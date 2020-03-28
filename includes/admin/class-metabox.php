@@ -17,7 +17,7 @@ class Toto_Metabox {
 
 
 	public function render_type_metabox() {
-		include TOTO_INCLUDES . '/admin/views/metabox/type.php';
+		include TOTO_INCLUDES . '/admin/views/metabox/index.php';
 	}
 
 

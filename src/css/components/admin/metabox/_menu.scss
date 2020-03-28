@@ -37,7 +37,7 @@ $height: 30px;
       min-height: 60px;
       text-decoration: none;
 
-      &:hover {
+      &.active, &:hover {
         color: #fff;
         background: #96c03d;
         border-color: #96c03d;
@@ -45,6 +45,10 @@ $height: 30px;
 
       &:focus{
         box-shadow: none;
+      }
+
+      &>svg{
+        margin-right: 10px;
       }
 
     }
@@ -62,6 +66,21 @@ $height: 30px;
         border-left-width: 20px;
         z-index: 2;
         border-left-color: inherit;
+      }
+    }
+
+    &:first-child{
+      .toto-tab-link{
+        border-top-left-radius: 5px;
+        border-bottom-left-radius: 5px;
+      }
+    }
+
+    &:last-child{
+      margin-right: 0;
+      .toto-tab-link{
+        border-top-right-radius: 5px;
+        border-bottom-right-radius: 5px;
       }
     }
 

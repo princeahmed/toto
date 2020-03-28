@@ -14,19 +14,20 @@ class Toto_Enqueue {
 	}
 
 	function admin_scripts() {
-		wp_enqueue_style( 'toto', TOTO_ASSETS . '/css/admin.css', [], TOTO_VERSION );
+		wp_enqueue_style( 'toto-admin-css', TOTO_ASSETS . '/css/admin.css', [], TOTO_VERSION );
 
-		wp_enqueue_script( 'toto', TOTO_ASSETS . '/js/admin.js', [ 'jquery' ], TOTO_VERSION, true );
+		wp_enqueue_script( 'fontawesome', TOTO_ASSETS . '/vendor/fontawesome.min.js', false, '5.10.0', true );
+		wp_enqueue_script( 'toto-admin-js', TOTO_ASSETS . '/js/admin.js', [ 'jquery', 'wp-util' ], TOTO_VERSION, true );
 
 		/* Create localized JS array */
 		$localized_array = [
-			'nonce' => wp_create_nonce( 'wp_plugin_boilerplate' ),
+			'_wpnonce' => wp_create_nonce(),
 			'i18n'  => [
 				'' => '',
 			]
 		];
 
-		wp_localize_script( 'toto', 'toto', $localized_array );
+		wp_localize_script( 'toto-admin-js', 'toto', $localized_array );
 
 	}
 

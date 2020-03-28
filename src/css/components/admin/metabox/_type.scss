@@ -1,0 +1,44 @@
+.toto-notification-types {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .toto-notification-type {
+    width: 49%;
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin-bottom: 15px;
+    justify-content: center;
+    flex-flow: column;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    cursor: pointer;
+
+    .toto-notification-type-title {
+      margin-top: 0;
+    }
+
+    input {
+      display: none;
+    }
+
+    &-icon {
+      line-height: 1;
+      font-size: 50px;
+    }
+
+    &.active {
+      background: #96c03d;
+      color: #fff;
+
+      .toto-notification-type-title {
+        color: inherit;
+      }
+
+    }
+
+  }
+
+}

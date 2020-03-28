@@ -96,9 +96,6 @@ final class Toto {
 		/* admin includes */
 		if ( is_admin() ) {
 			include_once TOTO_INCLUDES . '/admin/class-admin.php';
-			include_once TOTO_INCLUDES . '/admin/class-install.php';
-			include_once TOTO_INCLUDES . '/admin/class-metabox.php';
-			include_once TOTO_INCLUDES . '/admin/class-ajax.php';
 		}
 
 	}

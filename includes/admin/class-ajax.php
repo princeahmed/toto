@@ -1,17 +1,30 @@
 <?php
 
-defined('ABSPATH') || exit();
+defined( 'ABSPATH' ) || exit();
 
-class WP_Plugin_Boilerplate_Admin_Ajax{
+class Toto_Admin_Ajax {
 
 	public function __construct() {
-		add_action('wp_ajax_wp_plugin_boilerplate', [$this, 'wp_plugin_boilerplate']);
+		add_action( 'wp_ajax_update_menu', [ $this, 'update_menu' ] );
 	}
 
-	public function wp_plugin_boilerplate(){
-		//do the ajax stuffs
+	public function update_menu() {
+
+		if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'] ) ) {
+			wp_send_json_error( [ 'msg' => 'No Cheating!' ] );
+		}
+
+		if ( empty( $current_type = wp_unslash( $_REQUEST['type'] ) ) ) {
+			wp_send_json_error( [ 'msg' => 'type is not set.' ] );
+		}
+
+		ob_start();
+		include TOTO_INCLUDES . '/admin/views/metabox/menu.php';
+		$html = ob_get_clean();
+
+		wp_send_json_success( [ 'html' => $html ] );
 	}
 
 }
 
-new WP_Plugin_Boilerplate_Admin_Ajax();
+new Toto_Admin_Ajax();
