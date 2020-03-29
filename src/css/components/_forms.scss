@@ -1,0 +1,15 @@
+.toto-form-group{
+  display: flex;
+  flex-flow: column;
+  margin-bottom: 15px;
+
+  label{
+    font-weight: bold;
+    margin-bottom: 6px;
+  }
+
+  select{
+    max-width: 200px;
+  }
+
+}

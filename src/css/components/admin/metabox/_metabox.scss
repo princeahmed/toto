@@ -1,2 +1,12 @@
 @import "menu";
 @import "type";
+
+.toto-tab-content {
+  .toto-tab-content-item {
+    display: none;
+
+    &.active {
+      display: flex;
+    }
+  }
+}

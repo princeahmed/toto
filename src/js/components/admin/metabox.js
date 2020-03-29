@@ -1,10 +1,17 @@
 ;(function ($) {
     const app = {
         init: () => {
-            $(document).on('click', '.toto-notification-type', app.toggleNotificationTab)
+            $(document).on('click', '.toto-meta-tabs .toto-tab-link', app.toggleNotificationTab);
+            $(document).on('click', '.toto-notification-type', app.selectType);
         },
 
         toggleNotificationTab: function () {
+            $('.toto-meta-tabs .toto-tab-link, .toto-tab-content-item').removeClass('active');
+            $(this).addClass('active');
+            $(`#${$(this).data('target')}`).addClass('active');
+        },
+
+        selectType: function () {
             $('.toto-notification-type').removeClass('active').find('input').prop('checked', false);
             $(this).addClass('active').find('input').prop('checked', true);
 
@@ -26,7 +33,8 @@
 
                 error: error => console.log(error)
             })
-        }
+        },
+
 
     };
 

@@ -4,8 +4,8 @@ defined( 'ABSPATH' ) || exit;
 
 class Toto_Notifications {
 
-	public static function notification_types() {
-		return [
+	public static function notification_types( $type = false ) {
+		$all = [
 			'INFORMATIONAL' => [
 				"name" => "Informational",
 				"icon" => "fa fa-info-circle",
@@ -464,6 +464,8 @@ class Toto_Notifications {
 				'data_send_email'      => '',
 			],
 		];
+
+		return $type ? $all[ $type ] : $all;
 	}
 
 	public static function get( $type ) {
@@ -516,7 +518,7 @@ class Toto_Notifications {
 			'COOKIE_NOTIFICATION',
 			'SCORE_FEEDBACK'
 		] ) ) {
-			$settings_tabs = [ 'basic', 'display', 'customize', 'triggers' ];
+			$settings_tabs = [ 'content','triggers', 'display', 'customize' ];
 		}
 
 		if ( in_array( $type, [
@@ -527,10 +529,17 @@ class Toto_Notifications {
 			'REQUEST_COLLECTOR',
 			'COUNTDOWN_COLLECTOR'
 		] ) ) {
-			$settings_tabs = [ 'basic', 'display', 'customize', 'triggers', 'data' ];
+			$settings_tabs = [ 'content','triggers', 'display', 'customize', 'data' ];
 		}
 
 		return $settings_tabs;
+	}
+
+	public static function settings_fields( $type ) {
+		$notification = self::notification_types( $type );
+		$fields       = require TOTO_INCLUDES . '/admin/views/notifications/settings/fields.php';
+
+		return $fields;
 	}
 
 }

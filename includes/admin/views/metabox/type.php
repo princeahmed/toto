@@ -1,4 +1,4 @@
-<div class="toto-notification-types">
+<div class="toto-tab-content-item flex-row toto-notification-types active" id="notification_type">
 	<?php
 
 	foreach ( Toto_Notifications::notification_types() as $type => $config ) {

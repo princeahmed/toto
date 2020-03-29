@@ -1,4 +1,4 @@
-<?php defined('ALTUMCODE') || die() ?>
+<?php defined('ABSPATH') || die() ?>
 
 
 <?php ob_start() ?>

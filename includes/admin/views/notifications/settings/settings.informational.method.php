@@ -1,69 +1,48 @@
 <?php
-defined('ALTUMCODE') || die();
+
+defined( 'ABSPATH' ) || die();
 
 /* Create the content for each tab */
 $html = [];
 
 /* Extra Javascript needed */
 $javascript = '';
+
+$notification_fields = Toto_Notifications::settings_fields('INFORMATIONAL');
+
+$fields = [];
+
+ob_start();
+echo $notification_fields->title;
+echo $notification_fields->description;
+echo $notification_fields->image;
+echo $notification_fields->url;
+$fields['content'] = ob_get_clean();
+
+ob_start();
+echo $notification_fields->trigger;
+echo $notification_fields->display_trigger;
+echo $notification_fields->display_once_per_session;
+echo $notification_fields->display_mobile;
+
+$fields['triggers'] = ob_get_clean();
+
+ob_start();
+echo $notification_fields->display_duration;
+echo $notification_fields->display_position;
+echo $notification_fields->display_close_button;
+echo $notification_fields->display_branding;
+$fields['display'] = ob_get_clean();
+
+ob_start();
+echo $notification_fields->title_color;
+echo $notification_fields->description_color;
+echo $notification_fields->background_color;
+echo $notification_fields->border_radius;
+$fields['customize'] = ob_get_clean();
+
+
 ?>
-
-<?php /* Basic Tab */ ?>
-<?php ob_start() ?>
-    <div class="form-group">
-        <label for="settings_title"><?= $this->language->notification->settings->title ?></label>
-        <input type="text" id="settings_title" name="title" class="form-control" value="<?= $data->notification->settings->title ?>" required="required" />
-    </div>
-
-    <div class="form-group">
-        <label for="settings_description"><?= $this->language->notification->settings->description ?></label>
-        <input type="text" id="settings_description" name="description" class="form-control" value="<?= $data->notification->settings->description ?>" required="required" />
-    </div>
-
-    <div class="form-group">
-        <label for="settings_image"><?= $this->language->notification->settings->image ?></label>
-        <input type="text" id="settings_image" name="image" class="form-control" value="<?= $data->notification->settings->image ?>" />
-        <small class="text-muted"><?= $this->language->notification->settings->image_help ?></small>
-    </div>
-
-    <div class="form-group">
-        <label for="settings_url"><?= $this->language->notification->settings->url ?></label>
-        <input type="text" id="settings_url" name="url" class="form-control" value="<?= $data->notification->settings->url ?>" />
-        <small class="text-muted"><?= $this->language->notification->settings->url_help ?></small>
-    </div>
-<?php $html['basic'] = ob_get_clean() ?>
-
-
-<?php /* Customize Tab */ ?>
-<?php ob_start() ?>
-    <div class="form-group">
-        <label for="settings_title_color"><?= $this->language->notification->settings->title_color ?></label>
-        <input type="hidden" id="settings_title_color" name="title_color" class="form-control" value="<?= $data->notification->settings->title_color ?>" required="required" />
-        <div id="settings_title_color_pickr"></div>
-    </div>
-
-    <div class="form-group">
-        <label for="settings_description_color"><?= $this->language->notification->settings->description_color ?></label>
-        <input type="hidden" id="settings_description_color" name="description_color" class="form-control" value="<?= $data->notification->settings->description_color ?>" required="required" />
-        <div id="settings_description_color_pickr"></div>
-    </div>
-
-    <div class="form-group">
-        <label for="settings_background_color"><?= $this->language->notification->settings->background_color ?></label>
-        <input type="hidden" id="settings_background_color" name="background_color" class="form-control" value="<?= $data->notification->settings->background_color ?>" required="required" />
-        <div id="settings_background_color_pickr"></div>
-    </div>
-
-    <div class="form-group">
-        <label for="settings_border_radius"><?= $this->language->notification->settings->border_radius ?></label>
-        <select class="custom-select" name="border_radius">
-            <option value="straight" <?= $data->notification->settings->border_radius == 'straight' ? 'selected="selected"' : null ?>><?= $this->language->notification->settings->border_radius_straight ?></option>
-            <option value="rounded" <?= $data->notification->settings->border_radius == 'rounded' ? 'selected="selected"' : null ?>><?= $this->language->notification->settings->border_radius_rounded ?></option>
-            <option value="round" <?= $data->notification->settings->border_radius == 'round' ? 'selected="selected"' : null ?>><?= $this->language->notification->settings->border_radius_round ?></option>
-        </select>
-        <small class="text-muted"><?= $this->language->notification->settings->border_radius_help ?></small>
-    </div>
-<?php $html['customize'] = ob_get_clean() ?>
 
 
 <?php ob_start() ?>
@@ -127,4 +106,4 @@ $javascript = '';
 </script>
 <?php $javascript = ob_get_clean() ?>
 
-<?php return (object) ['html' => $html, 'javascript' => $javascript] ?>
+<?php return (object) [ 'fields' => $fields, 'javascript' => $javascript ] ?>

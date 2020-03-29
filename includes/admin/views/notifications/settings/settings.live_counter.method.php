@@ -1,5 +1,5 @@
 <?php
-defined('ALTUMCODE') || die();
+defined('ABSPATH') || die();
 
 /* Create the content for each tab */
 $html = [];
