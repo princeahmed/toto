@@ -472,6 +472,22 @@ class Toto_Notifications {
 		return require TOTO_INCLUDES . '/admin/views/notifications/' . strtolower( $type ) . '.php';
 	}
 
+	public static function get_view( $type ) {
+		$notification = (object) self::notification_types( $type );
+
+		return require TOTO_INCLUDES . '/admin/views/notifications/view/' . strtolower( $type ) . '.php';
+	}
+
+	public static function preview( $type ) {
+		$notification = self::get_view( $type );
+
+		echo preg_replace( [ '/<form/', '/<\/form>/', '/required=\"required\"/' ], [
+			'<div',
+			'</div>',
+			''
+		], $notification->html );
+	}
+
 	public static function get_enabled_methods( $type ) {
 
 		$methods = [];
@@ -518,7 +534,7 @@ class Toto_Notifications {
 			'COOKIE_NOTIFICATION',
 			'SCORE_FEEDBACK'
 		] ) ) {
-			$settings_tabs = [ 'content','triggers', 'display', 'customize' ];
+			$settings_tabs = [ 'content', 'triggers', 'display', 'customize' ];
 		}
 
 		if ( in_array( $type, [
@@ -529,17 +545,93 @@ class Toto_Notifications {
 			'REQUEST_COLLECTOR',
 			'COUNTDOWN_COLLECTOR'
 		] ) ) {
-			$settings_tabs = [ 'content','triggers', 'display', 'customize', 'data' ];
+			$settings_tabs = [ 'content', 'triggers', 'display', 'customize', 'data' ];
 		}
 
 		return $settings_tabs;
 	}
 
-	public static function settings_fields( $type ) {
+	public static function settings_fields( $type, $field = false ) {
 		$notification = self::notification_types( $type );
 		$fields       = require TOTO_INCLUDES . '/admin/views/notifications/settings/fields.php';
 
-		return $fields;
+		return $field ? $fields->$field : $fields;
+	}
+
+	public static function notification_setting_tabs( $type ) {
+		$default_triggers = [ 'trigger', 'display_trigger', 'display_once_per_session', 'display_mobile', ];
+
+		$default_display = [ 'display_duration', 'display_position', 'display_close_button', 'display_branding', ];
+
+		$fields = [
+			'INFORMATIONAL' => [
+				'content'   => [ 'title', 'description', 'image', 'url', ],
+				'triggers'  => $default_triggers,
+				'display'   => $default_display,
+				'customize' => [ 'title_color', 'description_color', 'background_color', 'border_radius', ],
+			],
+
+			'COUPON' => [
+				'content'   => [
+					'title',
+					'description',
+					'image',
+					'coupon_code',
+					'button_url',
+					'button_text',
+					'footer_text',
+				],
+				'triggers'  => $default_triggers,
+				'display'   => $default_display,
+				'customize' => [
+					'title_color',
+					'description_color',
+					'background_color',
+					'button_background_color',
+					'button_color',
+					'border_radius',
+				],
+			],
+
+			'LIVE_COUNTER' => [
+				'content'   => [ 'description', 'last_activity', 'url', ],
+				'triggers'  => array_merge( $default_triggers, [ 'minimum_activity' ] ),
+				'display'   => $default_display,
+				'customize' => [
+					'number_color',
+					'number_background_color',
+					'description_color',
+					'background_color',
+					'pulse_background_color',
+					'border_radius',
+				],
+			],
+
+			'EMAIL_COLLECTOR' => [
+				'content'   => [
+					'title',
+					'description',
+					'email_placeholder',
+					'button_text',
+					'show_agreement',
+					'agreement',
+				],
+				'triggers'  => $default_triggers,
+				'display'   => $default_display,
+				'customize' => [
+					'title_color',
+					'description_color',
+					'background_color',
+					'button_background_color',
+					'button_color',
+					'border_radius',
+				],
+				'data'      => [ 'data_send_is_enabled', 'data_send', ],
+			],
+		];
+
+		return $fields[ $type ];
+
 	}
 
 }

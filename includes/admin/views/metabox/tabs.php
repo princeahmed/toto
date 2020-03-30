@@ -5,11 +5,17 @@
 	//type tab
 	include TOTO_INCLUDES . '/admin/views/metabox/type.php';
 
-	$settings = require TOTO_INCLUDES . '/admin/views/notifications/settings/settings.' . strtolower( $current_type ) . '.method.php';
+	$tabs = Toto_Notifications::notification_setting_tabs($current_type);
 
-	foreach ( $settings->fields as $key => $content ) { ?>
+	foreach ( $tabs as $key => $fields ) { ?>
         <div class="toto-tab-content-item flex-column" id="<?php echo $key; ?>">
-			<?php echo $content; ?>
+			<?php
+
+            foreach ($fields as $field){
+	            echo Toto_Notifications::settings_fields($current_type, $field);
+            }
+
+            ?>
         </div>
 	<?php } ?>
 

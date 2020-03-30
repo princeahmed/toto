@@ -1,0 +1,64 @@
+/* Coupon */
+.toto-coupon-wrapper {
+}
+
+@media (min-width: 576px) {
+    .toto-coupon-wrapper {
+        max-width: 480px !important;
+    }
+}
+.toto-coupon-content {
+    padding: 8px !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+}
+
+.toto-coupon-title {
+    font-size: 18px !important;
+    font-weight: bold !important;
+    margin-bottom: 8px !important;
+}
+
+.toto-coupon-description {
+    font-size: 16px !important;
+    margin-bottom: 8px !important;
+}
+
+.toto-coupon-image {
+    width: 170px !important;
+    border-radius: 8px !important;
+    margin-right: 16px !important;
+}
+
+.toto-coupon-coupon-code {
+    background: white;
+    border-radius: 8px !important;
+    padding: 8px !important;
+    text-align: center !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+    border: 2px dashed black !important;
+    margin: 18px 0 !important;
+}
+
+.toto-coupon-button {
+    display: block !important;
+    border-radius: 8px !important;
+    padding: 8px !important;
+    text-align: center !important;
+    font-weight: bold !important;
+    font-size: 18px !important;
+    margin: 18px 0 !important;
+}
+
+.toto-coupon-button:hover {
+    color: initial;
+    opacity: .9 !important;
+    text-decoration: none !important;
+}
+
+.toto-coupon-footer {
+    font-size: 14px !important;
+    text-decoration: underline !important;
+}

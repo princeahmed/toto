@@ -2,42 +2,42 @@
 
 
 <?php ob_start() ?>
-<div class="altumcode-wrapper altumcode-wrapper-<?= $notification->settings->border_radius ?> altumcode-emoji-feedback-wrapper" style="background: <?= $notification->settings->background_color ?>">
-    <div class="altumcode-emoji-feedback-content">
-        <p class="altumcode-emoji-feedback-title" style="color: <?= $notification->settings->title_color ?>"><?= $notification->settings->title ?></p>
+<div class="toto-wrapper toto-wrapper-<?= $notification->settings->border_radius ?> toto-emoji-feedback-wrapper" style="background: <?= $notification->settings->background_color ?>">
+    <div class="toto-emoji-feedback-content">
+        <p class="toto-emoji-feedback-title" style="color: <?= $notification->settings->title_color ?>"><?= $notification->settings->title ?></p>
 
-        <div class="altumcode-emoji-feedback-emojis">
+        <div class="toto-emoji-feedback-emojis">
             <?php if($notification->settings->show_angry): ?>
-            <img src="<?= url(ASSETS_URL_PATH . 'images/emojis/angry.svg') ?>" class="altumcode-emoji-feedback-emoji" data-type="angry" />
+            <img src="<?= url(ASSETS_URL_PATH . 'images/emojis/angry.svg') ?>" class="toto-emoji-feedback-emoji" data-type="angry" />
             <?php endif ?>
 
             <?php if($notification->settings->show_sad): ?>
-            <img src="<?= url(ASSETS_URL_PATH . 'images/emojis/sad.svg') ?>" class="altumcode-emoji-feedback-emoji" data-type="sad" />
+            <img src="<?= url(ASSETS_URL_PATH . 'images/emojis/sad.svg') ?>" class="toto-emoji-feedback-emoji" data-type="sad" />
             <?php endif ?>
 
             <?php if($notification->settings->show_neutral): ?>
-            <img src="<?= url(ASSETS_URL_PATH . 'images/emojis/neutral.svg') ?>" class="altumcode-emoji-feedback-emoji" data-type="neutral" />
+            <img src="<?= url(ASSETS_URL_PATH . 'images/emojis/neutral.svg') ?>" class="toto-emoji-feedback-emoji" data-type="neutral" />
             <?php endif ?>
 
             <?php if($notification->settings->show_happy): ?>
-            <img src="<?= url(ASSETS_URL_PATH . 'images/emojis/happy.svg') ?>" class="altumcode-emoji-feedback-emoji" data-type="happy" />
+            <img src="<?= url(ASSETS_URL_PATH . 'images/emojis/happy.svg') ?>" class="toto-emoji-feedback-emoji" data-type="happy" />
             <?php endif ?>
 
             <?php if($notification->settings->show_excited): ?>
-            <img src="<?= url(ASSETS_URL_PATH . 'images/emojis/excited.svg') ?>" class="altumcode-emoji-feedback-emoji" data-type="excited" />
+            <img src="<?= url(ASSETS_URL_PATH . 'images/emojis/excited.svg') ?>" class="toto-emoji-feedback-emoji" data-type="excited" />
             <?php endif ?>
         </div>
 
         <?php if($notification->settings->display_branding): ?>
             <?php if(isset($notification->branding, $notification->branding->name, $notification->branding->url) && !empty($notification->branding->name) && !empty($notification->branding->url)): ?>
-                <a href="<?= $notification->branding->url ?>" class="altumcode-site"><?= $notification->branding->name ?></a>
+                <a href="<?= $notification->branding->url ?>" class="toto-site"><?= $notification->branding->name ?></a>
             <?php else: ?>
-                <a href="<?= url() ?>" class="altumcode-site"><?= \Altum\Language::get()->notification->branding ?></a>
+                <a href="<?= url() ?>" class="toto-site"><?= \Altum\Language::get()->notification->branding ?></a>
             <?php endif ?>
         <?php endif ?>
     </div>
 
-    <span class="altumcode-close"></span>
+    <span class="toto-close"></span>
 </div>
 <?php $html = ob_get_clean() ?>
 
@@ -62,16 +62,16 @@ new AltumCodeManager({
     displayed: main_element => {
 
         /* On click event to the button */
-        let emojis = main_element.querySelectorAll('.altumcode-emoji-feedback-emoji');
+        let emojis = main_element.querySelectorAll('.toto-emoji-feedback-emoji');
 
         for(let emoji of emojis) {
             emoji.addEventListener('click', event => {
 
                 /* Trigger the animation */
-                emoji.className += ' altumcode-emoji-feedback-emoji-clicked';
+                emoji.className += ' toto-emoji-feedback-emoji-clicked';
 
                 /* Get all the other emojis and remove them */
-                let other_emojis = main_element.querySelectorAll('.altumcode-emoji-feedback-emoji:not(.altumcode-emoji-feedback-emoji-clicked)');
+                let other_emojis = main_element.querySelectorAll('.toto-emoji-feedback-emoji:not(.toto-emoji-feedback-emoji-clicked)');
                 for(let other_emoji of other_emojis) {
                     other_emoji.remove();
                 }

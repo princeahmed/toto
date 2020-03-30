@@ -1,15 +1,85 @@
-.toto-form-group{
+.toto-form-group {
   display: flex;
   flex-flow: column;
   margin-bottom: 15px;
+  position: relative;
 
-  label{
+  input, select {
+    min-height: 40px;
+    border-color: #ced4da;
+  }
+
+  label {
     font-weight: bold;
     margin-bottom: 6px;
   }
 
-  select{
+  select {
     max-width: 200px;
   }
 
+}
+
+.toto-input-group {
+  display: flex;
+
+  input{
+    flex: 1;
+  }
+}
+
+.toto-switch-group {
+  input {
+    display: none;
+
+    &:checked + label {
+      &:before {
+        content: '';
+        border-color: #96c03d;
+        background-color: #96c03d;
+      }
+
+      &:after {
+        content: '';
+        left: 11px;
+        background: #fff no-repeat 50%/50% 50%;
+      }
+    }
+
+  }
+
+  label {
+    margin-left: 40px;
+
+    &:before {
+      color: #fff;
+      background: #fff;
+      border: 1px solid #adb5bd;
+      pointer-events: all;
+      border-radius: 8px;
+      position: absolute;
+      display: block;
+      width: 25px;
+      height: 15px;
+      content: "";
+      left: 0;
+
+      transition: background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+
+    &:after {
+      position: absolute;
+      display: block;
+      width: 15px;
+      height: 15px;
+      content: "";
+      background: #adb5bd no-repeat 50%/50% 50%;
+      border-radius: 8px;
+      left: 1px;
+      top: 1px;
+
+      transition: transform .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, -webkit-transform .15s ease-in-out;
+    }
+
+  }
 }

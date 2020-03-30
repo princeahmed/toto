@@ -2,60 +2,60 @@
 
 
 <?php ob_start() ?>
-<div class="altumcode-wrapper altumcode-wrapper-<?= $notification->settings->border_radius ?> altumcode-coupon-wrapper" style="background: <?= $notification->settings->background_color ?>">
-    <div class="altumcode-coupon-content">
-        <?php if(!empty($notification->settings->image)): ?>
-        <img src="<?= $notification->settings->image ?>" class="altumcode-coupon-image" />
+<div class="toto-wrapper toto-wrapper-<?php echo $notification->border_radius ?> toto-coupon-wrapper" style="background: <?php echo $notification->background_color ?>">
+    <div class="toto-coupon-content">
+        <?php if(!empty($notification->image)): ?>
+        <img src="<?php echo $notification->image ?>" class="toto-coupon-image" />
         <?php endif ?>
 
         <div>
-            <p class="altumcode-coupon-title" style="color: <?= $notification->settings->title_color ?>"><?= $notification->settings->title ?></p>
-            <p class="altumcode-coupon-description" style="color: <?= $notification->settings->description_color ?>"><?= $notification->settings->description ?></p>
+            <p class="toto-coupon-title" style="color: <?php echo $notification->title_color ?>"><?php echo $notification->title ?></p>
+            <p class="toto-coupon-description" style="color: <?php echo $notification->description_color ?>"><?php echo $notification->description ?></p>
 
-            <div class="altumcode-coupon-coupon-code"><?= $notification->settings->coupon_code ?></div>
+            <div class="toto-coupon-coupon-code"><?php echo $notification->coupon_code ?></div>
 
-            <a href="<?= $notification->settings->button_url ?>" class="altumcode-coupon-button" style="background: <?= $notification->settings->button_background_color ?>;color: <?= $notification->settings->button_color ?>"><?= $notification->settings->button_text ?></a>
+            <a href="<?php echo $notification->button_url ?>" class="toto-coupon-button" style="background: <?php echo $notification->button_background_color ?>;color: <?php echo $notification->button_color ?>"><?php echo $notification->button_text ?></a>
 
             <div>
-                <a href="#" class="altumcode-coupon-footer"><?= $notification->settings->footer_text ?></a>
+                <a href="#" class="toto-coupon-footer"><?php echo $notification->footer_text ?></a>
             </div>
 
-            <?php if($notification->settings->display_branding): ?>
+            <?php if($notification->display_branding): ?>
                 <?php if(isset($notification->branding, $notification->branding->name, $notification->branding->url) && !empty($notification->branding->name) && !empty($notification->branding->url)): ?>
-                    <a href="<?= $notification->branding->url ?>" class="altumcode-site"><?= $notification->branding->name ?></a>
+                    <a href="<?php echo $notification->branding->url ?>" class="toto-site"><?php echo $notification->branding->name ?></a>
                 <?php else: ?>
-                    <a href="<?= url() ?>" class="altumcode-site"><?= \Altum\Language::get()->notification->branding ?></a>
+                    <a href="" class="toto-site">\Altum\Language::get()->notification->branding </a>
                 <?php endif ?>
             <?php endif ?>
         </div>
     </div>
 
-    <span class="altumcode-close"></span>
+    <span class="toto-close"></span>
 </div>
 <?php $html = ob_get_clean() ?>
 
 
 <?php ob_start() ?>
 new AltumCodeManager({
-    content: <?= json_encode($html) ?>,
-    display_mobile: <?= json_encode($notification->settings->display_mobile) ?>,
-    display_trigger: <?= json_encode($notification->settings->display_trigger) ?>,
-    display_trigger_value: <?= json_encode($notification->settings->display_trigger_value) ?>,
-    duration: <?= $notification->settings->display_duration === -1 ? -1 : $notification->settings->display_duration * 1000 ?>,
+    content: <?php echo json_encode($html) ?>,
+    display_mobile: <?php echo json_encode($notification->display_mobile) ?>,
+    display_trigger: <?php echo json_encode($notification->display_trigger) ?>,
+    display_trigger_value: <?php echo json_encode($notification->display_trigger_value) ?>,
+    duration: <?php echo $notification->display_duration === -1 ? -1 : $notification->display_duration * 1000 ?>,
     url: '',
-    close: <?= json_encode($notification->settings->display_close_button) ?>,
-    once_per_session: <?= json_encode($notification->settings->display_once_per_session) ?>,
-    position: <?= json_encode($notification->settings->display_position) ?>,
+    close: <?php echo json_encode($notification->display_close_button) ?>,
+    once_per_session: <?php echo json_encode($notification->display_once_per_session) ?>,
+    position: <?php echo json_encode($notification->display_position) ?>,
     stop_on_focus: true,
-    trigger_all_pages: <?= json_encode($notification->settings->trigger_all_pages) ?>,
-    triggers: <?= json_encode($notification->settings->triggers) ?>,
+    trigger_all_pages: <?php echo json_encode($notification->trigger_all_pages) ?>,
+    triggers: <?php echo json_encode($notification->triggers) ?>,
 
-    notification_id: <?= $notification->notification_id ?>
+    notification_id: <?php echo $notification->notification_id ?>
 }).initiate({
     displayed: main_element => {
 
         /* On click the footer remove element */
-        main_element.querySelector('.altumcode-coupon-footer').addEventListener('click', event => {
+        main_element.querySelector('.toto-coupon-footer').addEventListener('click', event => {
 
             AltumCodeManager.remove_notification(main_element);
 
@@ -64,7 +64,7 @@ new AltumCodeManager({
         });
 
         /* On click event to the button */
-        main_element.querySelector('.altumcode-coupon-button').addEventListener('click', event => {
+        main_element.querySelector('.toto-coupon-button').addEventListener('click', event => {
 
             let notification_id = main_element.getAttribute('data-notification-id');
 

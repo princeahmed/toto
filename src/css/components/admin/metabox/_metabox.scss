@@ -1,6 +1,17 @@
 @import "menu";
 @import "type";
 
+#toto_type{
+  border-radius: 10px;
+  padding: 10px 10px;
+
+  .hndle.ui-sortable-handle{
+    border: none;
+    font-size: 20px;
+  }
+
+}
+
 .toto-tab-content {
   .toto-tab-content-item {
     display: none;
@@ -8,5 +19,37 @@
     &.active {
       display: flex;
     }
+  }
+}
+
+.btn-trigger-add{
+  background: #96c03d;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: white;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border: 1px solid #999;
+  margin-left: 20px;
+}
+
+.triggers_rules{
+  .toto-input-group{
+    margin-bottom: 15px;
+  }
+}
+
+.notification-preview{
+  justify-content: space-between;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  align-items: center;
+  margin-top: 10px;
+
+  &-title{
+    font-size: 20px;
+    margin-left: 25px;
   }
 }

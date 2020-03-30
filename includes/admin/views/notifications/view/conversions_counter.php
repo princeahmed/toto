@@ -2,30 +2,30 @@
 
 
 <?php ob_start() ?>
-<div class="altumcode-wrapper altumcode-wrapper-<?= $notification->settings->border_radius ?> altumcode-conversions-counter-wrapper" style="background: <?= $notification->settings->background_color ?>">
-    <div class="altumcode-conversions-counter-content">
+<div class="toto-wrapper toto-wrapper-<?= $notification->settings->border_radius ?> toto-conversions-counter-wrapper" style="background: <?= $notification->settings->background_color ?>">
+    <div class="toto-conversions-counter-content">
 
-        <div class="altumcode-conversions-counter-header">
-            <div class="altumcode-conversions-counter-number" style="background: <?= $notification->settings->number_background_color ?>; color: <?= $notification->settings->number_color ?>">
+        <div class="toto-conversions-counter-header">
+            <div class="toto-conversions-counter-number" style="background: <?= $notification->settings->number_background_color ?>; color: <?= $notification->settings->number_color ?>">
                 <?= isset($notification->counter) && $notification->counter >= $notification->settings->display_minimum_activity ? $notification->counter : \Altum\Language::get()->notification->conversions_counter->number_default ?>
             </div>
 
             <div>
-                <p class="altumcode-conversions-counter-title" style="color: <?= $notification->settings->title_color ?>"><?= $notification->settings->title ?></p>
-                <p class="altumcode-conversions-counter-time"><?= sprintf(\Altum\Language::get()->notification->conversions_counter->time_default, $notification->settings->last_activity) ?></p>
+                <p class="toto-conversions-counter-title" style="color: <?= $notification->settings->title_color ?>"><?= $notification->settings->title ?></p>
+                <p class="toto-conversions-counter-time"><?= sprintf(\Altum\Language::get()->notification->conversions_counter->time_default, $notification->settings->last_activity) ?></p>
             </div>
         </div>
 
         <?php if($notification->settings->display_branding): ?>
             <?php if(isset($notification->branding, $notification->branding->name, $notification->branding->url) && !empty($notification->branding->name) && !empty($notification->branding->url)): ?>
-                <a href="<?= $notification->branding->url ?>" class="altumcode-site"><?= $notification->branding->name ?></a>
+                <a href="<?= $notification->branding->url ?>" class="toto-site"><?= $notification->branding->name ?></a>
             <?php else: ?>
-                <a href="<?= url() ?>" class="altumcode-site"><?= \Altum\Language::get()->notification->branding ?></a>
+                <a href="<?= url() ?>" class="toto-site"><?= \Altum\Language::get()->notification->branding ?></a>
             <?php endif ?>
         <?php endif ?>
     </div>
 
-    <span class="altumcode-close"></span>
+    <span class="toto-close"></span>
 </div>
 <?php $html = ob_get_clean(); ?>
 

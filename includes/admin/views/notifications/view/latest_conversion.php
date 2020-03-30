@@ -2,18 +2,18 @@
 
 
 <?php ob_start() ?>
-<div class="altumcode-wrapper altumcode-wrapper-<?= $notification->settings->border_radius ?> altumcode-latest-conversion-wrapper" style="background: <?= $notification->settings->background_color ?>">
-    <div class="altumcode-latest-conversion-content">
+<div class="toto-wrapper toto-wrapper-<?= $notification->settings->border_radius ?> toto-latest-conversion-wrapper" style="background: <?= $notification->settings->background_color ?>">
+    <div class="toto-latest-conversion-content">
         <?php if(!empty($notification->settings->image)): ?>
-        <img src="<?= $notification->settings->image ?>" class="altumcode-latest-conversion-image" />
+        <img src="<?= $notification->settings->image ?>" class="toto-latest-conversion-image" />
         <?php endif ?>
 
         <div>
-            <p class="altumcode-latest-conversion-title" style="color: <?= $notification->settings->title_color ?>"><?= isset($notification->who) && $notification->who ? $notification->who : $notification->settings->title ?></p>
-            <p class="altumcode-latest-conversion-description" style="color: <?= $notification->settings->description_color ?>"><?= $notification->settings->description ?></p>
+            <p class="toto-latest-conversion-title" style="color: <?= $notification->settings->title_color ?>"><?= isset($notification->who) && $notification->who ? $notification->who : $notification->settings->title ?></p>
+            <p class="toto-latest-conversion-description" style="color: <?= $notification->settings->description_color ?>"><?= $notification->settings->description ?></p>
 
-            <div class="altumcode-latest-conversion-footer">
-                <div class="altumcode-latest-conversion-time">
+            <div class="toto-latest-conversion-footer">
+                <div class="toto-latest-conversion-time">
                     <?php if(isset($notification->last_action_date) && $notification->last_action_date): ?>
                         <?= \Altum\Date::get_timeago($notification->last_action_date) ?>
                     <?php else: ?>
@@ -23,9 +23,9 @@
 
                 <?php if($notification->settings->display_branding): ?>
                     <?php if(isset($notification->branding, $notification->branding->name, $notification->branding->url) && !empty($notification->branding->name) && !empty($notification->branding->url)): ?>
-                        <a href="<?= $notification->branding->url ?>" class="altumcode-site"><?= $notification->branding->name ?></a>
+                        <a href="<?= $notification->branding->url ?>" class="toto-site"><?= $notification->branding->name ?></a>
                     <?php else: ?>
-                        <a href="<?= url() ?>" class="altumcode-site"><?= \Altum\Language::get()->notification->branding ?></a>
+                        <a href="<?= url() ?>" class="toto-site"><?= \Altum\Language::get()->notification->branding ?></a>
                     <?php endif ?>
                 <?php endif ?>
             </div>
@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <span class="altumcode-close"></span>
+    <span class="toto-close"></span>
 </div>
 <?php $html = ob_get_clean() ?>
 

@@ -4,49 +4,49 @@
 <?php ob_start() ?>
 <?php $date_ended = new \DateTime($notification->settings->end_date) < new \DateTime() ?>
 <?php $date = (new \DateTime($notification->settings->end_date))->diff(new \DateTime()) ?>
-<div class="altumcode-wrapper altumcode-wrapper-<?= $notification->settings->border_radius ?> altumcode-countdown-collector-wrapper" style="background: <?= $notification->settings->background_color ?>">
-    <div class="altumcode-countdown-collector-content">
-        <p class="altumcode-countdown-collector-title" style="color: <?= $notification->settings->title_color ?>"><?= $notification->settings->title ?></p>
-        <p class="altumcode-countdown-collector-description" style="color: <?= $notification->settings->description_color ?>"><?= $notification->settings->description ?></p>
+<div class="toto-wrapper toto-wrapper-<?= $notification->settings->border_radius ?> toto-countdown-collector-wrapper" style="background: <?= $notification->settings->background_color ?>">
+    <div class="toto-countdown-collector-content">
+        <p class="toto-countdown-collector-title" style="color: <?= $notification->settings->title_color ?>"><?= $notification->settings->title ?></p>
+        <p class="toto-countdown-collector-description" style="color: <?= $notification->settings->description_color ?>"><?= $notification->settings->description ?></p>
 
-        <p class="altumcode-countdown-collector-content-title" style="color: <?= $notification->settings->content_title_color ?>"><?= $notification->settings->content_title ?></p>
+        <p class="toto-countdown-collector-content-title" style="color: <?= $notification->settings->content_title_color ?>"><?= $notification->settings->content_title ?></p>
 
-        <div class="altumcode-countdown-collector-timer">
+        <div class="toto-countdown-collector-timer">
             <input type="hidden" name="end_date" value="<?= (new \DateTime($notification->settings->end_date))->getTimestamp() ?>" />
 
-            <div class="altumcode-countdown-collector-timer-block">
-                <div class="altumcode-countdown-collector-time" data-type="days"><?= $date_ended ? '0' : $date->format('%a') ?></div>
-                <p class="altumcode-countdown-collector-time-text"><?= \Altum\Language::get()->notification->countdown_collector->days ?></p>
+            <div class="toto-countdown-collector-timer-block">
+                <div class="toto-countdown-collector-time" data-type="days"><?= $date_ended ? '0' : $date->format('%a') ?></div>
+                <p class="toto-countdown-collector-time-text"><?= \Altum\Language::get()->notification->countdown_collector->days ?></p>
             </div>
 
-            <div class="altumcode-countdown-collector-timer-block">
-                <div class="altumcode-countdown-collector-time" data-type="hours"><?= $date_ended ? '0' : $date->format('%h') ?></div>
-                <p class="altumcode-countdown-collector-time-text"><?= \Altum\Language::get()->notification->countdown_collector->hours ?></p>
+            <div class="toto-countdown-collector-timer-block">
+                <div class="toto-countdown-collector-time" data-type="hours"><?= $date_ended ? '0' : $date->format('%h') ?></div>
+                <p class="toto-countdown-collector-time-text"><?= \Altum\Language::get()->notification->countdown_collector->hours ?></p>
             </div>
 
-            <div class="altumcode-countdown-collector-timer-block">
-                <div class="altumcode-countdown-collector-time" data-type="minutes"><?= $date_ended ? '0' : $date->format('%i') ?></div>
-                <p class="altumcode-countdown-collector-time-text"><?= \Altum\Language::get()->notification->countdown_collector->minutes ?></p>
+            <div class="toto-countdown-collector-timer-block">
+                <div class="toto-countdown-collector-time" data-type="minutes"><?= $date_ended ? '0' : $date->format('%i') ?></div>
+                <p class="toto-countdown-collector-time-text"><?= \Altum\Language::get()->notification->countdown_collector->minutes ?></p>
             </div>
 
-            <div class="altumcode-countdown-collector-timer-block">
-                <div class="altumcode-countdown-collector-time" data-type="seconds"><?= $date_ended ? '0' : $date->format('%s') ?></div>
-                <p class="altumcode-countdown-collector-time-text"><?= \Altum\Language::get()->notification->countdown_collector->seconds ?></p>
+            <div class="toto-countdown-collector-timer-block">
+                <div class="toto-countdown-collector-time" data-type="seconds"><?= $date_ended ? '0' : $date->format('%s') ?></div>
+                <p class="toto-countdown-collector-time-text"><?= \Altum\Language::get()->notification->countdown_collector->seconds ?></p>
             </div>
         </div>
 
         <div>
-            <form class="altumcode-countdown-collector-form" id="altumcode-countdown-collector-form" name="" action="" method="GET" role="form">
-                <div class="altumcode-countdown-collector-row">
+            <form class="toto-countdown-collector-form" id="toto-countdown-collector-form" name="" action="" method="GET" role="form">
+                <div class="toto-countdown-collector-row">
                     <input type="text" class="" name="input" placeholder="<?= $notification->settings->input_placeholder ?>" />
 
                     <button type="submit" name="button" style="color: <?= $notification->settings->button_color ?>; background: <?= $notification->settings->button_background_color ?>"><?= $notification->settings->button_text ?></button>
                 </div>
 
                 <?php if($notification->settings->show_agreement): ?>
-                    <div class="altumcode-agreement-checkbox">
+                    <div class="toto-agreement-checkbox">
                         <input type="checkbox" id="agreement" name="agreement" required="required" />
-                        <label for="agreement" class="altumcode-agreement-checkbox-text" style="color: <?= $notification->settings->description_color ?>">
+                        <label for="agreement" class="toto-agreement-checkbox-text" style="color: <?= $notification->settings->description_color ?>">
                             <a href="<?= $notification->settings->agreement_url ?>">
                                 <?= $notification->settings->agreement_text ?>
                             </a>
@@ -57,15 +57,15 @@
 
             <?php if($notification->settings->display_branding): ?>
                 <?php if(isset($notification->branding, $notification->branding->name, $notification->branding->url) && !empty($notification->branding->name) && !empty($notification->branding->url)): ?>
-                    <a href="<?= $notification->branding->url ?>" class="altumcode-site"><?= $notification->branding->name ?></a>
+                    <a href="<?= $notification->branding->url ?>" class="toto-site"><?= $notification->branding->name ?></a>
                 <?php else: ?>
-                    <a href="<?= url() ?>" class="altumcode-site"><?= \Altum\Language::get()->notification->branding ?></a>
+                    <a href="<?= url() ?>" class="toto-site"><?= \Altum\Language::get()->notification->branding ?></a>
                 <?php endif ?>
             <?php endif ?>
         </div>
     </div>
 
-    <span class="altumcode-close"></span>
+    <span class="toto-close"></span>
 </div>
 <?php $html = ob_get_clean() ?>
 
@@ -144,7 +144,7 @@ new AltumCodeManager({
         let countdown_interval = setInterval(countdown, 1000);
 
         /* Form submission */
-        main_element.querySelector('#altumcode-countdown-collector-form').addEventListener('submit', event => {
+        main_element.querySelector('#toto-countdown-collector-form').addEventListener('submit', event => {
 
             let input = event.currentTarget.querySelector('[name="input"]').value;
             let notification_id = main_element.getAttribute('data-notification-id');

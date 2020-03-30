@@ -9,3 +9,26 @@
 .flex-row{
   flex-flow: row;
 }
+
+.align-center{
+  align-items: center;
+}
+
+.align-base{
+  align-items: baseline;
+}
+
+.toto-btn-delete{
+  margin-left: 15px;
+  padding: 0 15px;
+  cursor: pointer;
+  border-radius: 3px;
+  background: #bd2130;
+  color: #fff;
+  border: none;
+}
+
+.container-disabled {
+  pointer-events: none;
+  opacity: .5;
+}

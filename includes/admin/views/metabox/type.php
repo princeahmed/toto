@@ -1,9 +1,7 @@
 <div class="toto-tab-content-item flex-row toto-notification-types active" id="notification_type">
 	<?php
 
-	foreach ( Toto_Notifications::notification_types() as $type => $config ) {
-		//$notification = Toto_Notifications::get( $type );
-		?>
+	foreach ( Toto_Notifications::notification_types() as $type => $config ) {?>
         <div class="toto-notification-type <?php echo $current_type == $type ? 'active' : ''; ?>">
 
             <h3 class="toto-notification-type-title"><?php echo $config['name']; ?></h3>
@@ -12,18 +10,14 @@
                 <i class="<?php echo $config['icon']; ?>"></i>
             </div>
 
-            <input type="radio" name="toto_notification_type" value="<?php echo $type; ?>"
-                   required="required" <?php checked( $current_type, $type ); ?>>
+            <input type="radio" name="toto_notification_type" value="<?php echo $type; ?>" required="required" <?php checked( $current_type, $type ); ?>>
 
-            <div class="preview" style="display: none">
+            <div class="preview" style="display: none;">
 				<?php
 
-				//				preg_replace( [ '/<form/', '/<\/form>/', '/required=\"required\"/' ], [
-				//					'<div',
-				//					'</div>',
-				//					''
-				//				], $notification->html );
-				//
+				if ( in_array( $type, [ 'INFORMATIONAL', 'COUPON', 'LIVE_COUNTER', 'EMAIL_COLLECTOR' ] ) ) {
+					Toto_Notifications::preview($type);
+				}
 				?>
             </div>
 

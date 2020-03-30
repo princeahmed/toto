@@ -1,33 +1,33 @@
 <?php defined('ABSPATH') || die() ?>
 
 <?php ob_start() ?>
-<div class="altumcode-wrapper altumcode-wrapper-<?= $notification->settings->border_radius ?> altumcode-cookie-notification-wrapper" style="background: <?= $notification->settings->background_color ?>">
-    <div class="altumcode-cookie-notification-content">
+<div class="toto-wrapper toto-wrapper-<?= $notification->settings->border_radius ?> toto-cookie-notification-wrapper" style="background: <?= $notification->settings->background_color ?>">
+    <div class="toto-cookie-notification-content">
 
-        <div class="altumcode-cookie-notification-header">
+        <div class="toto-cookie-notification-header">
             <?php if(!empty($notification->settings->image)): ?>
-                <img src="<?= $notification->settings->image ?>" class="altumcode-cookie-notification-image" />
+                <img src="<?= $notification->settings->image ?>" class="toto-cookie-notification-image" />
             <?php endif ?>
 
-            <p class="altumcode-cookie-notification-description" style="color: <?= $notification->settings->description_color ?>">
+            <p class="toto-cookie-notification-description" style="color: <?= $notification->settings->description_color ?>">
                 <?= $notification->settings->description ?>
 
-                <span class="altumcode-cookie-notification-url"><a href="<?= $notification->settings->url ?>"><?= $notification->settings->url_text ?></a></span>
+                <span class="toto-cookie-notification-url"><a href="<?= $notification->settings->url ?>"><?= $notification->settings->url_text ?></a></span>
             </p>
         </div>
 
-        <button type="button" class="altumcode-cookie-notification-button" style="background: <?= $notification->settings->button_background_color ?>;color: <?= $notification->settings->button_color ?>"><?= $notification->settings->button_text ?></button>
+        <button type="button" class="toto-cookie-notification-button" style="background: <?= $notification->settings->button_background_color ?>;color: <?= $notification->settings->button_color ?>"><?= $notification->settings->button_text ?></button>
 
         <?php if($notification->settings->display_branding): ?>
             <?php if(isset($notification->branding, $notification->branding->name, $notification->branding->url) && !empty($notification->branding->name) && !empty($notification->branding->url)): ?>
-                <a href="<?= $notification->branding->url ?>" class="altumcode-site"><?= $notification->branding->name ?></a>
+                <a href="<?= $notification->branding->url ?>" class="toto-site"><?= $notification->branding->name ?></a>
             <?php else: ?>
-                <a href="<?= url() ?>" class="altumcode-site"><?= \Altum\Language::get()->notification->branding ?></a>
+                <a href="<?= url() ?>" class="toto-site"><?= \Altum\Language::get()->notification->branding ?></a>
             <?php endif ?>
         <?php endif ?>
     </div>
 
-    <span class="altumcode-close"></span>
+    <span class="toto-close"></span>
 </div>
 <?php $html = ob_get_clean() ?>
 
@@ -53,7 +53,7 @@ new AltumCodeManager({
     displayed: main_element => {
 
         /* On click the footer remove element */
-        main_element.querySelector('.altumcode-cookie-notification-button').addEventListener('click', event => {
+        main_element.querySelector('.toto-cookie-notification-button').addEventListener('click', event => {
 
             AltumCodeManager.remove_notification(main_element);
 

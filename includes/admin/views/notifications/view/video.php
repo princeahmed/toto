@@ -2,26 +2,26 @@
 
 
 <?php ob_start() ?>
-<div class="altumcode-wrapper altumcode-wrapper-<?= $notification->settings->border_radius ?> altumcode-video-wrapper" style="background: <?= $notification->settings->background_color ?>">
-    <div class="altumcode-video-content">
-        <p class="altumcode-video-title" style="color: <?= $notification->settings->title_color ?>"><?= $notification->settings->title ?></p>
+<div class="toto-wrapper toto-wrapper-<?= $notification->settings->border_radius ?> toto-video-wrapper" style="background: <?= $notification->settings->background_color ?>">
+    <div class="toto-video-content">
+        <p class="toto-video-title" style="color: <?= $notification->settings->title_color ?>"><?= $notification->settings->title ?></p>
 
-        <div class="altumcode-video-video-container">
-            <iframe class="altumcode-video-video-iframe" src="<?= $notification->settings->video ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="toto-video-video-container">
+            <iframe class="toto-video-video-iframe" src="<?= $notification->settings->video ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
-        <a href="<?= $notification->settings->button_url ?>" class="altumcode-video-button" style="background: <?= $notification->settings->button_background_color ?>;color: <?= $notification->settings->button_color ?>"><?= $notification->settings->button_text ?></a>
+        <a href="<?= $notification->settings->button_url ?>" class="toto-video-button" style="background: <?= $notification->settings->button_background_color ?>;color: <?= $notification->settings->button_color ?>"><?= $notification->settings->button_text ?></a>
 
         <?php if($notification->settings->display_branding): ?>
             <?php if(isset($notification->branding, $notification->branding->name, $notification->branding->url) && !empty($notification->branding->name) && !empty($notification->branding->url)): ?>
-                <a href="<?= $notification->branding->url ?>" class="altumcode-site"><?= $notification->branding->name ?></a>
+                <a href="<?= $notification->branding->url ?>" class="toto-site"><?= $notification->branding->name ?></a>
             <?php else: ?>
-                <a href="<?= url() ?>" class="altumcode-site"><?= \Altum\Language::get()->notification->branding ?></a>
+                <a href="<?= url() ?>" class="toto-site"><?= \Altum\Language::get()->notification->branding ?></a>
             <?php endif ?>
         <?php endif ?>
     </div>
 
-    <span class="altumcode-close"></span>
+    <span class="toto-close"></span>
 </div>
 <?php $html = ob_get_clean(); ?>
 
@@ -46,7 +46,7 @@ new AltumCodeManager({
     displayed: main_element => {
 
         /* On click event to the button */
-        main_element.querySelector('.altumcode-video-button').addEventListener('click', event => {
+        main_element.querySelector('.toto-video-button').addEventListener('click', event => {
 
             let notification_id = main_element.getAttribute('data-notification-id');
 
