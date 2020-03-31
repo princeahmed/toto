@@ -135,15 +135,15 @@ $javascript = '';
 <script>
     /* Notification Preview Handlers */
     $('#settings_title').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-latest-conversion-title').text($(event.currentTarget).val());
+        $('#notification_preview .toto-latest-conversion-title').text($(event.currentTarget).val());
     });
 
     $('#settings_description').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-latest-conversion-description').text($(event.currentTarget).val());
+        $('#notification_preview .toto-latest-conversion-description').text($(event.currentTarget).val());
     });
 
     $('#settings_image').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-latest-conversion-image').attr('src', $(event.currentTarget).val());
+        $('#notification_preview .toto-latest-conversion-image').attr('src', $(event.currentTarget).val());
     });
 
     /* Title Color Handler */
@@ -157,7 +157,7 @@ $javascript = '';
         $('#settings_title_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-latest-conversion-title').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-latest-conversion-title').css('color', hsva.toHEXA().toString());
     });
 
 
@@ -172,7 +172,7 @@ $javascript = '';
         $('#settings_description_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-latest-conversion-description').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-latest-conversion-description').css('color', hsva.toHEXA().toString());
     });
 
 
@@ -187,7 +187,7 @@ $javascript = '';
         $('#settings_background_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-wrapper').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-wrapper').css('background', hsva.toHEXA().toString());
     });
 
 

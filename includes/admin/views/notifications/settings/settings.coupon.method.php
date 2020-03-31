@@ -95,27 +95,27 @@ $javascript = '';
 <script>
     /* Notification Preview Handlers */
     $('#settings_title').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-coupon-title').text($(event.currentTarget).val());
+        $('#notification_preview .toto-coupon-title').text($(event.currentTarget).val());
     });
 
     $('#settings_description').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-coupon-description').text($(event.currentTarget).val());
+        $('#notification_preview .toto-coupon-description').text($(event.currentTarget).val());
     });
 
     $('#settings_image').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-coupon-image').attr('src', $(event.currentTarget).val());
+        $('#notification_preview .toto-coupon-image').attr('src', $(event.currentTarget).val());
     });
 
     $('#settings_coupon_code').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-coupon-coupon-code').text($(event.currentTarget).val());
+        $('#notification_preview .toto-coupon-coupon-code').text($(event.currentTarget).val());
     });
 
     $('#settings_button_text').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-coupon-button').text($(event.currentTarget).val());
+        $('#notification_preview .toto-coupon-button').text($(event.currentTarget).val());
     });
 
     $('#settings_footer_text').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-coupon-footer').text($(event.currentTarget).val());
+        $('#notification_preview .toto-coupon-footer').text($(event.currentTarget).val());
     });
 
     /* Title Color Handler */
@@ -129,7 +129,7 @@ $javascript = '';
         $('#settings_title_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-coupon-title').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-coupon-title').css('color', hsva.toHEXA().toString());
     });
 
     /* Description Color Handler */
@@ -143,7 +143,7 @@ $javascript = '';
         $('#settings_description_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-coupon-description').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-coupon-description').css('color', hsva.toHEXA().toString());
     });
 
 
@@ -158,7 +158,7 @@ $javascript = '';
         $('#settings_background_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-wrapper').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-wrapper').css('background', hsva.toHEXA().toString());
     });
 
     /* Button Background Color Handler */
@@ -172,7 +172,7 @@ $javascript = '';
         $('#settings_button_background_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-coupon-button').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-coupon-button').css('background', hsva.toHEXA().toString());
     });
 
     /* Button Color Handler */
@@ -186,7 +186,7 @@ $javascript = '';
         $('#settings_button_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-coupon-button').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-coupon-button').css('color', hsva.toHEXA().toString());
     });
 </script>
 <?php $javascript = ob_get_clean() ?>

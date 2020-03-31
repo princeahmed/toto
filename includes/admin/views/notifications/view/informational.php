@@ -2,7 +2,6 @@
 
 defined( 'ABSPATH' ) || die();
 
-
 ?>
 
 
@@ -16,13 +15,6 @@ defined( 'ABSPATH' ) || die();
         <div>
             <p class="toto-informational-title" style="color: <?php echo $notification->title_color ?>"><?php echo $notification->title ?></p>
             <p class="toto-informational-description" style="color: <?php echo $notification->description_color ?>"><?php echo $notification->description ?></p>
-
-
-			<?php if ( $notification->display_branding ): ?><?php if ( isset( $notification->branding, $notification->branding->name, $notification->branding->url ) && ! empty( $notification->branding->name ) && ! empty( $notification->branding->url ) ): ?>
-                <a href="<?php echo $notification->branding->url ?>" class="toto-site"><?php echo $notification->branding->name ?></a>
-			<?php else: ?>
-                <a href="" class="toto-site">\Altum\Language::get()->notification->branding</a>
-			<?php endif ?><?php endif ?>
         </div>
     </div>
 

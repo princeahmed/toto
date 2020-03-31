@@ -79,19 +79,19 @@ $javascript = '';
 <script>
     /* Notification Preview Handlers */
     $('#settings_description').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-cookie-notification-description').text($(event.currentTarget).val());
+        $('#notification_preview .toto-cookie-notification-description').text($(event.currentTarget).val());
     });
 
     $('#settings_image').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-cookie-notification-image').attr('src', $(event.currentTarget).val());
+        $('#notification_preview .toto-cookie-notification-image').attr('src', $(event.currentTarget).val());
     });
 
     $('#settings_url_text').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-cookie-notification-url').text($(event.currentTarget).val());
+        $('#notification_preview .toto-cookie-notification-url').text($(event.currentTarget).val());
     });
 
     $('#settings_button_text').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-cookie-notification-button').text($(event.currentTarget).val());
+        $('#notification_preview .toto-cookie-notification-button').text($(event.currentTarget).val());
     });
 
     /* Description Color Handler */
@@ -105,7 +105,7 @@ $javascript = '';
         $('#settings_description_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-cookie-notification-description').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-cookie-notification-description').css('color', hsva.toHEXA().toString());
     });
 
 
@@ -120,7 +120,7 @@ $javascript = '';
         $('#settings_background_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-wrapper').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-wrapper').css('background', hsva.toHEXA().toString());
     });
 
     /* Button Background Color Handler */
@@ -134,7 +134,7 @@ $javascript = '';
         $('#settings_button_background_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-cookie-notification-button').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-cookie-notification-button').css('background', hsva.toHEXA().toString());
     });
 
     /* Button Color Handler */
@@ -148,7 +148,7 @@ $javascript = '';
         $('#settings_button_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-cookie-notification-button').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-cookie-notification-button').css('color', hsva.toHEXA().toString());
     });
 </script>
 <?php $javascript = ob_get_clean() ?>

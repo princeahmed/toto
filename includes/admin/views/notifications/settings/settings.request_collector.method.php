@@ -165,27 +165,27 @@ $javascript = '';
         $('#settings_show_agreement').on('change', show_agreement_check);
 
         /* Cancel the submit button form of the email collector */
-        $('#altumcode-request-collector-form').on('submit', event => event.preventDefault());
+        $('#toto-request-collector-form').on('submit', event => event.preventDefault());
 
         /* Notification Preview Handlers */
         $('#settings_title').on('change paste keyup', event => {
-            $('#notification_preview .altumcode-request-collector-title').text($(event.currentTarget).val());
+            $('#notification_preview .toto-request-collector-title').text($(event.currentTarget).val());
         });
 
         $('#settings_description').on('change paste keyup', event => {
-            $('#notification_preview .altumcode-request-collector-description').text($(event.currentTarget).val());
+            $('#notification_preview .toto-request-collector-description').text($(event.currentTarget).val());
         });
 
         $('#settings_image').on('change paste keyup', event => {
-            $('#notification_preview .altumcode-request-collector-image').attr('src', $(event.currentTarget).val());
+            $('#notification_preview .toto-request-collector-image').attr('src', $(event.currentTarget).val());
         });
 
         $('#settings_content_title').on('change paste keyup', event => {
-            $('#notification_preview .altumcode-request-collector-content-title').text($(event.currentTarget).val());
+            $('#notification_preview .toto-request-collector-content-title').text($(event.currentTarget).val());
         });
 
         $('#settings_content_description').on('change paste keyup', event => {
-            $('#notification_preview .altumcode-request-collector-content-description').text($(event.currentTarget).val());
+            $('#notification_preview .toto-request-collector-content-description').text($(event.currentTarget).val());
         });
 
         $('#settings_input_placeholder').on('change paste keyup', event => {
@@ -207,7 +207,7 @@ $javascript = '';
             $('#settings_title_color').val(hsva.toHEXA().toString());
 
             /* Notification Preview Handler */
-            $('#notification_preview .altumcode-request-collector-title').css('color', hsva.toHEXA().toString());
+            $('#notification_preview .toto-request-collector-title').css('color', hsva.toHEXA().toString());
         });
 
 
@@ -222,7 +222,7 @@ $javascript = '';
             $('#settings_description_color').val(hsva.toHEXA().toString());
 
             /* Notification Preview Handler */
-            $('#notification_preview .altumcode-request-collector-description').css('color', hsva.toHEXA().toString());
+            $('#notification_preview .toto-request-collector-description').css('color', hsva.toHEXA().toString());
         });
 
         /* Content Title Color Handler */
@@ -236,7 +236,7 @@ $javascript = '';
             $('#settings_content_title_color').val(hsva.toHEXA().toString());
 
             /* Notification Preview Handler */
-            $('#notification_preview .altumcode-request-collector-content-title').css('color', hsva.toHEXA().toString());
+            $('#notification_preview .toto-request-collector-content-title').css('color', hsva.toHEXA().toString());
         });
 
 
@@ -251,7 +251,7 @@ $javascript = '';
             $('#settings_content_description_color').val(hsva.toHEXA().toString());
 
             /* Notification Preview Handler */
-            $('#notification_preview .altumcode-request-collector-content-description').css('color', hsva.toHEXA().toString());
+            $('#notification_preview .toto-request-collector-content-description').css('color', hsva.toHEXA().toString());
         });
 
         /* Background Color Handler */
@@ -267,7 +267,7 @@ $javascript = '';
             console.log('event', hsva.toHEXA().toString());
 
             /* Notification Preview Handler */
-            $('#notification_preview .altumcode-wrapper').css('background', hsva.toHEXA().toString());
+            $('#notification_preview .toto-wrapper').css('background', hsva.toHEXA().toString());
         });
 
         /* Submit Background Color Handler */

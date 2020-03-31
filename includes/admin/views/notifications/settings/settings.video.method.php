@@ -75,15 +75,15 @@ $javascript = '';
 <script>
     /* Notification Preview Handlers */
     $('#settings_title').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-video-title').text($(event.currentTarget).val());
+        $('#notification_preview .toto-video-title').text($(event.currentTarget).val());
     });
 
     $('#settings_video').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-video-video-iframe').attr('src', $(event.currentTarget).val());
+        $('#notification_preview .toto-video-video-iframe').attr('src', $(event.currentTarget).val());
     });
 
     $('#settings_button_text').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-video-button').text($(event.currentTarget).val());
+        $('#notification_preview .toto-video-button').text($(event.currentTarget).val());
     });
 
 
@@ -98,7 +98,7 @@ $javascript = '';
         $('#settings_title_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-video-title').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-video-title').css('color', hsva.toHEXA().toString());
     });
 
 
@@ -113,7 +113,7 @@ $javascript = '';
         $('#settings_background_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-wrapper').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-wrapper').css('background', hsva.toHEXA().toString());
     });
 
     /* Button Background Color Handler */
@@ -127,7 +127,7 @@ $javascript = '';
         $('#settings_button_background_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-video-button').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-video-button').css('background', hsva.toHEXA().toString());
     });
 
     /* Button Color Handler */
@@ -141,7 +141,7 @@ $javascript = '';
         $('#settings_button_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-video-button').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-video-button').css('color', hsva.toHEXA().toString());
     });
 </script>
 <?php $javascript = ob_get_clean() ?>

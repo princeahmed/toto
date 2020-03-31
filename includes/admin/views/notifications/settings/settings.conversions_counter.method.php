@@ -141,15 +141,15 @@ $javascript = '';
 <script>
     /* Notification Preview Handlers */
     $('#settings_title').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-conversions-counter-title').text($(event.currentTarget).val());
+        $('#notification_preview .toto-conversions-counter-title').text($(event.currentTarget).val());
     });
 
     $('#settings_description').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-conversions-counter-description').text($(event.currentTarget).val());
+        $('#notification_preview .toto-conversions-counter-description').text($(event.currentTarget).val());
     });
 
     $('#settings_image').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-conversions-counter-image').attr('src', $(event.currentTarget).val());
+        $('#notification_preview .toto-conversions-counter-image').attr('src', $(event.currentTarget).val());
     });
 
     /* Number Color Handler */
@@ -163,7 +163,7 @@ $javascript = '';
         $('#settings_number_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-conversions-counter-number').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-conversions-counter-number').css('color', hsva.toHEXA().toString());
     });
 
     /* Number Background Color Handler */
@@ -177,7 +177,7 @@ $javascript = '';
         $('#settings_number_background_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-conversions-counter-number').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-conversions-counter-number').css('background', hsva.toHEXA().toString());
     });
 
 
@@ -192,7 +192,7 @@ $javascript = '';
         $('#settings_title_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-conversions-counter-title').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-conversions-counter-title').css('color', hsva.toHEXA().toString());
     });
 
 
@@ -207,7 +207,7 @@ $javascript = '';
         $('#settings_background_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-wrapper').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-wrapper').css('background', hsva.toHEXA().toString());
     });
 
     /* Data Triggers Auto Handler */

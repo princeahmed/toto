@@ -179,19 +179,19 @@ $javascript = '';
     });
 
     /* Cancel the submit button form of the email collector */
-    $('#altumcode-countdown-collector-form').on('submit', event => event.preventDefault());
+    $('#toto-countdown-collector-form').on('submit', event => event.preventDefault());
 
     /* Notification Preview Handlers */
     $('#settings_title').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-countdown-collector-title').text($(event.currentTarget).val());
+        $('#notification_preview .toto-countdown-collector-title').text($(event.currentTarget).val());
     });
 
     $('#settings_description').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-countdown-collector-description').text($(event.currentTarget).val());
+        $('#notification_preview .toto-countdown-collector-description').text($(event.currentTarget).val());
     });
 
     $('#settings_content_title').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-countdown-collector-content-title').text($(event.currentTarget).val());
+        $('#notification_preview .toto-countdown-collector-content-title').text($(event.currentTarget).val());
     });
 
     $('#settings_input_placeholder').on('change paste keyup', event => {
@@ -213,7 +213,7 @@ $javascript = '';
         $('#settings_title_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-countdown-collector-title').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-countdown-collector-title').css('color', hsva.toHEXA().toString());
     });
 
 
@@ -228,7 +228,7 @@ $javascript = '';
         $('#settings_description_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-countdown-collector-description').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-countdown-collector-description').css('color', hsva.toHEXA().toString());
     });
 
     /* Content Title Color Handler */
@@ -242,7 +242,7 @@ $javascript = '';
         $('#settings_content_title_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-countdown-collector-content-title').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-countdown-collector-content-title').css('color', hsva.toHEXA().toString());
     });
 
     /* Time Color Handler */
@@ -256,7 +256,7 @@ $javascript = '';
         $('#settings_time_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-countdown-collector-time').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-countdown-collector-time').css('color', hsva.toHEXA().toString());
     });
 
     /* Time Background Color Handler */
@@ -270,7 +270,7 @@ $javascript = '';
         $('#settings_time_background_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-countdown-collector-time').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-countdown-collector-time').css('background', hsva.toHEXA().toString());
     });
 
     /* Background Color Handler */
@@ -286,7 +286,7 @@ $javascript = '';
         console.log('event', hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-wrapper').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-wrapper').css('background', hsva.toHEXA().toString());
     });
 
     /* Submit Background Color Handler */

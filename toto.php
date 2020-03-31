@@ -47,11 +47,7 @@ final class Toto {
 		if ( version_compare( PHP_VERSION, $this->min_php, '<=' ) ) {
 			$return = false;
 
-			$notice = sprintf(
-			/* translators: %s: Min PHP version */
-				esc_html__( 'Unsupported PHP version Min required PHP Version: "%s"', 'wp-plugin-boilerplate' ),
-				$this->min_php
-			);
+			$notice = sprintf( /* translators: %s: Min PHP version */ esc_html__( 'Unsupported PHP version Min required PHP Version: "%s"', 'wp-plugin-boilerplate' ), $this->min_php );
 		}
 
 		if ( ! $return ) {
@@ -89,6 +85,7 @@ final class Toto {
 		include_once TOTO_INCLUDES . '/class-cpt.php';
 		include_once TOTO_INCLUDES . '/class-shortcodes.php';
 		include_once TOTO_INCLUDES . '/class-enqueue.php';
+		include_once TOTO_INCLUDES . '/class-form-handler.php';
 		include_once TOTO_INCLUDES . '/class-ajax.php';
 		include_once TOTO_INCLUDES . '/functions.php';
 		include_once TOTO_INCLUDES . '/prince-settings/prince-loader.php';

@@ -96,11 +96,11 @@ $javascript = '';
 <script>
     /* Notification Preview Handlers */
     $('#settings_title').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-social-share-title').text($(event.currentTarget).val());
+        $('#notification_preview .toto-social-share-title').text($(event.currentTarget).val());
     });
 
     $('#settings_description').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-social-share-description').text($(event.currentTarget).val());
+        $('#notification_preview .toto-social-share-description').text($(event.currentTarget).val());
     });
 
     /* Hide and show preview of the share buttons */
@@ -108,9 +108,9 @@ $javascript = '';
         let share_type = $(event.currentTarget).attr('id').replace('share_', '');
 
         if($(event.currentTarget).is(':checked')) {
-            $(`#notification_preview .altumcode-social-share-button-${share_type}`).show();
+            $(`#notification_preview .toto-social-share-button-${share_type}`).show();
         } else {
-            $(`#notification_preview .altumcode-social-share-button-${share_type}`).hide();
+            $(`#notification_preview .toto-social-share-button-${share_type}`).hide();
         }
     });
 
@@ -125,7 +125,7 @@ $javascript = '';
         $('#settings_title_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-social-share-title').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-social-share-title').css('color', hsva.toHEXA().toString());
     });
 
 
@@ -140,7 +140,7 @@ $javascript = '';
         $('#settings_description_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-social-share-description').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-social-share-description').css('color', hsva.toHEXA().toString());
     });
 
     /* Background Color Handler */
@@ -154,7 +154,7 @@ $javascript = '';
         $('#settings_background_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-wrapper').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-wrapper').css('background', hsva.toHEXA().toString());
     });
 
 </script>

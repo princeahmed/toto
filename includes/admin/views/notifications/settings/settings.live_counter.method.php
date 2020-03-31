@@ -87,15 +87,15 @@ $javascript = '';
 <script>
     /* Notification Preview Handlers */
     $('#settings_title').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-live-counter-title').text($(event.currentTarget).val());
+        $('#notification_preview .toto-live-counter-title').text($(event.currentTarget).val());
     });
 
     $('#settings_description').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-live-counter-description').text($(event.currentTarget).val());
+        $('#notification_preview .toto-live-counter-description').text($(event.currentTarget).val());
     });
 
     $('#settings_image').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-live-counter-image').attr('src', $(event.currentTarget).val());
+        $('#notification_preview .toto-live-counter-image').attr('src', $(event.currentTarget).val());
     });
 
     /* Number Color Handler */
@@ -109,7 +109,7 @@ $javascript = '';
         $('#settings_number_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-live-counter-number').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-live-counter-number').css('color', hsva.toHEXA().toString());
     });
 
     /* Number Background Color Handler */
@@ -123,7 +123,7 @@ $javascript = '';
         $('#settings_number_background_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-live-counter-number').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-live-counter-number').css('background', hsva.toHEXA().toString());
     });
 
 
@@ -138,7 +138,7 @@ $javascript = '';
         $('#settings_description_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-live-counter-description').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-live-counter-description').css('color', hsva.toHEXA().toString());
     });
 
 
@@ -153,7 +153,7 @@ $javascript = '';
         $('#settings_background_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-wrapper').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-wrapper').css('background', hsva.toHEXA().toString());
     });
 
     /* Pulse Background Color Handler */
@@ -167,7 +167,7 @@ $javascript = '';
         $('#settings_pulse_background_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-toast-pulse').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-toast-pulse').css('background', hsva.toHEXA().toString());
     });
 </script>
 <?php $javascript = ob_get_clean() ?>

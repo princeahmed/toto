@@ -49,15 +49,15 @@ $fields['customize'] = ob_get_clean();
 <script>
     /* Notification Preview Handlers */
     $('#settings_title').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-informational-title').text($(event.currentTarget).val());
+        $('#notification_preview .toto-informational-title').text($(event.currentTarget).val());
     });
 
     $('#settings_description').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-informational-description').text($(event.currentTarget).val());
+        $('#notification_preview .toto-informational-description').text($(event.currentTarget).val());
     });
 
     $('#settings_image').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-informational-image').attr('src', $(event.currentTarget).val());
+        $('#notification_preview .toto-informational-image').attr('src', $(event.currentTarget).val());
     });
 
     /* Title Color Handler */
@@ -71,7 +71,7 @@ $fields['customize'] = ob_get_clean();
         $('#settings_title_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-informational-title').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-informational-title').css('color', hsva.toHEXA().toString());
     });
 
 
@@ -86,7 +86,7 @@ $fields['customize'] = ob_get_clean();
         $('#settings_description_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-informational-description').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-informational-description').css('color', hsva.toHEXA().toString());
     });
 
 
@@ -101,7 +101,7 @@ $fields['customize'] = ob_get_clean();
         $('#settings_background_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-wrapper').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-wrapper').css('background', hsva.toHEXA().toString());
     });
 </script>
 <?php $javascript = ob_get_clean() ?>

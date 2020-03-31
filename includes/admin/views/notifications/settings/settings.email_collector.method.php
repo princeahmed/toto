@@ -52,15 +52,15 @@ $fields['data'] = ob_get_clean();
     $('#settings_show_agreement').on('change', show_agreement_check);
 
     /* Cancel the submit button form of the email collector */
-    $('#altumcode-email-collector-form').on('submit', event => event.preventDefault());
+    $('#toto-email-collector-form').on('submit', event => event.preventDefault());
 
     /* Notification Preview Handlers */
     $('#settings_title').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-email-collector-title').text($(event.currentTarget).val());
+        $('#notification_preview .toto-email-collector-title').text($(event.currentTarget).val());
     });
 
     $('#settings_description').on('change paste keyup', event => {
-        $('#notification_preview .altumcode-email-collector-description').text($(event.currentTarget).val());
+        $('#notification_preview .toto-email-collector-description').text($(event.currentTarget).val());
     });
 
     $('#settings_email_placeholder').on('change paste keyup', event => {
@@ -82,7 +82,7 @@ $fields['data'] = ob_get_clean();
         $('#settings_title_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-email-collector-title').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-email-collector-title').css('color', hsva.toHEXA().toString());
     });
 
 
@@ -97,7 +97,7 @@ $fields['data'] = ob_get_clean();
         $('#settings_description_color').val(hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-email-collector-description').css('color', hsva.toHEXA().toString());
+        $('#notification_preview .toto-email-collector-description').css('color', hsva.toHEXA().toString());
     });
 
 
@@ -114,7 +114,7 @@ $fields['data'] = ob_get_clean();
         console.log('event', hsva.toHEXA().toString());
 
         /* Notification Preview Handler */
-        $('#notification_preview .altumcode-wrapper').css('background', hsva.toHEXA().toString());
+        $('#notification_preview .toto-wrapper').css('background', hsva.toHEXA().toString());
     });
 
     /* Submit Background Color Handler */

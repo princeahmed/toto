@@ -18,19 +18,21 @@ class Toto_Admin_Ajax {
 			wp_send_json_error( [ 'msg' => 'type is not set.' ] );
 		}
 
+		$post_id = ! empty( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : '';
+
 		ob_start();
 		include TOTO_INCLUDES . '/admin/views/metabox/menu.php';
 		$menu_html = ob_get_clean();
 
 		ob_start();
-		$tabs = Toto_Notifications::notification_setting_tabs( $current_type );
+		$tabs = Toto_Notifications::setting_tabs( $current_type );
 
 		foreach ( $tabs as $key => $fields ) { ?>
             <div class="toto-tab-content-item flex-column" id="<?php echo $key; ?>">
 				<?php
 
 				foreach ( $fields as $field ) {
-					echo Toto_Notifications::settings_fields( $current_type, $field );
+					echo Toto_Notifications::settings_fields( $current_type, $field, $post_id );
 				}
 
 				?>
@@ -38,10 +40,15 @@ class Toto_Admin_Ajax {
 		<?php }
 		$content_html = ob_get_clean();
 
+		ob_start();
+		Toto_Notifications::preview_handler( $current_type );
+		$scripts = ob_get_clean();
+
 		wp_send_json_success( [
 			'html' => [
 				'menu'    => $menu_html,
 				'content' => $content_html,
+				'scripts' => $scripts,
 			]
 		] );
 	}

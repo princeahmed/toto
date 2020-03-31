@@ -89,7 +89,7 @@ $fields->url = ob_get_clean();
 ob_start(); ?>
     <div class="toto-form-group">
         <label for="settings_title_color">Title Color</label>
-        <input type="text" id="settings_title_color" name="settings[title_color]" value="<?php echo $title_color; ?>"/>
+        <input type="text" id="settings_title_color" class="toto-color-field" name="settings[title_color]" value="<?php echo $title_color; ?>"/>
     </div>
 <?php
 
@@ -99,7 +99,7 @@ $fields->title_color = ob_get_clean();
 ob_start(); ?>
     <div class="toto-form-group">
         <label for="settings_description_color">Description Color</label>
-        <input type="text" id="settings_description_color" name="settings[description_color]" value="<?php echo $description_color; ?>"/>
+        <input type="text" id="settings_description_color" class="toto-color-field" name="settings[description_color]" value="<?php echo $description_color; ?>"/>
     </div>
 <?php
 
@@ -109,7 +109,7 @@ $fields->description_color = ob_get_clean();
 ob_start(); ?>
     <div class="toto-form-group">
         <label for="settings_background_color">Background Color</label>
-        <input type="text" id="settings_background_color" name="settings[background_color]" value="<?php echo $background_color; ?>"/>
+        <input type="text" id="settings_background_color" class="toto-color-field" name="settings[background_color]" value="<?php echo $background_color; ?>"/>
     </div>
 <?php
 
@@ -120,9 +120,9 @@ ob_start(); ?>
     <div class="toto-form-group">
         <label for="settings_border_radius">Border Radius</label>
         <select id="settings_border_radius" name="settings[border_radius]">
-            <option value="straight" <?php checked( 'straight', $border_radius ); ?>>Straight</option>
-            <option value="rounded" <?php checked( 'rounded', $border_radius ); ?>>Rounded</option>
-            <option value="round" <?php checked( 'round', $border_radius ) ?>>Round</option>
+            <option value="straight" <?php selected( 'straight', $border_radius ); ?>>Straight</option>
+            <option value="rounded" <?php selected( 'rounded', $border_radius ); ?>>Rounded</option>
+            <option value="round" <?php selected( 'round', $border_radius ) ?>>Round</option>
         </select>
         <p class="description">Change the shape of the corners of the notification</p>
     </div>
@@ -211,18 +211,18 @@ ob_start(); ?>
             <p class="description">Where should the notification show?</p>
         </div>
 
-        <button type="button" id="trigger_add" class="btn-trigger-add">
-            <i class="fas fa-plus-circle"></i> Add new trigger
+        <button type="button" id="trigger_add" class="btn-trigger-add <?php echo 'yes' == $trigger_all_pages ? 'toto-hidden' : ''; ?>">
+            <i class="fas fa-plus-circle toto-mr-5"></i> Add new trigger
         </button>
     </div>
 
-    <div id="triggers_rules" class="triggers_rules toto-form-group container-disabled">
+    <div id="triggers_rules" class="triggers_rules toto-form-group <?php echo 'yes' == $trigger_all_pages ? 'container-disabled' : ''; ?>">
 		<?php
 
-        if ( ! empty( $triggers ) ) {
+		if ( ! empty( $triggers ) ) {
 			foreach ( $triggers as $trigger ) { ?>
                 <div class="toto-input-group">
-                    <select name="trigger_type[]">
+                    <select name="settings[trigger_type[]]">
                         <option value="exact" <? checked( 'exact', $trigger->type ) ?>>Exact</option>
                         <option value="contains" <? checked( 'contains', $trigger->type ) ?>>Contains</option>
                         <option value="starts_with" <? checked( 'starts_with', $trigger->type ) ?>>Starts With</option>
@@ -231,12 +231,12 @@ ob_start(); ?>
                         </option>
                     </select>
 
-                    <input type="text" name="trigger_value[]" value="<?php echo $trigger->value; ?>" placeholder="Full URL ( ex: https://domain.com )"/>
+                    <input type="text" name="settings[trigger_value[]]" value="<?php echo $trigger->value; ?>" placeholder="Full URL ( ex: https://domain.com )"/>
 
                     <button type="button" class="trigger-delete"><i class="fa fa-times"></i></button>
                 </div>
 			<?php }
-		}else{ ?>
+		} else { ?>
             <div class="toto-input-group">
                 <select name="trigger_type[]">
                     <option value="exact">Exact</option>
@@ -249,9 +249,10 @@ ob_start(); ?>
 
                 <input type="text" name="trigger_value[]" placeholder="Full URL ( ex: https://domain.com )"/>
 
-                <button type="button" class="trigger-delete toto-btn-delete" style="display: none;"><i class="fa fa-times"></i></button>
+                <button type="button" class="trigger-delete toto-btn-delete" style="display: none;">
+                    <i class="fa fa-times"></i></button>
             </div>
-        <?php } ?>
+		<?php } ?>
     </div>
 
 <?php
@@ -286,9 +287,9 @@ $fields->display_trigger = ob_get_clean();
 //Trigger Session
 ob_start(); ?>
     <div class="toto-form-group toto-switch-group">
-        <input type="checkbox" id="display_once_per_session" name="settings[display_once_per_session]" <?php checked( 'yes', $display_once_per_session ); ?> >
+        <input type="checkbox" id="settings_display_once_per_session" name="settings[display_once_per_session]" <?php checked( 'yes', $display_once_per_session ); ?> >
 
-        <label class="clickable" for="display_once_per_session">Display notification once per session</label>
+        <label class="clickable" for="settings_display_once_per_session">Display notification once per session</label>
 
         <p class="description">A visitor session is cleared once the browser is closed.</p>
     </div>
@@ -298,9 +299,9 @@ $fields->display_once_per_session = ob_get_clean();
 //Display Mobile
 ob_start(); ?>
     <div class="toto-form-group toto-switch-group">
-        <input type="checkbox" id="display_mobile" name="settings[display_mobile]" <?php checked( 'yes', $display_mobile ); ?> >
+        <input type="checkbox" id="settings_display_mobile" name="settings[display_mobile]" <?php checked( 'yes', $display_mobile ); ?> >
 
-        <label class="clickable" for="display_mobile">Display on Mobile</label>
+        <label class="clickable" for="settings_display_mobile">Display on Mobile</label>
 
         <p class="description">Wether or not to display the notification on when pixels available are smaller than
             768px.</p>
@@ -368,27 +369,23 @@ ob_start(); ?>
 
 $fields->footer_text = ob_get_clean();
 
-//Show Agreement
+//Agreement
 ob_start(); ?>
-    <div class="toto-form-group">
+    <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_show_agreement" name="settings[show_agreement]" <?php checked( 'yes', $show_agreement ); ?> >
 
         <label class="clickable" for="settings_show_agreement">Show Agreement</label>
 
         <p class="description">Require the user to confirm his agreement by ticking a checkbox.</p>
     </div>
-<?php
-$fields->show_agreement = ob_get_clean();
 
-//Agreement
-ob_start(); ?>
-    <div id="agreement">
-        <div class="form-group">
+    <div id="agreement" style="display: none">
+        <div class="toto-form-group">
             <label for="settings_agreement_text">Agreement Text</label>
             <input type="text" id="settings_agreement_text" name="settings[agreement_text]" value="<?php echo $agreement_text; ?>"/>
         </div>
 
-        <div class="form-group">
+        <div class="toto-form-group">
             <label for="settings_agreement_url">Agreement URL</label>
             <input type="text" id="settings_agreement_url" name="settings[agreement_url]" value="<?php echo $agreement_url; ?>"/>
         </div>
@@ -400,7 +397,7 @@ $fields->agreement = ob_get_clean();
 ob_start(); ?>
     <div class="toto-form-group">
         <label for="settings_button_background_color">Button Background Color</label>
-        <input type="text" id="settings_button_background_color" class="es_color" name="settings[button_background_color]" value="<?php echo $button_background_color; ?>"/>
+        <input type="text" id="settings_button_background_color" class="toto-color-field" name="settings[button_background_color]" value="<?php echo $button_background_color; ?>"/>
     </div>
 <?php
 
@@ -458,31 +455,27 @@ $fields->pulse_background_color = ob_get_clean();
 
 //Send Caught Data to External
 ob_start(); ?>
-    <div class="toto-form-group">
+    <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_data_send_is_enabled" name="settings[data_send_is_enabled]" <?php checked( 'yes', $data_send_is_enabled ); ?> >
 
         <label class="clickable" for="settings_data_send_is_enabled">Send Caught Data to External</label>
     </div>
-<?php
-$fields->data_send_is_enabled = ob_get_clean();
 
-//Data Send
-ob_start(); ?>
-    <div id="data_send">
-        <div class="form-group">
+    <div id="data_send" class="container-disabled">
+        <div class="toto-form-group">
             <label for="settings_data_send_webhook">Webhook</label>
             <input type="text" id="settings_data_send_webhook" name="settings[data_send_webhook]" value="<?php echo $data_send_webhook; ?>" placeholder="Webhook URL"/>
             <p class="description">Leave empty to disable this field.</p>
         </div>
 
-        <div class="form-group">
+        <div class="toto-form-group">
             <label for="settings_data_send_email">Email</label>
             <input type="text" id="settings_data_send_email" name="settings[data_send_email]" value="<?php echo $data_send_email; ?>" placeholder="Valid email address"/>
             <p class="description">Leave empty to disable this field.></p>
         </div>
     </div>
 <?php
-$fields->data_send = ob_get_clean();
+$fields->data_send_is_enabled = ob_get_clean();
 
 
 return $fields;
