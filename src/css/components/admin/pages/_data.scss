@@ -1,0 +1,32 @@
+.toto-data-panel{
+  .toto-panel-body{
+    margin-top: 15px;
+  }
+}
+
+.data-group {
+  display: flex;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+
+  &:last-child{
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .data-label {
+    font-weight: bold;
+    min-width: 80px;
+  }
+  .data-value {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+
+    img{
+      margin-right: 5px;
+    }
+  }
+
+}

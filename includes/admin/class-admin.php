@@ -11,7 +11,6 @@ class Toto_Admin {
 	}
 
 	public function includes() {
-		include_once TOTO_INCLUDES . '/admin/class-install.php';
 		include_once TOTO_INCLUDES . '/admin/class-metabox.php';
 		include_once TOTO_INCLUDES . '/admin/class-ajax.php';
 	}

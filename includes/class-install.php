@@ -8,12 +8,8 @@ defined( 'ABSPATH' ) || exit;
  */
 class Toto_Install {
 
-	public static function init() {
-		register_activation_hook( TOTO_FILE, [ __CLASS__, 'activate' ] );
-		//register_deactivation_hook( TOTO_FILE, [ __CLASS__, 'deactivate' ] );
-	}
-
 	public static function activate() {
+
 		$key = sanitize_key( toto()->name );
 		update_option( $key . '_version', toto()->version );
 		update_option( 'toto_flush_rewrite_rules', true );
@@ -28,6 +24,7 @@ class Toto_Install {
 	 * @since 1.0.0
 	 */
 	public static function create_tables() {
+
 		global $wpdb;
 		$wpdb->hide_errors();
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
@@ -37,9 +34,10 @@ class Toto_Install {
          	id bigint(20) NOT NULL AUTO_INCREMENT,
 			notification_id bigint(20) NOT NULL,
 			data longtext DEFAULT NULL,
+			created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id),
-			key notification_id (notification_id),
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;",
+			key notification_id (notification_id)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
 		];
 
 		foreach ( $tables as $table ) {

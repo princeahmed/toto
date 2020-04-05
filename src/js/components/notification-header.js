@@ -60,10 +60,8 @@ let send_tracking_data = params => {
         return;
     }
 
-    wp.ajax.send('data', {
-        data: {
-            params
-        },
+    wp.ajax.send('toto_save_data', {
+        data: {data: params},
 
         success: (res) => {
             console.log(res);

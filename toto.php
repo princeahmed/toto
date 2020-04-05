@@ -82,6 +82,7 @@ final class Toto {
 	public function includes() {
 
 		/* core includes */
+		include_once TOTO_INCLUDES . '/class-install.php';
 		include_once TOTO_INCLUDES . '/class-hooks.php';
 		include_once TOTO_INCLUDES . '/class-cpt.php';
 		include_once TOTO_INCLUDES . '/class-shortcodes.php';
@@ -100,6 +101,9 @@ final class Toto {
 	}
 
 	public function init_hooks() {
+
+		/* Installation */
+		register_activation_hook( TOTO_FILE, [ 'Toto_Install', 'activate' ] );
 
 		/* Localize our plugin */
 		add_action( 'init', [ $this, 'localization_setup' ] );
