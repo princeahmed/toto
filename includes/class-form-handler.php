@@ -8,11 +8,12 @@ class Toto_Form_Handler {
 	}
 
 	public function save_toto_meta( $post_id ) {
-		if ( defined( DOING_AJAX ) && DOING_AJAX ) {
+
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			return;
 		}
 
-		if ( defined( DOING_CRON ) && DOING_CRON ) {
+		if ( defined( 'DOING_CRON' ) && DOING_CRON ) {
 			return;
 		}
 
@@ -31,7 +32,7 @@ class Toto_Form_Handler {
 		];
 
 		foreach ( $switch_fields as $key ) {
-			$settings[ $key ] = isset( $settings[ $key ] ) ? 'yes' : 'no';
+			$settings[ $key ] = isset( $settings[ $key ] ) ? true : false;
 		}
 
 		update_post_meta( $post_id, '_settings',  $settings);

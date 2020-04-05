@@ -14,7 +14,9 @@ $display_position         = ! empty( $notification['display_position'] ) ? $noti
 $display_duration         = ! empty( $notification['display_duration'] ) ? $notification['display_duration'] : '';
 $display_close_button     = ! empty( $notification['display_close_button'] ) ? $notification['display_close_button'] : '';
 $display_branding         = ! empty( $notification['display_branding'] ) ? $notification['display_branding'] : '';
-$trigger_all_pages        = ! empty( $notification['trigger_all_pages'] ) ? $notification['trigger_all_pages'] : '';
+$trigger_on               = ! empty( $notification['trigger_on'] ) ? $notification['trigger_on'] : '';
+$trigger_locations        = ! empty( $notification['trigger_locations'] ) ? $notification['trigger_locations'] : '';
+$custom_post_page_ids     = ! empty( $notification['custom_post_page_ids'] ) ? $notification['custom_post_page_ids'] : '';
 $triggers                 = ! empty( $notification['triggers'] ) ? $notification['triggers'] : '';
 $display_trigger          = ! empty( $notification['display_trigger'] ) ? $notification['display_trigger'] : '';
 $display_trigger_value    = ! empty( $notification['display_trigger_value'] ) ? $notification['display_trigger_value'] : '';
@@ -64,8 +66,18 @@ $fields->description = ob_get_clean();
 //Field Image
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_image">Image URL</label>
-        <input type="text" id="settings_image" name="settings[image]" value="<?php echo $image; ?>"/>
+        <label for="settings_image">Image</label>
+
+        <img src="<?php echo $image; ?>" alt="Notification Image" class="toto-image-preview <?php echo empty( $image ) ? 'toto-hidden' : ''; ?>">
+
+        <div class="toto-input-group">
+            <input type="text" id="settings_image" name="settings[image]" value="<?php echo $image; ?>"/>
+            <button type="button" class="button button-primary toto-choose-image toto-ml-10 toto-mr-10">Choose Image
+            </button>
+            <button type="button" class="button button-link-delete toto-remove-image <?php echo empty( $image ) ? 'toto-hidden' : ''; ?>">
+                Remove Image
+            </button>
+        </div>
         <p class="description">Leave empty for no image. Hint: icons8.com has a good library of small icons that you
             can use.</p>
     </div>
@@ -155,27 +167,27 @@ ob_start(); ?>
     <div class="toto-form-group">
         <label for="settings_display_position">Display Position</label>
         <select id="settings_display_position" name="settings[display_position]">
-            <option value="top_left" <?php checked( 'top_left', $display_position ) ?>>Top Left</option>
-            <option value="top_center" <?php checked( 'top_center', $display_position ) ?>>Top Center
+            <option value="top_left" <?php selected( 'top_left', $display_position ) ?>>Top Left</option>
+            <option value="top_center" <?php selected( 'top_center', $display_position ) ?>>Top Center
             </option>
-            <option value="top_right" <?php checked( 'top_right', $display_position ) ?>>Top Right
+            <option value="top_right" <?php selected( 'top_right', $display_position ) ?>>Top Right
             </option>
-            <option value="middle_left" <?php checked( 'middle_left', $display_position ) ?>>Middle
+            <option value="middle_left" <?php selected( 'middle_left', $display_position ) ?>>Middle
                 Left
             </option>
-            <option value="middle_center" <?php checked( 'middle_center', $display_position ) ?>>Middle
+            <option value="middle_center" <?php selected( 'middle_center', $display_position ) ?>>Middle
                 Center
             </option>
-            <option value="middle_right" <?php checked( 'middle_right', $display_position ) ?>>Middle
+            <option value="middle_right" <?php selected( 'middle_right', $display_position ) ?>>Middle
                 Right
             </option>
-            <option value="bottom_left" <?php checked( 'bottom_left', $display_position ) ?>>Bottom
+            <option value="bottom_left" <?php selected( 'bottom_left', $display_position ) ?>>Bottom
                 Left
             </option>
-            <option value="bottom_center" <?php checked( 'bottom_center', $display_position ) ?>>Bottom
+            <option value="bottom_center" <?php selected( 'bottom_center', $display_position ) ?>>Bottom
                 Center
             </option>
-            <option value="bottom_right" <?php checked( 'bottom_right', $display_position ) ?>>Bottom
+            <option value="bottom_right" <?php selected( 'bottom_right', $display_position ) ?>>Bottom
                 Right
             </option>
         </select>
@@ -187,7 +199,7 @@ $fields->display_position = ob_get_clean();
 //Display Close Button
 ob_start(); ?>
     <div class="toto-form-group toto-switch-group">
-        <input type="checkbox" id="settings_display_close_button" name="settings[display_close_button]" <?php checked( 'yes', $display_close_button ) ?> />
+        <input type="checkbox" id="settings_display_close_button" name="settings[display_close_button]" <?php checked( true, $display_close_button ); ?> />
         <label for="settings_display_close_button">Display Close Button</label>
     </div>
 <?php
@@ -196,63 +208,46 @@ $fields->display_close_button = ob_get_clean();
 //Display Branding
 ob_start(); ?>
     <div class="toto-form-group toto-switch-group">
-        <input type="checkbox" id="settings_display_branding" name="settings[display_branding]" <?php checked( 'yes', $display_branding ) ?> />
+        <input type="checkbox" id="settings_display_branding" name="settings[display_branding]" <?php checked( true, $display_branding ) ?> />
         <label for="settings_display_branding">Display Branding</label>
     </div>
 <?php
 $fields->display_branding = ob_get_clean();
 
-//Trigger Rules
-ob_start(); ?>
-    <div class="d-flex align-center">
-        <div class="toto-form-group toto-switch-group">
-            <input type="checkbox" id="settings_trigger_all_pages" name="settings[trigger_all_pages]" <?php checked( 'yes', $trigger_all_pages ) ?>>
-            <label class="clickable" for="settings_trigger_all_pages">Trigger on all pages</label>
-            <p class="description">Where should the notification show?</p>
+ob_start();
+?>
+    <div class="toto-form-group flex-row flex-wrap">
+        <label for="settings_trigger_on_all" class="toto-mr-20">Trigger on: </label>
+
+        <div class="toto-label-group">
+            <input type="radio" id="settings_trigger_on_all" name="settings[trigger_on]" value="all" <?php checked( 'all', $trigger_on ); ?>>
+            <label for="settings_trigger_on_all">Everywhere</label>
         </div>
 
-        <button type="button" id="trigger_add" class="btn-trigger-add <?php echo 'yes' == $trigger_all_pages ? 'toto-hidden' : ''; ?>">
-            <i class="fas fa-plus-circle toto-mr-5"></i> Add new trigger
-        </button>
+        <div class="toto-label-group">
+            <input type="radio" id="settings_trigger_on_selected" name="settings[trigger_on]" value="selected" <?php checked( 'selected', $trigger_on ); ?>>
+            <label for="settings_trigger_on_selected">Selected</label>
+        </div>
+
+        <div class="toto-break"></div>
+        <p class="description">Where should the notification show?</p>
     </div>
 
-    <div id="triggers_rules" class="triggers_rules toto-form-group <?php echo 'yes' == $trigger_all_pages ? 'container-disabled' : ''; ?>">
-		<?php
+    <div class="toto-form-group flex-row align-center <?php echo 'selected' == $trigger_on ? '' : 'toto-hidden'; ?>">
+        <label for="settings_trigger_locations" class="toto-mr-20">Select Locations: </label>
+        <select name="settings[trigger_locations][]" class="toto-select2" id="settings_trigger_locations" multiple>
+			<?php
+			foreach ( toto_locations() as $key => $val ) {
+				printf( '<option value="%1$s" %3$s>%2$s</option>', $key, $val, ! empty( $trigger_locations ) && in_array( $key, $trigger_locations ) ? 'selected' : '' );
+			}
+			?>
+        </select>
+    </div>
 
-		if ( ! empty( $triggers ) ) {
-			foreach ( $triggers as $trigger ) { ?>
-                <div class="toto-input-group">
-                    <select name="settings[trigger_type[]]">
-                        <option value="exact" <? checked( 'exact', $trigger->type ) ?>>Exact</option>
-                        <option value="contains" <? checked( 'contains', $trigger->type ) ?>>Contains</option>
-                        <option value="starts_with" <? checked( 'starts_with', $trigger->type ) ?>>Starts With</option>
-                        <option value="ends_with" <? checked( 'ends_with', $trigger->type ) ?>>Ends With</option>
-                        <option value="page_contains" <? checked( 'page_contains', $trigger->type ) ?>>Page Contains
-                        </option>
-                    </select>
-
-                    <input type="text" name="settings[trigger_value[]]" value="<?php echo $trigger->value; ?>" placeholder="Full URL ( ex: https://domain.com )"/>
-
-                    <button type="button" class="trigger-delete"><i class="fa fa-times"></i></button>
-                </div>
-			<?php }
-		} else { ?>
-            <div class="toto-input-group">
-                <select name="trigger_type[]">
-                    <option value="exact">Exact</option>
-                    <option value="contains">Contains</option>
-                    <option value="starts_with">Starts With</option>
-                    <option value="ends_with">Ends With</option>
-                    <option value="page_contains">Page Contains
-                    </option>
-                </select>
-
-                <input type="text" name="trigger_value[]" placeholder="Full URL ( ex: https://domain.com )"/>
-
-                <button type="button" class="trigger-delete toto-btn-delete" style="display: none;">
-                    <i class="fa fa-times"></i></button>
-            </div>
-		<?php } ?>
+    <div class="toto-form-group <?php echo ! empty( $trigger_locations ) && in_array( 'is_custom', $trigger_locations ) ? '' : 'toto-hidden'; ?>">
+        <label for="settings_custom_post_page_ids" class="toto-mr-20">Post/ Page IDs: </label>
+        <input type="text" name="settings[custom_post_page_ids]" id="settings_custom_post_page_ids" value="<?php echo $custom_post_page_ids; ?>">
+        <p class="description">Comma Separated ID of Post, Page or Custom Post Type Posts.</p>
     </div>
 
 <?php
@@ -276,7 +271,8 @@ ob_start(); ?>
                 </option>
             </select>
 
-            <input type="number" min="0" name="settings[display_trigger_value]" value="<?php echo $display_trigger_value; ?>"/>
+            <input type="number" min="0" class="<?php echo 'exit_intent' == $display_trigger ? 'toto-hidden' : ''; ?>" name="settings[display_trigger_value]" value="<?php echo $display_trigger_value; ?>"/>
+
         </div>
 
         <p class="description">On what event the notification should show up.</p>
@@ -287,7 +283,7 @@ $fields->display_trigger = ob_get_clean();
 //Trigger Session
 ob_start(); ?>
     <div class="toto-form-group toto-switch-group">
-        <input type="checkbox" id="settings_display_once_per_session" name="settings[display_once_per_session]" <?php checked( 'yes', $display_once_per_session ); ?> >
+        <input type="checkbox" id="settings_display_once_per_session" name="settings[display_once_per_session]" <?php checked( true, $display_once_per_session ); ?> >
 
         <label class="clickable" for="settings_display_once_per_session">Display notification once per session</label>
 
@@ -299,7 +295,7 @@ $fields->display_once_per_session = ob_get_clean();
 //Display Mobile
 ob_start(); ?>
     <div class="toto-form-group toto-switch-group">
-        <input type="checkbox" id="settings_display_mobile" name="settings[display_mobile]" <?php checked( 'yes', $display_mobile ); ?> >
+        <input type="checkbox" id="settings_display_mobile" name="settings[display_mobile]" <?php checked( true, $display_mobile ); ?> >
 
         <label class="clickable" for="settings_display_mobile">Display on Mobile</label>
 
@@ -372,14 +368,14 @@ $fields->footer_text = ob_get_clean();
 //Agreement
 ob_start(); ?>
     <div class="toto-form-group toto-switch-group">
-        <input type="checkbox" id="settings_show_agreement" name="settings[show_agreement]" <?php checked( 'yes', $show_agreement ); ?> >
+        <input type="checkbox" id="settings_show_agreement" name="settings[show_agreement]" <?php checked( true, $show_agreement ); ?> >
 
         <label class="clickable" for="settings_show_agreement">Show Agreement</label>
 
         <p class="description">Require the user to confirm his agreement by ticking a checkbox.</p>
     </div>
 
-    <div id="agreement" style="display: none">
+    <div id="agreement" class="<?php echo true == $show_agreement ? '' : 'toto-hidden'; ?>">
         <div class="toto-form-group">
             <label for="settings_agreement_text">Agreement Text</label>
             <input type="text" id="settings_agreement_text" name="settings[agreement_text]" value="<?php echo $agreement_text; ?>"/>
@@ -456,7 +452,7 @@ $fields->pulse_background_color = ob_get_clean();
 //Send Caught Data to External
 ob_start(); ?>
     <div class="toto-form-group toto-switch-group">
-        <input type="checkbox" id="settings_data_send_is_enabled" name="settings[data_send_is_enabled]" <?php checked( 'yes', $data_send_is_enabled ); ?> >
+        <input type="checkbox" id="settings_data_send_is_enabled" name="settings[data_send_is_enabled]" <?php checked( true, $data_send_is_enabled ); ?> >
 
         <label class="clickable" for="settings_data_send_is_enabled">Send Caught Data to External</label>
     </div>

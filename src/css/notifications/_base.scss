@@ -161,17 +161,21 @@
 }
 
 .toto-toast-star {
-    font-size: 14px !important;
-    color: #ffc100 !important;
+    font-size: 14px;
+    color: #ffc100;
 }
 
 .toto-agreement-checkbox {
-    display: flex !important;
-    align-items: center !important;
+    display: flex;
+    align-items: center;
 }
 
 .toto-agreement-checkbox-text {
-    font-size: 12px !important;
-    margin-left: 5px !important;
-    margin-top: 8px !important;
+    font-size: 12px;
+    margin-left: 5px;
+    margin-top: 8px;
+}
+
+#toto-agreement{
+    margin-top: 8px;
 }

@@ -27,7 +27,10 @@ const paths = {
         dest: 'assets/css/'
     },
     js: {
-        src: ['src/js/frontend.js', 'src/js/admin.js'],
+        src: [
+            'src/js/frontend.js',
+            'src/js/admin.js',
+        ],
         dest: 'assets/js/'
     },
     images: {
@@ -105,7 +108,7 @@ export const css = () => {
 
 export const js = () => {
     return gulp.src(paths.js.src)
-    //.pipe(named(file => (file.stem + (PRODUCTION ? `.min` : ''))))
+        //.pipe(named(file => (file.stem + (PRODUCTION ? `.min` : ''))))
         .pipe(named())
         .pipe(webpack({
             mode: PRODUCTION ? 'production' : 'development',
@@ -117,7 +120,7 @@ export const js = () => {
                             {
                                 loader: 'babel-loader',
                                 options: {
-                                    presets: ['babel-preset-env']
+                                    presets: ['@babel/preset-env']
                                 }
                             }
                         ]

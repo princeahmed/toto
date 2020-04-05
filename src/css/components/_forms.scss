@@ -7,6 +7,11 @@
   input, select {
     min-height: 40px;
     border-color: #ced4da;
+
+    &[type=radio] {
+      min-height: auto;
+    }
+
   }
 
   label {
@@ -15,7 +20,24 @@
   }
 
   select {
-    max-width: 200px;
+    max-width: 300px;
+
+    option{
+      margin: 0 5px;
+      padding: 5px 5px 10px;
+      border-bottom: 1px solid #ddd;
+    }
+  }
+
+}
+
+.toto-label-group{
+  display: flex;
+  align-items: center;
+  margin: 0 5px;
+
+  input{
+    margin-right: 8px;
   }
 
 }
@@ -23,7 +45,7 @@
 .toto-input-group {
   display: flex;
 
-  input{
+  input {
     flex: 1;
   }
 }

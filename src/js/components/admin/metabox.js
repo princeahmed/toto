@@ -2,14 +2,30 @@
     const app = {
         init: () => {
             app.initMetaTabs();
+            app.initSelect2();
 
             $(document).on('click', '.toto-meta-tabs .toto-tab-link', app.toggleNotificationTab);
             $(document).on('click', '.toto-notification-type', app.selectType);
             $(document).on('change', '#settings_trigger_all_pages', app.toggleTriggerContent);
             $(document).on('change', '#settings_data_send_is_enabled', app.toggleDataSendContent);
+            $(document).on('change', '[name="settings[trigger_on]"]', app.toggleLocationsField);
+            $(document).on('change', '#settings_display_trigger', app.displayTriggerSelect);
+            $(document).on('change', '#settings_trigger_locations', app.toggleCustomIds);
             $(document).on('click', '#trigger_add', app.addTrigger);
             $(document).on('click', '.toto-btn-delete', app.deleteTrigger);
             $(document).on('click', '#settings_show_agreement', app.toggleAgreement);
+            $(document).on('click', '.toto-choose-image', app.handleMedia);
+            $(document).on('click', '.toto-remove-image', app.removeImage);
+        },
+
+        initSelect2: () => {
+            $('#settings_trigger_locations').select2({
+                placeholder: 'Select Locations',
+            });
+
+            $(document).on('focus', '.toto-form-group :input', function () {
+                $(this).attr('autocomplete', 'new-password');
+            });
         },
 
         initMetaTabs: () => {
@@ -31,6 +47,22 @@
             $('.toto-meta-tabs .toto-tab-link, .toto-tab-content-item').removeClass('active');
             $(this).addClass('active').parent().prevAll('.toto-tab-item').find('.toto-tab-link').addClass('active');
             $(`#${target}`).addClass('active');
+        },
+
+        toggleLocationsField: function () {
+            if ('all' === $(this).val()) {
+                $('#settings_trigger_locations').parent().addClass('toto-hidden');
+            } else {
+                $('#settings_trigger_locations').parent().removeClass('toto-hidden');
+            }
+        },
+
+        toggleCustomIds: function () {
+            if ( $(this).val() && $(this).val().includes('is_custom')) {
+                $('#settings_custom_post_page_ids').parent().removeClass('toto-hidden');
+            } else {
+                $('#settings_custom_post_page_ids').parent().addClass('toto-hidden');
+            }
         },
 
         selectType: function () {
@@ -96,7 +128,41 @@
         },
 
         toggleAgreement: function () {
-            $('#agreement').toggle();
+            $('#agreement').toggleClass('toto-hidden');
+        },
+
+        handleMedia: function (e) {
+            e.preventDefault();
+
+            const image = wp.media({
+                title: 'Choose Image',
+                multiple: false
+            }).open()
+                .on('select', function () {
+                    const uploaded_image = image.state().get('selection').first();
+                    const image_url = uploaded_image.toJSON().url;
+                    $('.toto-image-preview',).attr('src', image_url).removeClass('toto-hidden');
+                    $('#settings_image',).val(image_url).trigger('change');
+                    $('.toto-remove-image').removeClass('toto-hidden');
+                });
+        },
+
+        removeImage: function (e) {
+            e.preventDefault();
+            $('.toto-image-preview',).attr('src', '').addClass('toto-hidden');
+            $('#settings_image',).val('').trigger('change');
+            $('.toto-remove-image').addClass('toto-hidden');
+        },
+
+        displayTriggerSelect: function () {
+            const val = $(this).val();
+
+            if ('exit_intent' === val) {
+                $(this).next().addClass('toto-hidden');
+            } else {
+                $(this).next().removeClass('toto-hidden').val('').attr('placeholder', $(`option[value=${val}]`, $(this)).data('placeholder'));
+            }
+
         }
 
     };

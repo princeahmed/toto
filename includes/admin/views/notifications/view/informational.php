@@ -18,16 +18,29 @@ defined( 'ABSPATH' ) || die();
         </div>
     </div>
 
-    <span class="toto-close"></span>
+    <span class="toto-close">
+        <?php echo $notification->display_close_button ? '&#10006;' : ''; ?>
+    </span>
 </div>
 <?php $html = ob_get_clean() ?>
 
 
 <?php ob_start() ?>
-new AltumCodeManager({content: <?php echo json_encode( $html ) ?>,display_mobile: <?php echo json_encode( $notification->display_mobile ) ?>,display_trigger: <?php echo json_encode( $notification->display_trigger ) ?>,display_trigger_value: <?php echo json_encode( $notification->display_trigger_value ) ?>,duration: <?php echo $notification->display_duration === - 1 ? - 1 : $notification->display_duration * 1000 ?>,url: <?php echo json_encode( $notification->url ) ?>,close: <?php echo json_encode( $notification->display_close_button ) ?>,once_per_session: <?php echo json_encode( $notification->display_once_per_session ) ?>,position: <?php echo json_encode( $notification->display_position ) ?>,stop_on_focus: true,trigger_all_pages: <?php echo json_encode( $notification->trigger_all_pages ) ?>,triggers: <?php echo json_encode( $notification->triggers ) ?>,
+    new TotoNotification({
+        content: <?php echo json_encode( $html ) ?>,
+        display_mobile: <?php echo json_encode( $notification->display_mobile ); ?>,
+        display_trigger: <?php echo json_encode( $notification->display_trigger ); ?>,
+        display_trigger_value: <?php echo json_encode( $notification->display_trigger_value ); ?>,
+        duration: <?php echo $notification->display_duration === - 1 ? - 1 : $notification->display_duration * 1000 ?>,
+        url: <?php echo json_encode( $notification->url ); ?>,
+        close: <?php echo json_encode( $notification->display_close_button ); ?>,
+        once_per_session: <?php echo json_encode( $notification->display_once_per_session ); ?>,
+        position: <?php echo json_encode( $notification->display_position ); ?>,
+        stop_on_focus: true,
+        should_show: <?php echo json_encode( toto_should_show($notification->notification_id) ); ?>,
 
-notification_id: <?php echo $notification->notification_id ?>
-}).initiate();
+        notification_id: <?php echo $notification->notification_id ?>
+    }).initiate();
 <?php $javascript = ob_get_clean(); ?>
 
 <?php return (object) [ 'html' => $html, 'javascript' => $javascript ] ?>

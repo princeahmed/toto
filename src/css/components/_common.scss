@@ -1,24 +1,28 @@
-.d-flex{
+.d-flex {
   display: flex;
 }
 
-.flex-column{
+.flex-column {
   flex-flow: column;
 }
 
-.flex-row{
-  flex-flow: row;
+.flex-row {
+  flex-flow: row !important;
 }
 
-.align-center{
+.flex-wrap {
+  flex-wrap: wrap !important;
+}
+
+.align-center {
   align-items: center;
 }
 
-.align-base{
+.align-base {
   align-items: baseline;
 }
 
-.toto-btn-delete{
+.toto-btn-delete {
   margin-left: 15px;
   padding: 0 15px;
   cursor: pointer;
@@ -30,13 +34,42 @@
 
 .container-disabled {
   pointer-events: none;
-  opacity: .5;
+  opacity: .3;
 }
 
-.toto-hidden{
+.toto-hidden {
   display: none !important;
 }
 
-.toto-mr-5{
+.toto-mr-5 {
   margin-right: 5px;
+}
+
+.toto-ml-5 {
+  margin-left: 5px;
+}
+
+.toto-mr-10 {
+  margin-right: 10px !important;
+}
+
+.toto-mr-20 {
+  margin-right: 20px !important;
+}
+
+.toto-ml-10 {
+  margin-left: 10px !important;
+}
+
+.toto-image-preview{
+  width: max-content;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  max-width: 100px;
+}
+
+.toto-break {
+  flex-basis: 100%;
+  height: 0;
 }

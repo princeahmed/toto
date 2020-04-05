@@ -2,17 +2,17 @@
 
 defined('ABSPATH') || exit();
 
-class WP_Plugin_Boilerplate_Ajax{
+class Toto_Ajax{
 
 	public function __construct() {
-		add_action('wp_ajax_wp_plugin_boilerplate', [$this, 'wp_plugin_boilerplate']);
-		add_action('wp_ajax_nopriv_wp_plugin_boilerplate', [$this, 'wp_plugin_boilerplate']);
+		add_action('wp_ajax_toto_save_data', [$this, 'save_data']);
+		add_action('wp_ajax_nopriv_toto_save_data', [$this, 'save_data']);
 	}
 
-	public function wp_plugin_boilerplate(){
-		//do the ajax stuffs
+	public function save_data(){
+
 	}
 
 }
 
-new WP_Plugin_Boilerplate_Ajax();
+new Toto_Ajax();
