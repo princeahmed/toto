@@ -610,22 +610,14 @@ class Toto_Notifications {
 
 	}
 
-	public static function get_enabled_methods( $type ) {
-
-		$methods = [];
-
-		if ( in_array( $type, [
-			'INFORMATIONAL',
-			'COUPON',
-			'LIVE_COUNTER',
-			'VIDEO',
-			'SOCIAL_SHARE',
-			'EMOJI_FEEDBACK',
-			'COOKIE_NOTIFICATION',
-			'SCORE_FEEDBACK'
-		] ) ) {
-			$methods = [ 'statistics', 'settings' ];
-		}
+	/**
+     * Check if the notification type supports data collection
+     *
+	 * @param $type
+	 *
+	 * @return bool
+	 */
+	public static function is_data_supports( $type ) {
 
 		if ( in_array( $type, [
 			'EMAIL_COLLECTOR',
@@ -635,10 +627,10 @@ class Toto_Notifications {
 			'REQUEST_COLLECTOR',
 			'COUNTDOWN_COLLECTOR'
 		] ) ) {
-			$methods = [ 'statistics', 'settings', 'data' ];
+			return true;
 		}
 
-		return $methods;
+		return false;
 	}
 
 	public static function get_enabled_settings_tabs( $type ) {

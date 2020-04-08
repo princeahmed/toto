@@ -9,7 +9,7 @@
 
         <form id="toto-email-collector-form" class="toto-email-collector-form" name="" action="" method="GET" role="form">
             <div class="toto-email-collector-row">
-                <input type="text" class="toto-email-collector-email-placeholder" name="email" placeholder="<?php echo $notification->email_placeholder ?>" required="required"/>
+                <input type="email" class="toto-email-collector-email-placeholder" name="email" placeholder="<?php echo $notification->email_placeholder ?>" required="required"/>
 
                 <button type="submit" class="toto-email-collector-button" name="button" style="color: <?php echo $notification->button_color ?>; background: <?php echo $notification->button_background_color ?>"><?php echo $notification->button_text ?></button>
             </div>

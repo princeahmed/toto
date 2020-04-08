@@ -7,6 +7,14 @@ Completed:
 Todo:
 ---
 1. Rename Files
+2. Add Pagination On Data Page
+3. Add Per Page Box on Data Page
+4. Add Impression/ Hover/ Clicks/ Submission checkbox on side of Statistics page
+5. Add Sound Support
+6. Add Everyone/ Loggedin /Logged out showing option
+7. Add only shortcode use method
+8. Add notification list page
+9. Add Pagination on statics top pages
 
 Premium Features:
 ------
