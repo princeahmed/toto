@@ -20,69 +20,49 @@ function toto_locations() {
 	);
 }
 
-function toto_should_show( $post_id ) {
-
-	$trigger_on = get_post_meta( $post_id, '_settings', true );
-
-	if ( empty( $trigger_on['trigger_on'] ) ) {
-		return true;
+function toto_get_user_ip() {
+	if ( isset( $_SERVER['HTTP_CLIENT_IP'] ) ) {
+		return $_SERVER['HTTP_CLIENT_IP'];
+	} else if ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
+		return $_SERVER['HTTP_X_FORWARDED_FOR'];
+	} else if ( isset( $_SERVER['HTTP_X_FORWARDED'] ) ) {
+		return $_SERVER['HTTP_X_FORWARDED'];
+	} else if ( isset( $_SERVER['HTTP_FORWARDED_FOR'] ) ) {
+		return $_SERVER['HTTP_FORWARDED_FOR'];
+	} else if ( isset( $_SERVER['HTTP_FORWARDED'] ) ) {
+		return $_SERVER['HTTP_FORWARDED'];
+	} else if ( isset( $_SERVER['REMOTE_ADDR'] ) ) {
+		return $_SERVER['REMOTE_ADDR'];
+	} else {
+		return 'UNKNOWN';
 	}
+}
 
-	$trigger_on = $trigger_on['trigger_on'];
+/* Generate chart data for based on the date key and each of keys inside */
+function toto_get_chart_data( $main_array = [] ) {
 
-	if ( $trigger_on == 'all' ) {
-		return true;
-	}
+	$results = [];
 
-	$locations = get_post_meta( $post_id, '_settings', true );
+	foreach ( $main_array as $date_label => $data ) {
 
-	if ( empty( $locations['trigger_locations'] ) ) {
-		return true;
-	}
+		foreach ( $data as $label_key => $label_value ) {
 
-	$locations = $locations['trigger_locations'];
-
-	if ( in_array( 'is_custom', $locations ) ) {
-		$ids = get_post_meta( $post_id, '_settings', true )['custom_post_page_ids'];
-
-		$ids = explode( ',', $ids );
-
-		foreach ( $ids as $id ) {
-			$id = trim( $id );
-
-			if ( ! is_numeric( $id ) ) {
-				continue;
+			if ( ! isset( $results[ $label_key ] ) ) {
+				$results[ $label_key ] = [];
 			}
 
-			if ( is_page( $id ) || is_single( $id ) ) {
-				return true;
-			}
+			$results[ $label_key ][] = $label_value;
 
 		}
 
 	}
 
-	$fields = array(
-		'is_front_page' => is_front_page(),
-		'is_home'       => is_home(),
-		'is_singular'   => is_singular(),
-		'is_single'     => is_single(),
-		'is_page'       => is_page(),
-		'is_attachment' => is_attachment(),
-		'is_search'     => is_search(),
-		'is_404'        => is_404(),
-		'is_archive'    => is_archive(),
-		'is_category'   => is_category(),
-	);
-
-	foreach ( $locations as $location ) {
-		if ( empty( $fields[ $location ] ) || ! $fields[ $location ] ) {
-			continue;
-		}
-
-		return true;
-
+	foreach ( $results as $key => $value ) {
+		$results[ $key . '_total' ] = array_sum( $results[ $key ] );
+		$results[ $key ]            = '["' . implode( '", "', $value ) . '"]';
 	}
 
-	return false;
+	$results['labels'] = '["' . implode( '", "', array_keys( $main_array ) ) . '"]';
+
+	return $results;
 }

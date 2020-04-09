@@ -1,113 +1,5 @@
-/* Functions for tracking */
-let get_ip = () => {
-
-    /* Return the ip from session store if any */
-    if (sessionStorage.getItem('user_ip') && sessionStorage.getItem('user_ip') != '') {
-        return sessionStorage.getItem('user_ip');
-    } else {
-        let xmlHttp = new XMLHttpRequest();
-        xmlHttp.open('GET', 'https://api6.ipify.org', false);
-        xmlHttp.send(null);
-
-        let ip = xmlHttp.responseText;
-
-        /* Set it to the session storage to avoid multiple requests to this website */
-        sessionStorage.setItem('user_ip', ip);
-
-        return ip;
-    }
-
-};
-
-let get_location_data = (ip) => {
-
-    /* Return the ip from session store if any */
-    if (sessionStorage.getItem('user_location') && sessionStorage.getItem('user_location') != '') {
-        return sessionStorage.getItem('user_location');
-    } else {
-        let xmlHttp = new XMLHttpRequest();
-        xmlHttp.open('GET', `https://www.iplocate.io/api/lookup/${ip}`, false);
-        xmlHttp.send(null);
-
-        /* Try and get details from the response */
-        try {
-            let response = JSON.parse(xmlHttp.responseText);
-
-            let user_location = JSON.stringify({
-                city: response.city,
-                country: response.country,
-                country_code: response.country_code
-            });
-
-            /* Set it to the session storage to avoid multiple requests to this website */
-            sessionStorage.setItem('user_location', user_location);
-
-            return user_location;
-
-        } catch (error) {
-            return false;
-        }
-
-    }
-
-};
-
-//todo make object based
-let send_tracking_data = params => {
-
-    /* Check if we should send the analytics or not */
-    if (params.subtype && ['impression', 'click', 'hover'].includes(params.subtype)) {
-        return;
-    }
-
-    wp.ajax.send('toto_save_data', {
-        data: {data: params},
-
-        success: (res) => {
-            console.log(res);
-        },
-
-        error: (error) => {
-            console.log(error);
-        }
-
-    });
-
-};
-
-window.send_tracking_data = send_tracking_data;
-
-/* Save user tracking data */
-let user = {
-
-    //pixel_key: pixel_key,
-
-    /* Get user IP */
-    ip: get_ip(),
-
-    /* Location data */
-    location: get_location_data(get_ip()),
-
-    /* User agent */
-    agent: navigator.userAgent,
-
-    /* Current accessed page */
-    current_page: encodeURIComponent(window.location.href),
-};
-window.user = user;
-
-/* Helpers */
-let get_scroll_percentage = () => {
-    let h = document.documentElement;
-    let b = document.body;
-    let st = 'scrollTop';
-    let sh = 'scrollHeight';
-
-    return (h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight) * 100;
-};
-
 /* toto Notify Class */
-class TotoNotification {
+export default class Notification {
 
     /* Create and initiate the class with the proper parameters */
     constructor(options) {
@@ -126,10 +18,6 @@ class TotoNotification {
         this.options.close = options.close || false;
         this.options.stop_on_focus = options.stop_on_focus || true;
         this.options.position = typeof options.position === 'undefined' ? 'bottom_left' : options.position;
-
-        /* On what pages to show the notification */
-        //this.options.trigger_all_pages = typeof options.trigger_all_pages === 'undefined' ? true : options.trigger_all_pages;
-        //this.options.triggers = options.triggers || [];
 
         /* More checks on if it should be displayed */
         this.options.once_per_session = typeof options.once_per_session === 'undefined' ? true : options.once_per_session;
@@ -189,8 +77,8 @@ class TotoNotification {
                         });
 
                         /* Data collection from the form */
-                        send_tracking_data({
-                            ...user,
+                        $.toto.send_tracking_data({
+                            ...$.toto.user(),
                             ...data,
                             notification_id: notification_id,
                             type: 'auto_capture'
@@ -204,7 +92,8 @@ class TotoNotification {
 
         }
 
-        /* Check the should_show option: used when conversions on a notification already happened and the notification should not pop up again */
+        /* Check the should_show option: used when conversions on a notification already happened
+        and the notification should not pop up again */
         if (!this.options.should_show) {
             return false;
         }
@@ -275,11 +164,10 @@ class TotoNotification {
 
                 if (this.options.notification_id) {
                     /* Click statistics */
-                    send_tracking_data({
-                        ...user,
+                    $.toto.send_tracking_data({
+                        ...$.toto.user(),
                         notification_id: this.options.notification_id,
-                        type: 'notification',
-                        subtype: 'click'
+                        type: 'click'
                     });
                 }
 
@@ -403,11 +291,10 @@ class TotoNotification {
             if (this.options.notification_id) {
 
                 /* Impression notification */
-                send_tracking_data({
-                    ...user,
+                $.toto.send_statistics_data({
+                    ...$.toto.user(),
                     notification_id: this.options.notification_id,
-                    type: 'notification',
-                    subtype: 'impression'
+                    type: 'impression'
                 });
 
                 /* Mouse over notification */
@@ -416,11 +303,10 @@ class TotoNotification {
                     /* Make sure that we didnt already send this data on the user session */
                     if (!sessionStorage.getItem(`notification_hover_${this.options.notification_id}`)) {
 
-                        send_tracking_data({
-                            ...user,
+                        $.toto.send_statistics_data({
+                            ...$.toto.user(),
                             notification_id: this.options.notification_id,
-                            type: 'notification',
-                            subtype: 'hover'
+                            type: 'hover'
                         });
 
                         /* Make sure to set the sessionStorage to avoid sending this data again in this session */
@@ -525,7 +411,7 @@ class TotoNotification {
                 element.parentNode.removeChild(element);
 
                 /* Recalculate position of other notifications */
-                TotoNotification.reposition();
+                $.toto.notification.reposition();
 
             }, 400);
 
@@ -608,8 +494,6 @@ class TotoNotification {
 
                     continue;
 
-                    break;
-
                 case 'top_left':
 
                     toasts[i].style['top'] = `${toasts_offset[toast_position].top}px`;
@@ -679,5 +563,3 @@ class TotoNotification {
     }
 
 }
-
-window.TotoNotification = TotoNotification;

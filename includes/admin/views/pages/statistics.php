@@ -1,3 +1,64 @@
+<?php
+
+$notification_id   = 373;
+$notification_type = 'EMAIL_COLLECTOR';
+$is_data_supports  = Toto_Notifications::is_data_supports( $notification_type );
+
+global $wpdb;
+$table      = $wpdb->prefix . 'toto_notification_statistics';
+$start_date = '2020-04-04';
+$end_date   = '2020-04-15';
+
+$log_sql = "SELECT
+                 `type`,
+                 COUNT(`id`) AS `total`,
+                 DATE_FORMAT(`created_at`, '%Y-%m-%d') AS `date`
+            FROM
+                 {$table}
+            WHERE
+                `notification_id` = {$notification_id}
+                AND (`created_at` BETWEEN '{$start_date}' AND '{$end_date}')
+            GROUP BY
+                `date`,
+                `type`
+            ORDER BY
+                `date`
+                ";
+
+$logs = $wpdb->get_results( $log_sql, 'ARRAY_A' );
+
+$logs_chart = [];
+foreach ( $logs as $log ) {
+	/* Handle if the date key is not already set */
+	if ( ! array_key_exists( $log['date'], $logs_chart ) ) {
+		$logs_chart[ $log['date'] ] = [
+			'impression'             => 0,
+			'hover'                  => 0,
+			'click'                  => 0,
+			'submissions'            => 0,
+			'feedback_emoji_angry'   => 0,
+			'feedback_emoji_sad'     => 0,
+			'feedback_emoji_neutral' => 0,
+			'feedback_emoji_happy'   => 0,
+			'feedback_emoji_excited' => 0,
+			'feedback_score_1'       => 0,
+			'feedback_score_2'       => 0,
+			'feedback_score_3'       => 0,
+			'feedback_score_4'       => 0,
+			'feedback_score_5'       => 0,
+
+		];
+	}
+
+	$logs_chart[ $log['date'] ][ $log['type'] ] = $log['total'];
+
+}
+
+
+$logs_chart = toto_get_chart_data( $logs_chart );
+
+?>
+
 <div class="wrap">
     <h1 class="wp-heading-inline">Notification Statistics</h1>
 
@@ -12,7 +73,8 @@
                 <img src="http://localhost/toto/wp-content/plugins/notificationx/admin/assets/img/views-icon.png" alt="">
             </div>
             <div class="summary-info">
-                <span class="summary-number">15</span> <span class="summary-title">Impressions</span>
+                <div class="summary-number"><?php echo $logs_chart['impression_total']; ?></div>
+                <div class="summary-title">Impressions</div>
             </div>
         </div>
 
@@ -21,28 +83,29 @@
                 <img src="http://localhost/toto/wp-content/plugins/notificationx/admin/assets/img/views-icon.png" alt="">
             </div>
             <div class="summary-info">
-                <span class="summary-number">15</span> <span class="summary-title">Impressions</span>
+                <div class="summary-number"><?php echo $logs_chart['hover_total']; ?></div>
+                <div class="summary-title">Mouse Hovers</div>
             </div>
         </div>
 
         <div class="statistics-summary">
 			<?php
-			$notification_type = 'INFORMATIONAL';
-			$is_data_supports  = Toto_Notifications::is_data_supports( $notification_type );
 
 			if ( $is_data_supports ) { ?>
                 <div class="summary-icon">
                     <img src="http://localhost/toto/wp-content/plugins/notificationx/admin/assets/img/views-icon.png" alt="">
                 </div>
                 <div class="summary-info">
-                    <span class="summary-number">15</span> <span class="summary-title">Submissions</span>
+                    <div class="summary-number"><?php echo $logs_chart['submissions_total']; ?></div>
+                    <div class="summary-title">Submissions</div>
                 </div>
 			<?php } else { ?>
                 <div class="summary-icon">
                     <img src="http://localhost/toto/wp-content/plugins/notificationx/admin/assets/img/views-icon.png" alt="">
                 </div>
                 <div class="summary-info">
-                    <span class="summary-number">15</span> <span class="summary-title">Clicks</span>
+                    <div class="summary-number"><?php echo $logs_chart['click_total']; ?></div>
+                    <div class="summary-title">Clicks</div>
                 </div>
 			<?php } ?>
         </div>
@@ -66,6 +129,37 @@
     </div>
 
     <div class="statistics-top-pages">
+
+		<?php
+
+		$type_labels = [
+			'submissions' => 'Submission',
+			'hover'       => 'Mouse Hover',
+			'impression'  => 'Impression',
+			'click'       => 'Click',
+		];
+
+		$sql = "SELECT 
+                    DISTINCT `url`, 
+                    `type`, 
+                    COUNT(`id`) AS `total_uniques`,
+                    SUM(`count`) AS `total_sessions` 
+                FROM 
+                    {$table}
+                WHERE
+                    `notification_id` = {$notification_id}
+                    AND (`created_at` BETWEEN '{$start_date}' AND '{$end_date}')
+                GROUP BY `url`, `type` 
+                ORDER BY 
+                    `total_sessions` DESC,
+                    `total_uniques` DESC 
+                LIMIT 10
+                ";
+
+		$top_pages = $wpdb->get_results( $sql );
+
+		?>
+
         <h3 class="top-pages-title">Top Pages</h3>
         <p class="top-pages-description description">Most active pages on which notifications had most activity.</p>
 
@@ -81,20 +175,22 @@
             </thead>
 
             <tbody>
-            <tr>
-                <td>1</td>
-                <td>https://localhost</td>
-                <td>Click</td>
-                <td>1</td>
-                <td>7</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>https://google.com</td>
-                <td>Click</td>
-                <td>1</td>
-                <td>7</td>
-            </tr>
+			<?php
+			$i = 1;
+			if ( ! empty( $top_pages ) ) {
+				foreach ( $top_pages as $item ) { ?>
+                    <tr>
+                        <td><?php echo $i; ?></td>
+                        <td><?php echo $item->url; ?></td>
+                        <td><?php echo $type_labels[$item->type]; ?></td>
+                        <td><?php echo $item->total_uniques; ?></td>
+                        <td><?php echo $item->total_sessions; ?></td>
+                    </tr>
+					<?php
+					$i ++;
+				}
+			}
+			?>
             </tbody>
 
         </table>
@@ -153,9 +249,9 @@
     new Chart(impressions_chart, {
         type: 'line',
         data: {
-            labels: ["2020-04-04", "2020-04-05", "2020-04-06", "2020-04-07", "2020-04-08"], //todo change labels
+            labels: <?php echo $logs_chart['labels'] ?>,
             datasets: [{
-                data: ["1", "2", "43", "32", "5"],
+                data: <?php echo $logs_chart['impression'] ?>,
                 backgroundColor: gradient,
                 borderColor: '#2BE39B',
                 fill: true
@@ -175,7 +271,7 @@
             },
             title: {
                 display: true,
-                text: 'Title' //todo change title
+                text: 'Impressions' //todo change title
             },
             legend: {
                 display: false
@@ -215,9 +311,9 @@
     new Chart(hovers_chart, {
         type: 'line',
         data: {
-            labels: ["2020-04-04", "2020-04-05"],
+            labels: <?php echo $logs_chart['labels'] ?>,
             datasets: [{
-                data: ["1", "1"],
+                data: <?php echo $logs_chart['hover'] ?>,
                 backgroundColor: gradient,
                 borderColor: '#3ec1ff',
                 fill: true
@@ -268,18 +364,18 @@
     });
 
 
-    let form_submissions_chart = document.getElementById('click_submissions_chart').getContext('2d');
+    let submissions_chart = document.getElementById('click_submissions_chart').getContext('2d');
 
-    gradient = form_submissions_chart.createLinearGradient(0, 0, 0, 250);
+    gradient = submissions_chart.createLinearGradient(0, 0, 0, 250);
     gradient.addColorStop(0, 'rgba(150, 192, 61, 0.4)');
     gradient.addColorStop(1, 'rgba(150, 192, 61, 0.05)');
 
-    new Chart(form_submissions_chart, {
+    new Chart(submissions_chart, {
         type: 'line',
         data: {
-            labels: ['hello', 'world', 'quite'], //todo
+            labels: <?php echo $logs_chart['labels'] ?>,
             datasets: [{
-                data: ['1', '2', '3'],
+                data: <?php echo $logs_chart['submissions'] ?>,
                 backgroundColor: gradient,
                 borderColor: '#96c03d',
                 fill: true

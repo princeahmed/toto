@@ -37,7 +37,6 @@ defined( 'ABSPATH' ) || die();
         once_per_session: <?php echo json_encode( $notification->display_once_per_session ); ?>,
         position: <?php echo json_encode( $notification->display_position ); ?>,
         stop_on_focus: true,
-        should_show: <?php echo json_encode( toto_should_show($notification->notification_id) ); ?>,
 
         notification_id: <?php echo $notification->notification_id ?>
     }).initiate();

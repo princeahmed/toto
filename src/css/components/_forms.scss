@@ -3,7 +3,6 @@
   flex-flow: column;
   margin-bottom: 15px;
   position: relative;
-  justify-content: flex-end;
 
   input, select, button {
     min-height: 40px;
@@ -13,6 +12,10 @@
       min-height: auto;
     }
 
+  }
+
+  .select2{
+    min-width: 250px;
   }
 
   label {

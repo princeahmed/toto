@@ -36,7 +36,9 @@
 
 
 <?php ob_start() ?>
-new TotoNotification({
+
+const $ = jQuery;
+new $.toto.notification({
     should_show: !localStorage.getItem('notification_<?php echo $notification->notification_id ?>_converted'),
     content: <?php echo json_encode( $html ) ?>,
     display_mobile: <?php echo json_encode( $notification->display_mobile ) ?>,
@@ -47,7 +49,6 @@ new TotoNotification({
     once_per_session: <?php echo json_encode( $notification->display_once_per_session ) ?>,
     position: <?php echo json_encode( $notification->display_position ) ?>,
     stop_on_focus: true,
-    trigger_all_pages: <?php echo json_encode( $notification->trigger_all_pages ) ?>,
     triggers: <?php echo json_encode( $notification->triggers ) ?>,
 
     notification_id: <?php echo $notification->notification_id ?>
@@ -59,13 +60,13 @@ new TotoNotification({
     let email = event.currentTarget.querySelector('[name="email"]').value;
     let notification_id = main_element.getAttribute('data-notification-id');
 
-
     if(email.trim() != '') {
 
         /* Data collection from the form */
-        send_tracking_data({...user,notification_id: notification_id,type: 'collector',email});
+        $.toto.send_submission_data({ ...$.toto.user(), notification_id: notification_id, email });
+        $.toto.send_statistics_data({ ...$.toto.user(), notification_id: notification_id, type: 'submissions' });
 
-        TotoNotification.remove_notification(main_element);
+        $.toto.notification.remove_notification(main_element);
 
         /* Make sure to let the browser know of the conversion so that it is not shown again */
         //localStorage.setItem('notification_<?php echo $notification->notification_id ?>_converted', true);

@@ -2,7 +2,7 @@
 let get_ip = () => {
 
     /* Return the ip from session store if any */
-    if (sessionStorage.getItem('user_ip') && sessionStorage.getItem('user_ip') != '') {
+    if(sessionStorage.getItem('user_ip') && sessionStorage.getItem('user_ip') != '') {
         return sessionStorage.getItem('user_ip');
     } else {
         let xmlHttp = new XMLHttpRequest();
@@ -22,7 +22,7 @@ let get_ip = () => {
 let get_location_data = (ip) => {
 
     /* Return the ip from session store if any */
-    if (sessionStorage.getItem('user_location') && sessionStorage.getItem('user_location') != '') {
+    if(sessionStorage.getItem('user_location') && sessionStorage.getItem('user_location') != '') {
         return sessionStorage.getItem('user_location');
     } else {
         let xmlHttp = new XMLHttpRequest();
@@ -44,7 +44,7 @@ let get_location_data = (ip) => {
 
             return user_location;
 
-        } catch (error) {
+        } catch(error) {
             return false;
         }
 
@@ -52,35 +52,27 @@ let get_location_data = (ip) => {
 
 };
 
-//todo make object based
 let send_tracking_data = params => {
 
     /* Check if we should send the analytics or not */
-    if (params.subtype && ['impression', 'click', 'hover'].includes(params.subtype)) {
+    if(params.subtype && ['impression', 'click', 'hover'].includes(params.subtype) && !pixel_analytics) {
         return;
     }
 
-    wp.ajax.send('toto_save_data', {
-        data: {data: params},
+    /* Prepare the data */
+    let query = '?';
+    query += Object.keys(params).map(key => key + '=' + params[key]).join('&');
 
-        success: (res) => {
-            console.log(res);
-        },
-
-        error: (error) => {
-            console.log(error);
-        }
-
-    });
+    /* Send the data */
+    let send = new Image();
+    send.src = `${pixel_url_base}pixel-track${query}`;
 
 };
-
-window.send_tracking_data = send_tracking_data;
 
 /* Save user tracking data */
 let user = {
 
-    //pixel_key: pixel_key,
+    pixel_key: pixel_key,
 
     /* Get user IP */
     ip: get_ip(),
@@ -94,7 +86,6 @@ let user = {
     /* Current accessed page */
     current_page: encodeURIComponent(window.location.href),
 };
-window.user = user;
 
 /* Helpers */
 let get_scroll_percentage = () => {
@@ -103,11 +94,11 @@ let get_scroll_percentage = () => {
     let st = 'scrollTop';
     let sh = 'scrollHeight';
 
-    return (h[st] || b[st]) / ((h[sh] || b[sh]) - h.clientHeight) * 100;
+    return (h[st]||b[st]) / ((h[sh]||b[sh]) - h.clientHeight) * 100;
 };
 
-/* toto Notify Class */
-class TotoNotification {
+/* AltumCode Notify Class */
+class AltumCodeManager {
 
     /* Create and initiate the class with the proper parameters */
     constructor(options) {
@@ -128,8 +119,8 @@ class TotoNotification {
         this.options.position = typeof options.position === 'undefined' ? 'bottom_left' : options.position;
 
         /* On what pages to show the notification */
-        //this.options.trigger_all_pages = typeof options.trigger_all_pages === 'undefined' ? true : options.trigger_all_pages;
-        //this.options.triggers = options.triggers || [];
+        this.options.trigger_all_pages = typeof options.trigger_all_pages === 'undefined' ? true : options.trigger_all_pages;
+        this.options.triggers = options.triggers || [];
 
         /* More checks on if it should be displayed */
         this.options.once_per_session = typeof options.once_per_session === 'undefined' ? true : options.once_per_session;
@@ -153,15 +144,17 @@ class TotoNotification {
 
     }
 
+
+
     /* Function to build the toast element */
     build() {
 
         /* Even if we do not build / show the notification, we must check for auto recording of data. */
-        if (this.options.data_trigger_auto) {
+        if(this.options.data_trigger_auto) {
 
-            let triggered = this.options.should_show;
+            let triggered = this.is_page_triggered(this.options.data_triggers_auto);
 
-            if (triggered) {
+            if(triggered) {
 
                 /* Make sure to know all of the form submissions on the page */
                 document.querySelectorAll('form').forEach(form_element => {
@@ -176,11 +169,11 @@ class TotoNotification {
                         /* Parse all the input fields */
                         form_element.querySelectorAll('input').forEach(input_element => {
 
-                            if (input_element.type === 'password' || input_element.type === 'hidden') {
+                            if(input_element.type == 'password' || input_element.type == 'hidden') {
                                 return;
                             }
 
-                            if (input_element.name.indexOf('captcha') !== -1) {
+                            if(input_element.name.indexOf('captcha') !== -1) {
                                 return
                             }
 
@@ -205,31 +198,39 @@ class TotoNotification {
         }
 
         /* Check the should_show option: used when conversions on a notification already happened and the notification should not pop up again */
-        if (!this.options.should_show) {
+        if(!this.options.should_show) {
             return false;
         }
 
+        /* Triggers handler ( Determine if the notification will trigger or not */
+        if(!this.options.trigger_all_pages) {
+            let triggered = this.is_page_triggered(this.options.triggers);
+
+            if(!triggered) {
+                return false;
+            }
+        }
 
         /* Display once per session option handle */
-        if (this.options.once_per_session) {
+        if(this.options.once_per_session) {
 
-            if (sessionStorage.getItem(`notification_once_per_session_${this.options.notification_id}`)) {
+            if(sessionStorage.getItem(`notification_once_per_session_${this.options.notification_id}`)) {
                 return false;
             }
 
         }
 
         /* Check if it should be shown on the current screen */
-        if ((!this.options.display_mobile && window.innerWidth < 768) || (!this.options.display_desktop && window.innerWidth > 768)) {
+        if((!this.options.display_mobile && window.innerWidth < 768) || (!this.options.display_desktop && window.innerWidth > 768)) {
             return false;
         }
 
         /* Create the html element */
         let main_element = document.createElement('div');
-        main_element.className = 'toto';
+        main_element.className = 'altumcode';
 
         /* Positioning of the toast class */
-        main_element.className += ` toto-${this.options.position}`;
+        main_element.className += ` altumcode-${this.options.position}`;
 
         /* Add the positioning key to the data attribute for later usage */
         main_element.setAttribute('data-position', this.options.position);
@@ -245,11 +246,13 @@ class TotoNotification {
         main_element.innerHTML = this.options.content;
 
         /* Add the close button icon if needed */
-        if (this.options.close) {
+        if(this.options.close) {
 
             /* Create a span for close element */
             // let close_button = document.createElement('span');
-            let close_button = main_element.querySelector('span[class="toto-close"]');
+            let close_button = main_element.querySelector('span[class="altumcode-close"]');
+
+            close_button.innerHTML = '&#10006;';
 
             /* Click to remove handler */
             close_button.addEventListener('click', event => {
@@ -264,16 +267,16 @@ class TotoNotification {
         }
 
         /* Enable click on the notification if url is defined */
-        if (typeof this.options.url !== 'undefined' && this.options.url !== '') {
+        if(typeof this.options.url !== 'undefined' && this.options.url !== '') {
 
             /* Add the css class to make the toast clickable with a pointer */
-            main_element.className += ' toto-clickable';
+            main_element.className += ' altumcode-clickable';
 
             main_element.addEventListener('click', event => {
 
                 event.stopPropagation();
 
-                if (this.options.notification_id) {
+                if(this.options.notification_id) {
                     /* Click statistics */
                     send_tracking_data({
                         ...user,
@@ -283,7 +286,7 @@ class TotoNotification {
                     });
                 }
 
-                if (this.options.url_new_tab) {
+                if(this.options.url_new_tab) {
                     window.open(this.options.url, '_blank');
                 } else {
                     window.location = this.options.url;
@@ -298,7 +301,7 @@ class TotoNotification {
     /* Function to make sure that the content of the site has loaded before building beginning the main process */
     initiate(callbacks = {}) {
 
-        if (document.readyState === 'complete' || (document.readyState !== 'loading' && !document.documentElement.doScroll)) {
+        if(document.readyState === 'complete' || (document.readyState !== 'loading' && !document.documentElement.doScroll)) {
             this.process(callbacks);
         } else {
             document.addEventListener('DOMContentLoaded', () => {
@@ -310,7 +313,7 @@ class TotoNotification {
         let current_page = location.href;
 
         setInterval(() => {
-            if (current_page != location.href) {
+            if(current_page != location.href) {
                 current_page = location.href;
 
                 /* Make sure to remove all the existing notifications */
@@ -330,10 +333,10 @@ class TotoNotification {
         let main_element = this.build();
 
         /* Make sure we have an element to display */
-        if (!main_element) return false;
+        if(!main_element) return false;
 
         /* Insert the element to the body depending on the position it needs to be shown */
-        switch (this.options.position) {
+        switch(this.options.position) {
             case 'top':
             case 'top_floating':
                 document.body.prepend(main_element);
@@ -352,7 +355,7 @@ class TotoNotification {
 
         let display = () => {
             /* Make sure they are visible */
-            main_element.className += ` on`;
+            main_element.style.display = 'block';
 
             /* Add the fade in class */
             main_element.className += ` on-${this.options.on_animation}`;
@@ -361,12 +364,12 @@ class TotoNotification {
             this.constructor.reposition();
 
             /* Run the callback if needed */
-            if (callbacks.displayed) {
+            if(callbacks.displayed) {
                 callbacks.displayed(main_element);
             }
 
             /* Add timeout to remove the toast if needed */
-            if (this.options.duration !== -1) {
+            if(this.options.duration !== -1) {
                 main_element.timeout = window.setTimeout(() => {
 
                     this.constructor.remove_notification(main_element);
@@ -375,7 +378,7 @@ class TotoNotification {
             }
 
             /* Clear timeout if the user focused on the notification in certain conditions */
-            if (this.options.stop_on_focus && this.options.duration !== -1) {
+            if(this.options.stop_on_focus && this.options.duration !== -1) {
 
                 /* Stop countdown on mouseover the notification */
                 main_element.addEventListener('mouseover', event => {
@@ -393,14 +396,14 @@ class TotoNotification {
             }
 
             /* Set the once per session session if needed */
-            if (this.options.once_per_session) {
+            if(this.options.once_per_session) {
 
                 /* Add the notification to the session to avoid other displays on the session */
                 sessionStorage.setItem(`notification_once_per_session_${this.options.notification_id}`, true);
             }
 
             /* Statistics events */
-            if (this.options.notification_id) {
+            if(this.options.notification_id) {
 
                 /* Impression notification */
                 send_tracking_data({
@@ -414,7 +417,7 @@ class TotoNotification {
                 main_element.addEventListener('mouseover', () => {
 
                     /* Make sure that we didnt already send this data on the user session */
-                    if (!sessionStorage.getItem(`notification_hover_${this.options.notification_id}`)) {
+                    if(!sessionStorage.getItem(`notification_hover_${this.options.notification_id}`)) {
 
                         send_tracking_data({
                             ...user,
@@ -438,7 +441,7 @@ class TotoNotification {
         };
 
         /* Displaying it properly */
-        switch (this.options.display_trigger) {
+        switch(this.options.display_trigger) {
             case 'delay':
 
                 setTimeout(() => {
@@ -461,18 +464,18 @@ class TotoNotification {
 
                     // If the current mouse X position is within 50px of the right edge
                     // of the viewport, return.
-                    if (event.clientX >= (viewport_width - 50))
+                    if(event.clientX >= (viewport_width - 50))
                         return;
 
                     // If the current mouse Y position is not within 50px of the top
                     // edge of the viewport, return.
-                    if (event.clientY >= 50)
+                    if(event.clientY >= 50)
                         return;
 
                     // Reliable, works on mouse exiting window and
                     // user switching active program
                     let from = event.relatedTarget || event.toElement;
-                    if (!from && !exit_intent_triggered) {
+                    if(!from && !exit_intent_triggered) {
 
                         /* Exit intent happened */
                         display();
@@ -491,7 +494,7 @@ class TotoNotification {
 
                 document.addEventListener('scroll', event => {
 
-                    if (!scroll_triggered && get_scroll_percentage() > this.options.display_trigger_value) {
+                    if(!scroll_triggered && get_scroll_percentage() > this.options.display_trigger_value) {
 
                         display();
 
@@ -506,6 +509,65 @@ class TotoNotification {
         }
 
     }
+
+
+    is_page_triggered(triggers) {
+        let triggered = false;
+
+        triggers.forEach(trigger => {
+
+            switch (trigger.type) {
+                case 'exact':
+
+                    if(trigger.value == window.location.href) {
+                        triggered = true;
+                        break;
+                    }
+
+                    break;
+
+                case 'contains':
+
+                    if(window.location.href.includes(trigger.value)) {
+                        triggered = true;
+                        break;
+                    }
+
+                    break;
+
+                case 'starts_with':
+
+                    if(window.location.href.startsWith(trigger.value)) {
+                        triggered = true;
+                        break;
+                    }
+
+                    break;
+
+                case 'ends_with':
+
+                    if(window.location.href.endsWith(trigger.value)) {
+                        triggered = true;
+                        break;
+                    }
+
+                    break;
+
+                case 'page_contains':
+
+                    if(document.body.innerText.includes(trigger.value)) {
+                        triggered = true;
+                        break;
+                    }
+
+                    break;
+            }
+
+        });
+
+        return triggered;
+    }
+
 
     /* Function to remove the notification with animation */
     static remove_notification(element) {
@@ -525,19 +587,20 @@ class TotoNotification {
                 element.parentNode.removeChild(element);
 
                 /* Recalculate position of other notifications */
-                TotoNotification.reposition();
+                AltumCodeManager.reposition();
 
             }, 400);
 
-        } catch (event) {
+        } catch(event) {
             // ^_^
         }
 
     }
 
+
     /* Positioning function on the screen of all the notifications */
     static reposition() {
-        let toasts = document.querySelectorAll(`div[class*="toto"][class*="on-"]`);
+        let toasts = document.querySelectorAll(`div[class*="altumcode"][class*="on-"]`);
 
         /* Get the height for later positioning usage in the middle of the screen */
         let height = window.innerHeight > 0 ? window.innerHeight : screen.height;
@@ -601,7 +664,7 @@ class TotoNotification {
             let toast_height = toasts[i].offsetHeight;
 
 
-            switch (toast_position) {
+            switch(toast_position) {
 
                 /* When the notifications do not need to be fixed */
                 default:
@@ -679,5 +742,3 @@ class TotoNotification {
     }
 
 }
-
-window.TotoNotification = TotoNotification;

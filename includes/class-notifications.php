@@ -111,7 +111,7 @@ class Toto_Notifications {
 				'show_agreement'           => isset( $settings->show_agreement ) ? $settings->show_agreement : false,
 				'agreement_text'           => ! empty( $settings->agreement_text ) ? $settings->agreement_text : "I read & agree the Privacy Policy",
 				'agreement_url'            => ! empty( $settings->agreement_url ) ? $settings->agreement_url : '',
-				'trigger_all_pages'        => isset( $settings->trigger_all_pages ) ? $settings->trigger_all_pages : true,
+				'trigger_on'               => ! empty( $settings->trigger_on ) ? $settings->trigger_on : 'all',
 				'triggers'                 => ! empty( $settings->triggers ) ? $settings->triggers : [],
 				'display_trigger'          => ! empty( $settings->display_trigger ) ? $settings->display_trigger : 'delay',
 				'display_trigger_value'    => ! empty( $settings->display_trigger_value ) ? $settings->display_trigger_value : 2,
@@ -611,8 +611,8 @@ class Toto_Notifications {
 	}
 
 	/**
-     * Check if the notification type supports data collection
-     *
+	 * Check if the notification type supports data collection
+	 *
 	 * @param $type
 	 *
 	 * @return bool
@@ -747,6 +747,80 @@ class Toto_Notifications {
 
 	}
 
+	/**
+	 * Check if the notification can show by matching trigger location conditions
+	 *
+	 * @param $notification_id
+	 *
+	 * @return bool
+	 */
+	public static function can_show( $notification_id ) {
+
+		$trigger_on = get_post_meta( $notification_id, '_settings', true );
+
+		if ( empty( $trigger_on['trigger_on'] ) ) {
+			return true;
+		}
+
+		$trigger_on = $trigger_on['trigger_on'];
+
+		if ( $trigger_on == 'all' ) {
+			return true;
+		}
+
+		$locations = get_post_meta( $notification_id, '_settings', true );
+
+		if ( empty( $locations['trigger_locations'] ) ) {
+			return true;
+		}
+
+		$locations = $locations['trigger_locations'];
+
+		if ( in_array( 'is_custom', $locations ) ) {
+			$ids = get_post_meta( $notification_id, '_settings', true )['custom_post_page_ids'];
+
+			$ids = explode( ',', $ids );
+
+			foreach ( $ids as $id ) {
+				$id = trim( $id );
+
+				if ( ! is_numeric( $id ) ) {
+					continue;
+				}
+
+				if ( is_page( $id ) || is_single( $id ) ) {
+					return true;
+				}
+
+			}
+
+		}
+
+		$fields = array(
+			'is_front_page' => is_front_page(),
+			'is_home'       => is_home(),
+			'is_singular'   => is_singular(),
+			'is_single'     => is_single(),
+			'is_page'       => is_page(),
+			'is_attachment' => is_attachment(),
+			'is_search'     => is_search(),
+			'is_404'        => is_404(),
+			'is_archive'    => is_archive(),
+			'is_category'   => is_category(),
+		);
+
+		foreach ( $locations as $location ) {
+			if ( empty( $fields[ $location ] ) || ! $fields[ $location ] ) {
+				continue;
+			}
+
+			return true;
+
+		}
+
+		return false;
+	}
+
 	public static function active_notifications() {
 		$args = [
 			'post_type'   => 'toto_notification',
@@ -763,6 +837,9 @@ class Toto_Notifications {
 			$post_ids = wp_list_pluck( $posts, 'ID' );
 
 			foreach ( $post_ids as $post_id ) {
+				if ( ! self::can_show( $post_id ) ) {
+					continue;
+				}
 				$type = get_post_meta( $post_id, '_notification_type', true );
 
 				$scripts .= Toto_Notifications::get_view( $type, $post_id )->javascript;

@@ -18,7 +18,7 @@
 		</div>
 
 		<div class="toto-form-group">
-			<button class="toto-btn toto-btn-primary" type="submit" id="data-select">Submit</button>
+			<button class="toto-btn toto-btn-primary toto-mt-auto" type="submit" id="data-select">Submit</button>
 		</div>
 
 	</div>

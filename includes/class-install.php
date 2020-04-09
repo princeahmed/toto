@@ -37,7 +37,21 @@ class Toto_Install {
 			created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
 			PRIMARY KEY  (id),
 			key notification_id (notification_id)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;"
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;",
+
+			"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}toto_notification_statistics(
+         	id bigint(20) NOT NULL AUTO_INCREMENT,
+         	unique_id varchar (32) NOT NULL DEFAULT '',
+			notification_id bigint(20) NOT NULL,
+			`count` bigint(20) NOT NULL DEFAULT '1',
+			ip varchar(128)  NOT NULL DEFAULT '',
+			`type` varchar(32)  NOT NULL DEFAULT '',
+			url text  NOT NULL,
+			created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+			updated_at DATETIME NOT NULL,
+			PRIMARY KEY  (id),
+			UNIQUE KEY `unique_id` (`unique_id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;",
 		];
 
 		foreach ( $tables as $table ) {
