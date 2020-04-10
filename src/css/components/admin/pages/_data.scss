@@ -1,6 +1,26 @@
 .toto-data-panel{
+  margin-bottom: 10px;
+
   .toto-panel-body{
     margin-top: 15px;
+  }
+  .toto-panel-header{
+    .panel-body-collapse{
+      text-decoration: none;
+      color: black;
+      padding: 3px 4px;
+      border: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      margin-right: 15px;
+
+      i{
+        margin-right: 0;
+      }
+
+    }
   }
 }
 

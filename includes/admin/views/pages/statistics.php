@@ -63,6 +63,7 @@ $logs_chart = toto_get_chart_data( $logs_chart );
     <h1 class="wp-heading-inline">Notification Statistics</h1>
 
 	<?php
+	$toto_current_page = 'notification-statistics';
 	include TOTO_INCLUDES . '/admin/views/pages/filter-bar.php';
 	?>
 
@@ -195,7 +196,7 @@ $logs_chart = toto_get_chart_data( $logs_chart );
 
         </table>
 
-        <button id="toto_show_more_pages" type="submit" class="toto-btn toto-btn-primary">Show More</button>
+        <button id="toto_show_more_pages" type="submit" class="toto-btn toto-btn-primary">Show More Pages</button>
 
     </div>
 

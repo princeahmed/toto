@@ -6,9 +6,11 @@ $time_format = get_option( 'time_format' );
 <div class="wrap">
     <h1 class="wp-heading-inline">Notification Data</h1>
 
-    <?php
-    include TOTO_INCLUDES.'/admin/views/pages/filter-bar.php';
-    ?>
+	<?php
+    $per_page_field = true;
+    $toto_current_page = 'notification-data';
+	include TOTO_INCLUDES . '/admin/views/pages/filter-bar.php';
+	?>
 
     <div class="toto-notification-data">
 		<?php
@@ -16,7 +18,7 @@ $time_format = get_option( 'time_format' );
 
 		$table = $wpdb->prefix . 'toto_notification_data';
 
-		$sql     = "SELECT data, created_at FROM {$table} WHERE notification_id=%d ORDER BY id DESC";
+		$sql     = "SELECT data, created_at FROM {$table} WHERE notification_id=%d ORDER BY id DESC LIMIT 10";
 		$results = $wpdb->get_results( $wpdb->prepare( $sql, 373 ) );
 
 		foreach ( $results as $data ) {
@@ -28,10 +30,13 @@ $time_format = get_option( 'time_format' );
 
             <div class="toto-panel toto-data-panel">
                 <div class="toto-panel-header">
+                    <a href="#" class="panel-body-collapse"><i class="dashicons dashicons-arrow-down-alt2"></i></a>
                     <div class="panel-title"><?php echo $date; ?></div>
                     <div class="panel-tools">
-                        <a href="#" class="button button-link-delete data-delete"><i class="dashicons dashicons-trash"></i> Delete</a>
-                        <a href="#" class="button button-primary data-details"><i class="dashicons dashicons-plus-alt"></i> Details</a>
+                        <a href="#" class="button button-link-delete data-delete"><i class="dashicons dashicons-trash"></i>
+                            Delete</a>
+                        <a href="#" class="button button-primary data-details"><i class="dashicons dashicons-plus-alt"></i>
+                            Details</a>
                     </div>
                 </div>
                 <div class="toto-panel-body toto-hidden">
@@ -55,6 +60,17 @@ $time_format = get_option( 'time_format' );
 		}
 
 		?>
+
+        <div class="toto-pagination-wrap">
+            <ul class="toto-pagination">
+                <li class="page-item"><a class="page-link disabled" href="#">Previous</a></li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            </ul>
+        </div>
+
     </div>
 
 </div>

@@ -48,6 +48,10 @@
 .toto-mt-auto {
   margin-top: auto;
 }
+.toto-ml-auto {
+  margin-left: auto;
+}
+
 .toto-ml-5 {
   margin-left: 5px;
 }
@@ -99,30 +103,82 @@
 //Panel
 .toto-panel {
   background: #fff;
-  padding: 15px;
+  padding: 10px 15px;
   border-radius: 5px;
-  margin-bottom: 20px;
+  border: 1px solid #ddd;
 
-  &-header{
+
+  &-header {
     display: flex;
-    justify-content: space-between;
 
-    .panel-title{
+    .panel-title {
       font-size: 18px;
       line-height: 1.5;
     }
 
-    .panel-tools{
-      a{
+    .panel-tools {
+      margin-left: auto;
+
+      a {
         display: inline-flex;
         align-items: center;
         margin: 0 10px;
 
-        i{
+        i {
           margin-right: 5px;
         }
 
       }
     }
   }
+}
+
+//Pagination
+.toto-pagination-wrap {
+  text-align: center;
+}
+
+.toto-pagination {
+  display: inline-flex;
+
+  .page-item {
+    &:first-child {
+      .page-link {
+        border-top-left-radius: 3px;
+        border-bottom-left-radius: 3px;
+      }
+    }
+
+    &:last-child {
+      .page-link {
+        border-top-right-radius: 3px;
+        border-bottom-right-radius: 3px;
+      }
+    }
+  }
+
+  .page-link {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #007bff;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+    font-size: 16px;
+    text-decoration: none;
+
+    &:hover, &:active {
+      background: #96c03d;
+      color: #fff;
+    }
+
+    &.disabled {
+      pointer-events: none;
+      color: #ddd;
+    }
+
+  }
+
 }
