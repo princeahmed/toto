@@ -3,6 +3,7 @@
         init: () => {
             app.initMetaTabs();
             app.initSelect2();
+            app.initVolumeSlider();
 
             $(document).on('click', '.toto-meta-tabs .toto-tab-link', app.toggleNotificationTab);
             $(document).on('click', '.toto-notification-type', app.selectType);
@@ -38,6 +39,21 @@
 
         },
 
+        initVolumeSlider: () => {
+            const handle = $("#toto-volume-handle");
+            $("#toto-volume-slider").slider({
+                value: $('#toto-volume-slider').data('value'),
+                create: function () {
+                    handle.text($(this).slider("value"));
+                },
+
+                slide: function (event, ui) {
+                    handle.text(ui.value);
+                    $('#settings_sound_volume').val(ui.value);
+                }
+            });
+        },
+
         toggleNotificationTab: function (e) {
             e.preventDefault();
             const target = $(this).data('target');
@@ -50,15 +66,15 @@
         },
 
         toggleLocationsField: function () {
-            if ('all' === $(this).val()) {
-                $('#settings_trigger_locations').parent().addClass('toto-hidden');
-            } else {
+            if ('selected' === $(this).val()) {
                 $('#settings_trigger_locations').parent().removeClass('toto-hidden');
+            } else {
+                $('#settings_trigger_locations').parent().addClass('toto-hidden');
             }
         },
 
         toggleCustomIds: function () {
-            if ( $(this).val() && $(this).val().includes('is_custom')) {
+            if ($(this).val() && $(this).val().includes('is_custom')) {
                 $('#settings_custom_post_page_ids').parent().removeClass('toto-hidden');
             } else {
                 $('#settings_custom_post_page_ids').parent().addClass('toto-hidden');

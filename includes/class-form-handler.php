@@ -9,11 +9,7 @@ class Toto_Form_Handler {
 
 	public function save_toto_meta( $post_id ) {
 
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			return;
-		}
-
-		if ( defined( 'DOING_CRON' ) && DOING_CRON ) {
+		if ( wp_doing_ajax() || wp_doing_cron() ) {
 			return;
 		}
 
@@ -29,6 +25,7 @@ class Toto_Form_Handler {
 			'display_mobile',
 			'show_agreement',
 			'data_send_is_enabled',
+			'enable_sound',
 		];
 
 		foreach ( $switch_fields as $key ) {

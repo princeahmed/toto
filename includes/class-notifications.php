@@ -131,6 +131,10 @@ class Toto_Notifications {
 				'data_send_webhook'        => ! empty( $settings->data_send_webhook ) ? $settings->data_send_webhook : '',
 				'data_send_email'          => ! empty( $settings->data_send_email ) ? $settings->data_send_email : '',
 
+				'enable_sound'       => ! empty( $settings->enable_sound ) ? $settings->enable_sound : true,
+				'notification_sound' => ! empty( $settings->notification_sound ) ? $settings->notification_sound : 'to_the_point',
+				'sound_volume'       => ! empty( $settings->sound_volume ) ? $settings->sound_volume : 50,
+
 				'notification_id' => $post_id,
 			],
 
@@ -647,7 +651,7 @@ class Toto_Notifications {
 			'COOKIE_NOTIFICATION',
 			'SCORE_FEEDBACK'
 		] ) ) {
-			$settings_tabs = [ 'content', 'triggers', 'display', 'customize' ];
+			$settings_tabs = [ 'content', 'display', 'customize', 'sound' ];
 		}
 
 		if ( in_array( $type, [
@@ -658,7 +662,7 @@ class Toto_Notifications {
 			'REQUEST_COLLECTOR',
 			'COUNTDOWN_COLLECTOR'
 		] ) ) {
-			$settings_tabs = [ 'content', 'triggers', 'display', 'customize', 'data' ];
+			$settings_tabs = [ 'content', 'display', 'customize', 'sound', 'data' ];
 		}
 
 		return $settings_tabs;
@@ -673,14 +677,21 @@ class Toto_Notifications {
 	}
 
 	public static function setting_tabs( $type ) {
-		$default_triggers = [ 'trigger', 'display_trigger', 'display_once_per_session', 'display_mobile', ];
 
-		$default_display = [ 'display_duration', 'display_position', 'display_close_button', 'display_branding', ];
+		$default_display = [
+			'trigger',
+			'display_trigger',
+			'display_duration',
+			'display_position',
+			'display_once_per_session',
+			'display_mobile',
+			'display_close_button',
+			'display_branding',
+		];
 
 		$fields = [
 			'INFORMATIONAL' => [
 				'content'   => [ 'title', 'description', 'image', 'url', ],
-				'triggers'  => $default_triggers,
 				'display'   => $default_display,
 				'customize' => [ 'title_color', 'description_color', 'background_color', 'border_radius', ],
 			],
@@ -695,7 +706,6 @@ class Toto_Notifications {
 					'button_text',
 					'footer_text',
 				],
-				'triggers'  => $default_triggers,
 				'display'   => $default_display,
 				'customize' => [
 					'title_color',
@@ -709,8 +719,7 @@ class Toto_Notifications {
 
 			'LIVE_COUNTER' => [
 				'content'   => [ 'description', 'last_activity', 'url', ],
-				'triggers'  => array_merge( $default_triggers, [ 'minimum_activity' ] ),
-				'display'   => $default_display,
+				'display'   => array_merge( $default_display, [ 'minimum_activity' ] ),
 				'customize' => [
 					'number_color',
 					'number_background_color',
@@ -729,7 +738,6 @@ class Toto_Notifications {
 					'button_text',
 					'agreement',
 				],
-				'triggers'  => $default_triggers,
 				'display'   => $default_display,
 				'customize' => [
 					'title_color',
@@ -739,6 +747,7 @@ class Toto_Notifications {
 					'button_color',
 					'border_radius',
 				],
+				'sound'     => [ 'enable_sound' ],
 				'data'      => [ 'data_send_is_enabled', ],
 			],
 		];

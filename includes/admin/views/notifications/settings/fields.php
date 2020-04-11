@@ -40,6 +40,10 @@ $data_send_is_enabled     = ! empty( $notification['data_send_is_enabled'] ) ? $
 $data_send_webhook        = ! empty( $notification['data_send_webhook'] ) ? $notification['data_send_webhook'] : '';
 $data_send_email          = ! empty( $notification['data_send_email'] ) ? $notification['data_send_email'] : '';
 $minimum_activity         = ! empty( $notification['minimum_activity'] ) ? $notification['minimum_activity'] : '';
+$enable_sound             = ! empty( $notification['enable_sound'] ) ? $notification['enable_sound'] : '';
+$notification_sound       = ! empty( $notification['notification_sound'] ) ? $notification['notification_sound'] : '';
+$sound_volume             = ! empty( $notification['sound_volume'] ) ? $notification['sound_volume'] : '';
+
 
 $fields = new stdClass();
 
@@ -78,8 +82,8 @@ ob_start(); ?>
                 Remove Image
             </button>
         </div>
-        <p class="description">Leave empty for no image. Hint: icons8.com has a good library of small icons that you
-            can use.</p>
+        <p class="description">Leave empty for no image. Hint: icons8.com has a good library of small icons that you can
+            use.</p>
     </div>
 <?php
 
@@ -172,23 +176,17 @@ ob_start(); ?>
             </option>
             <option value="top_right" <?php selected( 'top_right', $display_position ) ?>>Top Right
             </option>
-            <option value="middle_left" <?php selected( 'middle_left', $display_position ) ?>>Middle
-                Left
+            <option value="middle_left" <?php selected( 'middle_left', $display_position ) ?>>Middle Left
             </option>
-            <option value="middle_center" <?php selected( 'middle_center', $display_position ) ?>>Middle
-                Center
+            <option value="middle_center" <?php selected( 'middle_center', $display_position ) ?>>Middle Center
             </option>
-            <option value="middle_right" <?php selected( 'middle_right', $display_position ) ?>>Middle
-                Right
+            <option value="middle_right" <?php selected( 'middle_right', $display_position ) ?>>Middle Right
             </option>
-            <option value="bottom_left" <?php selected( 'bottom_left', $display_position ) ?>>Bottom
-                Left
+            <option value="bottom_left" <?php selected( 'bottom_left', $display_position ) ?>>Bottom Left
             </option>
-            <option value="bottom_center" <?php selected( 'bottom_center', $display_position ) ?>>Bottom
-                Center
+            <option value="bottom_center" <?php selected( 'bottom_center', $display_position ) ?>>Bottom Center
             </option>
-            <option value="bottom_right" <?php selected( 'bottom_right', $display_position ) ?>>Bottom
-                Right
+            <option value="bottom_right" <?php selected( 'bottom_right', $display_position ) ?>>Bottom Right
             </option>
         </select>
         <p class="description">Position of the notification on the screen. Position doesn't change on the preview.</p>
@@ -229,6 +227,11 @@ ob_start();
             <label for="settings_trigger_on_selected">Selected</label>
         </div>
 
+        <div class="toto-label-group">
+            <input type="radio" id="settings_trigger_on_shortcode" name="settings[trigger_on]" value="shortcode" <?php checked( 'shortcode', $trigger_on ); ?>>
+            <label for="settings_trigger_on_shortcode">Use Only As Shortcode</label>
+        </div>
+
         <div class="toto-break"></div>
         <p class="description">Where should the notification show?</p>
     </div>
@@ -263,8 +266,7 @@ ob_start(); ?>
                 <option value="delay" data-placeholder="Number of seconds to wait until notification shows up" <?php selected( 'delay', $display_trigger ) ?>>
                     Delay
                 </option>
-                <option value="exit_intent" <?php selected( 'exit_intent', $display_trigger ) ?>>Exit
-                    Intent
+                <option value="exit_intent" <?php selected( 'exit_intent', $display_trigger ) ?>>Exit Intent
                 </option>
                 <option value="scroll" data-placeholder="Percent of scrolling from the top down." <?php selected( 'scroll', $display_trigger ) ?>>
                     Scroll Percentage
@@ -472,6 +474,38 @@ ob_start(); ?>
     </div>
 <?php
 $fields->data_send_is_enabled = ob_get_clean();
+
+//Trigger Session
+ob_start(); ?>
+    <div class="toto-form-group toto-switch-group">
+        <input type="checkbox" id="settings_enable_sound" name="settings[enable_sound]" <?php checked( true, $enable_sound ); ?> >
+
+        <label class="clickable" for="settings_enable_sound">Enable Notification Sound</label>
+
+        <p class="description">Enable to play a sound when the notification will show.</p>
+    </div>
+
+    <div class="toto-form-group">
+        <label for="settings_notification_sound">Select Notification Sound</label>
+        <select name="settings[notification_sound]" id="settings_notification_sound">
+            <option value="to_the_point" <?php selected( 'to_the_point', $notification_sound ); ?>>To The Point</option>
+            <option value="sound_two" <?php selected( 'sound_two', $notification_sound ); ?>>Sound Two</option>
+        </select>
+    </div>
+    <div class="toto-form-group">
+        <label for="settings_sound_volume">Notification Sound Volume</label>
+        <input type="hidden" name="settings[sound_volume]" id="settings_sound_volume" value="<?php echo $sound_volume; ?>"/>
+
+        <div id="toto-volume-slider" class="toto-volume-slider" data-value="<?php echo $sound_volume; ?>">
+            <div id="toto-volume-handle" class="toto-volume-handle ui-slider-handle"></div>
+        </div>
+
+        <p class="description">Adjust the notification sound volume.</p>
+
+    </div>
+
+<?php
+$fields->enable_sound = ob_get_clean();
 
 
 return $fields;

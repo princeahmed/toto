@@ -8,10 +8,6 @@ $tabs_config = [
 		'icon'  => 'fa-edit',
 		'title' => 'Content',
 	],
-	'triggers'  => [
-		'icon'  => 'fa-bell',
-		'title' => 'Triggers',
-	],
 	'display'   => [
 		'icon'  => 'fa-desktop',
 		'title' => 'Display',
@@ -19,6 +15,10 @@ $tabs_config = [
 	'customize' => [
 		'icon'  => 'fa-tools',
 		'title' => 'Customize',
+	],
+	'sound'     => [
+		'icon'  => 'fa-bell',
+		'title' => 'Sound',
 	],
 	'data'      => [
 		'icon'  => 'fa-database',
@@ -31,9 +31,7 @@ $tabs_config = [
 <ul class="toto-meta-tabs">
 
     <li class="toto-tab-item">
-        <a class="toto-tab-link active" data-target="notification_type">
-            <i class="fa fa-network-wired"></i> Type
-        </a>
+        <a class="toto-tab-link active" data-target="notification_type"> <i class="fa fa-network-wired"></i> Type </a>
     </li>
 
 	<?php foreach ( $enabled_tabs as $tab ) { ?>

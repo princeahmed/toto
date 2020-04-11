@@ -1,11 +1,13 @@
 @import "menu";
 @import "type";
 
-#toto_type{
+$primary: #96c03d;
+
+#toto_type {
   border-radius: 10px;
   padding: 10px 10px;
 
-  .hndle.ui-sortable-handle{
+  .hndle.ui-sortable-handle {
     border: none;
     font-size: 20px;
   }
@@ -22,8 +24,8 @@
   }
 }
 
-.btn-trigger-add{
-  background: #96c03d;
+.btn-trigger-add {
+  background: $primary;
   padding: 5px 10px;
   border-radius: 5px;
   color: white;
@@ -34,13 +36,13 @@
   margin-left: 20px;
 }
 
-.triggers_rules{
-  .toto-input-group{
+.triggers_rules {
+  .toto-input-group {
     margin-bottom: 15px;
   }
 }
 
-.notification-preview{
+.notification-preview {
   justify-content: space-between;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -48,8 +50,28 @@
   align-items: center;
   margin-top: 10px;
 
-  &-title{
+  &-title {
     font-size: 20px;
     margin-left: 25px;
   }
+}
+
+.toto-volume-slider {
+  margin: 10px 0;
+  display: flex;
+  align-items: center;
+  height: 15px;
+  background: $primary;
+  position: relative;
+  border-radius: 4px;
+
+  .toto-volume-handle {
+    padding: 8px;
+    color: white;
+    background: $primary;
+    position: absolute;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
 }
