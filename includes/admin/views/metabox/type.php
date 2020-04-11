@@ -1,7 +1,13 @@
 <div class="toto-tab-content-item toto-notification-types" id="notification_type">
 	<?php
 
-	foreach ( Toto_Notifications::get_config() as $type => $config ) {?>
+	$default        = array_keys( Toto_Notifications::get_config() );
+	$active_modules = toto_get_options( 'active_modules', $default );
+	foreach ( Toto_Notifications::get_config() as $type => $config ) {
+		if ( ! in_array( $type, $active_modules ) ) {
+			continue;
+		}
+		?>
         <div class="toto-notification-type <?php echo $current_type == $type ? 'active' : ''; ?>">
 
             <h3 class="toto-notification-type-title"><?php echo $config['name']; ?></h3>
@@ -16,7 +22,7 @@
 				<?php
 
 				if ( in_array( $type, [ 'INFORMATIONAL', 'COUPON', 'LIVE_COUNTER', 'EMAIL_COLLECTOR' ] ) ) {
-					Toto_Notifications::preview($type, $post_id);
+					Toto_Notifications::preview( $type, $post_id );
 				}
 
 				?>

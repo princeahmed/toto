@@ -91,7 +91,7 @@ final class Toto {
 		include_once TOTO_INCLUDES . '/class-ajax.php';
 		include_once TOTO_INCLUDES . '/class-notifications.php';
 		include_once TOTO_INCLUDES . '/functions.php';
-		//include_once TOTO_INCLUDES . '/prince-settings/prince-loader.php';
+		include_once TOTO_INCLUDES . '/prince-options/prince-options.php';
 
 		/* admin includes */
 		if ( is_admin() ) {

@@ -44,7 +44,7 @@ if ( ! function_exists( 'prince_display_by_type' ) ) {
 		if ( function_exists( $function_name_by_type ) ) {
 			call_user_func( $function_name_by_type, $args );
 		} else {
-			echo '<p>' . __( 'Sorry, this function does not exist', 'wp-plugin-boilerplate' ) . '</p>';
+			echo '<p>' . __( 'Sorry, this function does not exist', 'wp-radio' ) . '</p>';
 		}
 
 	}
@@ -72,6 +72,7 @@ if ( ! function_exists( 'prince_type_background' ) ) {
 
 		/* verify a description */
 		$has_desc = $field_desc ? true : false;
+		$block = $field_block ? true : false;
 
 		/* If an attachment ID is stored here fetch its URL and replace the value */
 		if ( isset( $field_value['background-image'] ) && wp_attachment_is_image( $field_value['background-image'] ) ) {
@@ -88,7 +89,7 @@ if ( ! function_exists( 'prince_type_background' ) ) {
 		}
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-background ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-background ' .( $has_desc ? 'has-desc' : 'no-desc' ). '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -133,7 +134,7 @@ if ( ! function_exists( 'prince_type_background' ) ) {
 
 			echo '<select name="' . esc_attr( $field_name ) . '[background-repeat]" id="' . esc_attr( $field_id ) . '-repeat" class="prince-ui-select ' . esc_attr( $field_class ) . '">';
 
-			echo '<option value="">' . __( 'background-repeat', 'wp-plugin-boilerplate' ) . '</option>';
+			echo '<option value="">' . __( 'background-repeat', 'wp-radio' ) . '</option>';
 			foreach ( prince_recognized_background_repeat( $field_id ) as $key => $value ) {
 
 				echo '<option value="' . esc_attr( $key ) . '" ' . selected( $background_repeat, $key, false ) . '>' . esc_attr( $value ) . '</option>';
@@ -151,7 +152,7 @@ if ( ! function_exists( 'prince_type_background' ) ) {
 
 			echo '<select name="' . esc_attr( $field_name ) . '[background-attachment]" id="' . esc_attr( $field_id ) . '-attachment" class="prince-ui-select ' . $field_class . '">';
 
-			echo '<option value="">' . __( 'background-attachment', 'wp-plugin-boilerplate' ) . '</option>';
+			echo '<option value="">' . __( 'background-attachment', 'wp-radio' ) . '</option>';
 
 			foreach ( prince_recognized_background_attachment( $field_id ) as $key => $value ) {
 
@@ -170,7 +171,7 @@ if ( ! function_exists( 'prince_type_background' ) ) {
 
 			echo '<select name="' . esc_attr( $field_name ) . '[background-position]" id="' . esc_attr( $field_id ) . '-position" class="prince-ui-select ' . esc_attr( $field_class ) . '">';
 
-			echo '<option value="">' . __( 'background-position', 'wp-plugin-boilerplate' ) . '</option>';
+			echo '<option value="">' . __( 'background-position', 'wp-radio' ) . '</option>';
 
 			foreach ( prince_recognized_background_position( $field_id ) as $key => $value ) {
 
@@ -223,7 +224,7 @@ if ( ! function_exists( 'prince_type_background' ) ) {
 
 			} else {
 
-				echo '<input type="text" name="' . esc_attr( $field_name ) . '[background-size]" id="' . esc_attr( $field_id ) . '-size" value="' . ( isset( $field_value['background-size'] ) ? esc_attr( $field_value['background-size'] ) : '' ) . '" class="widefat prince-background-size-input prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'background-size', 'wp-plugin-boilerplate' ) . '" />';
+				echo '<input type="text" name="' . esc_attr( $field_name ) . '[background-size]" id="' . esc_attr( $field_id ) . '-size" value="' . ( isset( $field_value['background-size'] ) ? esc_attr( $field_value['background-size'] ) : '' ) . '" class="widefat prince-background-size-input prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'background-size', 'wp-radio' ) . '" />';
 
 			}
 
@@ -237,10 +238,10 @@ if ( ! function_exists( 'prince_type_background' ) ) {
 			echo '<div class="prince-ui-upload-parent">';
 
 			/* input */
-			echo '<input type="text" name="' . esc_attr( $field_name ) . '[background-image]" id="' . esc_attr( $field_id ) . '" value="' . ( isset( $field_value['background-image'] ) ? esc_attr( $field_value['background-image'] ) : '' ) . '" class="widefat prince-ui-upload-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'background-image', 'wp-plugin-boilerplate' ) . '" />';
+			echo '<input type="text" name="' . esc_attr( $field_name ) . '[background-image]" id="' . esc_attr( $field_id ) . '" value="' . ( isset( $field_value['background-image'] ) ? esc_attr( $field_value['background-image'] ) : '' ) . '" class="widefat prince-ui-upload-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'background-image', 'wp-radio' ) . '" />';
 
 			/* add media button */
-			echo '<a href="javascript:void(0);" class="prince_upload_media prince-ui-button button button-primary light" rel="' . $post_id . '" title="' . __( 'Add Media', 'wp-plugin-boilerplate' ) . '"><span class="icon dashicons dashicons-plus-alt"></span>' . __( 'Add Media', 'wp-plugin-boilerplate' ) . '</a>';
+			echo '<a href="javascript:void(0);" class="prince_upload_media prince-ui-button button button-primary light" rel="' . $post_id . '" title="' . __( 'Add Media', 'wp-radio' ) . '"><span class="icon dashicons dashicons-plus-alt"></span>' . __( 'Add Media', 'wp-radio' ) . '</a>';
 
 			echo '</div>';
 
@@ -258,7 +259,7 @@ if ( ! function_exists( 'prince_type_background' ) ) {
 					echo '<div class="prince-ui-image-wrap"><img src="' . esc_url( $field_value['background-image'] ) . '" alt="" /></div>';
 				}
 
-				echo '<a href="javascript:(void);" class="prince-ui-remove-media prince-ui-button button button-secondary light" title="' . __( 'Remove Media', 'wp-plugin-boilerplate' ) . '"><span class="icon dashicons dashicons-trash"></span></a>';
+				echo '<a href="javascript:(void);" class="prince-ui-remove-media prince-ui-button button button-secondary light" title="' . __( 'Remove Media', 'wp-radio' ) . '"><span class="icon dashicons dashicons-trash"></span></a>';
 
 				echo '</div>';
 
@@ -297,7 +298,7 @@ if ( ! function_exists( 'prince_type_border' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-border ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-border ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -318,7 +319,7 @@ if ( ! function_exists( 'prince_type_border' ) ) {
 
 			$width = isset( $field_value['width'] ) ? esc_attr( $field_value['width'] ) : '';
 
-			echo '<div class="prince-option-group prince-option-group--one-sixth"><input type="text" name="' . esc_attr( $field_name ) . '[width]" id="' . esc_attr( $field_id ) . '-width" value="' . esc_attr( $width ) . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'width', 'wp-plugin-boilerplate' ) . '" /></div>';
+			echo '<div class="prince-option-group prince-option-group--one-sixth"><input type="text" name="' . esc_attr( $field_name ) . '[width]" id="' . esc_attr( $field_id ) . '-width" value="' . esc_attr( $width ) . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'width', 'wp-radio' ) . '" /></div>';
 
 		}
 
@@ -329,7 +330,7 @@ if ( ! function_exists( 'prince_type_border' ) ) {
 
 			echo '<select name="' . esc_attr( $field_name ) . '[unit]" id="' . esc_attr( $field_id ) . '-unit" class="prince-ui-select ' . esc_attr( $field_class ) . '">';
 
-			echo '<option value="">' . __( 'unit', 'wp-plugin-boilerplate' ) . '</option>';
+			echo '<option value="">' . __( 'unit', 'wp-radio' ) . '</option>';
 
 			foreach ( prince_recognized_border_unit_types( $field_id ) as $unit ) {
 				echo '<option value="' . esc_attr( $unit ) . '"' . ( isset( $field_value['unit'] ) ? selected( $field_value['unit'], $unit, false ) : '' ) . '>' . esc_attr( $unit ) . '</option>';
@@ -348,7 +349,7 @@ if ( ! function_exists( 'prince_type_border' ) ) {
 
 			echo '<select name="' . esc_attr( $field_name ) . '[style]" id="' . esc_attr( $field_id ) . '-style" class="prince-ui-select ' . esc_attr( $field_class ) . '">';
 
-			echo '<option value="">' . __( 'style', 'wp-plugin-boilerplate' ) . '</option>';
+			echo '<option value="">' . __( 'style', 'wp-radio' ) . '</option>';
 
 			foreach ( prince_recognized_border_style_types( $field_id ) as $key => $style ) {
 				echo '<option value="' . esc_attr( $key ) . '"' . ( isset( $field_value['style'] ) ? selected( $field_value['style'], $key, false ) : '' ) . '>' . esc_attr( $style ) . '</option>';
@@ -409,7 +410,7 @@ if ( ! function_exists( 'prince_type_box_shadow' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-box-shadow ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-box-shadow ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -442,7 +443,7 @@ if ( ! function_exists( 'prince_type_box_shadow' ) ) {
 
 			$offset_x = isset( $field_value['offset-x'] ) ? esc_attr( $field_value['offset-x'] ) : '';
 
-			echo '<div class="prince-option-group prince-option-group--one-fifth"><span class="prince-icon-arrows-h prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[offset-x]" id="' . esc_attr( $field_id ) . '-offset-x" value="' . $offset_x . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'offset-x', 'wp-plugin-boilerplate' ) . '" /></div>';
+			echo '<div class="prince-option-group prince-option-group--one-fifth"><span class="prince-icon-arrows-h prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[offset-x]" id="' . esc_attr( $field_id ) . '-offset-x" value="' . $offset_x . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'offset-x', 'wp-radio' ) . '" /></div>';
 
 		}
 
@@ -451,7 +452,7 @@ if ( ! function_exists( 'prince_type_box_shadow' ) ) {
 
 			$offset_y = isset( $field_value['offset-y'] ) ? esc_attr( $field_value['offset-y'] ) : '';
 
-			echo '<div class="prince-option-group prince-option-group--one-fifth"><span class="prince-icon-arrows-v prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[offset-y]" id="' . esc_attr( $field_id ) . '-offset-y" value="' . $offset_y . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'offset-y', 'wp-plugin-boilerplate' ) . '" /></div>';
+			echo '<div class="prince-option-group prince-option-group--one-fifth"><span class="prince-icon-arrows-v prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[offset-y]" id="' . esc_attr( $field_id ) . '-offset-y" value="' . $offset_y . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'offset-y', 'wp-radio' ) . '" /></div>';
 
 		}
 
@@ -460,7 +461,7 @@ if ( ! function_exists( 'prince_type_box_shadow' ) ) {
 
 			$blur_radius = isset( $field_value['blur-radius'] ) ? esc_attr( $field_value['blur-radius'] ) : '';
 
-			echo '<div class="prince-option-group prince-option-group--one-fifth"><span class="prince-icon-circle prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[blur-radius]" id="' . esc_attr( $field_id ) . '-blur-radius" value="' . $blur_radius . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'blur-radius', 'wp-plugin-boilerplate' ) . '" /></div>';
+			echo '<div class="prince-option-group prince-option-group--one-fifth"><span class="prince-icon-circle prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[blur-radius]" id="' . esc_attr( $field_id ) . '-blur-radius" value="' . $blur_radius . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'blur-radius', 'wp-radio' ) . '" /></div>';
 
 		}
 
@@ -469,7 +470,7 @@ if ( ! function_exists( 'prince_type_box_shadow' ) ) {
 
 			$spread_radius = isset( $field_value['spread-radius'] ) ? esc_attr( $field_value['spread-radius'] ) : '';
 
-			echo '<div class="prince-option-group prince-option-group--one-fifth"><span class="prince-icon-arrows-alt prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[spread-radius]" id="' . esc_attr( $field_id ) . '-spread-radius" value="' . $spread_radius . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'spread-radius', 'wp-plugin-boilerplate' ) . '" /></div>';
+			echo '<div class="prince-option-group prince-option-group--one-fifth"><span class="prince-icon-arrows-alt prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[spread-radius]" id="' . esc_attr( $field_id ) . '-spread-radius" value="' . $spread_radius . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'spread-radius', 'wp-radio' ) . '" /></div>';
 
 		}
 
@@ -522,7 +523,7 @@ if ( ! function_exists( 'prince_type_category_checkbox' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-category-checkbox type-checkbox ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-category-checkbox type-checkbox ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -542,7 +543,7 @@ if ( ! function_exists( 'prince_type_category_checkbox' ) ) {
 				echo '</p>';
 			}
 		} else {
-			echo '<p>' . __( 'No Categories Found', 'wp-plugin-boilerplate' ) . '</p>';
+			echo '<p>' . __( 'No Categories Found', 'wp-radio' ) . '</p>';
 		}
 
 		echo '</div>';
@@ -576,7 +577,7 @@ if ( ! function_exists( 'prince_type_category_select' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-category-select ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-category-select ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -592,12 +593,12 @@ if ( ! function_exists( 'prince_type_category_select' ) ) {
 
 		/* has cats */
 		if ( ! empty( $categories ) ) {
-			echo '<option value="">-- ' . __( 'Choose One', 'wp-plugin-boilerplate' ) . ' --</option>';
+			echo '<option value="">-- ' . __( 'Choose One', 'wp-radio' ) . ' --</option>';
 			foreach ( $categories as $category ) {
 				echo '<option value="' . esc_attr( $category->term_id ) . '"' . selected( $field_value, $category->term_id, false ) . '>' . esc_attr( $category->name ) . '</option>';
 			}
 		} else {
-			echo '<option value="">' . __( 'No Categories Found', 'wp-plugin-boilerplate' ) . '</option>';
+			echo '<option value="">' . __( 'No Categories Found', 'wp-radio' ) . '</option>';
 		}
 
 		echo '</select>';
@@ -633,7 +634,7 @@ if ( ! function_exists( 'prince_type_checkbox' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-checkbox ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-checkbox ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -683,7 +684,7 @@ if ( ! function_exists( 'prince_type_colorpicker' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-colorpicker ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-colorpicker ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -759,7 +760,7 @@ if ( ! function_exists( 'prince_type_css' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-css simple ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-css simple ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -804,7 +805,7 @@ if ( ! function_exists( 'prince_type_custom_post_type_checkbox' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-custom-post-type-checkbox type-checkbox ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-custom-post-type-checkbox type-checkbox ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -834,7 +835,7 @@ if ( ! function_exists( 'prince_type_custom_post_type_checkbox' ) ) {
 				echo '</p>';
 			}
 		} else {
-			echo '<p>' . __( 'No Posts Found', 'wp-plugin-boilerplate' ) . '</p>';
+			echo '<p>' . __( 'No Posts Found', 'wp-radio' ) . '</p>';
 		}
 
 		echo '</div>';
@@ -868,7 +869,7 @@ if ( ! function_exists( 'prince_type_custom_post_type_select' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-custom-post-type-select ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-custom-post-type-select ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -893,13 +894,13 @@ if ( ! function_exists( 'prince_type_custom_post_type_select' ) ) {
 
 		/* has posts */
 		if ( is_array( $my_posts ) && ! empty( $my_posts ) ) {
-			echo '<option value="">-- ' . __( 'Choose One', 'wp-plugin-boilerplate' ) . ' --</option>';
+			echo '<option value="">-- ' . __( 'Choose One', 'wp-radio' ) . ' --</option>';
 			foreach ( $my_posts as $my_post ) {
 				$post_title = '' != $my_post->post_title ? $my_post->post_title : 'Untitled';
 				echo '<option value="' . esc_attr( $my_post->ID ) . '"' . selected( $field_value, $my_post->ID, false ) . '>' . $post_title . '</option>';
 			}
 		} else {
-			echo '<option value="">' . __( 'No Posts Found', 'wp-plugin-boilerplate' ) . '</option>';
+			echo '<option value="">' . __( 'No Posts Found', 'wp-radio' ) . '</option>';
 		}
 
 		echo '</select>';
@@ -949,7 +950,7 @@ if ( ! function_exists( 'prince_type_date_picker' ) ) {
 		$is_readonly = apply_filters( 'prince_type_date_picker_readonly', false, $field_id );
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-date-picker ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-date-picker ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* date picker JS */
 		echo '<script>jQuery(document).ready(function($) { PRINCE.bind_date_picker("' . esc_attr( $field_id ) . '", "' . esc_attr( $date_format ) . '"); });</script>';
@@ -1008,7 +1009,7 @@ if ( ! function_exists( 'prince_type_date_time_picker' ) ) {
 		$is_readonly = apply_filters( 'prince_type_date_time_picker_readonly', false, $field_id );
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-date-time-picker ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-date-time-picker ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* date time picker JS */
 		echo '<script>jQuery(document).ready(function($) { PRINCE.bind_date_time_picker("' . esc_attr( $field_id ) . '", "' . esc_attr( $date_format ) . '"); });</script>';
@@ -1053,7 +1054,7 @@ if ( ! function_exists( 'prince_type_dimension' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-dimension ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-dimension ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -1073,7 +1074,7 @@ if ( ! function_exists( 'prince_type_dimension' ) ) {
 
 			$width = isset( $field_value['width'] ) ? esc_attr( $field_value['width'] ) : '';
 
-			echo '<div class="prince-option-group prince-option-group--one-third"><span class="prince-icon-arrows-h prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[width]" id="' . esc_attr( $field_id ) . '-width" value="' . esc_attr( $width ) . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'width', 'wp-plugin-boilerplate' ) . '" /></div>';
+			echo '<div class="prince-option-group prince-option-group--one-third"><span class="prince-icon-arrows-h prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[width]" id="' . esc_attr( $field_id ) . '-width" value="' . esc_attr( $width ) . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'width', 'wp-radio' ) . '" /></div>';
 
 		}
 
@@ -1082,7 +1083,7 @@ if ( ! function_exists( 'prince_type_dimension' ) ) {
 
 			$height = isset( $field_value['height'] ) ? esc_attr( $field_value['height'] ) : '';
 
-			echo '<div class="prince-option-group prince-option-group--one-third"><span class="prince-icon-arrows-v prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[height]" id="' . esc_attr( $field_id ) . '-height" value="' . esc_attr( $height ) . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'height', 'wp-plugin-boilerplate' ) . '" /></div>';
+			echo '<div class="prince-option-group prince-option-group--one-third"><span class="prince-icon-arrows-v prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[height]" id="' . esc_attr( $field_id ) . '-height" value="' . esc_attr( $height ) . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'height', 'wp-radio' ) . '" /></div>';
 
 		}
 
@@ -1093,7 +1094,7 @@ if ( ! function_exists( 'prince_type_dimension' ) ) {
 
 			echo '<select name="' . esc_attr( $field_name ) . '[unit]" id="' . esc_attr( $field_id ) . '-unit" class="prince-ui-select ' . esc_attr( $field_class ) . '">';
 
-			echo '<option value="">' . __( 'unit', 'wp-plugin-boilerplate' ) . '</option>';
+			echo '<option value="">' . __( 'unit', 'wp-radio' ) . '</option>';
 
 			foreach ( prince_recognized_dimension_unit_types( $field_id ) as $unit ) {
 				echo '<option value="' . esc_attr( $unit ) . '"' . ( isset( $field_value['unit'] ) ? selected( $field_value['unit'], $unit, false ) : '' ) . '>' . esc_attr( $unit ) . '</option>';
@@ -1136,7 +1137,7 @@ if ( ! function_exists( 'prince_type_gallery' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		// Format setting outer wrapper
-		echo '<div class="format-setting type-gallery ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-gallery ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		// Description
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -1189,15 +1190,15 @@ if ( ! function_exists( 'prince_type_gallery' ) ) {
 
 			echo '
           <div class="prince-gallery-buttons">
-            <a href="#" class="prince-ui-button button button-secondary hug-left prince-gallery-delete">' . __( 'Delete Gallery', 'wp-plugin-boilerplate' ) . '</a>
-            <a href="#" class="prince-ui-button button button-primary right hug-right prince-gallery-edit">' . __( 'Edit Gallery', 'wp-plugin-boilerplate' ) . '</a>
+            <a href="#" class="prince-ui-button button button-secondary hug-left prince-gallery-delete">' . __( 'Delete Gallery', 'wp-radio' ) . '</a>
+            <a href="#" class="prince-ui-button button button-primary right hug-right prince-gallery-edit">' . __( 'Edit Gallery', 'wp-radio' ) . '</a>
           </div>';
 
 		} else {
 
 			echo '
           <div class="prince-gallery-buttons">
-            <a href="#" class="prince-ui-button button button-primary right hug-right prince-gallery-edit">' . __( 'Create Gallery', 'wp-plugin-boilerplate' ) . '</a>
+            <a href="#" class="prince-ui-button button button-primary right hug-right prince-gallery-edit">' . __( 'Create Gallery', 'wp-radio' ) . '</a>
           </div>';
 
 		}
@@ -1208,6 +1209,121 @@ if ( ! function_exists( 'prince_type_gallery' ) ) {
 
 	}
 
+}
+
+/**
+ * Playlist option type
+ *
+ * See @prince_display_by_type to see the full list of available arguments
+ *
+ * @param array the options arguments
+ *
+ * @return string the gallery metabox markup
+ *
+ * @access public
+ *
+ * @since 1.0.0
+ */
+
+if ( ! function_exists( 'prince_type_playlist' ) ) {
+
+	function prince_type_playlist( $args = [] ) {
+		// Turns arguments array into variables
+		extract( $args );
+
+		// Check Playlist type from settings['type']
+		$playlist_type = ! empty( $field_settings['type'] ) && 'video' == $field_settings['type'] ? 'video' : 'audio';
+
+		// Verify a description
+		$has_desc = $field_desc ? true : false;
+
+		// Format setting outer wrapper
+		echo '<div class="format-setting type-playlist ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
+
+		// Description
+		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
+
+		// Format setting inner wrapper
+		echo '<div class="format-setting-inner">';
+
+		// Setup the post type
+		$post_type = isset( $field_post_type ) ? explode( ',', $field_post_type ) : array( 'post' );
+
+		$field_value = trim( $field_value );
+
+		// Saved values
+		echo '<input type="hidden" name="' . esc_attr( $field_name ) . '" id="' . esc_attr( $field_id ) . '" value="' . esc_attr( $field_value ) . '" class="prince-playlist-value ' . esc_attr( $field_class ) . '" />';
+
+		// Search the string for the IDs
+		preg_match( '/ids=\'(.*?)\'/', $field_value, $matches );
+
+		// Turn the field value into an array of IDs
+		if ( isset( $matches[1] ) ) {
+
+			// Found the IDs in the shortcode
+			$ids = explode( ',', $matches[1] );
+
+		} else {
+
+			// The string is only IDs
+			$ids = ! empty( $field_value ) && $field_value != '' ? explode( ',', $field_value ) : array();
+
+		}
+
+		// Has attachment IDs
+		if ( ! empty( $ids ) ) {
+
+			echo '<ul class="prince-playlist-list attachments">';
+
+			foreach ( $ids as $id ) {
+
+				if ( $id == '' ) {
+					continue;
+				}
+
+				?>
+
+                <li class="attachment">
+                    <div class="attachment-preview">
+                        <div class="thumbnail">
+                            <div class="centered">
+                                <img src="<?php echo includes_url( 'images/media/' . $playlist_type . '.png' ); ?>" class="icon" draggable="false" alt="">
+                            </div>
+                            <div class="filename">
+                                <div>
+									<?php
+									$file = get_attached_file( $id );
+									echo esc_html( wp_basename( $file ) );
+									?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+
+				<?php
+			}
+
+			echo '</ul>';
+
+			echo '
+          <div class="prince-playlist-buttons">
+            <a href="#" class="prince-ui-button button button-secondary hug-left prince-playlist-delete"  data-type="' . $playlist_type . '">' . __( 'Delete Playlist', 'wp-radio' ) . '</a>
+            <a href="#" class="prince-ui-button button button-primary right hug-right prince-playlist-edit"  data-type="' . $playlist_type . '">' . __( 'Edit Playlist', 'wp-radio' ) . '</a>
+          </div>';
+
+		} else {
+			echo '<div class="prince-playlist-buttons">
+		            <a href="#" class="prince-ui-button button button-primary right hug-right prince-playlist-edit" data-type="' . $playlist_type . '">' . __( 'Create Playlist', 'wp-radio' ) . '</a>
+		          </div>';
+
+		}
+
+		echo '</div>';
+
+		echo '</div>';
+
+	}
 }
 
 /**
@@ -1233,7 +1349,7 @@ if ( ! function_exists( 'prince_type_google_fonts' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-google-font ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-google-font ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -1265,9 +1381,9 @@ if ( ! function_exists( 'prince_type_google_fonts' ) ) {
 			/* build font family */
 			$family = isset( $value['family'] ) ? $value['family'] : '';
 			echo '<div class="prince-google-font-family">';
-			echo '<a href="javascript:void(0);" class="js-remove-google-font prince-ui-button button button-secondary light" title="' . __( 'Remove Google Font', 'wp-plugin-boilerplate' ) . '"><span class="icon dashicons dashicons-trash"/>' . __( 'Remove Google Font', 'wp-plugin-boilerplate' ) . '</a>';
+			echo '<a href="javascript:void(0);" class="js-remove-google-font prince-ui-button button button-secondary light" title="' . __( 'Remove Google Font', 'wp-radio' ) . '"><span class="icon dashicons dashicons-trash"/>' . __( 'Remove Google Font', 'wp-radio' ) . '</a>';
 			echo '<select name="' . esc_attr( $field_name ) . '[' . $key . '][family]" id="' . esc_attr( $field_id ) . '-' . $key . '" class="prince-ui-select ' . esc_attr( $field_class ) . '">';
-			echo '<option value="">' . __( '-- Choose One --', 'wp-plugin-boilerplate' ) . '</option>';
+			echo '<option value="">' . __( '-- Choose One --', 'wp-radio' ) . '</option>';
 			foreach ( prince_recognized_google_font_families( $field_id ) as $family_key => $family_value ) {
 				echo '<option value="' . esc_attr( $family_key ) . '" ' . selected( $family, $family_key, false ) . '>' . esc_html( $family_value ) . '</option>';
 			}
@@ -1308,9 +1424,9 @@ if ( ! function_exists( 'prince_type_google_fonts' ) ) {
 
 		/* build font family */
 		echo '<div class="prince-google-font-family">';
-		echo '<a href="javascript:void(0);" class="js-remove-google-font prince-ui-button button button-secondary light" title="' . __( 'Remove Google Font', 'wp-plugin-boilerplate' ) . '"><span class="icon dashicons dashicons-trash"/>' . __( 'Remove Google Font', 'wp-plugin-boilerplate' ) . '</a>';
+		echo '<a href="javascript:void(0);" class="js-remove-google-font prince-ui-button button button-secondary light" title="' . __( 'Remove Google Font', 'wp-radio' ) . '"><span class="icon dashicons dashicons-trash"/>' . __( 'Remove Google Font', 'wp-radio' ) . '</a>';
 		echo '<select name="' . esc_attr( $field_name ) . '[%key%][family]" id="' . esc_attr( $field_id ) . '-%key%" class="prince-ui-select ' . esc_attr( $field_class ) . '">';
-		echo '<option value="">' . __( '-- Choose One --', 'wp-plugin-boilerplate' ) . '</option>';
+		echo '<option value="">' . __( '-- Choose One --', 'wp-radio' ) . '</option>';
 		foreach ( prince_recognized_google_font_families( $field_id ) as $family_key => $family_value ) {
 			echo '<option value="' . esc_attr( $family_key ) . '">' . esc_html( $family_value ) . '</option>';
 		}
@@ -1331,7 +1447,7 @@ if ( ! function_exists( 'prince_type_google_fonts' ) ) {
 
 		echo '</div>';
 
-		echo '<a href="javascript:void(0);" class="js-add-google-font prince-ui-button button button-primary right hug-right" title="' . __( 'Add Google Font', 'wp-plugin-boilerplate' ) . '">' . __( 'Add Google Font', 'wp-plugin-boilerplate' ) . '</a>';
+		echo '<a href="javascript:void(0);" class="js-add-google-font prince-ui-button button button-primary right hug-right" title="' . __( 'Add Google Font', 'wp-radio' ) . '">' . __( 'Add Google Font', 'wp-radio' ) . '</a>';
 
 		echo '</div>';
 
@@ -1364,7 +1480,7 @@ if ( ! function_exists( 'prince_type_javascript' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-javascript simple ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-javascript simple ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -1409,7 +1525,7 @@ if ( ! function_exists( 'prince_type_link_color' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-link-color ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-link-color ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -1419,11 +1535,11 @@ if ( ! function_exists( 'prince_type_link_color' ) ) {
 
 		/* allow fields to be filtered */
 		$prince_recognized_link_color_fields = apply_filters( 'prince_recognized_link_color_fields', array(
-			'link'    => _x( 'Standard', 'color picker', 'wp-plugin-boilerplate' ),
-			'hover'   => _x( 'Hover', 'color picker', 'wp-plugin-boilerplate' ),
-			'active'  => _x( 'Active', 'color picker', 'wp-plugin-boilerplate' ),
-			'visited' => _x( 'Visited', 'color picker', 'wp-plugin-boilerplate' ),
-			'focus'   => _x( 'Focus', 'color picker', 'wp-plugin-boilerplate' )
+			'link'    => _x( 'Standard', 'color picker', 'wp-radio' ),
+			'hover'   => _x( 'Hover', 'color picker', 'wp-radio' ),
+			'active'  => _x( 'Active', 'color picker', 'wp-radio' ),
+			'visited' => _x( 'Visited', 'color picker', 'wp-radio' ),
+			'focus'   => _x( 'Focus', 'color picker', 'wp-radio' )
 		), $field_id );
 
 		/* build link color fields */
@@ -1496,7 +1612,7 @@ if ( ! function_exists( 'prince_type_list_item' ) ) {
 		}
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-list-item ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-list-item ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -1534,10 +1650,10 @@ if ( ! function_exists( 'prince_type_list_item' ) ) {
 		echo '</ul>';
 
 		/* button */
-		echo '<a href="javascript:void(0);" class="prince-list-item-add prince-ui-button button button-primary right hug-right" title="' . __( 'Add New', 'wp-plugin-boilerplate' ) . '">' . __( 'Add New', 'wp-plugin-boilerplate' ) . '</a>';
+		echo '<a href="javascript:void(0);" class="prince-list-item-add prince-ui-button button button-primary right hug-right" title="' . __( 'Add New', 'wp-radio' ) . '">' . __( 'Add New', 'wp-radio' ) . '</a>';
 
 		/* description */
-		$list_desc = $sortable ? __( 'You can re-order with drag & drop, the order will update after saving.', 'wp-plugin-boilerplate' ) : '';
+		$list_desc = $sortable ? __( 'You can re-order with drag & drop, the order will update after saving.', 'wp-radio' ) : '';
 		echo '<div class="list-item-description">' . apply_filters( 'prince_list_item_description', $list_desc, $field_id ) . '</div>';
 
 		echo '</div>';
@@ -1571,7 +1687,7 @@ if ( ! function_exists( 'prince_type_measurement' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-measurement ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-measurement ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -1588,7 +1704,7 @@ if ( ! function_exists( 'prince_type_measurement' ) ) {
 		/* build measurement */
 		echo '<select name="' . esc_attr( $field_name ) . '[1]" id="' . esc_attr( $field_id ) . '-1" class="prince-ui-select ' . esc_attr( $field_class ) . '">';
 
-		echo '<option value="">' . __( 'unit', 'wp-plugin-boilerplate' ) . '</option>';
+		echo '<option value="">' . __( 'unit', 'wp-radio' ) . '</option>';
 
 		foreach ( prince_measurement_unit_types( $field_id ) as $unit ) {
 			echo '<option value="' . esc_attr( $unit ) . '"' . ( isset( $field_value[1] ) ? selected( $field_value[1], $unit, false ) : '' ) . '>' . esc_attr( $unit ) . '</option>';
@@ -1632,7 +1748,7 @@ if ( ! function_exists( 'prince_type_numeric_slider' ) ) {
 		$step     = isset( $_options[2] ) ? $_options[2] : 1;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-numeric-slider ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-numeric-slider ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -1681,7 +1797,7 @@ if ( ! function_exists( 'prince_type_on_off' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-radio ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-radio ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -1713,7 +1829,7 @@ if ( ! function_exists( 'prince_type_on_off' ) ) {
 				 * @since     1.0.0
 				 *
 				 */
-				'label' => apply_filters( 'prince_on_off_switch_on_label', __( 'On', 'wp-plugin-boilerplate' ), $field_id, 'on' )
+				'label' => apply_filters( 'prince_on_off_switch_on_label', __( 'On', 'wp-radio' ), $field_id, 'on' )
 			),
 			array(
 				/**
@@ -1737,7 +1853,7 @@ if ( ! function_exists( 'prince_type_on_off' ) ) {
 				 * @since     1.0.0
 				 *
 				 */
-				'label' => apply_filters( 'prince_on_off_switch_off_label', __( 'Off', 'wp-plugin-boilerplate' ), $field_id, 'off' )
+				'label' => apply_filters( 'prince_on_off_switch_off_label', __( 'Off', 'wp-radio' ), $field_id, 'off' )
 			)
 		);
 
@@ -1799,7 +1915,7 @@ if ( ! function_exists( 'prince_type_page_checkbox' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-page-checkbox type-checkbox ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-page-checkbox type-checkbox ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -1826,7 +1942,7 @@ if ( ! function_exists( 'prince_type_page_checkbox' ) ) {
 				echo '</p>';
 			}
 		} else {
-			echo '<p>' . __( 'No Pages Found', 'wp-plugin-boilerplate' ) . '</p>';
+			echo '<p>' . __( 'No Pages Found', 'wp-radio' ) . '</p>';
 		}
 
 		echo '</div>';
@@ -1860,7 +1976,7 @@ if ( ! function_exists( 'prince_type_page_select' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-page-select ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-page-select ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -1882,13 +1998,13 @@ if ( ! function_exists( 'prince_type_page_select' ) ) {
 
 		/* has pages */
 		if ( is_array( $my_posts ) && ! empty( $my_posts ) ) {
-			echo '<option value="">-- ' . __( 'Choose One', 'wp-plugin-boilerplate' ) . ' --</option>';
+			echo '<option value="">-- ' . __( 'Choose One', 'wp-radio' ) . ' --</option>';
 			foreach ( $my_posts as $my_post ) {
 				$post_title = '' != $my_post->post_title ? $my_post->post_title : 'Untitled';
 				echo '<option value="' . esc_attr( $my_post->ID ) . '"' . selected( $field_value, $my_post->ID, false ) . '>' . $post_title . '</option>';
 			}
 		} else {
-			echo '<option value="">' . __( 'No Pages Found', 'wp-plugin-boilerplate' ) . '</option>';
+			echo '<option value="">' . __( 'No Pages Found', 'wp-radio' ) . '</option>';
 		}
 
 		echo '</select>';
@@ -1924,7 +2040,7 @@ if ( ! function_exists( 'prince_type_post_checkbox' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-post-checkbox type-checkbox ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-post-checkbox type-checkbox ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -1951,7 +2067,7 @@ if ( ! function_exists( 'prince_type_post_checkbox' ) ) {
 				echo '</p>';
 			}
 		} else {
-			echo '<p>' . __( 'No Posts Found', 'wp-plugin-boilerplate' ) . '</p>';
+			echo '<p>' . __( 'No Posts Found', 'wp-radio' ) . '</p>';
 		}
 
 		echo '</div>';
@@ -1985,7 +2101,7 @@ if ( ! function_exists( 'prince_type_post_select' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-post-select ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-post-select ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -2007,13 +2123,13 @@ if ( ! function_exists( 'prince_type_post_select' ) ) {
 
 		/* has posts */
 		if ( is_array( $my_posts ) && ! empty( $my_posts ) ) {
-			echo '<option value="">-- ' . __( 'Choose One', 'wp-plugin-boilerplate' ) . ' --</option>';
+			echo '<option value="">-- ' . __( 'Choose One', 'wp-radio' ) . ' --</option>';
 			foreach ( $my_posts as $my_post ) {
 				$post_title = '' != $my_post->post_title ? $my_post->post_title : 'Untitled';
 				echo '<option value="' . esc_attr( $my_post->ID ) . '"' . selected( $field_value, $my_post->ID, false ) . '>' . $post_title . '</option>';
 			}
 		} else {
-			echo '<option value="">' . __( 'No Posts Found', 'wp-plugin-boilerplate' ) . '</option>';
+			echo '<option value="">' . __( 'No Posts Found', 'wp-radio' ) . '</option>';
 		}
 
 		echo '</select>';
@@ -2049,7 +2165,7 @@ if ( ! function_exists( 'prince_type_radio' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-radio ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-radio ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -2093,7 +2209,7 @@ if ( ! function_exists( 'prince_type_radio_image' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-radio-image ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-radio-image ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -2166,7 +2282,7 @@ if ( ! function_exists( 'prince_type_select' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-select ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-select ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -2226,7 +2342,7 @@ if ( ! function_exists( 'prince_type_sidebar_select' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-sidebar-select ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-sidebar-select ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -2251,12 +2367,12 @@ if ( ! function_exists( 'prince_type_sidebar_select' ) ) {
 
 		/* has sidebars */
 		if ( count( $sidebars ) ) {
-			echo '<option value="">-- ' . __( 'Choose Sidebar', 'wp-plugin-boilerplate' ) . ' --</option>';
+			echo '<option value="">-- ' . __( 'Choose Sidebar', 'wp-radio' ) . ' --</option>';
 			foreach ( $sidebars as $id => $sidebar ) {
 				echo '<option value="' . esc_attr( $id ) . '"' . selected( $field_value, $id, false ) . '>' . esc_attr( $sidebar ) . '</option>';
 			}
 		} else {
-			echo '<option value="">' . __( 'No Sidebars', 'wp-plugin-boilerplate' ) . '</option>';
+			echo '<option value="">' . __( 'No Sidebars', 'wp-radio' ) . '</option>';
 		}
 
 		echo '</select>';
@@ -2292,7 +2408,7 @@ if ( ! function_exists( 'prince_type_slider' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-slider ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-slider ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -2330,10 +2446,10 @@ if ( ! function_exists( 'prince_type_slider' ) ) {
 		echo '</ul>';
 
 		/* button */
-		echo '<a href="javascript:void(0);" class="prince-list-item-add prince-ui-button button button-primary right hug-right" title="' . __( 'Add New', 'wp-plugin-boilerplate' ) . '">' . __( 'Add New', 'wp-plugin-boilerplate' ) . '</a>';
+		echo '<a href="javascript:void(0);" class="prince-list-item-add prince-ui-button button button-primary right hug-right" title="' . __( 'Add New', 'wp-radio' ) . '">' . __( 'Add New', 'wp-radio' ) . '</a>';
 
 		/* description */
-		echo '<div class="list-item-description">' . __( 'You can re-order with drag & drop, the order will update after saving.', 'wp-plugin-boilerplate' ) . '</div>';
+		echo '<div class="list-item-description">' . __( 'You can re-order with drag & drop, the order will update after saving.', 'wp-radio' ) . '</div>';
 
 		echo '</div>';
 
@@ -2367,87 +2483,87 @@ if ( ! function_exists( 'prince_type_social_links' ) ) {
 
 			$field_value = apply_filters( 'prince_type_social_links_defaults', array(
 				array(
-					'name'  => __( 'Facebook', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'Facebook', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				),
 				array(
-					'name'  => __( 'Twitter', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'Twitter', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				),
 				array(
-					'name'  => __( 'Google+', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'Google+', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				),
 				array(
-					'name'  => __( 'LinkedIn', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'LinkedIn', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				),
 				array(
-					'name'  => __( 'Pinterest', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'Pinterest', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				),
 				array(
-					'name'  => __( 'Youtube', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'Youtube', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				),
 				array(
-					'name'  => __( 'Dribbble', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'Dribbble', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				),
 				array(
-					'name'  => __( 'Github', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'Github', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				),
 				array(
-					'name'  => __( 'Forrst', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'Forrst', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				),
 				array(
-					'name'  => __( 'Digg', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'Digg', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				),
 				array(
-					'name'  => __( 'Delicious', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'Delicious', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				),
 				array(
-					'name'  => __( 'Tumblr', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'Tumblr', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				),
 				array(
-					'name'  => __( 'Skype', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'Skype', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				),
 				array(
-					'name'  => __( 'SoundCloud', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'SoundCloud', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				),
 				array(
-					'name'  => __( 'Vimeo', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'Vimeo', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				),
 				array(
-					'name'  => __( 'Flickr', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'Flickr', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				),
 				array(
-					'name'  => __( 'VK.com', 'wp-plugin-boilerplate' ),
+					'name'  => __( 'VK.com', 'wp-radio' ),
 					'title' => '',
 					'href'  => ''
 				)
@@ -2459,7 +2575,7 @@ if ( ! function_exists( 'prince_type_social_links' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-social-list-item ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-social-list-item ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -2497,10 +2613,10 @@ if ( ! function_exists( 'prince_type_social_links' ) ) {
 		echo '</ul>';
 
 		/* button */
-		echo '<a href="javascript:void(0);" class="prince-social-links-add prince-ui-button button button-primary right hug-right" title="' . __( 'Add New', 'wp-plugin-boilerplate' ) . '">' . __( 'Add New', 'wp-plugin-boilerplate' ) . '</a>';
+		echo '<a href="javascript:void(0);" class="prince-social-links-add prince-ui-button button button-primary right hug-right" title="' . __( 'Add New', 'wp-radio' ) . '">' . __( 'Add New', 'wp-radio' ) . '</a>';
 
 		/* description */
-		echo '<div class="list-item-description">' . apply_filters( 'prince_social_links_description', __( 'You can re-order with drag & drop, the order will update after saving.', 'wp-plugin-boilerplate' ), $field_id ) . '</div>';
+		echo '<div class="list-item-description">' . apply_filters( 'prince_social_links_description', __( 'You can re-order with drag & drop, the order will update after saving.', 'wp-radio' ), $field_id ) . '</div>';
 
 		echo '</div>';
 
@@ -2533,7 +2649,7 @@ if ( ! function_exists( 'prince_type_spacing' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-spacing ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-spacing ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -2555,7 +2671,7 @@ if ( ! function_exists( 'prince_type_spacing' ) ) {
 
 			$top = isset( $field_value['top'] ) ? esc_attr( $field_value['top'] ) : '';
 
-			echo '<div class="prince-option-group"><span class="prince-icon-arrow-up prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[top]" id="' . esc_attr( $field_id ) . '-top" value="' . $top . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'top', 'wp-plugin-boilerplate' ) . '" /></div>';
+			echo '<div class="prince-option-group"><span class="prince-icon-arrow-up prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[top]" id="' . esc_attr( $field_id ) . '-top" value="' . $top . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'top', 'wp-radio' ) . '" /></div>';
 
 		}
 
@@ -2564,7 +2680,7 @@ if ( ! function_exists( 'prince_type_spacing' ) ) {
 
 			$right = isset( $field_value['right'] ) ? esc_attr( $field_value['right'] ) : '';
 
-			echo '<div class="prince-option-group"><span class="prince-icon-arrow-right prince-option-group--icon"></span></span><input type="text" name="' . esc_attr( $field_name ) . '[right]" id="' . esc_attr( $field_id ) . '-right" value="' . $right . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'right', 'wp-plugin-boilerplate' ) . '" /></div>';
+			echo '<div class="prince-option-group"><span class="prince-icon-arrow-right prince-option-group--icon"></span></span><input type="text" name="' . esc_attr( $field_name ) . '[right]" id="' . esc_attr( $field_id ) . '-right" value="' . $right . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'right', 'wp-radio' ) . '" /></div>';
 
 		}
 
@@ -2573,7 +2689,7 @@ if ( ! function_exists( 'prince_type_spacing' ) ) {
 
 			$bottom = isset( $field_value['bottom'] ) ? esc_attr( $field_value['bottom'] ) : '';
 
-			echo '<div class="prince-option-group"><span class="prince-icon-arrow-down prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[bottom]" id="' . esc_attr( $field_id ) . '-bottom" value="' . $bottom . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'bottom', 'wp-plugin-boilerplate' ) . '" /></div>';
+			echo '<div class="prince-option-group"><span class="prince-icon-arrow-down prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[bottom]" id="' . esc_attr( $field_id ) . '-bottom" value="' . $bottom . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'bottom', 'wp-radio' ) . '" /></div>';
 
 		}
 
@@ -2582,7 +2698,7 @@ if ( ! function_exists( 'prince_type_spacing' ) ) {
 
 			$left = isset( $field_value['left'] ) ? esc_attr( $field_value['left'] ) : '';
 
-			echo '<div class="prince-option-group"><span class="prince-icon-arrow-left prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[left]" id="' . esc_attr( $field_id ) . '-left" value="' . $left . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'left', 'wp-plugin-boilerplate' ) . '" /></div>';
+			echo '<div class="prince-option-group"><span class="prince-icon-arrow-left prince-option-group--icon"></span><input type="text" name="' . esc_attr( $field_name ) . '[left]" id="' . esc_attr( $field_id ) . '-left" value="' . $left . '" class="widefat prince-ui-input ' . esc_attr( $field_class ) . '" placeholder="' . __( 'left', 'wp-radio' ) . '" /></div>';
 
 		}
 
@@ -2593,7 +2709,7 @@ if ( ! function_exists( 'prince_type_spacing' ) ) {
 
 			echo '<select name="' . esc_attr( $field_name ) . '[unit]" id="' . esc_attr( $field_id ) . '-unit" class="prince-ui-select ' . esc_attr( $field_class ) . '">';
 
-			echo '<option value="">' . __( 'unit', 'wp-plugin-boilerplate' ) . '</option>';
+			echo '<option value="">' . __( 'unit', 'wp-radio' ) . '</option>';
 
 			foreach ( prince_recognized_spacing_unit_types( $field_id ) as $unit ) {
 				echo '<option value="' . esc_attr( $unit ) . '"' . ( isset( $field_value['unit'] ) ? selected( $field_value['unit'], $unit, false ) : '' ) . '>' . esc_attr( $unit ) . '</option>';
@@ -2666,7 +2782,7 @@ if ( ! function_exists( 'prince_type_tag_checkbox' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-tag-checkbox type-checkbox ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-tag-checkbox type-checkbox ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -2686,7 +2802,7 @@ if ( ! function_exists( 'prince_type_tag_checkbox' ) ) {
 				echo '</p>';
 			}
 		} else {
-			echo '<p>' . __( 'No Tags Found', 'wp-plugin-boilerplate' ) . '</p>';
+			echo '<p>' . __( 'No Tags Found', 'wp-radio' ) . '</p>';
 		}
 
 		echo '</div>';
@@ -2720,7 +2836,7 @@ if ( ! function_exists( 'prince_type_tag_select' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-tag-select ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-tag-select ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -2736,12 +2852,12 @@ if ( ! function_exists( 'prince_type_tag_select' ) ) {
 
 		/* has tags */
 		if ( $tags ) {
-			echo '<option value="">-- ' . __( 'Choose One', 'wp-plugin-boilerplate' ) . ' --</option>';
+			echo '<option value="">-- ' . __( 'Choose One', 'wp-radio' ) . ' --</option>';
 			foreach ( $tags as $tag ) {
 				echo '<option value="' . esc_attr( $tag->term_id ) . '"' . selected( $field_value, $tag->term_id, false ) . '>' . esc_attr( $tag->name ) . '</option>';
 			}
 		} else {
-			echo '<option value="">' . __( 'No Tags Found', 'wp-plugin-boilerplate' ) . '</option>';
+			echo '<option value="">' . __( 'No Tags Found', 'wp-radio' ) . '</option>';
 		}
 
 		echo '</select>';
@@ -2777,7 +2893,7 @@ if ( ! function_exists( 'prince_type_taxonomy_checkbox' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-taxonomy-checkbox type-checkbox ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-taxonomy-checkbox type-checkbox ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -2803,7 +2919,7 @@ if ( ! function_exists( 'prince_type_taxonomy_checkbox' ) ) {
 				echo '</p>';
 			}
 		} else {
-			echo '<p>' . __( 'No Taxonomies Found', 'wp-plugin-boilerplate' ) . '</p>';
+			echo '<p>' . __( 'No Taxonomies Found', 'wp-radio' ) . '</p>';
 		}
 
 		echo '</div>';
@@ -2837,7 +2953,7 @@ if ( ! function_exists( 'prince_type_taxonomy_select' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-tag-select ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-tag-select ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -2859,12 +2975,12 @@ if ( ! function_exists( 'prince_type_taxonomy_select' ) ) {
 
 		/* has tags */
 		if ( $taxonomies ) {
-			echo '<option value="">-- ' . __( 'Choose One', 'wp-plugin-boilerplate' ) . ' --</option>';
+			echo '<option value="">-- ' . __( 'Choose One', 'wp-radio' ) . ' --</option>';
 			foreach ( $taxonomies as $taxonomy ) {
 				echo '<option value="' . esc_attr( $taxonomy->term_id ) . '"' . selected( $field_value, $taxonomy->term_id, false ) . '>' . esc_attr( $taxonomy->name ) . '</option>';
 			}
 		} else {
-			echo '<option value="">' . __( 'No Taxonomies Found', 'wp-plugin-boilerplate' ) . '</option>';
+			echo '<option value="">' . __( 'No Taxonomies Found', 'wp-radio' ) . '</option>';
 		}
 
 		echo '</select>';
@@ -2900,7 +3016,7 @@ if ( ! function_exists( 'prince_type_text' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-text ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-text ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -2944,7 +3060,7 @@ if ( ! function_exists( 'prince_type_number' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-text ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-text ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -2966,6 +3082,60 @@ if ( ! function_exists( 'prince_type_number' ) ) {
 		     . '" min="' . esc_attr( $min )
 		     . '" max="' . esc_attr( $max )
 		     . '" ' . $field_attrs . ' />';
+
+		echo '</div>';
+
+		echo '</div>';
+
+	}
+
+}
+
+/**
+ * Function option type.
+ *
+ * See @prince_display_by_type to see the full list of available arguments.
+ *
+ * @param array     An array of arguments.
+ *
+ * @return    string
+ *
+ * @access    public
+ * @since     1.0.0
+ */
+if ( ! function_exists( 'prince_type_function' ) ) {
+
+	function prince_type_function( $args = array() ) {
+
+		/* turns arguments array into variables */
+		extract( $args );
+
+		/* verify a description */
+		$has_desc = $field_desc ? true : false;
+
+		/* format setting outer wrapper */
+		echo '<div class="format-setting type-text ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
+
+		/* description */
+		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
+
+		/* format setting inner wrapper */
+		echo '<div class="format-setting-inner">';
+
+		$params = ! empty( $field_settings['params'] ) ? $field_settings['params'] : [];
+
+		call_user_func_array( esc_attr( $field_settings['function'] ), $params );
+
+		if ( isset( $field_settings['input'] ) ) {
+			printf(
+				'<input type="hidden" name="%1$s" id="%2$s" value="%3$s" class="widefat prince-ui-input %4$s" %5$s />',
+				esc_attr( $field_name ),
+				esc_attr( $field_id ),
+				esc_attr( $field_value ),
+				esc_attr( $field_class ),
+				isset($field_attrs) ? $field_attrs : ''
+			);
+		}
 
 		echo '</div>';
 
@@ -2998,7 +3168,7 @@ if ( ! function_exists( 'prince_type_textarea' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-textarea ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' fill-area">';
+		echo '<div class="format-setting type-textarea ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . ' fill-area">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -3053,7 +3223,7 @@ if ( ! function_exists( 'prince_type_textarea_simple' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-textarea simple ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-textarea simple ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -3165,7 +3335,7 @@ if ( ! function_exists( 'prince_type_typography' ) ) {
 		$has_desc = $field_desc ? true : false;
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-typography ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-typography ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -3350,7 +3520,7 @@ if ( ! function_exists( 'prince_type_upload' ) ) {
 		}
 
 		/* format setting outer wrapper */
-		echo '<div class="format-setting type-upload ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . '">';
+		echo '<div class="format-setting type-upload ' . ( $has_desc ? 'has-desc' : 'no-desc' ) . ' ' . (isset($field_block) && $field_block == true  ? 'block': '') . '">';
 
 		/* description */
 		echo $has_desc ? '<div class="description">' . htmlspecialchars_decode( $field_desc ) . '</div>' : '';
@@ -3365,7 +3535,7 @@ if ( ! function_exists( 'prince_type_upload' ) ) {
 		echo '<input type="text" name="' . esc_attr( $field_name ) . '" id="' . esc_attr( $field_id ) . '" value="' . esc_attr( $field_value ) . '" class="widefat prince-ui-upload-input ' . esc_attr( $field_class ) . '" />';
 
 		/* add media button */
-		echo '<a href="javascript:void(0);" class="prince_upload_media prince-ui-button button button-primary light" rel="' . $post_id . '" title="' . __( 'Add Media', 'wp-plugin-boilerplate' ) . '"><span class="icon dashicons dashicons-plus-alt"></span>' . __( 'Add Media', 'wp-plugin-boilerplate' ) . '</a>';
+		echo '<a href="javascript:void(0);" class="prince_upload_media prince-ui-button button button-primary light" rel="' . $post_id . '" title="' . __( 'Add Media', 'wp-radio' ) . '"><span class="icon dashicons dashicons-plus-alt"></span>' . __( 'Add Media', 'wp-radio' ) . '</a>';
 
 		echo '</div>';
 
@@ -3383,7 +3553,7 @@ if ( ! function_exists( 'prince_type_upload' ) ) {
 				echo '<div class="prince-ui-image-wrap"><img src="' . esc_url( $field_value ) . '" alt="" /></div>';
 			}
 
-			echo '<a href="javascript:(void);" class="prince-ui-remove-media prince-ui-button button button-secondary light" title="' . __( 'Remove Media', 'wp-plugin-boilerplate' ) . '"><span class="icon dashicons dashicons-trash"></span></a>';
+			echo '<a href="javascript:(void);" class="prince-ui-remove-media prince-ui-button button button-secondary light" title="' . __( 'Remove Media', 'wp-radio' ) . '"><span class="icon dashicons dashicons-trash"></span></a>';
 
 			echo '</div>';
 

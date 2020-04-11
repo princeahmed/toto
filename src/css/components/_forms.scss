@@ -14,7 +14,7 @@
 
   }
 
-  .select2{
+  .select2 {
     min-width: 250px;
   }
 
@@ -27,7 +27,7 @@
   select {
     max-width: 300px;
 
-    option{
+    option {
       margin: 0 5px;
       padding: 5px 5px 10px;
       border-bottom: 1px solid #ddd;
@@ -36,12 +36,12 @@
 
 }
 
-.toto-label-group{
+.toto-label-group {
   display: flex;
   align-items: center;
   margin: 0 5px;
 
-  input{
+  input {
     margin-right: 8px;
   }
 
@@ -109,4 +109,8 @@
     }
 
   }
+}
+
+.toto-switcher {
+  cursor: pointer;
 }

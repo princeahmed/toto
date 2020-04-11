@@ -66,3 +66,10 @@ function toto_get_chart_data( $main_array = [] ) {
 
 	return $results;
 }
+
+
+function toto_get_options( $key, $default = null ) {
+	$settings = get_option( 'toto_options' );
+
+	return ! empty( $settings[ $key ] ) ? $settings[ $key ] : $default;
+}

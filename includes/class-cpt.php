@@ -68,7 +68,7 @@ class Toto_CPT {
 			'name'               => 'plural' == $type ? $plural : $singular,
 			'all_items'          => sprintf( __( "All %s", 'wp-plugin-boilerplate' ), $plural ),
 			'singular_name'      => $singular,
-			'add_new'            => sprintf( __( 'Add New %s', 'wp-plugin-boilerplate' ), $singular ),
+			'add_new'            => sprintf( __( 'Add New', 'wp-plugin-boilerplate' ), $singular ),
 			'add_new_item'       => sprintf( __( 'Add New %s', 'wp-plugin-boilerplate' ), $singular ),
 			'edit_item'          => sprintf( __( 'Edit %s', 'wp-plugin-boilerplate' ), $singular ),
 			'new_item'           => sprintf( __( 'New %s', 'wp-plugin-boilerplate' ), $singular ),

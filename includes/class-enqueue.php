@@ -29,14 +29,23 @@ class Toto_Enqueue {
 		wp_localize_script( 'toto-frontend-js', 'toto', $localized_array );
 	}
 
-	function admin_scripts() {
+	function admin_scripts( $hooks ) {
+
 		wp_enqueue_style( 'select2-css', TOTO_ASSETS . '/vendor/select2/select2.min.css', [], '4.0.6' );
 		wp_enqueue_style( 'toto-admin-css', TOTO_ASSETS . '/css/admin.css', [], TOTO_VERSION );
 
+
 		wp_enqueue_script( 'fontawesome', TOTO_ASSETS . '/vendor/fontawesome.min.js', false, '5.10.0', true );
 		wp_enqueue_script( 'select2', TOTO_ASSETS . '/vendor/select2/select2.min.js', false, '4.0.6', true );
-		wp_enqueue_script( 'chart', TOTO_ASSETS . '/vendor/Chart.bundle.min.js', false, '2.8.0', false );
-		wp_enqueue_script( 'toto-admin-js', TOTO_ASSETS . '/js/admin.js', [ 'jquery', 'wp-util', 'wp-color-picker' ], TOTO_VERSION, true );
+		wp_enqueue_script( 'toto-admin-js', TOTO_ASSETS . '/js/admin.js', [
+			'jquery',
+			'wp-util',
+			'wp-color-picker'
+		], TOTO_VERSION, true );
+
+		if ( 'toto_notification_page_notification-statistics' == $hooks ) {
+			wp_enqueue_script( 'chart', TOTO_ASSETS . '/vendor/Chart.bundle.min.js', false, '2.8.0', false );
+		}
 
 		/* Create localized JS array */
 		$localized_array = [
