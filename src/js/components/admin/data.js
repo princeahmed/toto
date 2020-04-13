@@ -3,6 +3,8 @@
         $(document).on('click', '.data-details', tooglePanelBody);
         $(document).on('click', '.panel-body-collapse', tooglePanelBody);
 
+        $('.toto_date_field').datepicker();
+
         function tooglePanelBody(e) {
             e.preventDefault();
 

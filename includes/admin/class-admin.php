@@ -65,7 +65,7 @@ class Toto_Admin {
 
 	public function columns_data( $column, $post_id ) {
 		if ( 'preview' == $column ) { ?>
-            <a href="#" class="toto-n-preview"> <i class="dashicons dashicons-visibility toto-mr-5"></i> Preview </a>
+            <a href="#" class="toto-n-preview" data-post_id="<?php echo $post_id; ?>"> <i class="dashicons dashicons-visibility toto-mr-5"></i> Preview </a>
 		<?php } elseif ( 'type' == $column ) {
 			$type      = get_post_meta( $post_id, '_notification_type', true );
 			$type_name = Toto_Notifications::get_config( $type )['name'];
@@ -73,8 +73,8 @@ class Toto_Admin {
             <span class="toto-n-type"><?php echo $type_name; ?></span>
 		<?php } elseif ( 'status' == $column ) { ?>
             <div class="toto-switcher">
-                <input type="checkbox" id="notification-<?php echo $post_id; ?>" value="<?php echo $post_id; ?>"
-					<?php echo 1 ? 'checked' : ''; ?> />
+                <input type="checkbox" class="toto_n_status" id="notification-<?php echo $post_id; ?>" value="<?php echo $post_id; ?>"
+					<?php checked( 'publish', get_post_status( $post_id ) ); ?> />
 
                 <div>
                     <label for="notification-<?php echo $post_id; ?>"></label>

@@ -11,12 +11,12 @@
 
         <div class="toto-form-group toto-mr-20">
             <label for="start_date">Start Date</label>
-            <input type="text" id="start_date" name="start_date" value="<?php echo date( 'Y-m-d', strtotime( 'yesterday' ) ); ?>">
+            <input type="text" id="start_date" class="toto_date_field" name="start_date" value="<?php echo date( 'Y-m-d', strtotime( 'yesterday' ) ); ?>">
         </div>
 
         <div class="toto-form-group toto-mr-20">
             <label for="end_date">End Date</label>
-            <input type="text" id="end_date" name="end_date" value="<?php echo date( 'Y-m-d', strtotime( 'today' ) ); ?>">
+            <input type="text" id="end_date" class="toto_date_field" name="end_date" value="<?php echo date( 'Y-m-d', strtotime( 'today' ) ); ?>">
         </div>
 
         <div class="toto-form-group">

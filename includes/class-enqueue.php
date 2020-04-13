@@ -4,12 +4,23 @@ defined( 'ABSPATH' ) || exit();
 
 class Toto_Enqueue {
 
+	public $toto_admin_screens = [
+		'toto_notification_page_notification-data',
+		'toto_notification_page_notification-statistics',
+		'toto_notification_page_prince-options',
+		'edit-toto_notification',
+		'toto_notification',
+
+	];
+
 	function __construct() {
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_scripts' ] );
+
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'load_prince_scripts' ] );
 	}
 
-	function frontend_scripts() {
+	public function frontend_scripts() {
 		wp_enqueue_style( 'toto-frontend-css', TOTO_ASSETS . '/css/frontend.css', [], TOTO_VERSION );
 
 		wp_enqueue_script( 'toto-frontend-js', TOTO_ASSETS . '/js/frontend.js', [
@@ -29,7 +40,11 @@ class Toto_Enqueue {
 		wp_localize_script( 'toto-frontend-js', 'toto', $localized_array );
 	}
 
-	function admin_scripts( $hooks ) {
+	public function admin_scripts( $hooks ) {
+
+		if ( ! in_array( get_current_screen()->id, $this->toto_admin_screens ) ) {
+			return;
+		}
 
 		wp_enqueue_style( 'select2-css', TOTO_ASSETS . '/vendor/select2/select2.min.css', [], '4.0.6' );
 		wp_enqueue_style( 'toto-admin-css', TOTO_ASSETS . '/css/admin.css', [], TOTO_VERSION );
@@ -40,7 +55,6 @@ class Toto_Enqueue {
 		wp_enqueue_script( 'toto-admin-js', TOTO_ASSETS . '/js/admin.js', [
 			'jquery',
 			'wp-util',
-			'wp-color-picker'
 		], TOTO_VERSION, true );
 
 		if ( 'toto_notification_page_notification-statistics' == $hooks ) {
@@ -58,6 +72,18 @@ class Toto_Enqueue {
 
 		wp_localize_script( 'toto-admin-js', 'toto', $localized_array );
 
+	}
+
+	public function load_prince_scripts() {
+
+		if ( ! in_array( get_current_screen()->id, $this->toto_admin_screens ) ) {
+			return;
+		}
+
+		if ( function_exists( 'prince_admin_styles' ) ) {
+			prince_admin_styles();
+			prince_admin_scripts();
+		}
 	}
 
 }

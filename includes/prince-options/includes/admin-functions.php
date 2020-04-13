@@ -677,7 +677,7 @@ if ( ! function_exists( 'prince_admin_styles' ) ) {
 		 */
 		$screen_ids = apply_filters( 'prince_dequeue_jquery_ui_css_screen_ids', array(
 			'toplevel_page_prince-options',
-			'Prince_page_prince-documentation',
+			'prince_page_prince-documentation',
 			'appearance_page_prince-options'
 		) );
 

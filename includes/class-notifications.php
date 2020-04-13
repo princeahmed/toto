@@ -797,7 +797,7 @@ class Toto_Notifications {
 					continue;
 				}
 
-				if ( is_page( $id ) || is_single( $id ) ) {
+				if ( is_singular( $id ) ) {
 					return true;
 				}
 
