@@ -15,6 +15,7 @@ Todo:
 7. Add only shortcode use method
 8. Add notification list page
 9. Add Pagination on statics top pages
+9. Set all the types as default module value
 
 Premium Features:
 ------

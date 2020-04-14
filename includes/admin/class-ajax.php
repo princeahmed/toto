@@ -7,7 +7,8 @@ class Toto_Admin_Ajax {
 	public function __construct() {
 		add_action( 'wp_ajax_update_menu', [ $this, 'update_menu' ] );
 		add_action( 'wp_ajax_toto_n_status', [ $this, 'handle_status_change' ] );
-		add_action( 'wp_ajax_toto_notification_preview', [ $this, 'toto_notification_preview' ] );
+		add_action( 'wp_ajax_toto_notification_preview', [ $this, 'notification_preview' ] );
+		add_action( 'wp_ajax_toto_get_data', [ $this, 'get_data' ] );
 	}
 
 	public function update_menu() {
@@ -70,7 +71,38 @@ class Toto_Admin_Ajax {
 
 	}
 
-	public function toto_notification_preview() {
+	public function get_data() {
+		$nid        = ! empty( $_REQUEST['nid'] ) ? intval( $_REQUEST['nid'] ) : '';
+		$start_date = ! empty( $_REQUEST['start_date'] ) ? wp_unslash( $_REQUEST['start_date'] ) : '';
+		$end_date   = ! empty( $_REQUEST['end_date'] ) ? wp_unslash( $_REQUEST['end_date'] ) : '';
+		$per_page   = ! empty( $_REQUEST['per_page'] ) ? wp_unslash( $_REQUEST['per_page'] ) : '';
+		$page       = ! empty( $_REQUEST['page'] ) ? wp_unslash( $_REQUEST['page'] ) : '';
+
+
+		$args = [
+			'nid'        => $nid,
+			'start_date' => $start_date,
+			'end_date'   => $end_date,
+			'per_page'   => $per_page,
+			'page'       => $page,
+		];
+
+
+		$results = toto_get_n_data( $args );
+
+		ob_start();
+
+		include TOTO_INCLUDES . '/admin/views/pages/data-loop.php';
+
+		$html = ob_get_clean();
+
+		wp_send_json_success( [
+			'html' => $html
+		] );
+
+	}
+
+	public function notification_preview() {
 		$post_id   = ! empty( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : '';
 		$type      = get_post_meta( $post_id, '_notification_type', true );
 		$type_name = Toto_Notifications::get_config( $type )['name'];

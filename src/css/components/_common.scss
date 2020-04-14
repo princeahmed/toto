@@ -74,6 +74,10 @@ $primary: #96c03d;
   margin-left: 10px !important;
 }
 
+.toto-mb-20 {
+  margin-bottom: 20px !important;
+}
+
 .toto-image-preview {
   width: max-content;
   border: 1px solid #ddd;
@@ -171,7 +175,7 @@ $primary: #96c03d;
     font-size: 16px;
     text-decoration: none;
 
-    &:hover, &:active {
+    &:hover, &:active, &.active {
       background: #96c03d;
       color: #fff;
     }

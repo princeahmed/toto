@@ -1,5 +1,18 @@
 $primary: #96c03d;
 
+#ui-datepicker-div{
+  .ui-datepicker-next{
+    &:before{
+      content: "→";
+    }
+  }
+  .ui-datepicker-prev{
+    &:before{
+      content: "←";
+    }
+  }
+}
+
 .ui-tabs-nav{
   &>li>a{
     display: flex !important;

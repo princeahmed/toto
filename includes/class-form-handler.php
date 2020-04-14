@@ -13,6 +13,10 @@ class Toto_Form_Handler {
 			return;
 		}
 
+		if ( empty( $_REQUEST['notification_type'] ) ) {
+			return;
+		}
+
 		update_post_meta( $post_id, '_notification_type', wp_unslash( $_REQUEST['notification_type'] ) );
 
 		$settings = wp_unslash( $_REQUEST['settings'] );
@@ -32,7 +36,7 @@ class Toto_Form_Handler {
 			$settings[ $key ] = isset( $settings[ $key ] ) ? true : false;
 		}
 
-		update_post_meta( $post_id, '_settings',  $settings);
+		update_post_meta( $post_id, '_settings', $settings );
 
 	}
 

@@ -23,8 +23,10 @@
 
             const postId = $(this).data('post_id');
             const modal = $('#toto_modal');
+            const ph = $('.ph-item', modal);
 
             modal.removeClass('toto-hidden');
+            ph.removeClass('toto-hidden');
 
             wp.ajax.send('toto_notification_preview', {
                 data: {
@@ -33,27 +35,41 @@
 
                 success: res => {
 
-                    const header = `<h2>Type: ${res.type}</h2><span class="toto-modal-close">&times;</span>`;
+                    const header = `Type: ${res.type}`;
 
-                    $('.toto-modal-header', modal).html(header);
-                    $('.toto-modal-body', modal).html(res.html);
+                    $('.toto-modal-header h2', modal).html(header);
+                    $('.modal-body-content', modal).html(res.html);
 
                 },
 
+                complete: () => ph.addClass('toto-hidden'),
+
                 error: error => console.log(error)
-            });
+            })
+            ;
 
         });
 
+        //hide notification preview on .close click
         $(document).on('click', '.toto-modal-close', function () {
-            $(this).parents('.toto-modal').addClass('toto-hidden');
+            const modal = $(this).parents('.toto-modal');
+            modal.addClass('toto-hidden');
+            $('.modal-body-content', modal).html('');
+            $('.toto-modal-header h2', modal).html('');
+            $('.ph-item', modal).removeClass('toto-hidden')
         });
 
+        //hide notification preview on out click
         $('.toto-modal').not('.toto-modal-content').on('click', function (e) {
             if (e.target !== this) {
                 return;
             }
-            $('.toto-modal').addClass('toto-hidden');
+
+            const modal = $(this);
+            modal.addClass('toto-hidden');
+            $('.modal-body-content', modal).html('');
+            $('.toto-modal-header h2', modal).html('');
+            $('.ph-item', modal).removeClass('toto-hidden')
         });
 
     });

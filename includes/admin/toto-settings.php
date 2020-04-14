@@ -54,7 +54,8 @@ class Toto_Settings {
 					'function' => 'toto_enable_disable_modules_html',
 				],
 				'block'    => true,
-				'section'  => 'general'
+				'section'  => 'general',
+				'std'      => array_keys( Toto_Notifications::get_config() ),
 			],
 
 			//Branding

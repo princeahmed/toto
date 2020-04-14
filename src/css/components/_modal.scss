@@ -27,12 +27,26 @@
       color: #fff;
     }
 
+    .ph-item {
+      margin: 25px 15px 15px 0;
+      padding: 0;
+      background: transparent;
+      border: none;
+      width: 200px;
+    }
+
   }
 
   .toto-modal-body {
     display: flex;
     justify-content: center;
     padding: 50px;
+    background: #E5F5FA;
+
+    .ph-item {
+      width: 450px;
+    }
+
   }
 
   .toto-modal-footer {

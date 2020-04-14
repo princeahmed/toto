@@ -38,38 +38,184 @@ function toto_get_user_ip() {
 	}
 }
 
-/* Generate chart data for based on the date key and each of keys inside */
-function toto_get_chart_data( $main_array = [] ) {
-
-	$results = [];
-
-	foreach ( $main_array as $date_label => $data ) {
-
-		foreach ( $data as $label_key => $label_value ) {
-
-			if ( ! isset( $results[ $label_key ] ) ) {
-				$results[ $label_key ] = [];
-			}
-
-			$results[ $label_key ][] = $label_value;
-
-		}
-
-	}
-
-	foreach ( $results as $key => $value ) {
-		$results[ $key . '_total' ] = array_sum( $results[ $key ] );
-		$results[ $key ]            = '["' . implode( '", "', $value ) . '"]';
-	}
-
-	$results['labels'] = '["' . implode( '", "', array_keys( $main_array ) ) . '"]';
-
-	return $results;
-}
-
-
 function toto_get_options( $key, $default = null ) {
 	$settings = get_option( 'toto_options' );
 
 	return ! empty( $settings[ $key ] ) ? $settings[ $key ] : $default;
 }
+
+function toto_get_n_data( $args = [] ) {
+	global $wpdb;
+
+	$table = $wpdb->prefix . 'toto_notification_data';
+
+	$args = array_merge( [
+		'page'       => 1,
+		'per_page'   => 10,
+		'start_date' => date( 'Y-m-d', strtotime( '-7 days' ) ),
+		'end_date'   => date( 'Y-m-d' ),
+	], $args );
+
+	$nid        = esc_attr( $args['nid'] );
+	$page       = intval( $args['page'] );
+	$per_page   = intval( $args['per_page'] );
+	$start_date = esc_attr( $args['start_date'] );
+	$end_date   = esc_attr( $args['end_date'] );
+
+	$offset = $per_page * ( $page - 1 );
+
+	$where = "WHERE notification_id = {$nid} ";
+
+	$where .= "AND (`created_at` BETWEEN '{$start_date}' AND '{$end_date}')";
+
+	$sql = "SELECT data, created_at FROM {$table} {$where} ORDER BY id DESC LIMIT {$offset}, {$per_page}";
+
+	return $wpdb->get_results( $sql );
+}
+
+function toto_get_chart_data( $args = [] ) {
+
+	/**
+	 * Get the statistics date from database
+	 */ global $wpdb;
+	$table = $wpdb->prefix . 'toto_notification_statistics';
+
+	$args = array_merge( [
+		'page'       => 1,
+		'per_page'   => 10,
+		'start_date' => date( 'Y-m-d', strtotime( '-7 days' ) ),
+		'end_date'   => date( 'Y-m-d' ),
+	], $args );
+
+	$nid        = esc_attr( $args['nid'] );
+	$page       = intval( $args['page'] );
+	$per_page   = intval( $args['per_page'] );
+	$start_date = esc_attr( $args['start_date'] );
+	$end_date   = esc_attr( $args['end_date'] );
+
+	$offset = $per_page * ( $page - 1 );
+
+	$where = "WHERE notification_id = {$nid} ";
+
+	$where .= "AND (`created_at` BETWEEN '{$start_date}' AND '{$end_date}')";
+
+
+	$sql = "SELECT
+                 `type`,
+                 COUNT(`id`) AS `total`,
+                 DATE_FORMAT(`created_at`, '%Y-%m-%d') AS `date`
+            FROM {$table} {$where}
+            GROUP BY
+                `date`,
+                `type`
+            ORDER BY
+                `date`
+            LIMIT {$offset}, {$per_page}
+                ";
+
+	$logs = $wpdb->get_results( $sql, 'ARRAY_A' );
+
+	/**
+	 * After getting the data
+	 * Format the log result to [date(key) => [type=>count]]
+	 */
+	$logs_chart = [];
+	foreach ( $logs as $log ) {
+		/* Handle if the date key is not already set */
+		if ( ! array_key_exists( $log['date'], $logs_chart ) ) {
+			$logs_chart[ $log['date'] ] = [
+				'impression'             => 0,
+				'hover'                  => 0,
+				'click'                  => 0,
+				'submissions'            => 0,
+				'feedback_emoji_angry'   => 0,
+				'feedback_emoji_sad'     => 0,
+				'feedback_emoji_neutral' => 0,
+				'feedback_emoji_happy'   => 0,
+				'feedback_emoji_excited' => 0,
+				'feedback_score_1'       => 0,
+				'feedback_score_2'       => 0,
+				'feedback_score_3'       => 0,
+				'feedback_score_4'       => 0,
+				'feedback_score_5'       => 0,
+
+			];
+		}
+
+		$logs_chart[ $log['date'] ][ $log['type'] ] = $log['total'];
+
+	}
+
+	/**
+	 * Format logs data to chart supported data
+	 * Generate chart data for based on the date key and each of keys inside
+	 * [chart_labels(date),.....] => [chart_value(count),....]
+	 */
+	$chart = [];
+	foreach ( $logs_chart as $date_label => $data ) {
+
+		foreach ( $data as $label_key => $label_value ) {
+
+			if ( ! isset( $chart[ $label_key ] ) ) {
+				$chart[ $label_key ] = [];
+			}
+
+			$chart[ $label_key ][] = $label_value;
+
+		}
+
+	}
+
+	foreach ( $chart as $key => $value ) {
+		$chart[ $key . '_total' ] = array_sum( $chart[ $key ] );
+		$chart[ $key ]            = '["' . implode( '", "', $value ) . '"]';
+	}
+
+	$chart['labels'] = '["' . implode( '", "', array_keys( $logs_chart ) ) . '"]';
+
+	//return the chart data
+	return $chart;
+
+}
+
+function toto_get_top_pages( $args = [] ) {
+	global $wpdb;
+
+	$table = $wpdb->prefix . 'toto_notification_statistics';
+
+	$args = array_merge( [
+		'page'       => 1,
+		'per_page'   => 10,
+		'start_date' => date( 'Y-m-d', strtotime( '-7 days' ) ),
+		'end_date'   => date( 'Y-m-d' ),
+	], $args );
+
+	$nid        = esc_attr( $args['nid'] );
+	$page       = intval( $args['page'] );
+	$per_page   = intval( $args['per_page'] );
+	$start_date = esc_attr( $args['start_date'] );
+	$end_date   = esc_attr( $args['end_date'] );
+
+	$offset = $per_page * ( $page - 1 );
+
+	$where = "WHERE notification_id = {$nid} ";
+
+	$where .= "AND (`created_at` BETWEEN '{$start_date}' AND '{$end_date}')";
+
+	$sql = "SELECT 
+                DISTINCT `url`, 
+                `type`, 
+                COUNT(`id`) AS `total_uniques`,
+                SUM(`count`) AS `total_sessions` 
+            FROM {$table} {$where}
+            GROUP BY `url`, `type` 
+            ORDER BY 
+                `total_sessions` DESC,
+                `total_uniques` DESC 
+            LIMIT {$offset}, {$per_page}
+            ";
+
+
+	return $wpdb->get_results( $sql );
+}
+

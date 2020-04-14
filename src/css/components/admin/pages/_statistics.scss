@@ -34,6 +34,12 @@
 
 }
 
+.chart-container{
+  margin-bottom: 50px;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 50px;
+}
+
 .statistics-top-pages{
   margin-top: 50px;
   .top-pages-title{
@@ -41,6 +47,10 @@
     font-weight: bold;
     margin-bottom: 12px;
   }
+}
+
+.top_pages_header{
+  text-align: center;
 }
 
 #top-pages-table{

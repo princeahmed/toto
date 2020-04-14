@@ -50,3 +50,18 @@
   }
 
 }
+
+.toto-filter-bar{
+  margin-bottom: 30px;
+
+  select[name="notification_id"]{
+    width: 250px;
+  }
+  select[name="per_page"]{
+    width: 100px;
+  }
+}
+
+.toto_no_results{
+  text-align: center;
+}

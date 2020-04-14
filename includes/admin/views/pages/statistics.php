@@ -4,58 +4,11 @@ $notification_id   = 373;
 $notification_type = 'EMAIL_COLLECTOR';
 $is_data_supports  = Toto_Notifications::is_data_supports( $notification_type );
 
-global $wpdb;
-$table      = $wpdb->prefix . 'toto_notification_statistics';
-$start_date = '2020-04-04';
-$end_date   = '2020-04-15';
+$log_args = [
+	'nid' => $notification_id
+];
 
-$log_sql = "SELECT
-                 `type`,
-                 COUNT(`id`) AS `total`,
-                 DATE_FORMAT(`created_at`, '%Y-%m-%d') AS `date`
-            FROM
-                 {$table}
-            WHERE
-                `notification_id` = {$notification_id}
-                AND (`created_at` BETWEEN '{$start_date}' AND '{$end_date}')
-            GROUP BY
-                `date`,
-                `type`
-            ORDER BY
-                `date`
-                ";
-
-$logs = $wpdb->get_results( $log_sql, 'ARRAY_A' );
-
-$logs_chart = [];
-foreach ( $logs as $log ) {
-	/* Handle if the date key is not already set */
-	if ( ! array_key_exists( $log['date'], $logs_chart ) ) {
-		$logs_chart[ $log['date'] ] = [
-			'impression'             => 0,
-			'hover'                  => 0,
-			'click'                  => 0,
-			'submissions'            => 0,
-			'feedback_emoji_angry'   => 0,
-			'feedback_emoji_sad'     => 0,
-			'feedback_emoji_neutral' => 0,
-			'feedback_emoji_happy'   => 0,
-			'feedback_emoji_excited' => 0,
-			'feedback_score_1'       => 0,
-			'feedback_score_2'       => 0,
-			'feedback_score_3'       => 0,
-			'feedback_score_4'       => 0,
-			'feedback_score_5'       => 0,
-
-		];
-	}
-
-	$logs_chart[ $log['date'] ][ $log['type'] ] = $log['total'];
-
-}
-
-
-$logs_chart = toto_get_chart_data( $logs_chart );
+$logs_chart = toto_get_chart_data( $log_args );
 
 ?>
 
@@ -63,7 +16,6 @@ $logs_chart = toto_get_chart_data( $logs_chart );
     <h1 class="wp-heading-inline">Notification Statistics</h1>
 
 	<?php
-	$toto_current_page = 'notification-statistics';
 	include TOTO_INCLUDES . '/admin/views/pages/filter-bar.php';
 	?>
 
@@ -113,6 +65,7 @@ $logs_chart = toto_get_chart_data( $logs_chart );
 
     </div>
 
+    <!--  Statistics Charts  -->
     <div class="toto-notification-statistics">
         <div class="chart-container">
             <canvas id="impressions_chart"></canvas>
@@ -140,29 +93,13 @@ $logs_chart = toto_get_chart_data( $logs_chart );
 			'click'       => 'Click',
 		];
 
-		$sql = "SELECT 
-                    DISTINCT `url`, 
-                    `type`, 
-                    COUNT(`id`) AS `total_uniques`,
-                    SUM(`count`) AS `total_sessions` 
-                FROM 
-                    {$table}
-                WHERE
-                    `notification_id` = {$notification_id}
-                    AND (`created_at` BETWEEN '{$start_date}' AND '{$end_date}')
-                GROUP BY `url`, `type` 
-                ORDER BY 
-                    `total_sessions` DESC,
-                    `total_uniques` DESC 
-                LIMIT 10
-                ";
-
-		$top_pages = $wpdb->get_results( $sql );
 
 		?>
 
-        <h3 class="top-pages-title">Top Pages</h3>
-        <p class="top-pages-description description">Most active pages on which notifications had most activity.</p>
+        <div class="top_pages_header">
+            <h3 class="top-pages-title">Top Pages</h3>
+            <p class="top-pages-description description">Most active pages on which notifications had most activity.</p>
+        </div>
 
         <table class="widefat" id="top-pages-table">
             <thead>
@@ -177,13 +114,16 @@ $logs_chart = toto_get_chart_data( $logs_chart );
 
             <tbody>
 			<?php
-			$i = 1;
+
+			$top_pages = toto_get_top_pages( $log_args );
+
 			if ( ! empty( $top_pages ) ) {
+				$i = 1;
 				foreach ( $top_pages as $item ) { ?>
                     <tr>
                         <td><?php echo $i; ?></td>
-                        <td><?php echo $item->url; ?></td>
-                        <td><?php echo $type_labels[$item->type]; ?></td>
+                        <td><a href="<?php echo $item->url; ?>" target="_blank"><?php echo $item->url; ?></a></td>
+                        <td><?php echo $type_labels[ $item->type ]; ?></td>
                         <td><?php echo $item->total_uniques; ?></td>
                         <td><?php echo $item->total_sessions; ?></td>
                     </tr>
@@ -272,7 +212,7 @@ $logs_chart = toto_get_chart_data( $logs_chart );
             },
             title: {
                 display: true,
-                text: 'Impressions' //todo change title
+                text: 'Impressions'
             },
             legend: {
                 display: false
