@@ -1,30 +1,43 @@
-.statistics-summary-wrap{
-  display: flex;
-  justify-content: space-between;
+.statistics-summary-wrap {
   margin: 50px 0;
 
-  .statistics-summary{
-    padding: 30px 100px;
-    border-radius: 15px;
+  .summary-content, .summary-ph-wrap {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .statistics-summary {
+    padding: 30px;
+    border-radius: 8px;
     background: #fff;
+    flex: 1;
+    margin: 0 30px;
     display: flex;
     align-items: center;
 
-    .summary-icon{
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    .summary-icon {
       margin-right: 20px;
     }
 
-    .summary-info{
+    .summary-info {
       display: flex;
       flex-flow: column;
 
-      .summary-number{
+      .summary-number {
         font-size: 32px;
         font-weight: bold;
         margin-bottom: 15px;
       }
 
-      .summary-title{
+      .summary-title {
         font-size: 18px;
       }
 
@@ -32,32 +45,61 @@
 
   }
 
+  .summary-ph {
+    padding: 30px;
+    border-radius: 8px;
+    background: #fff;
+    flex: 1;
+    margin: 0 30px;
+    align-items: center;
+
+    .ph-item {
+      padding: 0;
+      margin: 0;
+      border: none;
+
+      .ph-picture {
+        height: 75px;
+      }
+
+    }
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
 }
 
-.chart-container{
+.chart-container {
   margin-bottom: 50px;
   border-bottom: 1px solid #ddd;
   padding-bottom: 50px;
 }
 
-.statistics-top-pages{
+.statistics-top-pages {
   margin-top: 50px;
-  .top-pages-title{
+
+  .top-pages-title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 12px;
   }
 }
 
-.top_pages_header{
+.top_pages_header {
   text-align: center;
 }
 
-#top-pages-table{
+#top-pages-table {
   margin-top: 30px;
 
-  thead{
-    th{
+  thead {
+    th {
       font-weight: bold;
       background: #96c03d;
       padding: 20px;
@@ -65,8 +107,8 @@
     }
   }
 
-  tbody{
-    td{
+  tbody {
+    td {
       padding: 12px;
       border-bottom: 1px solid #ddd;
 
@@ -75,7 +117,7 @@
 
 }
 
-#toto_show_more_pages{
+#toto_show_more_pages {
   margin: 0 auto;
   display: block;
   padding: 10px 20px;

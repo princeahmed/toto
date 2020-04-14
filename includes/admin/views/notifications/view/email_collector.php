@@ -1,7 +1,6 @@
 <?php defined( 'ABSPATH' ) || die() ?>
 
-<?php ob_start() ?>
-<div class="toto-wrapper toto-email-collector-wrapper" style="background: <?php echo $notification->background_color ?>">
+<div class="toto-wrapper toto-email-collector-wrapper toto-wrapper-<?php echo $notification->border_radius ?>" style="background: <?php echo $notification->background_color ?>">
     <div class="toto-email-collector-content">
         <p class="toto-email-collector-title" style="color: <?php echo $notification->title_color ?>"><?php echo $notification->title ?></p>
         <p class="toto-email-collector-description" style="color: <?php echo $notification->description_color ?>"><?php echo $notification->description ?></p>
@@ -20,8 +19,7 @@
                 <label for="agreement" class="toto-agreement-checkbox-text" style="color: <?php echo $notification->description_color ?>">
                     <a href="<?php echo $notification->agreement_url ?>">
 						<?php echo $notification->agreement_text ?>
-                    </a>
-                </label>
+                    </a> </label>
             </div>
         </form>
 
@@ -32,51 +30,3 @@
 
     <span class="toto-close"></span>
 </div>
-<?php $html = ob_get_clean() ?>
-
-
-<?php ob_start() ?>
-
-const $ = jQuery;
-new $.toto.notification({
-    should_show: !localStorage.getItem('notification_<?php echo $notification->notification_id ?>_converted'),
-    content: <?php echo json_encode( $html ) ?>,
-    display_mobile: <?php echo json_encode( $notification->display_mobile ) ?>,
-    display_trigger: <?php echo json_encode( $notification->display_trigger ) ?>,
-    display_trigger_value: <?php echo json_encode( $notification->display_trigger_value ) ?>,
-    duration: <?php echo $notification->display_duration === - 1 ? - 1 : $notification->display_duration * 1000 ?>,
-    close: <?php echo json_encode( $notification->display_close_button ) ?>,
-    once_per_session: <?php echo json_encode( $notification->display_once_per_session ) ?>,
-    position: <?php echo json_encode( $notification->display_position ) ?>,
-    stop_on_focus: true,
-    triggers: <?php echo json_encode( $notification->triggers ) ?>,
-
-    notification_id: <?php echo $notification->notification_id ?>
-}).initiate({displayed: main_element => {
-
-    /* Form submission */
-    main_element.querySelector('#toto-email-collector-form').addEventListener('submit', event => {
-
-    let email = event.currentTarget.querySelector('[name="email"]').value;
-    let notification_id = main_element.getAttribute('data-notification-id');
-
-    if(email.trim() != '') {
-
-        /* Data collection from the form */
-        $.toto.send_submission_data({ ...$.toto.user(), notification_id: notification_id, email });
-        $.toto.send_statistics_data({ ...$.toto.user(), notification_id: notification_id, type: 'submissions' });
-
-        $.toto.notification.remove_notification(main_element);
-
-        /* Make sure to let the browser know of the conversion so that it is not shown again */
-        //localStorage.setItem('notification_<?php echo $notification->notification_id ?>_converted', true);
-
-    }
-
-    event.preventDefault();});
-
-}});
-
-<?php $javascript = ob_get_clean(); ?>
-
-<?php return (object) [ 'html' => $html, 'javascript' => $javascript ] ?>

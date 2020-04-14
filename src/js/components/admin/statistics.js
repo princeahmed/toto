@@ -1,24 +1,84 @@
 ;(function ($) {
+
+    if (typeof Chart !== 'function') {
+        return;
+    }
+
     Chart.defaults.global.elements.line.borderWidth = 4;
     Chart.defaults.global.elements.point.radius = 3;
     Chart.defaults.global.elements.point.borderWidth = 7;
 
     const app = {
         init: () => {
-            const charts = [
-                'impression',
-                'hover',
-                //'click',
-                'submissions',
-            ];
 
-            charts.forEach(key => app.initChart(key));
+            $(document).on('change', '#toto_n_statistics_filter :input', app.getData);
+
+            app.initChart();
 
         },
 
-        initChart: (key) => {
+        getData: function () {
+
+            const p = $(this).parents('#toto_n_statistics_filter');
+            const ph = $('.summary-ph-wrap, .chart-ph, .statistics-top-pages tfoot');
+            const summaryContent = $('.summary-content');
+            const chartContent = $('.chart-content');
+            const topPagesContent = $('.statistics-top-pages tbody');
+
+            const nid = $('#notification_id', p).val();
+            const start_date = $('#start_date', p).val();
+            const end_date = $('#end_date', p).val();
+
+            const data = {
+                nid,
+                start_date,
+                end_date,
+            };
+
+            ph.removeClass('toto-hidden');
+            summaryContent.html('');
+            chartContent.html('');
+            topPagesContent.html('');
+
+            wp.ajax.send('toto_get_statistics', {
+                data,
+
+                success: (res) => {
+                    summaryContent.html(res.summary_html);
+                    chartContent.html(res.chart_html);
+                    topPagesContent.html(res.top_pages_html);
+
+                    app.initChart();
+                },
+
+                complete: () => {
+                    ph.addClass('toto-hidden');
+                },
+
+                error: error => console.log(error)
+
+            });
+
+        },
+
+        initChart: () => {
+            const charts = [
+                'impression',
+                'hover',
+                'click',
+                'submissions',
+            ];
+
+            charts.forEach(key => app.chartConfig(key));
+        },
+
+        chartConfig: (key) => {
 
             const el = $(`#${key}_chart`);
+
+            if (!el.length) {
+                return;
+            }
 
             const colors = {
                 impression: ['rgba(43, 227, 155, 0.6)', 'rgba(43, 227, 155, 0.05)', '#2BE39B'],

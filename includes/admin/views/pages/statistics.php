@@ -4,12 +4,15 @@
 	<?php
 	include TOTO_INCLUDES . '/admin/views/pages/filter-bar.php';
 
-	$notification_id   = 373;
-	$notification_type = 'EMAIL_COLLECTOR';
-	$is_data_supports  = Toto_Notifications::is_data_supports( $notification_type );
+	//declared in filter-bar.php
+	$nid = ! empty( $posts ) ? array_key_first( $posts ) : '';
+	//$nid = 373;
+
+	$notification_type = get_post_meta( $nid, '_notification_type', true );
+	$statistics_types  = Toto_Notifications::statistics_types( $notification_type );
 
 	$log_args = [
-		'nid' => $notification_id
+		'nid' => $nid
 	];
 
 	$logs_chart = toto_get_chart_data( $log_args );
@@ -20,7 +23,7 @@
 	$type_title = [
 		'impression'  => 'Impressions',
 		'hover'       => 'Mouse Hovers',
-		//'click'       => 'Clicks',
+		'click'       => 'Clicks',
 		'submissions' => 'Submissions',
 	];
 
@@ -28,38 +31,125 @@
 
     <div class="statistics-summary-wrap">
 
-		<?php
-		foreach ( $type_title as $key => $title ) { ?>
-            <div class="statistics-summary">
-                <div class="summary-icon">
-                    <img src="http://localhost/toto/wp-content/plugins/notificationx/admin/assets/img/views-icon.png" alt="">
-                </div>
-                <div class="summary-info">
-                    <div class="summary-number"><?php echo $logs_chart[ $key . '_total' ]; ?></div>
-                    <div class="summary-title"><?php echo $title; ?></div>
+        <div class="summary-ph-wrap  toto-hidden">
+            <div class="summary-ph">
+                <div class="ph-item">
+                    <div class="ph-col-4">
+                        <div class="ph-picture"></div>
+                    </div>
+                    <div>
+                        <div class="ph-row">
+                            <div class="ph-col-10 big"></div>
+                            <div class="ph-col-10 empty"></div>
+                            <div class="ph-col-12"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
+            <div class="summary-ph">
+                <div class="ph-item">
+                    <div class="ph-col-4">
+                        <div class="ph-picture"></div>
+                    </div>
+                    <div>
+                        <div class="ph-row">
+                            <div class="ph-col-10 big"></div>
+                            <div class="ph-col-10 empty"></div>
+                            <div class="ph-col-12"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="summary-ph">
+                <div class="ph-item">
+                    <div class="ph-col-4">
+                        <div class="ph-picture"></div>
+                    </div>
+                    <div>
+                        <div class="ph-row">
+                            <div class="ph-col-10 big"></div>
+                            <div class="ph-col-10 empty"></div>
+                            <div class="ph-col-12"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-		<?php } ?>
+        <div class="summary-content">
+			<?php
+
+            include TOTO_INCLUDES . '/admin/views/pages/summary-loop.php'; ?>
+        </div>
     </div>
 
     <!--  Statistics Charts  -->
     <div class="toto-notification-statistics">
 
-		<?php
+        <div class="chart-ph toto-hidden">
+            <div class="ph-item">
 
-		foreach ( $type_title as $key => $title ) { ?>
-            <div class="chart-container">
-                <canvas id="<?php echo $key; ?>_chart" data-title="<?php echo $title; ?>" data-labels='<?php echo $labels; ?>' data-value='<?php echo $logs_chart[ $key ]; ?>'></canvas>
+                <div class="ph-col-12">
+                    <div class="ph-row">
+                        <div class="ph-col-6 big"></div>
+                        <div class="ph-col-4 empty big"></div>
+                        <div class="ph-col-2 big"></div>
+                        <div class="ph-col-4"></div>
+                        <div class="ph-col-4"></div>
+                        <div class="ph-col-4 empty"></div>
+                        <div class="ph-col-6"></div>
+                        <div class="ph-col-6 empty"></div>
+                        <div class="ph-col-12"></div>
+                    </div>
+                </div>
+
             </div>
-		<?php } ?>
+            <div class="ph-item">
+
+                <div class="ph-col-12">
+                    <div class="ph-row">
+                        <div class="ph-col-6 big"></div>
+                        <div class="ph-col-4 empty big"></div>
+                        <div class="ph-col-2 big"></div>
+                        <div class="ph-col-4"></div>
+                        <div class="ph-col-4"></div>
+                        <div class="ph-col-4 empty"></div>
+                        <div class="ph-col-6"></div>
+                        <div class="ph-col-6 empty"></div>
+                        <div class="ph-col-12"></div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="ph-item">
+
+                <div class="ph-col-12">
+                    <div class="ph-row">
+                        <div class="ph-col-6 big"></div>
+                        <div class="ph-col-4 empty big"></div>
+                        <div class="ph-col-2 big"></div>
+                        <div class="ph-col-4"></div>
+                        <div class="ph-col-4"></div>
+                        <div class="ph-col-4 empty"></div>
+                        <div class="ph-col-6"></div>
+                        <div class="ph-col-6 empty"></div>
+                        <div class="ph-col-12"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="chart-content">
+			<?php include TOTO_INCLUDES . '/admin/views/pages/chart-loop.php'; ?>
+        </div>
 
         <div class="statistics-top-pages">
 
             <div class="top_pages_header">
                 <h3 class="top-pages-title">Top Pages</h3>
-                <p class="top-pages-description description">Most active pages on which notifications had most
-                    activity.</p>
+                <p class="top-pages-description description">
+                    Most active pages on which notifications had most activity. </p>
             </div>
 
             <table class="widefat" id="top-pages-table">
@@ -74,26 +164,74 @@
                 </thead>
 
                 <tbody>
+
 				<?php
 
 				$top_pages = toto_get_top_pages( $log_args );
+				include TOTO_INCLUDES . '/admin/views/pages/top-page-loop.php';
 
-				if ( ! empty( $top_pages ) ) {
-					$i = 1;
-					foreach ( $top_pages as $item ) { ?>
-                        <tr>
-                            <td><?php echo $i; ?></td>
-                            <td><a href="<?php echo $item->url; ?>" target="_blank"><?php echo $item->url; ?></a></td>
-                            <td><?php echo $type_title[ $item->type ]; ?></td>
-                            <td><?php echo $item->total_uniques; ?></td>
-                            <td><?php echo $item->total_sessions; ?></td>
-                        </tr>
-						<?php
-						$i ++;
-					}
-				}
 				?>
+
                 </tbody>
+
+                <tfoot class="toto-hidden">
+                <tr>
+                    <td colspan="5">
+                        <div class="ph-item">
+
+                            <div class="ph-col-12">
+                                <div class="ph-row toto-mb-50">
+                                    <div class="ph-col-6 big"></div>
+                                    <div class="ph-col-4 empty big"></div>
+                                    <div class="ph-col-2 big"></div>
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-6"></div>
+                                    <div class="ph-col-6 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+
+                                <div class="ph-row toto-mb-50">
+                                    <div class="ph-col-6 big"></div>
+                                    <div class="ph-col-4 empty big"></div>
+                                    <div class="ph-col-2 big"></div>
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-6"></div>
+                                    <div class="ph-col-6 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+
+
+                                <div class="ph-row toto-mb-50">
+                                    <div class="ph-col-6 big"></div>
+                                    <div class="ph-col-4 empty big"></div>
+                                    <div class="ph-col-2 big"></div>
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-6"></div>
+                                    <div class="ph-col-6 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+
+
+                                <div class="ph-row toto-mb-50">
+                                    <div class="ph-col-6 big"></div>
+                                    <div class="ph-col-4 empty big"></div>
+                                    <div class="ph-col-2 big"></div>
+                                    <div class="ph-col-4"></div>
+                                    <div class="ph-col-8 empty"></div>
+                                    <div class="ph-col-6"></div>
+                                    <div class="ph-col-6 empty"></div>
+                                    <div class="ph-col-12"></div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
 
             </table>
 

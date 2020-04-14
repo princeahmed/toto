@@ -20,13 +20,7 @@
             <input type="radio" name="notification_type" value="<?php echo $type; ?>" required="required" <?php checked( $current_type, $type ); ?>>
 
             <div class="preview" style="display: none;">
-				<?php
-
-				if ( in_array( $type, [ 'INFORMATIONAL', 'COUPON', 'LIVE_COUNTER', 'EMAIL_COLLECTOR' ] ) ) {
-					Toto_Notifications::preview( $type, $post_id );
-				}
-
-				?>
+				<?php Toto_Notifications::preview( $type, $post_id ); ?>
             </div>
 
         </div>

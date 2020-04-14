@@ -44,61 +44,6 @@ export default class Notification {
     /* Function to build the toast element */
     build() {
 
-        /* Even if we do not build / show the notification, we must check for auto recording of data. */
-        if (this.options.data_trigger_auto) {
-
-            let triggered = this.options.should_show;
-
-            if (triggered) {
-
-                /* Make sure to know all of the form submissions on the page */
-                document.querySelectorAll('form').forEach(form_element => {
-
-                    form_element.addEventListener('submit', event => {
-
-                        let notification_id = this.options.notification_id;
-
-                        /* Store data from the form */
-                        let data = {};
-
-                        /* Parse all the input fields */
-                        form_element.querySelectorAll('input').forEach(input_element => {
-
-                            if (input_element.type === 'password' || input_element.type === 'hidden') {
-                                return;
-                            }
-
-                            if (input_element.name.indexOf('captcha') !== -1) {
-                                return
-                            }
-
-                            data[`form_${input_element.name}`] = input_element.value;
-
-                        });
-
-                        /* Data collection from the form */
-                        $.toto.send_tracking_data({
-                            ...$.toto.user(),
-                            ...data,
-                            notification_id: notification_id,
-                            type: 'auto_capture'
-                        });
-
-                    });
-
-                });
-
-            }
-
-        }
-
-        /* Check the should_show option: used when conversions on a notification already happened
-        and the notification should not pop up again */
-        if (!this.options.should_show) {
-            return false;
-        }
-
-
         /* Display once per session option handle */
         if (this.options.once_per_session) {
 
@@ -114,24 +59,7 @@ export default class Notification {
         }
 
         /* Create the html element */
-        let main_element = document.createElement('div');
-        main_element.className = 'toto';
-
-        /* Positioning of the toast class */
-        main_element.className += ` toto-${this.options.position}`;
-
-        /* Add the positioning key to the data attribute for later usage */
-        main_element.setAttribute('data-position', this.options.position);
-
-        /* Add the animation settings to the data attribute for later usage */
-        main_element.setAttribute('data-on-animation', this.options.on_animation);
-        main_element.setAttribute('data-off-animation', this.options.off_animation);
-
-        /* Add the notification id to the data attribute for later usage */
-        main_element.setAttribute('data-notification-id', this.options.notification_id);
-
-        /* Add the content to the element */
-        main_element.innerHTML = this.options.content;
+        let main_element = document.getElementById(`toto_notification_${this.options.notification_id}`);
 
         /* Add the close button icon if needed */
         if (this.options.close) {
@@ -164,8 +92,8 @@ export default class Notification {
 
                 if (this.options.notification_id) {
                     /* Click statistics */
-                    $.toto.send_tracking_data({
-                        ...$.toto.user(),
+                    jQuery.toto.send_tracking_data({
+                        ...jQuery.toto.user(),
                         notification_id: this.options.notification_id,
                         type: 'click'
                     });
@@ -198,7 +126,7 @@ export default class Notification {
         let current_page = location.href;
 
         setInterval(() => {
-            if (current_page != location.href) {
+            if (current_page !== location.href) {
                 current_page = location.href;
 
                 /* Make sure to remove all the existing notifications */
@@ -291,8 +219,8 @@ export default class Notification {
             if (this.options.notification_id) {
 
                 /* Impression notification */
-                $.toto.send_statistics_data({
-                    ...$.toto.user(),
+                jQuery.toto.send_statistics_data({
+                    ...jQuery.toto.user(),
                     notification_id: this.options.notification_id,
                     type: 'impression'
                 });
@@ -303,8 +231,8 @@ export default class Notification {
                     /* Make sure that we didnt already send this data on the user session */
                     if (!sessionStorage.getItem(`notification_hover_${this.options.notification_id}`)) {
 
-                        $.toto.send_statistics_data({
-                            ...$.toto.user(),
+                        jQuery.toto.send_statistics_data({
+                            ...jQuery.toto.user(),
                             notification_id: this.options.notification_id,
                             type: 'hover'
                         });
@@ -411,7 +339,7 @@ export default class Notification {
                 element.parentNode.removeChild(element);
 
                 /* Recalculate position of other notifications */
-                $.toto.notification.reposition();
+                jQuery.toto.notification.reposition();
 
             }, 400);
 

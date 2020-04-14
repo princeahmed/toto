@@ -15,7 +15,7 @@ class Toto_Hooks {
 	}
 
 	public function render_notifications() {
-		Toto_Notifications::active_notifications();
+		Toto_Notifications::display_notifications();
 	}
 
 }

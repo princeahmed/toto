@@ -12,6 +12,7 @@
 
 			<?php
 
+            //declared in filter-bar.php
 			$nid = ! empty( $posts ) ? array_key_first( $posts ) : '';
 
 			$results = toto_get_n_data( [ 'nid' => $nid ] );

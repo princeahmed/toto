@@ -1,7 +1,5 @@
 <?php defined('ABSPATH') || die() ?>
 
-
-<?php ob_start() ?>
 <div class="toto-wrapper toto-wrapper-<?php echo $notification->border_radius ?> toto-coupon-wrapper" style="background: <?php echo $notification->background_color ?>">
     <div class="toto-coupon-content">
         <?php if(!empty($notification->image)): ?>
@@ -24,7 +22,7 @@
                 <?php if(isset($notification->branding, $notification->branding->name, $notification->branding->url) && !empty($notification->branding->name) && !empty($notification->branding->url)): ?>
                     <a href="<?php echo $notification->branding->url ?>" class="toto-site"><?php echo $notification->branding->name ?></a>
                 <?php else: ?>
-                    <a href="" class="toto-site">\Altum\Language::get()->notification->branding </a>
+                    <a href="#" class="toto-site"></a>
                 <?php endif ?>
             <?php endif ?>
         </div>
@@ -32,53 +30,3 @@
 
     <span class="toto-close"></span>
 </div>
-<?php $html = ob_get_clean() ?>
-
-
-<?php ob_start() ?>
-new AltumCodeManager({
-    content: <?php echo json_encode($html) ?>,
-    display_mobile: <?php echo json_encode($notification->display_mobile) ?>,
-    display_trigger: <?php echo json_encode($notification->display_trigger) ?>,
-    display_trigger_value: <?php echo json_encode($notification->display_trigger_value) ?>,
-    duration: <?php echo $notification->display_duration === -1 ? -1 : $notification->display_duration * 1000 ?>,
-    url: '',
-    close: <?php echo json_encode($notification->display_close_button) ?>,
-    once_per_session: <?php echo json_encode($notification->display_once_per_session) ?>,
-    position: <?php echo json_encode($notification->display_position) ?>,
-    stop_on_focus: true,
-    trigger_all_pages: <?php echo json_encode($notification->trigger_all_pages) ?>,
-    triggers: <?php echo json_encode($notification->triggers) ?>,
-
-    notification_id: <?php echo $notification->notification_id ?>
-}).initiate({
-    displayed: main_element => {
-
-        /* On click the footer remove element */
-        main_element.querySelector('.toto-coupon-footer').addEventListener('click', event => {
-
-            AltumCodeManager.remove_notification(main_element);
-
-            event.preventDefault();
-
-        });
-
-        /* On click event to the button */
-        main_element.querySelector('.toto-coupon-button').addEventListener('click', event => {
-
-            let notification_id = main_element.getAttribute('data-notification-id');
-
-            send_tracking_data({
-                ...user,
-                notification_id: notification_id,
-                type: 'notification',
-                subtype: 'click'
-            });
-
-        });
-
-    }
-});
-<?php $javascript = ob_get_clean(); ?>
-
-<?php return (object) ['html' => $html, 'javascript' => $javascript] ?>

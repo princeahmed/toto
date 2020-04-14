@@ -9,6 +9,8 @@ class Toto_Admin_Ajax {
 		add_action( 'wp_ajax_toto_n_status', [ $this, 'handle_status_change' ] );
 		add_action( 'wp_ajax_toto_notification_preview', [ $this, 'notification_preview' ] );
 		add_action( 'wp_ajax_toto_get_data', [ $this, 'get_data' ] );
+		add_action( 'wp_ajax_toto_get_data', [ $this, 'get_data' ] );
+		add_action( 'wp_ajax_toto_get_statistics', [ $this, 'get_statistics' ] );
 	}
 
 	public function update_menu() {
@@ -98,6 +100,55 @@ class Toto_Admin_Ajax {
 
 		wp_send_json_success( [
 			'html' => $html
+		] );
+
+	}
+
+	public function get_statistics() {
+
+		$nid        = ! empty( $_REQUEST['nid'] ) ? intval( $_REQUEST['nid'] ) : '';
+		$start_date = ! empty( $_REQUEST['start_date'] ) ? wp_unslash( $_REQUEST['start_date'] ) : '';
+		$end_date   = ! empty( $_REQUEST['end_date'] ) ? wp_unslash( $_REQUEST['end_date'] ) : '';
+
+		$notification_type = get_post_meta( $nid, '_notification_type', true );
+		$statistics_types  = Toto_Notifications::statistics_types( $notification_type );
+
+		$args = [
+			'nid'        => $nid,
+			'start_date' => $start_date,
+			'end_date'   => $end_date,
+		];
+
+		$logs_chart = toto_get_chart_data( $args );
+
+		$labels = $logs_chart['labels'];
+
+		//statistics type and title
+		$type_title = [
+			'impression'  => 'Impressions',
+			'hover'       => 'Mouse Hovers',
+			//'click'       => 'Clicks',
+			'submissions' => 'Submissions',
+		];
+
+		ob_start();
+		include TOTO_INCLUDES . '/admin/views/pages/summary-loop.php';
+		$summary_html = ob_get_clean();
+
+		ob_start();
+		include TOTO_INCLUDES . '/admin/views/pages/chart-loop.php';
+		$chart_html = ob_get_clean();
+
+
+		$top_pages = toto_get_top_pages( $args );
+		ob_start();
+		include TOTO_INCLUDES . '/admin/views/pages/top-page-loop.php';
+		$top_pages_html = ob_get_clean();
+
+		wp_send_json_success( [
+			'summary_html'   => $summary_html,
+			'chart_html'     => $chart_html,
+			'top_pages_html' => $top_pages_html,
 		] );
 
 	}

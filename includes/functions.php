@@ -81,19 +81,19 @@ function toto_get_chart_data( $args = [] ) {
 	$table = $wpdb->prefix . 'toto_notification_statistics';
 
 	$args = array_merge( [
-		'page'       => 1,
+		//'page'       => 1,
 		'per_page'   => 10,
 		'start_date' => date( 'Y-m-d', strtotime( '-7 days' ) ),
 		'end_date'   => date( 'Y-m-d' ),
 	], $args );
 
-	$nid        = esc_attr( $args['nid'] );
-	$page       = intval( $args['page'] );
+	$nid = esc_attr( $args['nid'] );
+	//$page       = intval( $args['page'] );
 	$per_page   = intval( $args['per_page'] );
 	$start_date = esc_attr( $args['start_date'] );
 	$end_date   = esc_attr( $args['end_date'] );
 
-	$offset = $per_page * ( $page - 1 );
+	//$offset = $per_page * ( $page - 1 );
 
 	$where = "WHERE notification_id = {$nid} ";
 
@@ -110,7 +110,7 @@ function toto_get_chart_data( $args = [] ) {
                 `type`
             ORDER BY
                 `date`
-            LIMIT {$offset}, {$per_page}
+            LIMIT {$per_page}
                 ";
 
 	$logs = $wpdb->get_results( $sql, 'ARRAY_A' );
@@ -138,7 +138,6 @@ function toto_get_chart_data( $args = [] ) {
 				'feedback_score_3'       => 0,
 				'feedback_score_4'       => 0,
 				'feedback_score_5'       => 0,
-
 			];
 		}
 
@@ -217,5 +216,46 @@ function toto_get_top_pages( $args = [] ) {
 
 
 	return $wpdb->get_results( $sql );
+}
+
+function toto_get_timeago( $date ) {
+
+	$estimate_time = time() - ( new \DateTime( $date ) )->getTimestamp();
+
+	if ( $estimate_time < 1 ) {
+		return 'now';
+	}
+
+	$condition = [
+		12 * 30 * 24 * 60 * 60 => 'year',
+		30 * 24 * 60 * 60      => 'month',
+		24 * 60 * 60           => 'day',
+		60 * 60                => 'hour',
+		60                     => 'minute',
+		1                      => 'second'
+	];
+
+	foreach ( $condition as $secs => $str ) {
+		$d = $estimate_time / $secs;
+
+		if ( $d >= 1 ) {
+			$r = round( $d );
+
+			/* Determine the language string needed */
+			$language_string_time = $r > 1 ? $str . 's' : $str;
+
+			return $r . ' ' . $language_string_time . ' ago';
+		}
+	}
+}
+
+function toto_branding( $notification ) {
+	if ( $notification->display_branding ) {
+		if ( isset( $notification->branding ) && ! empty( $notification->branding->name ) && ! empty( $notification->branding->url ) ) {
+			printf( '<a href="%s" class="toto-site">%s</a>', $notification->branding->url, $notification->branding->name );
+		} else {
+			echo '<a href="#" class="toto-site">🔥 by Toto</a>';
+		}
+	}
 }
 
