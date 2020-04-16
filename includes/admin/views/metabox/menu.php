@@ -1,9 +1,6 @@
 <?php
 
-
-$enabled_tabs = Toto_Notifications::get_enabled_settings_tabs( $current_type );
-
-$tabs_config = [
+$tabs = [
 	'content'   => [
 		'icon'  => 'fa-edit',
 		'title' => 'Content',
@@ -20,10 +17,6 @@ $tabs_config = [
 		'icon'  => 'fa-bell',
 		'title' => 'Sound',
 	],
-	'data'      => [
-		'icon'  => 'fa-database',
-		'title' => 'Data',
-	],
 ];
 
 ?>
@@ -34,11 +27,11 @@ $tabs_config = [
         <a class="toto-tab-link active" data-target="notification_type"> <i class="fa fa-network-wired"></i> Type </a>
     </li>
 
-	<?php foreach ( $enabled_tabs as $tab ) { ?>
+	<?php foreach ( $tabs as $key => $tab ) { ?>
         <li class="toto-tab-item">
-            <a href="#" class="toto-tab-link" data-target="<?php echo $tab; ?>">
-                <i class="fa <?php echo $tabs_config[ $tab ]['icon']; ?>"></i>
-				<?php echo $tabs_config[ $tab ]['title']; ?>
+            <a href="#" class="toto-tab-link" data-target="<?php echo $key; ?>">
+                <i class="fa <?php echo $tab['icon']; ?>"></i>
+				<?php echo $tab['title']; ?>
             </a>
         </li>
 	<?php } ?>

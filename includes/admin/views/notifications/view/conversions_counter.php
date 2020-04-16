@@ -5,7 +5,7 @@
 
         <div class="toto-conversions-counter-header">
             <div class="toto-conversions-counter-number" style="background: <?php echo $notification->number_background_color ?>; color: <?php echo $notification->number_color ?>">
-				<?php echo isset( $notification->counter ) && $notification->counter >= $notification->display_minimum_activity ? $notification->counter : 5 ?>
+				<?php echo isset( $notification->count ) && $notification->count >= $notification->display_minimum_activity ? $notification->count : 5 ?>
             </div>
 
             <div>

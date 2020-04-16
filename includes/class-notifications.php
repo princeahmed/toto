@@ -287,69 +287,56 @@ class Toto_Notifications {
 	}
 
 	public static function preview_handler( $type ) {
+
+		$selector = strtolower( str_replace( '_', '-', $type ) );
+
 		$handlers = [
-			'INFORMATIONAL' => [
-				'title'                => 'title',
-				'description'          => 'description',
-				'image'                => 'image',
-				'title_color'          => 'title',
-				'description_color'    => 'description',
-				'background_color'     => 'wrapper',
-				'border_radius'        => 'wrapper',
-				'display_close_button' => 'close',
-			],
+			'title'                     => "toto-$selector-title",
+			'description'               => "toto-$selector-description",
+			'image'                     => "toto-$selector-image",
+			'title_color'               => "toto-$selector-title",
+			'description_color'         => "toto-$selector-description",
+			'background_color'          => "toto-wrapper",
+			'border_radius'             => "toto-wrapper",
+			'display_close_button'      => "toto-close",
+			'coupon_code'               => "toto-$selector-coupon-code",
+			'footer_text'               => "toto-$selector-footer",
+			'number_color'              => "toto-$selector-number",
+			'number_background_color'   => "toto-$selector-number",
+			'pulse_background_color'    => "toto-toast-pulse",
+			'email_placeholder'         => "toto-$selector-email-placeholder",
+			'button_text'               => "toto-$selector-button",
+			'agreement_text'            => "toto-agreement-checkbox-text",
+			'show_agreement'            => "toto-agreement-checkbox",
+			'button_background_color'   => "toto-$selector-button",
+			'button_color'              => "toto-$selector-button",
+			'display_branding'          => 'toto-site',
+			'enable_sound'              => '',
+			'notification_sound'        => '',
+			'sound_volume'              => '',
+			'show_angry'                => "toto-$selector-angry",
+			'show_sad'                  => "toto-$selector-sad",
+			'show_neutral'              => "toto-$selector-neutral",
+			'show_happy'                => "toto-$selector-happy",
+			'show_excited'              => "toto-$selector-excited",
 
-			'COUPON' => [
-				'title'                   => 'title',
-				'description'             => 'description',
-				'image'                   => 'image',
-				'coupon_code'             => 'coupon-code',
-				'button_text'             => 'button',
-				'footer_text'             => 'footer',
-				'title_color'             => 'title',
-				'description_color'       => 'description',
-				'background_color'        => 'wrapper',
-				'button_background_color' => 'button',
-				'button_color'            => 'button',
-				'border_radius'           => 'wrapper',
-				'display_close_button'    => 'close',
-			],
-
-			'LIVE_COUNTER' => [
-				'description'             => 'description',
-				'number_color'            => 'number',
-				'number_background_color' => 'number',
-				'description_color'       => 'description',
-				'background_color'        => 'wrapper',
-				'pulse_background_color'  => 'toto-toast-pulse',
-				'border_radius'           => 'wrapper',
-				'display_close_button'    => 'close',
-			],
-
-			'EMAIL_COLLECTOR' => [
-				'title'                   => 'title',
-				'description'             => 'description',
-				'email_placeholder'       => 'email-placeholder',
-				'button_text'             => 'button',
-				'agreement_text'          => 'toto-agreement-checkbox-text',
-				'show_agreement'          => 'toto-agreement-checkbox',
-				'title_color'             => 'title',
-				'description_color'       => 'description',
-				'background_color'        => 'wrapper',
-				'button_background_color' => 'button',
-				'button_color'            => 'button',
-				'border_radius'           => 'wrapper',
-				'display_close_button'    => 'close',
-			],
-
+			'conversion_count'          => "toto-$selector-counter-number",
+			'content_title'             => "toto-$selector-content-title",
+			'content_description'       => "toto-$selector-content-description",
+			'content_title_color'       => "toto-$selector-content-title",
+			'content_description_color' => "toto-$selector-content-description",
+			'input_placeholder'         => "toto-$selector-input-placeholder",
+			'share_facebook'            => "toto-$selector-button-facebook",
+			'share_twitter'             => "toto-$selector-button-twitter",
+			'share_linkedin'            => "toto-$selector-button-linkedin",
+			'video'                     => "toto-$selector-video-iframe",
 		];
 
 		$scripts = '';
-		foreach ( $handlers[ $type ] as $key => $target ) {
-
-			$selector = strtolower( str_replace( '_', '-', $type ) );
+		foreach ( $handlers as $key => $target ) {
 
 			ob_start();
+			//colors handlers
 			if ( ! in_array( $key, [
 				'title_color',
 				'description_color',
@@ -359,47 +346,78 @@ class Toto_Notifications {
 				'number_background_color',
 				'number_color',
 				'pulse_background_color',
+                'content_title_color',
+                'content_description_color',
 			] ) ) { ?>
                 $('#settings_<?php echo $key; ?>').on('change paste keyup', function() {
 				<?php
+
+				//text handlers
 				if ( in_array( $key, [
 					'title',
 					'description',
 					'coupon_code',
 					'button_text',
 					'footer_text',
+					'agreement_text',
+                    'conversion_count',
+                    'content_title',
+                    'content_description',
 				] ) ) {
-					printf( '$("#notification_preview .toto-%1$s-%2$s").text($(this).val());', $selector, $target );
-				} elseif ( in_array( $key, [ 'image' ] ) ) {
-					printf( '$("#notification_preview .toto-%1$s-%2$s").attr("src", $(this).val());', $selector, $target );
-				} elseif ( in_array( $key, [ 'border_radius' ] ) ) {
-					printf( '$("#notification_preview .toto-%s").removeClass("toto-wrapper-round toto-wrapper-rounded  toto-wrapper-straight").addClass(`toto-wrapper-${$(this).val()}`);', $target );
-				} elseif ( in_array( $key, [ 'email_placeholder' ] ) ) {
-					printf( '$("#notification_preview .toto-%1$s-%2$s").attr("placeholder", $(this).val());', $selector, $target );
-				} elseif ( in_array( $key, [ 'show_agreement' ] ) ) {
-					printf( '$("#notification_preview .%s").toggle();', $target );
-				} elseif ( in_array( $key, [ 'agreement_text' ] ) ) {
 					printf( '$("#notification_preview .%s").text($(this).val());', $target );
-				} elseif ( in_array( $key, [ 'display_close_button' ] ) ) {
-					printf( '$("#notification_preview .toto-%s").toggle();', $target );
+				} elseif ( in_array( $key, [ 'image', 'video' ] ) ) {
+					//src attr handler
+					printf( '$("#notification_preview .%s").attr("src", $(this).val());', $target );
+
+				} elseif ( in_array( $key, [ 'border_radius' ] ) ) {
+					//border radius handler
+					printf( '$("#notification_preview .%s").removeClass("toto-wrapper-round toto-wrapper-rounded  toto-wrapper-straight").addClass(`toto-wrapper-${$(this).val()}`);', $target );
+
+				} elseif ( in_array( $key, [ 'email_placeholder','input_placeholder' ] ) ) {
+					//placeholder handler
+					printf( '$("#notification_preview .%s").attr("placeholder", $(this).val());', $target );
+
+				} elseif ( in_array( $key, [
+					'show_agreement',
+					'display_branding',
+					'display_close_button',
+					'show_angry',
+					'show_sad',
+					'show_neutral',
+					'show_happy',
+					'show_excited',
+                    'share_facebook',
+                    'share_twitter',
+                    'share_linkedin',
+				] ) ) {
+					//toggle handler
+					printf( '$("#notification_preview .%s").toggle();', $target );
+
 				}
 
 				?>
                 });
 			<?php } else { ?>
-                $('#settings_<?php echo $key; ?>').wpColorPicker({                change: (e, ui)=>{                setTimeout(function(){
+                $('#settings_<?php echo $key; ?>').wpColorPicker({change: (e, ui)=>{setTimeout(function(){
 				<?php
+
 				if ( in_array( $key, [ 'title_color', 'description_color', 'button_color', 'number_color', ] ) ) {
-					printf( '$("#notification_preview .toto-%1$s-%2$s").css("color", e.target.value);', $selector, $target );
-				} elseif ( in_array( $key, [ 'button_background_color', 'number_background_color', ] ) ) {
-					printf( '$("#notification_preview .toto-%1$s-%2$s").css("background-color", e.target.value);', $selector, $target );
-				} elseif ( in_array( $key, [ 'background_color', ] ) ) {
-					printf( '$("#notification_preview .toto-%s").css("background-color", e.target.value);', $target );
-				} elseif ( in_array( $key, [ 'pulse_background_color', ] ) ) {
+					//color handler
+					printf( '$("#notification_preview .%s").css("color", e.target.value);', $target );
+
+				} elseif ( in_array( $key, [
+					'pulse_background_color',
+					'background_color',
+					'button_background_color',
+					'number_background_color',
+				] ) ) {
+					//bg color handler
 					printf( '$("#notification_preview .%s").css("background-color", e.target.value);', $target );
+
 				}
+
 				?>
-                }, 100);    }                });
+                }, 100);}});
 
 			<?php }
 			$scripts .= ob_get_clean();
@@ -430,37 +448,6 @@ class Toto_Notifications {
 		}
 
 		return $types;
-	}
-
-	public static function get_enabled_settings_tabs( $type ) {
-
-		$settings_tabs = [];
-
-		if ( in_array( $type, [
-			'INFORMATIONAL',
-			'COUPON',
-			'LIVE_COUNTER',
-			'VIDEO',
-			'SOCIAL_SHARE',
-			'EMOJI_FEEDBACK',
-			'COOKIE_NOTIFICATION',
-			'SCORE_FEEDBACK'
-		] ) ) {
-			$settings_tabs = [ 'content', 'display', 'customize', 'sound' ];
-		}
-
-		if ( in_array( $type, [
-			'EMAIL_COLLECTOR',
-			'LATEST_CONVERSION',
-			'CONVERSIONS_COUNTER',
-			'RANDOM_REVIEW',
-			'REQUEST_COLLECTOR',
-			'COUNTDOWN_COLLECTOR'
-		] ) ) {
-			$settings_tabs = [ 'content', 'display', 'customize', 'sound', 'data' ];
-		}
-
-		return $settings_tabs;
 	}
 
 	public static function settings_fields( $type, $field = false, $post_id = false ) {
@@ -542,9 +529,152 @@ class Toto_Notifications {
 					'button_color',
 					'border_radius',
 				],
-				'sound'     => [ 'enable_sound' ],
-				'data'      => [ 'data_send_is_enabled', ],
 			],
+
+			'CONVERSIONS_COUNTER' => [
+				'content' => [
+					'title',
+					'last_activity',
+					'url'
+				],
+
+				'display' => $default_display,
+
+				'customize' => [
+					'number_color',
+					'number_background_color',
+					'title_color',
+					'background_color',
+					'border_radius',
+				],
+			],
+
+			'COOKIE_NOTIFICATION' => [
+				'content' => [ 'description', 'image', 'url_text', 'url', 'button_text' ],
+
+				'display' => $default_display,
+
+				'customize' => [
+					'description_color',
+					'background_color',
+					'button_background_color',
+					'button_color',
+					'border_radius',
+				],
+			],
+
+			'COUNTDOWN_COLLECTOR' => [
+				'content' => [
+					'title',
+					'description',
+					'content_title',
+					'input_placeholder',
+					'button_text',
+					'end_date',
+					'agreement',
+				],
+
+				'display' => $default_display,
+
+				'customize' => [
+					'title_color',
+					'description_color',
+					'content_title_color',
+					'time_color',
+					'time_background_color',
+					'background_color',
+					'button_background_color',
+					'button_color',
+					'border_radius',
+				],
+			],
+
+			'EMOJI_FEEDBACK' => [
+				'content' => [ 'title', 'emoji' ],
+
+				'display' => $default_display,
+
+				'customize' => [ 'title_color', 'background_color', 'border_radius', ],
+			],
+
+			'LATEST_CONVERSION' => [
+				'content' => [ 'title', 'description', 'image', 'url', 'conversions_count', ],
+
+				'display' => $default_display,
+
+				'customize' => [ 'title_color', 'description_color', 'background_color', 'border_radius', ],
+			],
+
+			'RANDOM_REVIEW' => [
+				'content' => [ 'url' ],
+
+				'display' => $default_display,
+
+				'customize' => [ 'title_color', 'description_color', 'background_color', 'border_radius', ],
+			],
+
+			'REQUEST_COLLECTOR' => [
+				'content' => [
+					'title',
+					'description',
+					'image',
+					'content_title',
+					'content_description',
+					'input_placeholder',
+					'button_text',
+					'agreement',
+				],
+
+				'display' => $default_display,
+
+				'customize' => [
+					'title_color',
+					'description_color',
+					'content_title_color',
+					'content_description_color',
+					'background_color',
+					'button_background_color',
+					'button_color',
+					'border_radius',
+				],
+			],
+
+			'SCORE_FEEDBACK' => [
+				'content' => [ 'title', 'description', ],
+
+				'display' => $default_display,
+
+				'customize' => [
+					'title_color',
+					'description_color',
+					'background_color',
+					'button_background_color',
+					'button_color',
+				],
+			],
+
+			'SOCIAL_SHARE' => [
+				'content' => [ 'title', 'description', 'share_url', ],
+
+				'display' => $default_display,
+
+				'customize' => [ 'title_color', 'description_color', 'background_color', 'border_radius', ],
+			],
+
+			'VIDEO' => [
+				'content' => [ 'title', 'video', 'button_url', 'button_text', ],
+
+				'display' => $default_display,
+
+				'customize' => [
+					'title_color',
+					'background_color',
+					'button_background_color',
+					'button_color',
+					'border_radius',
+				],
+			],
+
 		];
 
 		return $fields[ $type ];

@@ -2,47 +2,66 @@
 
 defined( 'ABSPATH' ) || exit();
 
-$title                    = ! empty( $notification['title'] ) ? $notification['title'] : '';
-$description              = ! empty( $notification['description'] ) ? $notification['description'] : '';
-$image                    = ! empty( $notification['image'] ) ? $notification['image'] : '';
-$url                      = ! empty( $notification['url'] ) ? $notification['url'] : '';
-$title_color              = ! empty( $notification['title_color'] ) ? $notification['title_color'] : '';
-$description_color        = ! empty( $notification['description_color'] ) ? $notification['description_color'] : '';
-$background_color         = ! empty( $notification['background_color'] ) ? $notification['background_color'] : '';
-$border_radius            = ! empty( $notification['border_radius'] ) ? $notification['border_radius'] : '';
-$display_position         = ! empty( $notification['display_position'] ) ? $notification['display_position'] : '';
-$display_duration         = ! empty( $notification['display_duration'] ) ? $notification['display_duration'] : '';
-$display_close_button     = ! empty( $notification['display_close_button'] ) ? $notification['display_close_button'] : '';
-$display_branding         = ! empty( $notification['display_branding'] ) ? $notification['display_branding'] : '';
-$trigger_on               = ! empty( $notification['trigger_on'] ) ? $notification['trigger_on'] : '';
-$trigger_locations        = ! empty( $notification['trigger_locations'] ) ? $notification['trigger_locations'] : '';
-$custom_post_page_ids     = ! empty( $notification['custom_post_page_ids'] ) ? $notification['custom_post_page_ids'] : '';
-$triggers                 = ! empty( $notification['triggers'] ) ? $notification['triggers'] : '';
-$display_trigger          = ! empty( $notification['display_trigger'] ) ? $notification['display_trigger'] : '';
-$display_trigger_value    = ! empty( $notification['display_trigger_value'] ) ? $notification['display_trigger_value'] : '';
-$display_once_per_session = ! empty( $notification['display_once_per_session'] ) ? $notification['display_once_per_session'] : '';
-$display_mobile           = ! empty( $notification['display_mobile'] ) ? $notification['display_mobile'] : '';
-$email_placeholder        = ! empty( $notification['email_placeholder'] ) ? $notification['email_placeholder'] : '';
-$button_text              = ! empty( $notification['button_text'] ) ? $notification['button_text'] : '';
-$button_url               = ! empty( $notification['button_url'] ) ? $notification['button_url'] : '';
-$last_activity            = ! empty( $notification['last_activity'] ) ? $notification['last_activity'] : '';
-$coupon_code              = ! empty( $notification['coupon_code'] ) ? $notification['coupon_code'] : '';
-$footer_text              = ! empty( $notification['footer_text'] ) ? $notification['footer_text'] : '';
-$show_agreement           = ! empty( $notification['show_agreement'] ) ? $notification['show_agreement'] : '';
-$agreement_text           = ! empty( $notification['agreement_text'] ) ? $notification['agreement_text'] : '';
-$agreement_url            = ! empty( $notification['agreement_url'] ) ? $notification['agreement_url'] : '';
-$button_background_color  = ! empty( $notification['button_background_color'] ) ? $notification['button_background_color'] : '';
-$button_color             = ! empty( $notification['button_color'] ) ? $notification['button_color'] : '';
-$number_color             = ! empty( $notification['number_color'] ) ? $notification['number_color'] : '';
-$number_background_color  = ! empty( $notification['number_background_color'] ) ? $notification['number_background_color'] : '';
-$pulse_background_color   = ! empty( $notification['pulse_background_color'] ) ? $notification['pulse_background_color'] : '';
-$data_send_is_enabled     = ! empty( $notification['data_send_is_enabled'] ) ? $notification['data_send_is_enabled'] : '';
-$data_send_webhook        = ! empty( $notification['data_send_webhook'] ) ? $notification['data_send_webhook'] : '';
-$data_send_email          = ! empty( $notification['data_send_email'] ) ? $notification['data_send_email'] : '';
-$minimum_activity         = ! empty( $notification['minimum_activity'] ) ? $notification['minimum_activity'] : '';
-$enable_sound             = ! empty( $notification['enable_sound'] ) ? $notification['enable_sound'] : '';
-$notification_sound       = ! empty( $notification['notification_sound'] ) ? $notification['notification_sound'] : '';
-$sound_volume             = ! empty( $notification['sound_volume'] ) ? $notification['sound_volume'] : '';
+$title                     = ! empty( $notification['title'] ) ? $notification['title'] : '';
+$description               = ! empty( $notification['description'] ) ? $notification['description'] : '';
+$image                     = ! empty( $notification['image'] ) ? $notification['image'] : '';
+$url                       = ! empty( $notification['url'] ) ? $notification['url'] : '';
+$title_color               = ! empty( $notification['title_color'] ) ? $notification['title_color'] : '';
+$description_color         = ! empty( $notification['description_color'] ) ? $notification['description_color'] : '';
+$background_color          = ! empty( $notification['background_color'] ) ? $notification['background_color'] : '';
+$border_radius             = ! empty( $notification['border_radius'] ) ? $notification['border_radius'] : '';
+$display_position          = ! empty( $notification['display_position'] ) ? $notification['display_position'] : '';
+$display_duration          = ! empty( $notification['display_duration'] ) ? $notification['display_duration'] : '';
+$display_close_button      = ! empty( $notification['display_close_button'] ) ? $notification['display_close_button'] : '';
+$display_branding          = ! empty( $notification['display_branding'] ) ? $notification['display_branding'] : '';
+$trigger_on                = ! empty( $notification['trigger_on'] ) ? $notification['trigger_on'] : '';
+$trigger_locations         = ! empty( $notification['trigger_locations'] ) ? $notification['trigger_locations'] : '';
+$custom_post_page_ids      = ! empty( $notification['custom_post_page_ids'] ) ? $notification['custom_post_page_ids'] : '';
+$triggers                  = ! empty( $notification['triggers'] ) ? $notification['triggers'] : '';
+$display_trigger           = ! empty( $notification['display_trigger'] ) ? $notification['display_trigger'] : '';
+$display_trigger_value     = ! empty( $notification['display_trigger_value'] ) ? $notification['display_trigger_value'] : '';
+$display_once_per_session  = ! empty( $notification['display_once_per_session'] ) ? $notification['display_once_per_session'] : '';
+$display_mobile            = ! empty( $notification['display_mobile'] ) ? $notification['display_mobile'] : '';
+$email_placeholder         = ! empty( $notification['email_placeholder'] ) ? $notification['email_placeholder'] : '';
+$button_text               = ! empty( $notification['button_text'] ) ? $notification['button_text'] : '';
+$button_url                = ! empty( $notification['button_url'] ) ? $notification['button_url'] : '';
+$last_activity             = ! empty( $notification['last_activity'] ) ? $notification['last_activity'] : '';
+$coupon_code               = ! empty( $notification['coupon_code'] ) ? $notification['coupon_code'] : '';
+$footer_text               = ! empty( $notification['footer_text'] ) ? $notification['footer_text'] : '';
+$show_agreement            = ! empty( $notification['show_agreement'] ) ? $notification['show_agreement'] : '';
+$agreement_text            = ! empty( $notification['agreement_text'] ) ? $notification['agreement_text'] : '';
+$agreement_url             = ! empty( $notification['agreement_url'] ) ? $notification['agreement_url'] : '';
+$button_background_color   = ! empty( $notification['button_background_color'] ) ? $notification['button_background_color'] : '';
+$button_color              = ! empty( $notification['button_color'] ) ? $notification['button_color'] : '';
+$number_color              = ! empty( $notification['number_color'] ) ? $notification['number_color'] : '';
+$number_background_color   = ! empty( $notification['number_background_color'] ) ? $notification['number_background_color'] : '';
+$pulse_background_color    = ! empty( $notification['pulse_background_color'] ) ? $notification['pulse_background_color'] : '';
+$data_send_is_enabled      = ! empty( $notification['data_send_is_enabled'] ) ? $notification['data_send_is_enabled'] : '';
+$data_send_webhook         = ! empty( $notification['data_send_webhook'] ) ? $notification['data_send_webhook'] : '';
+$data_send_email           = ! empty( $notification['data_send_email'] ) ? $notification['data_send_email'] : '';
+$minimum_activity          = ! empty( $notification['minimum_activity'] ) ? $notification['minimum_activity'] : '';
+$enable_sound              = ! empty( $notification['enable_sound'] ) ? $notification['enable_sound'] : '';
+$notification_sound        = ! empty( $notification['notification_sound'] ) ? $notification['notification_sound'] : '';
+$sound_volume              = ! empty( $notification['sound_volume'] ) ? $notification['sound_volume'] : '';
+$show_angry                = ! empty( $notification['show_angry'] ) ? $notification['show_angry'] : '';
+$show_sad                  = ! empty( $notification['show_sad'] ) ? $notification['show_sad'] : '';
+$show_neutral              = ! empty( $notification['show_neutral'] ) ? $notification['show_neutral'] : '';
+$show_happy                = ! empty( $notification['show_happy'] ) ? $notification['show_happy'] : '';
+$show_excited              = ! empty( $notification['show_excited'] ) ? $notification['show_excited'] : '';
+$conversion_count          = ! empty( $notification['conversion_count'] ) ? $notification['conversion_count'] : '';
+$content_title             = ! empty( $notification['content_title'] ) ? $notification['content_title'] : '';
+$content_description       = ! empty( $notification['content_description'] ) ? $notification['content_description'] : '';
+$content_title_color       = ! empty( $notification['content_title_color'] ) ? $notification['content_title_color'] : '';
+$content_description_color = ! empty( $notification['content_description_color'] ) ? $notification['content_description_color'] : '';
+$input_placeholder         = ! empty( $notification['input_placeholder'] ) ? $notification['input_placeholder'] : '';
+$share_url                 = ! empty( $notification['share_url'] ) ? $notification['share_url'] : '';
+$share_facebook            = ! empty( $notification['share_facebook'] ) ? $notification['share_facebook'] : '';
+$share_twitter             = ! empty( $notification['share_twitter'] ) ? $notification['share_twitter'] : '';
+$share_linkedin            = ! empty( $notification['share_linkedin'] ) ? $notification['share_linkedin'] : '';
+$video                     = ! empty( $notification['video'] ) ? $notification['video'] : '';
+$time_color                = ! empty( $notification['time_color'] ) ? $notification['time_color'] : '';
+$time_background_color     = ! empty( $notification['time_background_color'] ) ? $notification['time_background_color'] : '';
+$end_date                  = ! empty( $notification['end_date'] ) ? $notification['end_date'] : '';
 
 
 $fields = new stdClass();
@@ -130,6 +149,27 @@ ob_start(); ?>
 <?php
 
 $fields->background_color = ob_get_clean();
+
+//Content Title Color
+ob_start(); ?>
+    <div class="toto-form-group">
+        <label for="settings_content_title_color">Content Title Color</label>
+        <input type="text" id="settings_content_title_color" class="toto-color-field" name="settings[content_title_color]" value="<?php echo $content_title_color; ?>"/>
+    </div>
+<?php
+
+$fields->content_title_color = ob_get_clean();
+
+
+//Content Description Color
+ob_start(); ?>
+    <div class="toto-form-group">
+        <label for="settings_content_description_color">Content Description Color</label>
+        <input type="text" id="settings_content_description_color" class="toto-color-field" name="settings[content_description_color]" value="<?php echo $content_description_color; ?>"/>
+    </div>
+<?php
+
+$fields->content_description_color = ob_get_clean();
 
 //Border Radius
 ob_start(); ?>
@@ -431,6 +471,26 @@ ob_start(); ?>
 
 $fields->number_color = ob_get_clean();
 
+//Time Color
+ob_start(); ?>
+    <div class="toto-form-group">
+        <label for="settings_time_color">Time Color</label>
+        <input type="text" id="settings_time_color" class="toto-color-field" name="settings[time_color]" value="<?php echo $time_color; ?>"/>
+    </div>
+<?php
+
+$fields->time_color = ob_get_clean();
+
+//Time Background Color
+ob_start(); ?>
+    <div class="toto-form-group">
+        <label for="settings_time_background_color">Time Background Color</label>
+        <input type="text" id="settings_time_background_color" class="toto-color-field" name="settings[time_background_color]" value="<?php echo $time_background_color; ?>"/>
+    </div>
+<?php
+
+$fields->time_background_color = ob_get_clean();
+
 //Number Background Color
 ob_start(); ?>
     <div class="toto-form-group">
@@ -507,5 +567,111 @@ ob_start(); ?>
 <?php
 $fields->enable_sound = ob_get_clean();
 
+ob_start(); ?>
+    <div class="toto-form-group toto-switch-group">
+        <input type="checkbox" id="settings_show_angry" name="settings[show_angry]" <?php checked( true, $show_angry ); ?> >
+
+        <label class="clickable" for="settings_show_angry">Enable Notification Sound</label>
+    </div>
+    <div class="toto-form-group toto-switch-group">
+        <input type="checkbox" id="settings_show_sad" name="settings[show_sad]" <?php checked( true, $show_sad ); ?> >
+
+        <label class="clickable" for="settings_show_sad">Enable Notification Sound</label>
+    </div>
+    <div class="toto-form-group toto-switch-group">
+        <input type="checkbox" id="settings_show_neutral" name="settings[show_neutral]" <?php checked( true, $show_neutral ); ?> >
+
+        <label class="clickable" for="settings_show_neutral">Enable Notification Sound</label>
+    </div>
+    <div class="toto-form-group toto-switch-group">
+        <input type="checkbox" id="settings_show_happy" name="settings[show_happy]" <?php checked( true, $show_happy ); ?> >
+
+        <label class="clickable" for="settings_show_happy">Enable Notification Sound</label>
+    </div>
+    <div class="toto-form-group toto-switch-group">
+        <input type="checkbox" id="settings_show_excited" name="settings[show_excited]" <?php checked( true, $show_excited ); ?> >
+
+        <label class="clickable" for="settings_show_excited">Enable Notification Sound</label>
+    </div>
+<?php
+$fields->emoji = ob_get_clean();
+
+ob_start(); ?>
+    <div class="toto-form-group">
+        <label for="settings_conversion_count">How many conversions to show?</label>
+        <input type="text" id="settings_conversion_count" name="settings[conversion_count]" value="<?php echo $conversion_count ?>"/>
+    </div>
+<?php
+$fields->conversion_count = ob_get_clean();
+
+ob_start(); ?>
+    <div class="toto-form-group">
+        <label for="settings_content_title">Content Title</label>
+        <input type="text" id="settings_content_title" name="settings[content_title]" value="<?php echo $content_title ?>"/>
+    </div>
+<?php
+$fields->content_title = ob_get_clean();
+
+ob_start(); ?>
+    <div class="toto-form-group">
+        <label for="settings_content_description">Content Description</label>
+        <input type="text" id="settings_content_description" name="settings[content_description]" value="<?php echo $content_description ?>"/>
+    </div>
+<?php
+$fields->content_description = ob_get_clean();
+
+ob_start(); ?>
+    <div class="toto-form-group">
+        <label for="settings_input_placeholder">Input Placeholder</label>
+        <input type="text" id="settings_input_placeholder" name="settings[input_placeholder]" value="<?php echo $input_placeholder ?>"/>
+    </div>
+<?php
+$fields->input_placeholder = ob_get_clean();
+
+ob_start(); ?>
+    <div class="toto-form-group">
+        <label for="settings_share_url">Share URL</label>
+        <input type="text" id="settings_share_url" name="settings[share_url]" value="<?php echo $share_url ?>"/>
+        <p class="description">Leave empty if you want the URL to be dynamic to the current page where the notification
+            is shown.</p>
+    </div>
+
+    <div class="toto-form-group toto-switch-group">
+        <input type="checkbox" id="settings_share_facebook" name="settings[share_facebook]" <?php checked( true, $share_facebook ); ?> >
+
+        <label class="clickable" for="settings_show_excited"><i class="fab fa-facebook"></i> Facebook Share</label>
+    </div>
+
+    <div class="toto-form-group toto-switch-group">
+        <input type="checkbox" id="settings_share_twitter" name="settings[share_twitter]" <?php checked( true, $share_twitter ); ?> >
+
+        <label class="clickable" for="settings_show_excited"><i class="fab fa-twitter"></i> Twitter Share</label>
+    </div>
+
+    <div class="toto-form-group toto-switch-group">
+        <input type="checkbox" id="settings_share_linkedin" name="settings[share_linkedin]" <?php checked( true, $share_linkedin ); ?> >
+
+        <label class="clickable" for="settings_show_excited"><i class="fab fa-linkedin"></i> Linkedin Share</label>
+    </div>
+<?php
+$fields->share_url = ob_get_clean();
+
+ob_start(); ?>
+    <div class="toto-form-group">
+        <label for="settings_video">YouTube Video Embed Url</label>
+        <input type="text" id="settings_video" name="settings[video]" value="<?php echo $video ?>"/>
+        <p class="description">Ex: https://www.youtube.com/embed/3WxQgvuT6ZI</p>
+    </div>
+<?php
+$fields->video = ob_get_clean();
+
+ob_start(); ?>
+    <div class="toto-form-group">
+        <label for="settings_end_date">End Date</label>
+        <input type="text" id="settings_end_date" class="toto-date-time-picker" name="settings[end_date]" value="<?php echo $end_date ?>"/>
+        <p class="description">Ex: https://www.youtube.com/embed/3WxQgvuT6ZI</p>
+    </div>
+<?php
+$fields->end_date = ob_get_clean();
 
 return $fields;

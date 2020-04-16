@@ -6,23 +6,23 @@
 
         <div class="toto-emoji-feedback-emojis">
 			<?php if ( $notification->show_angry ): ?>
-                <img src="<?php echo TOTO_ASSETS . 'images/emojis/angry.svg'; ?>" class="toto-emoji-feedback-emoji" data-type="angry"/>
+                <img src="<?php echo TOTO_ASSETS . 'images/emojis/angry.svg'; ?>" class="toto-emoji-feedback-emoji toto-emoji-feedback-angry" data-type="angry"/>
 			<?php endif ?>
 
 			<?php if ( $notification->show_sad ): ?>
-                <img src="<?php echo TOTO_ASSETS . 'images/emojis/sad.svg'; ?>" class="toto-emoji-feedback-emoji" data-type="sad"/>
+                <img src="<?php echo TOTO_ASSETS . 'images/emojis/sad.svg'; ?>" class="toto-emoji-feedback-emoji toto-emoji-feedback-sad" data-type="sad"/>
 			<?php endif ?>
 
 			<?php if ( $notification->show_neutral ): ?>
-                <img src="<?php echo TOTO_ASSETS . 'images/emojis/neutral.svg'; ?>" class="toto-emoji-feedback-emoji" data-type="neutral"/>
+                <img src="<?php echo TOTO_ASSETS . 'images/emojis/neutral.svg'; ?>" class="toto-emoji-feedback-emoji toto-emoji-feedback-neutral" data-type="neutral"/>
 			<?php endif ?>
 
 			<?php if ( $notification->show_happy ): ?>
-                <img src="<?php echo TOTO_ASSETS . 'images/emojis/happy.svg'; ?>" class="toto-emoji-feedback-emoji" data-type="happy"/>
+                <img src="<?php echo TOTO_ASSETS . 'images/emojis/happy.svg'; ?>" class="toto-emoji-feedback-emoji toto-emoji-feedback-happy" data-type="happy"/>
 			<?php endif ?>
 
 			<?php if ( $notification->show_excited ): ?>
-                <img src="<?php echo TOTO_ASSETS . 'images/emojis/excited.svg'; ?>" class="toto-emoji-feedback-emoji" data-type="excited"/>
+                <img src="<?php echo TOTO_ASSETS . 'images/emojis/excited.svg'; ?>" class="toto-emoji-feedback-emoji toto-emoji-feedback-excited" data-type="excited"/>
 			<?php endif ?>
         </div>
 

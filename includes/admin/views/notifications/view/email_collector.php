@@ -23,9 +23,7 @@
             </div>
         </form>
 
-		<?php if ( $notification->display_branding ): ?><?php if ( isset( $notification->branding, $notification->branding->name, $notification->branding->url ) && ! empty( $notification->branding->name ) && ! empty( $notification->branding->url ) ): ?>
-            <a href="<?php echo $notification->branding->url ?>" class="toto-site"><?php echo $notification->branding->name ?></a>
-		<?php else: ?><?php endif ?><?php endif ?>
+		<?php toto_branding($notification); ?>
     </div>
 
     <span class="toto-close"></span>

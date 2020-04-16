@@ -21,7 +21,7 @@ import Notification from "./class-notification";
         get_location: () => {
 
             /* Return the ip from session store if any */
-            const savedLocation = sessionStorage.getItem('user_location');
+            const savedLocation = localStorage.getItem('user_location');
             if (savedLocation && savedLocation !== '') {
                 return savedLocation;
             } else {
@@ -40,7 +40,7 @@ import Notification from "./class-notification";
                     });
 
                     /* Set it to the session storage to avoid multiple requests to this website */
-                    sessionStorage.setItem('user_location', user_location);
+                    localStorage.setItem('user_location', user_location);
 
                     return user_location;
 

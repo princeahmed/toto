@@ -37,7 +37,7 @@
         <div>
             <form class="toto-countdown-collector-form" id="toto-countdown-collector-form" name="" action="" method="GET" role="form">
                 <div class="toto-countdown-collector-row">
-                    <input type="text" class="" name="input" placeholder="<?php echo $notification->input_placeholder ?>"/>
+                    <input type="text" class="toto-countdown-collector-input-placeholder" name="input" placeholder="<?php echo $notification->input_placeholder ?>"/>
 
                     <button type="submit" name="button" style="color: <?php echo $notification->button_color ?>; background: <?php echo $notification->button_background_color ?>"><?php echo $notification->button_text ?></button>
                 </div>
