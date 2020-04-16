@@ -4,6 +4,9 @@
             app.initMetaTabs();
             app.initSelect2();
             app.initVolumeSlider();
+            app.handlePrevNext();
+
+            app.previewHandler();
 
             $(document).on('click', '.toto-meta-tabs .toto-tab-link', app.toggleNotificationTab);
             $(document).on('click', '.toto-notification-type', app.selectType);
@@ -17,6 +20,159 @@
             $(document).on('click', '#settings_show_agreement', app.toggleAgreement);
             $(document).on('click', '.toto-choose-image', app.handleMedia);
             $(document).on('click', '.toto-remove-image', app.removeImage);
+        },
+
+        previewHandler: () => {
+
+            if(!$('.toto-notification-type.active input').length){
+                return;
+            }
+
+            const type = $('.toto-notification-type.active input').val().toLowerCase().replace('_', '-');
+
+            const colorHandlers = {
+                title_color: `toto-${type}-title`,
+                description_color: `toto-${type}-description`,
+                button_color: `toto-${type}-button`,
+                number_color: `toto-${type}-number`,
+                content_title_color: `toto-${type}-content-title`,
+                content_description_color: `toto-${type}-content-description`,
+            };
+            for (let [key, target] of Object.entries(colorHandlers)) {
+
+
+                $(`#settings_${key}`).wpColorPicker({
+                    change: (e, ui) => {
+                        setTimeout(function () {
+                            $(`#notification_preview .${target}`).css("color", e.target.value);
+                        }, 100)
+                    }
+                });
+            }
+
+            //Background Color Handlers
+            const bgColorHandlers = {
+                background_color: `toto-wrapper`,
+                button_background_color: `toto-${type}-button`,
+                number_background_color: `toto-${type}-number`,
+                pulse_background_color: `toto-toast-pulse`,
+            };
+            for (let [key, target] of Object.entries(bgColorHandlers)) {
+                $(`#settings_${key}`).wpColorPicker({
+                    change: (e, ui) => {
+                        setTimeout(function () {
+                            $(`#notification_preview .${target}`).css("background-color", e.target.value);
+                        }, 100)
+                    }
+                });
+            }
+
+
+            const textHandlers = {
+                title: `toto-${type}-title`,
+                description: `toto-${type}-description`,
+                coupon_code: `toto-${type}-coupon-code`,
+                button_text: `toto-${type}-button-text`,
+                footer_text: `toto-${type}-footer-text`,
+                agreement_text: `toto-${type}-agreement-text`,
+                conversion_count: `toto-${type}-conversion-count`,
+                content_title: `toto-${type}-content-title`,
+                content_description: `toto-${type}-content-description`,
+            };
+
+            for (let [key, target] of Object.entries(textHandlers)) {
+                $(`#settings_${key}`).on('change paste keyup', function () {
+                    $(`#notification_preview .${target}`).text($(this).val());
+                });
+            }
+
+            // srcHandler
+            const srcHandler = {
+                image: `toto-${type}-image`,
+                video: `toto-${type}-video-iframe`,
+            };
+            for (let [key, target] of Object.entries(srcHandler)) {
+                $(`#settings_${key}`).on('change paste keyup', function () {
+                    $(`#notification_preview .${target}`).attr('src', $(this).val());
+                });
+            }
+
+            //border radius handler
+            const borderRadiusHandler = {border_radius: `toto-wrapper`};
+            for (let [key, target] of Object.entries(borderRadiusHandler)) {
+                $(`#settings_${key}`).on('change paste keyup', function () {
+                    $(`#notification_preview .${target}`).removeClass("toto-wrapper-round toto-wrapper-rounded  toto-wrapper-straight").addClass(`toto-wrapper-${$(this).val()}`);
+                });
+            }
+
+            //placeholder handler
+            const placeHolderHandler = {
+                email_placeholder: `toto-${type}-email-placeholder`,
+                input_placeholder: `toto-${type}-input-placeholder`,
+            };
+            for (let [key, target] of Object.entries(placeHolderHandler)) {
+                $(`#settings_${key}`).on('change paste keyup', function () {
+                    $(`#notification_preview .${target}`).attr('placeholder', $(this).val());
+                });
+            }
+
+            //toggle handler
+            const toggleHandler = {
+                show_agreement: `toto-agreement-checkbox`,
+                display_branding: `toto-site`,
+                display_close_button: `toto-close`,
+                show_angry: `toto-${type}-angry`,
+                show_sad: `toto-${type}-sad`,
+                show_neutral: `toto-${type}-neutral`,
+                show_happy: `toto-${type}-happy`,
+                show_excited: `toto-${type}-excited`,
+                share_facebook: `toto-${type}-button-facebook`,
+                share_twitter: `toto-${type}-button-twitter`,
+                share_linkedin: `toto-${type}-button-linkedin`,
+            };
+
+            for (let [key, target] of Object.entries(toggleHandler)) {
+                $(`#settings_${key}`).on('change paste keyup', function () {
+                    $(`#notification_preview .${target}`).toggle();
+                });
+            }
+
+        },
+
+        handlePrevNext: () => {
+
+            const target = localStorage.getItem('totoActiveTab');
+            const prev = $('.toto-prev');
+            const next = $('.toto-next');
+            const next_prev = $('.toto-next, .toto-prev');
+
+            next.on('click', function (e) {
+                e.preventDefault();
+
+                $(`.toto-tab-link[data-target="${target}"]`).parent().next().find('.toto-tab-link').trigger('click');
+            });
+
+            prev.on('click', function (e) {
+                e.preventDefault();
+
+                $(`.toto-tab-link[data-target="${target}"]`).parent().prev().find('.toto-tab-link').trigger('click');
+            });
+
+            if (target) {
+                if ('notification_type' === target) {
+                    prev.addClass('container-disabled');
+                    next.removeClass('container-disabled');
+                } else if ('sound' === target) {
+                    next.addClass('container-disabled');
+                    prev.removeClass('container-disabled')
+                } else {
+                    next_prev.removeClass('container-disabled');
+                }
+            } else {
+                prev.addClass('container-disabled');
+                next.removeClass('container-disabled');
+            }
+
         },
 
         initSelect2: () => {
@@ -59,6 +215,7 @@
             const target = $(this).data('target');
 
             localStorage.setItem('totoActiveTab', target);
+            //app.handlePrevNext();
 
             $('.toto-meta-tabs .toto-tab-link, .toto-tab-content-item').removeClass('active');
             $(this).addClass('active').parent().prevAll('.toto-tab-item').find('.toto-tab-link').addClass('active');
@@ -101,12 +258,7 @@
                 },
 
                 success: res => {
-
-                    $('.toto-meta-tabs').replaceWith(res.html.menu);
-
-                    $('.toto-tab-content-item:not(#notification_type)').remove();
                     $('#notification_type').after(res.html.content);
-                    $('#preview_handler').replaceWith(res.html.scripts);
 
                     app.init();
 

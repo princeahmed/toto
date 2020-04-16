@@ -64,7 +64,8 @@ class Toto_Enqueue {
 		}
 
 		//load notifications styles on edit notification screen
-		if ( 'toto_notification' == get_current_screen()->id ) {
+		if ( in_array( get_current_screen()->id, [ 'toto_notification', 'edit-toto_notification' ] ) ) {
+
 			wp_enqueue_style( 'toto-notification-css', TOTO_ASSETS . '/css/frontend.css', false, TOTO_VERSION );
 		}
 

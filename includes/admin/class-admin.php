@@ -65,10 +65,11 @@ class Toto_Admin {
 
 	public function columns_data( $column, $post_id ) {
 		if ( 'preview' == $column ) { ?>
-            <a href="#" class="toto-n-preview" data-post_id="<?php echo $post_id; ?>"> <i class="dashicons dashicons-visibility toto-mr-5"></i> Preview </a>
+            <a href="#" class="toto-n-preview" data-post_id="<?php echo $post_id; ?>">
+                <i class="dashicons dashicons-visibility toto-mr-5"></i> Preview </a>
 		<?php } elseif ( 'type' == $column ) {
 			$type      = get_post_meta( $post_id, '_notification_type', true );
-			$type_name = Toto_Notifications::get_config( $type )['name'];
+			$type_name = ! empty( $type ) ? Toto_Notifications::get_config( $type )['name'] : '';
 			?>
             <span class="toto-n-type"><?php echo $type_name; ?></span>
 		<?php } elseif ( 'status' == $column ) { ?>

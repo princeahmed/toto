@@ -75,3 +75,25 @@ $primary: #96c03d;
   }
 
 }
+
+.toto-next-prev{
+  display: flex;
+  justify-content: space-between;
+
+  a{
+    background: $primary;
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+
+    svg{
+      margin: 0 5px;
+    }
+
+  }
+
+}

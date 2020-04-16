@@ -26,10 +26,6 @@ class Toto_Admin_Ajax {
 		$post_id = ! empty( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : '';
 
 		ob_start();
-		include TOTO_INCLUDES . '/admin/views/metabox/menu.php';
-		$menu_html = ob_get_clean();
-
-		ob_start();
 		$tabs = Toto_Notifications::setting_tabs( $current_type );
 
 		foreach ( $tabs as $key => $fields ) { ?>
@@ -45,15 +41,9 @@ class Toto_Admin_Ajax {
 		<?php }
 		$content_html = ob_get_clean();
 
-		ob_start();
-		Toto_Notifications::preview_handler( $current_type );
-		$scripts = ob_get_clean();
-
 		wp_send_json_success( [
 			'html' => [
-				'menu'    => $menu_html,
 				'content' => $content_html,
-				'scripts' => $scripts,
 			]
 		] );
 	}

@@ -43,11 +43,12 @@ $minimum_activity          = ! empty( $notification['minimum_activity'] ) ? $not
 $enable_sound              = ! empty( $notification['enable_sound'] ) ? $notification['enable_sound'] : '';
 $notification_sound        = ! empty( $notification['notification_sound'] ) ? $notification['notification_sound'] : '';
 $sound_volume              = ! empty( $notification['sound_volume'] ) ? $notification['sound_volume'] : '';
-$show_angry                = ! empty( $notification['show_angry'] ) ? $notification['show_angry'] : '';
-$show_sad                  = ! empty( $notification['show_sad'] ) ? $notification['show_sad'] : '';
-$show_neutral              = ! empty( $notification['show_neutral'] ) ? $notification['show_neutral'] : '';
-$show_happy                = ! empty( $notification['show_happy'] ) ? $notification['show_happy'] : '';
-$show_excited              = ! empty( $notification['show_excited'] ) ? $notification['show_excited'] : '';
+$show_angry                = $notification['show_angry'];
+$show_sad                  = $notification['show_sad'];
+$show_neutral              = $notification['show_neutral'];
+$show_happy                = $notification['show_happy'];
+$show_excited              = $notification['show_excited'];
+
 $conversions_count         = ! empty( $notification['conversions_count'] ) ? $notification['conversions_count'] : '';
 $content_title             = ! empty( $notification['content_title'] ) ? $notification['content_title'] : '';
 $content_description       = ! empty( $notification['content_description'] ) ? $notification['content_description'] : '';

@@ -20,7 +20,3 @@
 	<?php } ?>
 
 </div>
-
-<?php
-Toto_Notifications::preview_handler( $current_type );
-?>

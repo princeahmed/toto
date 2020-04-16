@@ -12,3 +12,9 @@ if ( ! $current_type ) {
 include TOTO_INCLUDES . '/admin/views/metabox/preview.php';
 include TOTO_INCLUDES . '/admin/views/metabox/menu.php';
 include TOTO_INCLUDES . '/admin/views/metabox/tabs.php';
+
+?>
+<div class="toto-next-prev">
+	<a href="#" class="toto-prev"><i class="fa fa-angle-left"></i> Previous</a>
+	<a href="#" class="toto-next">Next <i class="fa fa-angle-right"></i></a>
+</div>
