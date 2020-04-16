@@ -48,7 +48,7 @@ $show_sad                  = ! empty( $notification['show_sad'] ) ? $notificatio
 $show_neutral              = ! empty( $notification['show_neutral'] ) ? $notification['show_neutral'] : '';
 $show_happy                = ! empty( $notification['show_happy'] ) ? $notification['show_happy'] : '';
 $show_excited              = ! empty( $notification['show_excited'] ) ? $notification['show_excited'] : '';
-$conversion_count          = ! empty( $notification['conversion_count'] ) ? $notification['conversion_count'] : '';
+$conversions_count         = ! empty( $notification['conversions_count'] ) ? $notification['conversions_count'] : '';
 $content_title             = ! empty( $notification['content_title'] ) ? $notification['content_title'] : '';
 $content_description       = ! empty( $notification['content_description'] ) ? $notification['content_description'] : '';
 $content_title_color       = ! empty( $notification['content_title_color'] ) ? $notification['content_title_color'] : '';
@@ -62,6 +62,8 @@ $video                     = ! empty( $notification['video'] ) ? $notification['
 $time_color                = ! empty( $notification['time_color'] ) ? $notification['time_color'] : '';
 $time_background_color     = ! empty( $notification['time_background_color'] ) ? $notification['time_background_color'] : '';
 $end_date                  = ! empty( $notification['end_date'] ) ? $notification['end_date'] : '';
+$link_url                  = ! empty( $notification['link_url'] ) ? $notification['link_url'] : '';
+$link_url_text             = ! empty( $notification['link_url_text'] ) ? $notification['link_url_text'] : '';
 
 
 $fields = new stdClass();
@@ -571,38 +573,38 @@ ob_start(); ?>
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_show_angry" name="settings[show_angry]" <?php checked( true, $show_angry ); ?> >
 
-        <label class="clickable" for="settings_show_angry">Enable Notification Sound</label>
+        <label class="clickable" for="settings_show_angry">Show Angry</label>
     </div>
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_show_sad" name="settings[show_sad]" <?php checked( true, $show_sad ); ?> >
 
-        <label class="clickable" for="settings_show_sad">Enable Notification Sound</label>
+        <label class="clickable" for="settings_show_sad">Show Sad</label>
     </div>
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_show_neutral" name="settings[show_neutral]" <?php checked( true, $show_neutral ); ?> >
 
-        <label class="clickable" for="settings_show_neutral">Enable Notification Sound</label>
+        <label class="clickable" for="settings_show_neutral">Show Neutral</label>
     </div>
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_show_happy" name="settings[show_happy]" <?php checked( true, $show_happy ); ?> >
 
-        <label class="clickable" for="settings_show_happy">Enable Notification Sound</label>
+        <label class="clickable" for="settings_show_happy">Show Happy</label>
     </div>
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_show_excited" name="settings[show_excited]" <?php checked( true, $show_excited ); ?> >
 
-        <label class="clickable" for="settings_show_excited">Enable Notification Sound</label>
+        <label class="clickable" for="settings_show_excited">Show Excited</label>
     </div>
 <?php
 $fields->emoji = ob_get_clean();
 
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_conversion_count">How many conversions to show?</label>
-        <input type="text" id="settings_conversion_count" name="settings[conversion_count]" value="<?php echo $conversion_count ?>"/>
+        <label for="settings_conversions_count">How many conversions to show?</label>
+        <input type="text" id="settings_conversions_count" name="settings[conversions_count]" value="<?php echo $conversions_count ?>"/>
     </div>
 <?php
-$fields->conversion_count = ob_get_clean();
+$fields->conversions_count = ob_get_clean();
 
 ob_start(); ?>
     <div class="toto-form-group">
@@ -673,5 +675,21 @@ ob_start(); ?>
     </div>
 <?php
 $fields->end_date = ob_get_clean();
+
+ob_start(); ?>
+    <div class="toto-form-group">
+        <label for="settings_link_url">Link URL</label>
+        <input type="text" id="settings_link_url" class="toto-date-time-picker" name="settings[link_url]" value="<?php echo $link_url ?>"/>
+    </div>
+<?php
+$fields->link_url = ob_get_clean();
+
+ob_start(); ?>
+    <div class="toto-form-group">
+        <label for="settings_link_url_text">Link URL Text</label>
+        <input type="text" id="settings_link_url_text" class="toto-date-time-picker" name="settings[link_url_text]" value="<?php echo $link_url_text ?>"/>
+    </div>
+<?php
+$fields->link_url_text = ob_get_clean();
 
 return $fields;

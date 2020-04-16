@@ -172,10 +172,11 @@ class Toto_Notifications {
 				"name" => "Cookie Notification",
 				"icon" => "fa fa-cookie",
 
-				'description' => ! empty( $settings->description ) ? $settings->description : "This website uses cookies to ensure you get the best experience on our website.",
-				'button_text' => ! empty( $settings->button_text ) ? $settings->button_text : "Okay 🔥",
-				'url_text'    => ! empty( $settings->url_text ) ? $settings->url_text : "Learn More",
-				'image'       => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/plasticine/2x/cookie.png",
+				'description'   => ! empty( $settings->description ) ? $settings->description : "This website uses cookies to ensure you get the best experience on our website.",
+				'button_text'   => ! empty( $settings->button_text ) ? $settings->button_text : "Okay 🔥",
+				'link_url'      => ! empty( $settings->link_url ) ? $settings->link_url : "",
+				'link_url_text' => ! empty( $settings->link_url_text ) ? $settings->link_url_text : "Learn More",
+				'image'         => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/plasticine/2x/cookie.png",
 			], $default ),
 
 			'SCORE_FEEDBACK' => array_merge( [
@@ -291,34 +292,34 @@ class Toto_Notifications {
 		$selector = strtolower( str_replace( '_', '-', $type ) );
 
 		$handlers = [
-			'title'                     => "toto-$selector-title",
-			'description'               => "toto-$selector-description",
-			'image'                     => "toto-$selector-image",
-			'title_color'               => "toto-$selector-title",
-			'description_color'         => "toto-$selector-description",
-			'background_color'          => "toto-wrapper",
-			'border_radius'             => "toto-wrapper",
-			'display_close_button'      => "toto-close",
-			'coupon_code'               => "toto-$selector-coupon-code",
-			'footer_text'               => "toto-$selector-footer",
-			'number_color'              => "toto-$selector-number",
-			'number_background_color'   => "toto-$selector-number",
-			'pulse_background_color'    => "toto-toast-pulse",
-			'email_placeholder'         => "toto-$selector-email-placeholder",
-			'button_text'               => "toto-$selector-button",
-			'agreement_text'            => "toto-agreement-checkbox-text",
-			'show_agreement'            => "toto-agreement-checkbox",
-			'button_background_color'   => "toto-$selector-button",
-			'button_color'              => "toto-$selector-button",
-			'display_branding'          => 'toto-site',
-			'enable_sound'              => '',
-			'notification_sound'        => '',
-			'sound_volume'              => '',
-			'show_angry'                => "toto-$selector-angry",
-			'show_sad'                  => "toto-$selector-sad",
-			'show_neutral'              => "toto-$selector-neutral",
-			'show_happy'                => "toto-$selector-happy",
-			'show_excited'              => "toto-$selector-excited",
+			'title'                   => "toto-$selector-title",
+			'description'             => "toto-$selector-description",
+			'image'                   => "toto-$selector-image",
+			'title_color'             => "toto-$selector-title",
+			'description_color'       => "toto-$selector-description",
+			'background_color'        => "toto-wrapper",
+			'border_radius'           => "toto-wrapper",
+			'display_close_button'    => "toto-close",
+			'coupon_code'             => "toto-$selector-coupon-code",
+			'footer_text'             => "toto-$selector-footer",
+			'number_color'            => "toto-$selector-number",
+			'number_background_color' => "toto-$selector-number",
+			'pulse_background_color'  => "toto-toast-pulse",
+			'email_placeholder'       => "toto-$selector-email-placeholder",
+			'button_text'             => "toto-$selector-button",
+			'agreement_text'          => "toto-agreement-checkbox-text",
+			'show_agreement'          => "toto-agreement-checkbox",
+			'button_background_color' => "toto-$selector-button",
+			'button_color'            => "toto-$selector-button",
+			'display_branding'        => 'toto-site',
+			'enable_sound'            => '',
+			'notification_sound'      => '',
+			'sound_volume'            => '',
+			'show_angry'              => "toto-$selector-angry",
+			'show_sad'                => "toto-$selector-sad",
+			'show_neutral'            => "toto-$selector-neutral",
+			'show_happy'              => "toto-$selector-happy",
+			'show_excited'            => "toto-$selector-excited",
 
 			'conversion_count'          => "toto-$selector-counter-number",
 			'content_title'             => "toto-$selector-content-title",
@@ -346,8 +347,8 @@ class Toto_Notifications {
 				'number_background_color',
 				'number_color',
 				'pulse_background_color',
-                'content_title_color',
-                'content_description_color',
+				'content_title_color',
+				'content_description_color',
 			] ) ) { ?>
                 $('#settings_<?php echo $key; ?>').on('change paste keyup', function() {
 				<?php
@@ -360,9 +361,9 @@ class Toto_Notifications {
 					'button_text',
 					'footer_text',
 					'agreement_text',
-                    'conversion_count',
-                    'content_title',
-                    'content_description',
+					'conversion_count',
+					'content_title',
+					'content_description',
 				] ) ) {
 					printf( '$("#notification_preview .%s").text($(this).val());', $target );
 				} elseif ( in_array( $key, [ 'image', 'video' ] ) ) {
@@ -373,7 +374,7 @@ class Toto_Notifications {
 					//border radius handler
 					printf( '$("#notification_preview .%s").removeClass("toto-wrapper-round toto-wrapper-rounded  toto-wrapper-straight").addClass(`toto-wrapper-${$(this).val()}`);', $target );
 
-				} elseif ( in_array( $key, [ 'email_placeholder','input_placeholder' ] ) ) {
+				} elseif ( in_array( $key, [ 'email_placeholder', 'input_placeholder' ] ) ) {
 					//placeholder handler
 					printf( '$("#notification_preview .%s").attr("placeholder", $(this).val());', $target );
 
@@ -386,9 +387,9 @@ class Toto_Notifications {
 					'show_neutral',
 					'show_happy',
 					'show_excited',
-                    'share_facebook',
-                    'share_twitter',
-                    'share_linkedin',
+					'share_facebook',
+					'share_twitter',
+					'share_linkedin',
 				] ) ) {
 					//toggle handler
 					printf( '$("#notification_preview .%s").toggle();', $target );
@@ -474,7 +475,6 @@ class Toto_Notifications {
 		$fields = [
 			'INFORMATIONAL' => [
 				'content'   => [ 'title', 'description', 'image', 'url', ],
-				'display'   => $default_display,
 				'customize' => [ 'title_color', 'description_color', 'background_color', 'border_radius', ],
 			],
 
@@ -488,7 +488,6 @@ class Toto_Notifications {
 					'button_text',
 					'footer_text',
 				],
-				'display'   => $default_display,
 				'customize' => [
 					'title_color',
 					'description_color',
@@ -501,7 +500,6 @@ class Toto_Notifications {
 
 			'LIVE_COUNTER' => [
 				'content'   => [ 'description', 'last_activity', 'url', ],
-				'display'   => array_merge( $default_display, [ 'minimum_activity' ] ),
 				'customize' => [
 					'number_color',
 					'number_background_color',
@@ -520,7 +518,6 @@ class Toto_Notifications {
 					'button_text',
 					'agreement',
 				],
-				'display'   => $default_display,
 				'customize' => [
 					'title_color',
 					'description_color',
@@ -538,8 +535,6 @@ class Toto_Notifications {
 					'url'
 				],
 
-				'display' => $default_display,
-
 				'customize' => [
 					'number_color',
 					'number_background_color',
@@ -550,9 +545,7 @@ class Toto_Notifications {
 			],
 
 			'COOKIE_NOTIFICATION' => [
-				'content' => [ 'description', 'image', 'url_text', 'url', 'button_text' ],
-
-				'display' => $default_display,
+				'content' => [ 'description', 'image', 'link_url', 'link_url_text', 'button_text' ],
 
 				'customize' => [
 					'description_color',
@@ -574,8 +567,6 @@ class Toto_Notifications {
 					'agreement',
 				],
 
-				'display' => $default_display,
-
 				'customize' => [
 					'title_color',
 					'description_color',
@@ -592,23 +583,17 @@ class Toto_Notifications {
 			'EMOJI_FEEDBACK' => [
 				'content' => [ 'title', 'emoji' ],
 
-				'display' => $default_display,
-
 				'customize' => [ 'title_color', 'background_color', 'border_radius', ],
 			],
 
 			'LATEST_CONVERSION' => [
 				'content' => [ 'title', 'description', 'image', 'url', 'conversions_count', ],
 
-				'display' => $default_display,
-
 				'customize' => [ 'title_color', 'description_color', 'background_color', 'border_radius', ],
 			],
 
 			'RANDOM_REVIEW' => [
 				'content' => [ 'url' ],
-
-				'display' => $default_display,
 
 				'customize' => [ 'title_color', 'description_color', 'background_color', 'border_radius', ],
 			],
@@ -625,8 +610,6 @@ class Toto_Notifications {
 					'agreement',
 				],
 
-				'display' => $default_display,
-
 				'customize' => [
 					'title_color',
 					'description_color',
@@ -642,8 +625,6 @@ class Toto_Notifications {
 			'SCORE_FEEDBACK' => [
 				'content' => [ 'title', 'description', ],
 
-				'display' => $default_display,
-
 				'customize' => [
 					'title_color',
 					'description_color',
@@ -656,15 +637,11 @@ class Toto_Notifications {
 			'SOCIAL_SHARE' => [
 				'content' => [ 'title', 'description', 'share_url', ],
 
-				'display' => $default_display,
-
 				'customize' => [ 'title_color', 'description_color', 'background_color', 'border_radius', ],
 			],
 
 			'VIDEO' => [
 				'content' => [ 'title', 'video', 'button_url', 'button_text', ],
-
-				'display' => $default_display,
 
 				'customize' => [
 					'title_color',
@@ -677,7 +654,11 @@ class Toto_Notifications {
 
 		];
 
-		return $fields[ $type ];
+		$return            = $fields[ $type ];
+		$return['display'] = $default_display;
+		$return['sound']   = [ 'enable_sound' ];
+
+		return $return;
 
 	}
 

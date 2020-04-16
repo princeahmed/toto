@@ -11,7 +11,7 @@
             <p class="toto-cookie-notification-description" style="color: <?php echo $notification->description_color ?>">
                 <?php echo $notification->description ?>
 
-                <span class="toto-cookie-notification-url"><a href="<?php echo $notification->url ?>"><?php echo $notification->url_text ?></a></span>
+                <span class="toto-cookie-notification-url"><a href="<?php echo $notification->link_url ?>"><?php echo $notification->link_url_text ?></a></span>
             </p>
         </div>
 

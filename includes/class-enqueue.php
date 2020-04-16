@@ -42,6 +42,7 @@ class Toto_Enqueue {
 
 	public function admin_scripts( $hooks ) {
 
+
 		if ( ! in_array( get_current_screen()->id, $this->toto_admin_screens ) ) {
 			return;
 		}
@@ -57,8 +58,14 @@ class Toto_Enqueue {
 			'wp-util',
 		], TOTO_VERSION, true );
 
+		//load chart.js only on the statistics page
 		if ( 'toto_notification_page_notification-statistics' == $hooks ) {
 			wp_enqueue_script( 'chart', TOTO_ASSETS . '/vendor/Chart.bundle.min.js', false, '2.8.0', false );
+		}
+
+		//load notifications styles on edit notification screen
+		if ( 'toto_notification' == get_current_screen()->id ) {
+			wp_enqueue_style( 'toto-notification-css', TOTO_ASSETS . '/css/frontend.css', false, TOTO_VERSION );
 		}
 
 		/* Create localized JS array */

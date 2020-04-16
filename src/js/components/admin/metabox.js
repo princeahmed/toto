@@ -108,6 +108,8 @@
                     $('#notification_type').after(res.html.content);
                     $('#preview_handler').replaceWith(res.html.scripts);
 
+                    app.init();
+
                 },
 
                 error: error => console.log(error)
