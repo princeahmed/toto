@@ -5,7 +5,6 @@
             app.initSelect2();
             app.initVolumeSlider();
             app.handlePrevNext();
-
             app.previewHandler();
 
             $(document).on('click', '.toto-meta-tabs .toto-tab-link', app.toggleNotificationTab);
@@ -20,11 +19,12 @@
             $(document).on('click', '#settings_show_agreement', app.toggleAgreement);
             $(document).on('click', '.toto-choose-image', app.handleMedia);
             $(document).on('click', '.toto-remove-image', app.removeImage);
+            $(document).on('click', '.toto-next, .toto-prev', app.handlePrevNext);
         },
 
         previewHandler: () => {
 
-            if(!$('.toto-notification-type.active input').length){
+            if (!$('.toto-notification-type.active input').length) {
                 return;
             }
 
@@ -139,24 +139,15 @@
 
         },
 
-        handlePrevNext: () => {
+        handlePrevNext: function (e) {
+            if(e){
+                e.preventDefault();
+            }
 
             const target = localStorage.getItem('totoActiveTab');
             const prev = $('.toto-prev');
             const next = $('.toto-next');
             const next_prev = $('.toto-next, .toto-prev');
-
-            next.on('click', function (e) {
-                e.preventDefault();
-
-                $(`.toto-tab-link[data-target="${target}"]`).parent().next().find('.toto-tab-link').trigger('click');
-            });
-
-            prev.on('click', function (e) {
-                e.preventDefault();
-
-                $(`.toto-tab-link[data-target="${target}"]`).parent().prev().find('.toto-tab-link').trigger('click');
-            });
 
             if (target) {
                 if ('notification_type' === target) {
@@ -171,6 +162,14 @@
             } else {
                 prev.addClass('container-disabled');
                 next.removeClass('container-disabled');
+            }
+
+            if ($(this).hasClass('toto-next')) {
+                $(`.toto-tab-link[data-target="${target}"]`).parent().next().find('.toto-tab-link').trigger('click');
+            }
+
+            if ($(this).hasClass('toto-prev')) {
+                $(`.toto-tab-link[data-target="${target}"]`).parent().prev().find('.toto-tab-link').trigger('click');
             }
 
         },
@@ -215,11 +214,12 @@
             const target = $(this).data('target');
 
             localStorage.setItem('totoActiveTab', target);
-            //app.handlePrevNext();
-
             $('.toto-meta-tabs .toto-tab-link, .toto-tab-content-item').removeClass('active');
+
             $(this).addClass('active').parent().prevAll('.toto-tab-item').find('.toto-tab-link').addClass('active');
             $(`#${target}`).addClass('active');
+
+            app.handlePrevNext();
         },
 
         toggleLocationsField: function () {
@@ -259,7 +259,6 @@
 
                 success: res => {
                     $('#notification_type').after(res.html.content);
-
                     app.init();
 
                 },
