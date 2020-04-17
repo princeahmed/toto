@@ -4,8 +4,11 @@ defined( 'ABSPATH' ) || exit();
 
 class Toto_Admin_Ajax {
 
+	/**
+	 * Toto_Admin_Ajax constructor.
+	 */
 	public function __construct() {
-		add_action( 'wp_ajax_update_menu', [ $this, 'update_menu' ] );
+		add_action( 'wp_ajax_toto_update_fields', [ $this, 'update_fields' ] );
 		add_action( 'wp_ajax_toto_n_status', [ $this, 'handle_status_change' ] );
 		add_action( 'wp_ajax_toto_notification_preview', [ $this, 'notification_preview' ] );
 		add_action( 'wp_ajax_toto_get_data', [ $this, 'get_data' ] );
@@ -13,14 +16,17 @@ class Toto_Admin_Ajax {
 		add_action( 'wp_ajax_toto_get_statistics', [ $this, 'get_statistics' ] );
 	}
 
-	public function update_menu() {
+	/**
+	 * Update notification content fields based on notification type
+	 */
+	public function update_fields() {
 
 		if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'] ) ) {
-			wp_send_json_error( [ 'msg' => 'No Cheating!' ] );
+			wp_send_json_error( [ 'msg' => __( 'No Cheating!', 'toto' ) ] );
 		}
 
 		if ( empty( $current_type = wp_unslash( $_REQUEST['type'] ) ) ) {
-			wp_send_json_error( [ 'msg' => 'type is not set.' ] );
+			wp_send_json_error( [ 'msg' => __( 'Type is not set.', 'toto' ) ] );
 		}
 
 		$post_id = ! empty( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : '';
@@ -46,8 +52,12 @@ class Toto_Admin_Ajax {
 				'content' => $content_html,
 			]
 		] );
+
 	}
 
+	/**
+	 * Handle notification post_status change
+	 */
 	public function handle_status_change() {
 		$post_id = ! empty( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : '';
 		$status  = ! empty( $_REQUEST['status'] ) ? wp_unslash( $_REQUEST['status'] ) : 'draft';
@@ -63,6 +73,9 @@ class Toto_Admin_Ajax {
 
 	}
 
+	/**
+	 * Get notification saved data
+	 */
 	public function get_data() {
 		$nid        = ! empty( $_REQUEST['nid'] ) ? intval( $_REQUEST['nid'] ) : '';
 		$start_date = ! empty( $_REQUEST['start_date'] ) ? wp_unslash( $_REQUEST['start_date'] ) : '';
@@ -94,6 +107,9 @@ class Toto_Admin_Ajax {
 
 	}
 
+	/**
+	 * Get notification saved statistics
+	 */
 	public function get_statistics() {
 
 		$nid        = ! empty( $_REQUEST['nid'] ) ? intval( $_REQUEST['nid'] ) : '';
@@ -115,10 +131,10 @@ class Toto_Admin_Ajax {
 
 		//statistics type and title
 		$type_title = [
-			'impression'  => 'Impressions',
-			'hover'       => 'Mouse Hovers',
-			//'click'       => 'Clicks',
-			'submissions' => 'Submissions',
+			'impression'  => __( 'Impressions', 'toto' ),
+			'hover'       => __( 'Mouse Hovers', 'toto' ),
+			'click'       => __( 'Clicks', 'toto' ),
+			'submissions' => __( 'Submissions', 'toto' ),
 		];
 
 		ob_start();
@@ -143,6 +159,9 @@ class Toto_Admin_Ajax {
 
 	}
 
+	/**
+	 * Get notification preview
+	 */
 	public function notification_preview() {
 		$post_id   = ! empty( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : '';
 		$type      = get_post_meta( $post_id, '_notification_type', true );

@@ -73,6 +73,8 @@ class Toto_Enqueue {
 		$localized_array = [
 			'_wpnonce' => wp_create_nonce(),
 			'userIp'   => toto_get_user_ip(),
+			'siteURL'  => site_url(),
+			'totoURL'  => plugins_url( '', TOTO_FILE ),
 			'i18n'     => [
 				'' => '',
 			]

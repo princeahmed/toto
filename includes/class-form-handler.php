@@ -35,6 +35,7 @@ class Toto_Form_Handler {
 			'show_neutral',
 			'show_happy',
 			'show_excited',
+			'enable_sound',
 		];
 
 		foreach ( $switch_fields as $key ) {

@@ -20,6 +20,24 @@
             $(document).on('click', '.toto-choose-image', app.handleMedia);
             $(document).on('click', '.toto-remove-image', app.removeImage);
             $(document).on('click', '.toto-next, .toto-prev', app.handlePrevNext);
+            $(document).on('change', '.toto-switch-group input', app.handleToggle);
+            $(document).on('change', '#settings_notification_sound', app.playSound);
+        },
+
+        playSound: function () {
+            const sound = $(this).val();
+            $('#toto-sound source').attr('src', `${toto.totoURL}/assets/sounds/${sound}.mp3`);
+
+            const audio = $('#toto-sound');
+            audio[0].pause();
+            audio[0].load();
+            audio[0].oncanplaythrough = audio[0].play();
+        },
+
+        handleToggle: function () {
+            const target = $(this).parent().data('target');
+            $(target).parent().toggleClass('toto-hidden');
+
         },
 
         previewHandler: () => {
@@ -140,7 +158,7 @@
         },
 
         handlePrevNext: function (e) {
-            if(e){
+            if (e) {
                 e.preventDefault();
             }
 
@@ -196,6 +214,7 @@
 
         initVolumeSlider: () => {
             const handle = $("#toto-volume-handle");
+
             $("#toto-volume-slider").slider({
                 value: $('#toto-volume-slider').data('value'),
                 create: function () {
@@ -205,7 +224,18 @@
                 slide: function (event, ui) {
                     handle.text(ui.value);
                     $('#settings_sound_volume').val(ui.value);
-                }
+                },
+
+                change: function (event, ui) {
+                    const audio = $('#toto-sound');
+
+                    audio.prop('volume', ui.value / 100);
+                    audio[0].pause();
+                    audio[0].load();
+                    audio[0].oncanplaythrough = audio[0].play();
+                },
+
+
             });
         },
 
@@ -244,13 +274,13 @@
 
             $('.notification-preview-content').html($('.preview', $(this)).html());
 
-            app.updateMenu(this);
+            app.updateFields(this);
 
         },
 
-        updateMenu: ($this) => {
+        updateFields: ($this) => {
 
-            wp.ajax.send('update_menu', {
+            wp.ajax.send('toto_update_fields', {
                 data: {
                     type: $('input', $this).val(),
                     post_id: $('#post_ID').val(),
@@ -258,6 +288,7 @@
                 },
 
                 success: res => {
+                    $('.toto-tab-content>div:not(#notification_type)').remove();
                     $('#notification_type').after(res.html.content);
                     app.init();
 

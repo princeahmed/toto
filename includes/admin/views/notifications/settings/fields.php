@@ -540,7 +540,7 @@ $fields->data_send_is_enabled = ob_get_clean();
 
 //Trigger Session
 ob_start(); ?>
-    <div class="toto-form-group toto-switch-group">
+    <div class="toto-form-group toto-switch-group" data-target="#settings_notification_sound,#settings_sound_volume">
         <input type="checkbox" id="settings_enable_sound" name="settings[enable_sound]" <?php checked( true, $enable_sound ); ?> >
 
         <label class="clickable" for="settings_enable_sound">Enable Notification Sound</label>
@@ -548,14 +548,43 @@ ob_start(); ?>
         <p class="description">Enable to play a sound when the notification will show.</p>
     </div>
 
-    <div class="toto-form-group">
+    <div class="toto-form-group <?php echo $enable_sound ? '' : 'toto-hidden'; ?>">
         <label for="settings_notification_sound">Select Notification Sound</label>
+		<?php
+		$sounds = [
+			'to-the-point'     => __( 'To The Point', 'toto' ),
+			'subscription-two' => __( 'Subscription Two', 'toto' ),
+			'subscription-one' => __( 'Subscription One', 'toto' ),
+			'intuition'        => __( 'Intuition', 'toto' ),
+			'review-one'       => __( 'Review One', 'toto' ),
+			'review-two'       => __( 'Review Two', 'toto' ),
+			'sales-one'        => __( 'Sales One', 'toto' ),
+			'sales-two'        => __( 'Sales Two', 'toto' ),
+			'stats-one'        => __( 'Stats One', 'toto' ),
+			'stats-two'        => __( 'Stats Two', 'toto' ),
+		];
+
+		?>
         <select name="settings[notification_sound]" id="settings_notification_sound">
-            <option value="to_the_point" <?php selected( 'to_the_point', $notification_sound ); ?>>To The Point</option>
-            <option value="sound_two" <?php selected( 'sound_two', $notification_sound ); ?>>Sound Two</option>
+            <option value="-1"><?php _e( 'Select Sound', 'toto' ) ?></option>
+			<?php
+
+			foreach ( $sounds as $key => $title ) {
+				printf( '<option value="%1$s" %3$s>%2$s</option>', $key, $title, selected( $key, $notification_sound ) );
+			}
+
+			?>
         </select>
+
+        <div class="play-sound toto-hidden">
+            <audio id="toto-sound">
+                <source src="<?php echo TOTO_ASSETS . '/sounds/' . $notification_sound . '.mp3'; ?>" type="audio/mpeg">
+                Your browser does not support the audio element.
+            </audio>
+        </div>
+
     </div>
-    <div class="toto-form-group">
+    <div class="toto-form-group <?php echo $enable_sound ? '' : 'toto-hidden'; ?>">
         <label for="settings_sound_volume">Notification Sound Volume</label>
         <input type="hidden" name="settings[sound_volume]" id="settings_sound_volume" value="<?php echo $sound_volume; ?>"/>
 

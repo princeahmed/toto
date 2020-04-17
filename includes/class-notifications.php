@@ -31,8 +31,8 @@ class Toto_Notifications {
 			'display_minimum_activity' => ! empty( $settings->display_minimum_activity ) ? $settings->display_minimum_activity : 0,
 			'pulse_background_color'   => ! empty( $settings->pulse_background_color ) ? $settings->pulse_background_color : '#17bf21',
 
-			'enable_sound'       => ! empty( $settings->enable_sound ) ? $settings->enable_sound : true,
-			'notification_sound' => ! empty( $settings->notification_sound ) ? $settings->notification_sound : 'to_the_point',
+			'enable_sound'       => isset( $settings->enable_sound ) ? $settings->enable_sound : false,
+			'notification_sound' => ! empty( $settings->notification_sound ) ? $settings->notification_sound : '-1',
 			'sound_volume'       => ! empty( $settings->sound_volume ) ? $settings->sound_volume : 50,
 
 			'show_agreement' => isset( $settings->show_agreement ) ? $settings->show_agreement : false,
@@ -60,7 +60,8 @@ class Toto_Notifications {
 
 				'title'       => ! empty( $settings->title ) ? $settings->title : __( 'Flash Sale! 🔥', 'toto' ),
 				'description' => ! empty( $settings->description ) ? $settings->description : __( 'Limited sale until tonight, right now!', 'toto' ),
-				'image'       => ! empty( $settings->image ) ? $settings->image : 'https://img.icons8.com/nolan/2x/cutting-coupon.png',
+				//'image'       => ! empty( $settings->image ) ? $settings->image : 'https://img.icons8.com/nolan/2x/cutting-coupon.png',
+				'image'       => '',
 			], $default ),
 
 			'COUPON' => array_merge( [
@@ -69,7 +70,8 @@ class Toto_Notifications {
 
 				'title'       => ! empty( $settings->title ) ? $settings->title : '35% OFF 🔥!',
 				'description' => ! empty( $settings->description ) ? $settings->description : 'Limited summer sale coupon code!',
-				'image'       => ! empty( $settings->image ) ? $settings->image : 'https://img.icons8.com/nolan/2x/cutting-coupon.png',
+				//'image'       => ! empty( $settings->image ) ? $settings->image : 'https://img.icons8.com/nolan/2x/cutting-coupon.png',
+				'image'       => '',
 				'coupon_code' => ! empty( $settings->coupon_code ) ? $settings->coupon_code : 'COUPON20',
 				'button_text' => ! empty( $settings->button_text ) ? $settings->button_text : 'Get Coupon',
 				'footer_text' => ! empty( $settings->footer_text ) ? $settings->footer_text : 'No, I don\'t want to save money',
@@ -84,7 +86,8 @@ class Toto_Notifications {
 
 				'description'   => ! empty( $settings->description ) ? $settings->description : 'Active visitors now.',
 				'last_activity' => ! empty( $settings->last_activity ) ? $settings->last_activity : 15,
-				"image"         => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/nolan/2x/cutting-coupon.png",
+				//"image"         => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/nolan/2x/cutting-coupon.png",
+				"image"         => '',
 				"number"        => ! empty( $settings->number ) ? $settings->number : "15",
 			], $default ),
 
@@ -104,7 +107,8 @@ class Toto_Notifications {
 
 				'title'             => ! empty( $settings->title ) ? $settings->title : "A cool person",
 				'description'       => ! empty( $settings->description ) ? $settings->description : "Signed up for the newsletter.",
-				'image'             => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/color/2x/webhook.png",
+				//'image'             => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/color/2x/webhook.png",
+				'image'             => '',
 				'time_ago'          => ! empty( $settings->time_ago ) ? $settings->time_ago : "10 mins ago",
 				'conversions_count' => ! empty( $settings->conversions_count ) ? $settings->conversions_count : 1,
 			], $default ),
@@ -114,7 +118,8 @@ class Toto_Notifications {
 				"icon" => "fa fa-comment-dollar",
 
 				'title'         => ! empty( $settings->title ) ? $settings->title : "People bought the product",
-				'image'         => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/officel/2x/return-purchase.png",
+				//'image'         => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/officel/2x/return-purchase.png",
+				'image'         => '',
 				'number'        => ! empty( $settings->number ) ? $settings->number : "5",
 				'time'          => ! empty( $settings->time ) ? $settings->time : "In the last %s hours",
 				'last_activity' => ! empty( $settings->last_activity ) ? $settings->last_activity : 2,
@@ -125,7 +130,8 @@ class Toto_Notifications {
 				"icon" => "fa fa-video",
 
 				'title'       => ! empty( $settings->title ) ? $settings->title : "Demo of the product 🔥",
-				'video'       => ! empty( $settings->video ) ? $settings->video : "https://www.youtube.com/embed/zWZa05uaiNA",
+				//'video'       => ! empty( $settings->video ) ? $settings->video : "https://www.youtube.com/embed/zWZa05uaiNA",
+				'video'       => '',
 				'button_text' => ! empty( $settings->button_text ) ? $settings->button_text : "Sign up 🙌",
 			], $default ),
 
