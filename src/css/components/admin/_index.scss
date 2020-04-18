@@ -7,11 +7,20 @@
     }
 
     .toto-n-type {
-      font-weight: bold;
     }
     .toto-n-shortcode {
-      background: #ddd;
-      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+
+      .fa-copy{
+        background: #96C03D;
+        padding: 7px;
+        border-radius: 50%;
+        color: #fff;
+        margin-right: 10px;
+        cursor: pointer;
+      }
+
     }
 
     .column-preview {

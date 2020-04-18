@@ -82,7 +82,7 @@ class Toto_Admin {
                 </div>
             </div>
 		<?php } elseif ( 'shortcode' == $column ) { ?>
-            <span class="toto-n-shortcode">[toto id=<?php echo $post_id; ?>]</span>
+            <span class="toto-n-shortcode" title="<?php _e('Copy Shortcode', 'toto') ?>"><i class="fa fa-copy"></i> <code>[toto id=<?php echo $post_id; ?>]</code></span>
 		<?php }
 	}
 

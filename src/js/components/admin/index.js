@@ -1,6 +1,8 @@
 ;(function ($) {
     $(document).ready(function () {
 
+        Swal.fire('Any fool can use a computer');
+
         //Change notification status
         $('.column-status .toto-switcher').on('click', function () {
             const input = $('input', $(this));
@@ -71,6 +73,20 @@
             $('.toto-modal-header h2', modal).html('');
             $('.ph-item', modal).removeClass('hidden')
         });
+
+        //Copy to clipboard
+        $(document).on('click', '.toto-n-shortcode .fa-copy', function (e) {
+            e.preventDefault();
+
+            const text = $(this).next().text();
+
+            const $temp = $("<input>");
+            $("body").append($temp);
+            $temp.val(text).select();
+            document.execCommand("copy");
+            $temp.remove();
+        });
+
 
     });
 })(jQuery);

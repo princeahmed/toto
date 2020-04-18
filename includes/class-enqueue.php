@@ -52,6 +52,7 @@ class Toto_Enqueue {
 
 
 		wp_enqueue_script( 'fontawesome', TOTO_ASSETS . '/vendor/fontawesome.min.js', false, '5.10.0', true );
+		wp_enqueue_script( 'sweetalert', TOTO_ASSETS . '/vendor/sweetalert.min.js', false, '', true );
 		wp_enqueue_script( 'select2', TOTO_ASSETS . '/vendor/select2/select2.min.js', false, '4.0.6', true );
 		wp_enqueue_script( 'toto-admin-js', TOTO_ASSETS . '/js/admin.js', [
 			'jquery',
