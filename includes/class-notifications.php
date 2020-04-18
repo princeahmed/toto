@@ -232,8 +232,11 @@ class Toto_Notifications {
 		return $type ? $all[ $type ] : $all;
 	}
 
-	public static function get_view( $type, $post_id = false, $preview = false ) {
+	public static function get_view( $post_id, $preview = false, $shortcode = false ) {
+
+		$type         = get_post_meta( $post_id, '_notification_type', true );
 		$notification = (object) self::get_config( $type, $post_id );
+
 
 		if ( ! $preview ) {
 			$type = get_post_meta( $post_id, '_notification_type', true );
@@ -242,7 +245,7 @@ class Toto_Notifications {
 				'display_mobile'        => $notification->display_mobile,
 				'display_trigger'       => $notification->display_trigger,
 				'display_trigger_value' => $notification->display_trigger_value,
-				'duration'              => $notification->display_duration === - 1 ? - 1 : $notification->display_duration * 1000,
+				'duration'              => $notification->display_duration == - 1 ? - 1 : $notification->display_duration * 1000,
 				'url'                   => $notification->url,
 				'close'                 => $notification->display_close_button,
 				'once_per_session'      => $notification->display_once_per_session,
@@ -254,22 +257,36 @@ class Toto_Notifications {
 				'sound_volume'          => $notification->sound_volume,
 			];
 
-			$classes = [ 'toto', "toto-{$notification->display_position}" ];
-			$data    = [
-				'position'        => $notification->display_position,
-				'on-animation'    => $notification->display_position,
-				'notification-id' => $post_id,
-				'config'          => json_encode( $config ),
+			$attr = [
+				'data-notification-id' => $post_id,
 			];
+
+			$classes = [ 'toto' ];
+
+			if ( $shortcode ) {
+				$classes[]              = 'shortcode';
+				$config['shortcode']    = true;
+				$config['position']     = null;
+				$attr['data-shortcode'] = "toto_notification_$post_id";
+			}
+
+			if ( ! $shortcode ) {
+				$classes[]             = "toto-{$notification->display_position}";
+				$attr['id']            = "toto_notification_$post_id";
+				$attr['data-position'] = $notification->display_position;
+			}
+
+			$attr['data-config'] = json_encode( $config );
+
 
 			ob_start();
 			?>
 
-            <div class="<?php echo implode( ' ', $classes ); ?>" id="toto_notification_<?php echo $post_id; ?>"
+            <div class="<?php echo implode( ' ', $classes ); ?>"
 				<?php
 
-				foreach ( $data as $key => $value ) {
-					printf( " data-%s='%s'", $key, $value );
+				foreach ( $attr as $key => $value ) {
+					printf( " %s='%s'", $key, $value );
 				}
 
 				?>
@@ -287,7 +304,7 @@ class Toto_Notifications {
 	public static function preview( $type, $post_id = false ) {
 
 		ob_start();
-		self::get_view( $type, $post_id, true );
+		self::get_view( $post_id, true );
 		$notification = ob_get_clean();
 
 		echo preg_replace( [ '/<form/', '/<\/form>/', '/required=\"required\"/' ], [
@@ -617,8 +634,7 @@ class Toto_Notifications {
 					continue;
 				}
 
-				$type = get_post_meta( $post_id, '_notification_type', true );
-				Toto_Notifications::get_view( $type, $post_id );
+				Toto_Notifications::get_view( $post_id );
 
 			}
 

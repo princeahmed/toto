@@ -1,17 +1,30 @@
 <?php
 
-defined('ABSPATH') || exit();
+defined( 'ABSPATH' ) || exit();
 
-class WP_Plugin_Boilerplate_Shortcodes{
+class TOTO_Shortcodes {
 
 	public function __construct() {
-		add_shortcode('wp_plugin_boilerplate', [$this, 'wp_plugin_boilerplate']);
+		add_shortcode( 'toto', [ $this, 'render_notification' ] );
 	}
 
-	public function wp_plugin_boilerplate(){
-		//include shortcode template file
+	public function render_notification( $atts ) {
+
+		$id = intval( $atts['id'] );
+
+		if ( ! $id ) {
+			return;
+		}
+
+
+
+		ob_start();
+		Toto_Notifications::get_view( $id, false, true );
+
+		return ob_get_clean();
+
 	}
 
 }
 
-new WP_Plugin_Boilerplate_Shortcodes();
+new TOTO_Shortcodes();

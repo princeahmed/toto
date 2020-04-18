@@ -4,6 +4,7 @@ export default class Notification {
     /* Create and initiate the class with the proper parameters */
     constructor(options) {
 
+
         /* Initiate the main options variable */
         this.options = {};
 
@@ -38,6 +39,8 @@ export default class Notification {
         /* Must be set from the outside */
         this.options.notification_id = options.notification_id || false;
 
+        this.options.shortcode = typeof options.shortcode === 'undefined' ? false : options.shortcode;
+
     }
 
     /* Function to build the toast element */
@@ -58,7 +61,10 @@ export default class Notification {
         }
 
         /* Create the html element */
-        let main_element = document.getElementById(`toto_notification_${this.options.notification_id}`);
+        let main_element = this.options.shortcode ?
+            document.querySelector(`[data-shortcode="toto_notification_${this.options.notification_id}"]`)
+            : document.getElementById(`toto_notification_${this.options.notification_id}`);
+
 
         /* Add the close button icon if needed */
         if (this.options.close) {
@@ -143,38 +149,15 @@ export default class Notification {
     process(callbacks = {}) {
 
         let main_element = this.build();
-
         /* Make sure we have an element to display */
         if (!main_element) return false;
 
-        /* Insert the element to the body depending on the position it needs to be shown */
-        switch (this.options.position) {
-            case 'top':
-            case 'top_floating':
-                document.body.prepend(main_element);
-                break;
-
-            case 'bottom':
-            case 'bottom_floating':
-                document.body.appendChild(main_element);
-                break;
-
-            /* Fixed positions */
-            default:
-                document.body.appendChild(main_element);
-                break;
-        }
 
         let display = () => {
 
-            if (this.options.enable_sound) {
-                const audio = new Audio(this.options.notification_sound);
-                audio.volume = this.options.sound_volume / 100;
-                audio.play();
-            }
-
             /* Make sure they are visible */
             main_element.className += ` on`;
+            //jQuery(main_element).addClass('on');
 
             /* Add the fade in class */
             main_element.className += ` on-${this.options.on_animation}`;
@@ -185,6 +168,13 @@ export default class Notification {
             /* Run the callback if needed */
             if (callbacks.displayed) {
                 callbacks.displayed(main_element);
+            }
+
+            /* play sound */
+            if (this.options.enable_sound) {
+                const audio = new Audio(this.options.notification_sound);
+                audio.volume = this.options.sound_volume / 100;
+                audio.play();
             }
 
             /* Add timeout to remove the toast if needed */
