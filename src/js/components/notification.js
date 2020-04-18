@@ -3,12 +3,13 @@ import Notification from "./class-notification";
 ;(function ($) {
     $.toto = {
         init: () => {
-            $('.toto').each((i, n) => {
-                const config = $(n).data('config');
+            $('.toto').each((i, el) => {
+                const config = $(el).data('config');
 
                 let callbacks = {};
-                if (config.notification_type in callbacks) {
+                if (config.notification_type in $.toto.callbacks()) {
                     callbacks = $.toto.callbacks()[config.notification_type];
+
                 }
 
                 new $.toto.notification({
@@ -75,12 +76,9 @@ import Notification from "./class-notification";
                 data: {data: params},
 
                 success: (res) => {
-                    console.log(res);
                 },
 
-                error: (error) => {
-                    console.log(error);
-                }
+                error: (error) => console.log(error)
 
             });
 
@@ -128,11 +126,10 @@ import Notification from "./class-notification";
 
                         let notification_id = main_element.getAttribute('data-notification-id');
 
-                        send_tracking_data({
-                            ...user,
+                        $.toto.send_statistics_data({
+                            ...$.toto.user(),
                             notification_id: notification_id,
-                            type: 'notification',
-                            subtype: 'click'
+                            type: 'click',
                         });
 
                     });
@@ -149,20 +146,20 @@ import Notification from "./class-notification";
                         let email = event.currentTarget.querySelector('[name="email"]').value;
                         let notification_id = main_element.getAttribute('data-notification-id');
 
-                        if (email.trim() != '') {
+                        if (email.trim() !== '') {
 
                             /* Data collection from the form */
-                            $.toto.send_submission_data({...$.toto.user(), notification_id: notification_id, email});
                             $.toto.send_statistics_data({
                                 ...$.toto.user(),
-                                notification_id: notification_id,
-                                type: 'submissions'
+                                notification_id,
+                                type: 'submissions',
+                                data: email
                             });
 
                             $.toto.notification.remove_notification(main_element);
 
                             /* Make sure to let the browser know of the conversion so that it is not shown again */
-                            //localStorage.setItem('notification_<?php echo $notification->notification_id ?>_converted', true);
+                            localStorage.setItem(`notification_${notification_id}_converted`, true);
 
                         }
 
@@ -180,11 +177,10 @@ import Notification from "./class-notification";
 
                         let notification_id = main_element.getAttribute('data-notification-id');
 
-                        $.toto.send_tracking_data({
-                            ...user,
-                            notification_id: notification_id,
-                            type: 'notification',
-                            subtype: 'click'
+                        $.toto.send_statistics_data({
+                            ...$.toto.user(),
+                            notification_id,
+                            type: 'click',
                         });
 
                     });
@@ -200,11 +196,10 @@ import Notification from "./class-notification";
 
                         let notification_id = main_element.getAttribute('data-notification-id');
 
-                        $.toto.send_tracking_data({
-                            ...user,
-                            notification_id: notification_id,
-                            type: 'notification',
-                            subtype: 'click'
+                        $.toto.send_statistics_data({
+                            ...$.toto.user(),
+                            notification_id,
+                            type: 'click',
                         });
 
                     });
@@ -233,18 +228,17 @@ import Notification from "./class-notification";
                             let notification_id = main_element.getAttribute('data-notification-id');
                             let feedback = emoji.getAttribute('data-type');
 
-                            send_tracking_data({
-                                ...user,
-                                notification_id: notification_id,
-                                type: 'notification',
-                                subtype: `feedback_emoji_${feedback}`
+                            $.toto.send_statistics_data({
+                                ...$.toto.user(),
+                                notification_id,
+                                type: `feedback_emoji_${feedback}`,
                             });
 
                             /* Make sure to let the browser know of the conversion so that it is not shown again */
-                            localStorage.setItem('notification_<?= $notification->notification_id ?>_converted', true);
+                            localStorage.setItem(`notification_${notification_id}_converted`, true);
 
                             setTimeout(() => {
-                                $.toto.remove_notification(main_element);
+                                $.toto.notification.remove_notification(main_element);
                             }, 950);
 
                         });
@@ -260,10 +254,11 @@ import Notification from "./class-notification";
                     /* On click the footer remove element */
                     main_element.querySelector('.toto-cookie-notification-button').addEventListener('click', event => {
 
+                        const notification_id = main_element.getAttribute('data-notification-id');
                         $.toto.remove_notification(main_element);
 
                         /* Make sure to let the browser know of the conversion so that it is not shown again */
-                        localStorage.setItem('notification_<?= $notification->notification_id ?>_converted', true);
+                        localStorage.setItem(`notification_${notification_id}_converted`, true);
 
                         event.preventDefault();
 
@@ -278,7 +273,7 @@ import Notification from "./class-notification";
                     /* On click event to the button */
                     let scores = main_element.querySelectorAll('.toto-score-feedback-button');
 
-                    for(let score of scores) {
+                    for (let score of scores) {
                         score.addEventListener('click', event => {
 
                             /* Trigger the animation */
@@ -286,22 +281,21 @@ import Notification from "./class-notification";
 
                             /* Get all the other emojis and remove them */
                             let other_scores = main_element.querySelectorAll('.toto-score-feedback-button:not(.toto-score-feedback-button-clicked)');
-                            for(let other_score of other_scores) {
+                            for (let other_score of other_scores) {
                                 other_score.remove();
                             }
 
-                            let notification_id = main_element.getAttribute('data-notification-id');
-                            let feedback = score.getAttribute('data-score');
+                            const notification_id = main_element.getAttribute('data-notification-id');
+                            const feedback = score.getAttribute('data-score');
 
-                            $.toto.send_tracking_data({
-                                ...user,
-                                notification_id: notification_id,
-                                type: 'notification',
-                                subtype: `feedback_score_${feedback}`
+                            $.toto.send_statistics_data({
+                                ...$.toto.user(),
+                                notification_id,
+                                type: `feedback_score_${feedback}`,
                             });
 
                             /* Make sure to let the browser know of the conversion so that it is not shown again */
-                            localStorage.setItem('notification_<?= $notification->notification_id ?>_converted', true);
+                            localStorage.setItem(`notification_${notification_id}_converted`, true);
 
                             setTimeout(() => {
                                 $.toto.remove_notification(main_element);
@@ -324,20 +318,20 @@ import Notification from "./class-notification";
                         let notification_id = main_element.getAttribute('data-notification-id');
 
 
-                        if(input.trim() != '') {
+                        if (input.trim() !== '') {
 
                             /* Data collection from the form */
-                            $.toto.send_tracking_data({
-                                ...user,
-                                notification_id: notification_id,
+                            $.toto.send_statistics_data({
+                                ...$.toto.user(),
+                                notification_id,
                                 type: 'collector',
-                                input
+                                data: input
                             });
 
                             $.toto.remove_notification(main_element);
 
                             /* Make sure to let the browser know of the conversion so that it is not shown again */
-                            localStorage.setItem('notification_<?= $notification->notification_id ?>_converted', true);
+                            localStorage.setItem(`notification_${notification_id}_converted`, true);
 
                         }
 
@@ -346,14 +340,14 @@ import Notification from "./class-notification";
 
                 }
             },
-            
+
             COUNTDOWN_COLLECTOR: {
                 displayed: main_element => {
 
                     /* Countdown */
-                    let end_date = new Date(main_element.querySelector('[name="end_date"]').value);
+                    const end_date = new Date(main_element.querySelector('[name="end_date"]').value);
 
-                    let countdown = () => {
+                    const countdown = () => {
                         let days_element = main_element.querySelector('[data-type="days"]');
                         let hours_element = main_element.querySelector('[data-type="hours"]');
                         let minutes_element = main_element.querySelector('[data-type="minutes"]');
@@ -369,19 +363,19 @@ import Notification from "./class-notification";
                         let new_minutes = minutes;
                         let new_seconds = seconds - 1;
 
-                        if(new_seconds < 0 && new_minutes > 0) {
+                        if (new_seconds < 0 && new_minutes > 0) {
                             new_seconds = 60;
                             new_minutes--;
 
-                            if(new_minutes < 0 && new_hours > 0) {
+                            if (new_minutes < 0 && new_hours > 0) {
                                 new_minutes = 60;
                                 new_hours--;
 
-                                if(new_hours < 0 && new_days > 0) {
+                                if (new_hours < 0 && new_days > 0) {
                                     new_hours = 60;
                                     new_days--;
 
-                                    if(new_days < 0) {
+                                    if (new_days < 0) {
                                         new_days = 0;
                                     }
                                 }
@@ -389,7 +383,7 @@ import Notification from "./class-notification";
                         }
 
                         /* Check if the timer is up */
-                        if(days == 0 && hours == 0 && minutes == 0 && seconds == 0) {
+                        if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
                             clearInterval(countdown_interval);
 
                             $.toto.remove_notification(main_element);
@@ -402,7 +396,7 @@ import Notification from "./class-notification";
                         seconds_element.innerText = new_seconds;
                     };
 
-                    let countdown_interval = setInterval(countdown, 1000);
+                    const countdown_interval = setInterval(countdown, 1000);
 
                     /* Form submission */
                     main_element.querySelector('#toto-countdown-collector-form').addEventListener('submit', event => {
@@ -411,20 +405,20 @@ import Notification from "./class-notification";
                         let notification_id = main_element.getAttribute('data-notification-id');
 
 
-                        if(input.trim() != '') {
+                        if (input.trim() !== '') {
 
                             /* Data collection from the form */
-                            send_tracking_data({
-                                ...user,
+                            $.toto.send_statistics_data({
+                                ...$.toto.user(),
                                 notification_id: notification_id,
                                 type: 'collector',
-                                input
+                                data: input
                             });
 
                             $.toto.remove_notification(main_element);
 
                             /* Make sure to let the browser know of the conversion so that it is not shown again */
-                            localStorage.setItem('notification_<?= $notification->notification_id ?>_converted', true);
+                            localStorage.setItem(`notification_${notification_id}_converted`, true);
 
                         }
 

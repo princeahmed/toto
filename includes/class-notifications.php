@@ -32,7 +32,7 @@ class Toto_Notifications {
 			'pulse_background_color'   => ! empty( $settings->pulse_background_color ) ? $settings->pulse_background_color : '#17bf21',
 
 			'enable_sound'       => isset( $settings->enable_sound ) ? $settings->enable_sound : false,
-			'notification_sound' => ! empty( $settings->notification_sound ) ? $settings->notification_sound : '-1',
+			'notification_sound' => ! empty( $settings->notification_sound ) ? $settings->notification_sound : '',
 			'sound_volume'       => ! empty( $settings->sound_volume ) ? $settings->sound_volume : 50,
 
 			'show_agreement' => isset( $settings->show_agreement ) ? $settings->show_agreement : false,
@@ -248,7 +248,10 @@ class Toto_Notifications {
 				'once_per_session'      => $notification->display_once_per_session,
 				'stop_on_focus'         => true,
 				'notification_id'       => $post_id,
-				'notification_type'     => $type
+				'notification_type'     => $type,
+				'enable_sound'          => $notification->enable_sound,
+				'notification_sound'    => TOTO_ASSETS . '/sounds/' . $notification->notification_sound . '.mp3',
+				'sound_volume'          => $notification->sound_volume,
 			];
 
 			$classes = [ 'toto', "toto-{$notification->display_position}" ];
@@ -259,21 +262,22 @@ class Toto_Notifications {
 				'config'          => json_encode( $config ),
 			];
 
+			ob_start();
 			?>
 
             <div class="<?php echo implode( ' ', $classes ); ?>" id="toto_notification_<?php echo $post_id; ?>"
 				<?php
 
 				foreach ( $data as $key => $value ) {
-					printf( "data-%s='%s'", $key, $value );
+					printf( " data-%s='%s'", $key, $value );
 				}
 
 				?>
             >
-				<?php return include TOTO_INCLUDES . '/admin/views/notifications/view/' . strtolower( $type ) . '.php'; ?>
+				<?php include TOTO_INCLUDES . '/admin/views/notifications/view/' . strtolower( $type ) . '.php'; ?>
             </div>
-
 			<?php
+			echo ob_get_clean();
 		} else {
 			return include TOTO_INCLUDES . '/admin/views/notifications/view/' . strtolower( $type ) . '.php';
 		}
@@ -303,7 +307,7 @@ class Toto_Notifications {
 	public static function statistics_types( $type ) {
 
 		$types = [];
-		if ( in_array( $type, [ 'INFORMATIONAL', 'COUPON' ] ) ) {
+		if ( in_array( $type, [ 'INFORMATIONAL', 'COUPON', 'RANDOM_REVIEW' ] ) ) {
 			$types = [ 'impression', 'hover', 'click', ];
 		} elseif ( in_array( $type, [ 'EMAIL_COLLECTOR', ] ) ) {
 			$types = [ 'impression', 'hover', 'submissions', ];

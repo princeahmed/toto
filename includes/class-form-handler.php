@@ -28,18 +28,17 @@ class Toto_Form_Handler {
 			'display_once_per_session',
 			'display_mobile',
 			'show_agreement',
-			'data_send_is_enabled',
 			'enable_sound',
 			'show_angry',
 			'show_sad',
 			'show_neutral',
 			'show_happy',
-			'show_excited',
 			'enable_sound',
+			'show_excited',
 		];
 
 		foreach ( $switch_fields as $key ) {
-			$settings[ $key ] = isset( $settings[ $key ] ) ? true : false;
+			$settings[ $key ] = ! isset( $settings[ $key ] ) || ! $settings[ $key ] ? false : true;
 		}
 
 		update_post_meta( $post_id, '_settings', $settings );

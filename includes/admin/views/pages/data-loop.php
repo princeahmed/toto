@@ -21,7 +21,7 @@ if ( ! empty( $results ) ) {
                         Details</a>
                 </div>
             </div>
-            <div class="toto-panel-body toto-hidden">
+            <div class="toto-panel-body hidden">
 				<?php
 				foreach ( $data as $key => $val ) {
 

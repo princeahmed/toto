@@ -94,13 +94,13 @@ ob_start(); ?>
     <div class="toto-form-group">
         <label for="settings_image">Image</label>
 
-        <img src="<?php echo $image; ?>" alt="Notification Image" class="toto-image-preview <?php echo empty( $image ) ? 'toto-hidden' : ''; ?>">
+        <img src="<?php echo $image; ?>" alt="Notification Image" class="toto-image-preview <?php echo empty( $image ) ? 'hidden' : ''; ?>">
 
         <div class="toto-input-group">
             <input type="text" id="settings_image" name="settings[image]" value="<?php echo $image; ?>"/>
             <button type="button" class="button button-primary toto-choose-image toto-ml-10 toto-mr-10">Choose Image
             </button>
-            <button type="button" class="button button-link-delete toto-remove-image <?php echo empty( $image ) ? 'toto-hidden' : ''; ?>">
+            <button type="button" class="button button-link-delete toto-remove-image <?php echo empty( $image ) ? 'hidden' : ''; ?>">
                 Remove Image
             </button>
         </div>
@@ -279,7 +279,7 @@ ob_start();
         <p class="description">Where should the notification show?</p>
     </div>
 
-    <div class="toto-form-group flex-row align-center <?php echo 'selected' == $trigger_on ? '' : 'toto-hidden'; ?>">
+    <div class="toto-form-group flex-row align-center <?php echo 'selected' == $trigger_on ? '' : 'hidden'; ?>">
         <label for="settings_trigger_locations" class="toto-mr-20">Select Locations: </label>
         <select name="settings[trigger_locations][]" class="toto-select2" id="settings_trigger_locations" multiple>
 			<?php
@@ -290,7 +290,7 @@ ob_start();
         </select>
     </div>
 
-    <div class="toto-form-group <?php echo ! empty( $trigger_locations ) && in_array( 'is_custom', $trigger_locations ) ? '' : 'toto-hidden'; ?>">
+    <div class="toto-form-group <?php echo ! empty( $trigger_locations ) && in_array( 'is_custom', $trigger_locations ) ? '' : 'hidden'; ?>">
         <label for="settings_custom_post_page_ids" class="toto-mr-20">Post/ Page IDs: </label>
         <input type="text" name="settings[custom_post_page_ids]" id="settings_custom_post_page_ids" value="<?php echo $custom_post_page_ids; ?>">
         <p class="description">Comma Separated ID of Post, Page or Custom Post Type Posts.</p>
@@ -316,7 +316,7 @@ ob_start(); ?>
                 </option>
             </select>
 
-            <input type="number" min="0" class="<?php echo 'exit_intent' == $display_trigger ? 'toto-hidden' : ''; ?>" name="settings[display_trigger_value]" value="<?php echo $display_trigger_value; ?>"/>
+            <input type="number" min="0" class="<?php echo 'exit_intent' == $display_trigger ? 'hidden' : ''; ?>" name="settings[display_trigger_value]" value="<?php echo $display_trigger_value; ?>"/>
 
         </div>
 
@@ -420,7 +420,7 @@ ob_start(); ?>
         <p class="description">Require the user to confirm his agreement by ticking a checkbox.</p>
     </div>
 
-    <div id="agreement" class="<?php echo true == $show_agreement ? '' : 'toto-hidden'; ?>">
+    <div id="agreement" class="<?php echo true == $show_agreement ? '' : 'hidden'; ?>">
         <div class="toto-form-group">
             <label for="settings_agreement_text">Agreement Text</label>
             <input type="text" id="settings_agreement_text" name="settings[agreement_text]" value="<?php echo $agreement_text; ?>"/>
@@ -548,7 +548,7 @@ ob_start(); ?>
         <p class="description">Enable to play a sound when the notification will show.</p>
     </div>
 
-    <div class="toto-form-group <?php echo $enable_sound ? '' : 'toto-hidden'; ?>">
+    <div class="toto-form-group <?php echo $enable_sound ? '' : 'hidden'; ?>">
         <label for="settings_notification_sound">Select Notification Sound</label>
 		<?php
 		$sounds = [
@@ -576,7 +576,7 @@ ob_start(); ?>
 			?>
         </select>
 
-        <div class="play-sound toto-hidden">
+        <div class="play-sound hidden">
             <audio id="toto-sound">
                 <source src="<?php echo TOTO_ASSETS . '/sounds/' . $notification_sound . '.mp3'; ?>" type="audio/mpeg">
                 Your browser does not support the audio element.
@@ -584,7 +584,7 @@ ob_start(); ?>
         </div>
 
     </div>
-    <div class="toto-form-group <?php echo $enable_sound ? '' : 'toto-hidden'; ?>">
+    <div class="toto-form-group <?php echo $enable_sound ? '' : 'hidden'; ?>">
         <label for="settings_sound_volume">Notification Sound Volume</label>
         <input type="hidden" name="settings[sound_volume]" id="settings_sound_volume" value="<?php echo $sound_volume; ?>"/>
 

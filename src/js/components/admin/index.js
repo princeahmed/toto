@@ -25,8 +25,8 @@
             const modal = $('#toto_modal');
             const ph = $('.ph-item', modal);
 
-            modal.removeClass('toto-hidden');
-            ph.removeClass('toto-hidden');
+            modal.removeClass('hidden');
+            ph.removeClass('hidden');
 
             wp.ajax.send('toto_notification_preview', {
                 data: {
@@ -42,7 +42,7 @@
 
                 },
 
-                complete: () => ph.addClass('toto-hidden'),
+                complete: () => ph.addClass('hidden'),
 
                 error: error => console.log(error)
             })
@@ -53,10 +53,10 @@
         //hide notification preview on .close click
         $(document).on('click', '.toto-modal-close', function () {
             const modal = $(this).parents('.toto-modal');
-            modal.addClass('toto-hidden');
+            modal.addClass('hidden');
             $('.modal-body-content', modal).html('');
             $('.toto-modal-header h2', modal).html('');
-            $('.ph-item', modal).removeClass('toto-hidden')
+            $('.ph-item', modal).removeClass('hidden')
         });
 
         //hide notification preview on out click
@@ -66,10 +66,10 @@
             }
 
             const modal = $(this);
-            modal.addClass('toto-hidden');
+            modal.addClass('hidden');
             $('.modal-body-content', modal).html('');
             $('.toto-modal-header h2', modal).html('');
-            $('.ph-item', modal).removeClass('toto-hidden')
+            $('.ph-item', modal).removeClass('hidden')
         });
 
     });

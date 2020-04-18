@@ -22,7 +22,7 @@
 			?>
         </div>
 
-        <div class="toto_n_data_ph toto-hidden">
+        <div class="toto_n_data_ph hidden">
             <div class="ph-item">
 
                 <div class="ph-col-12">

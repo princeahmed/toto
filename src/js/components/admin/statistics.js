@@ -21,9 +21,10 @@
 
             const p = $(this).parents('#toto_n_statistics_filter');
             const ph = $('.summary-ph-wrap, .chart-ph, .statistics-top-pages tfoot');
-            const summaryContent = $('.summary-content');
-            const chartContent = $('.chart-content');
-            const topPagesContent = $('.statistics-top-pages tbody');
+
+            const summaryContent = $('.statistics-summary-wrap');
+            const chartContent = $('.toto_n_statistics_chart');
+            const topPagesContent = $('.statistics-top-pages');
 
             const nid = $('#notification_id', p).val();
             const start_date = $('#start_date', p).val();
@@ -35,10 +36,8 @@
                 end_date,
             };
 
-            ph.removeClass('toto-hidden');
-            summaryContent.html('');
-            chartContent.html('');
-            topPagesContent.html('');
+            ph.removeClass('hidden');
+            $('.summary-content, .chart-content, .statistics-top-pages tbody').addClass('hidden');
 
             wp.ajax.send('toto_get_statistics', {
                 data,
@@ -46,13 +45,17 @@
                 success: (res) => {
                     summaryContent.html(res.summary_html);
                     chartContent.html(res.chart_html);
-                    topPagesContent.html(res.top_pages_html);
+
+                    if (res.top_pages_html !== '') {
+                        $('.statistics-top-pages').removeClass('hidden');
+                        topPagesContent.html(res.top_pages_html);
+                    }
 
                     app.initChart();
                 },
 
                 complete: () => {
-                    ph.addClass('toto-hidden');
+                    ph.addClass('hidden');
                 },
 
                 error: error => console.log(error)

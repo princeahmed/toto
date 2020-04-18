@@ -8,8 +8,6 @@ export default class Notification {
         this.options = {};
 
         /* Process the passed options and the default ones */
-        this.options.content = options.content || '';
-        this.options.should_show = typeof options.should_show === 'undefined' ? true : options.should_show;
         this.options.delay = typeof options.delay === 'undefined' ? 3000 : options.delay;
         this.options.duration = typeof options.duration === 'undefined' ? 3000 : options.duration;
         this.options.selector = options.selector;
@@ -28,13 +26,14 @@ export default class Notification {
         this.options.display_trigger = typeof options.display_trigger === 'undefined' ? 'delay' : options.display_trigger;
         this.options.display_trigger_value = typeof options.display_trigger_value === 'undefined' ? 3 : options.display_trigger_value;
 
-        /* On what pages to show the notification */
-        this.options.data_trigger_auto = typeof options.data_trigger_auto === 'undefined' ? false : options.data_trigger_auto;
-        this.options.data_triggers_auto = options.data_triggers_auto || [];
-
         /* Animations */
         this.options.on_animation = typeof options.on_animation === 'undefined' ? 'fadeIn' : options.on_animation;
         this.options.off_animation = typeof options.off_animation === 'undefined' ? 'fadeOut' : options.off_animation;
+
+        /* Sounds */
+        this.options.enable_sound = typeof options.enable_sound === 'undefined' ? false : options.enable_sound;
+        this.options.notification_sound = typeof options.notification_sound === 'undefined' ? '' : options.notification_sound;
+        this.options.sound_volume = typeof options.sound_volume === 'undefined' ? .5 : options.sound_volume;
 
         /* Must be set from the outside */
         this.options.notification_id = options.notification_id || false;
@@ -167,6 +166,13 @@ export default class Notification {
         }
 
         let display = () => {
+
+            if (this.options.enable_sound) {
+                const audio = new Audio(this.options.notification_sound);
+                audio.volume = this.options.sound_volume / 100;
+                audio.play();
+            }
+
             /* Make sure they are visible */
             main_element.className += ` on`;
 
@@ -305,7 +311,7 @@ export default class Notification {
 
                 document.addEventListener('scroll', event => {
 
-                    if (!scroll_triggered && get_scroll_percentage() > this.options.display_trigger_value) {
+                    if (!scroll_triggered && jQuery.toto.get_scroll_percentage() > this.options.display_trigger_value) {
 
                         display();
 
@@ -336,8 +342,9 @@ export default class Notification {
             /* Remove the element from the DOM */
             window.setTimeout(() => {
 
-                element.parentNode.removeChild(element);
-
+                if (element.parentNode !== null) {
+                    element.parentNode.removeChild(element);
+                }
                 /* Recalculate position of other notifications */
                 jQuery.toto.notification.reposition();
 

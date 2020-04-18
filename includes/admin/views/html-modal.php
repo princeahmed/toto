@@ -1,4 +1,4 @@
-<div id="toto_modal" class="toto-modal toto-hidden">
+<div id="toto_modal" class="toto-modal hidden">
 
     <!-- Modal content -->
     <div class="toto-modal-content">

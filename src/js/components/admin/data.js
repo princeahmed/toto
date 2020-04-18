@@ -17,7 +17,7 @@
 
             const parent = $(this).parents('.toto-panel');
 
-            $('.toto-panel-body', parent).toggleClass('toto-hidden');
+            $('.toto-panel-body', parent).toggleClass('hidden');
             $('.panel-body-collapse i', parent).toggleClass('dashicons-arrow-down-alt2 dashicons-arrow-up-alt2');
             $('.data-details i', parent).toggleClass('dashicons-plus-alt dashicons-minus');
         }
@@ -41,7 +41,7 @@
                 page
             };
 
-            ph.removeClass('toto-hidden');
+            ph.removeClass('hidden');
             $('.toto_n_data').html('');
 
             wp.ajax.send('toto_get_data', {
@@ -52,7 +52,7 @@
                 },
 
                 complete: () => {
-                    ph.addClass('toto-hidden');
+                    ph.addClass('hidden');
                 },
 
                 error: error => console.log(error)

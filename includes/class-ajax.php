@@ -74,7 +74,7 @@ class Toto_Ajax {
 
 		$wpdb->query( $wpdb->prepare( $sql, [ $notification_id, $unique_id, $type, $ip, $url, $date, $date ] ) );
 
-		exit;
+		wp_send_json_success( [ 'msg' => 'success' ] );
 
 	}
 

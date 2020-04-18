@@ -20,7 +20,6 @@
             $(document).on('click', '.toto-choose-image', app.handleMedia);
             $(document).on('click', '.toto-remove-image', app.removeImage);
             $(document).on('click', '.toto-next, .toto-prev', app.handlePrevNext);
-            $(document).on('change', '.toto-switch-group input', app.handleToggle);
             $(document).on('change', '#settings_notification_sound', app.playSound);
         },
 
@@ -36,7 +35,7 @@
 
         handleToggle: function () {
             const target = $(this).parent().data('target');
-            $(target).parent().toggleClass('toto-hidden');
+            $(target).parent().toggleClass('hidden');
 
         },
 
@@ -151,7 +150,7 @@
 
             for (let [key, target] of Object.entries(toggleHandler)) {
                 $(`#settings_${key}`).on('change paste keyup', function () {
-                    $(`#notification_preview .${target}`).toggle();
+                    $(`#notification_preview .${target}`).toggleClass('hidden');
                 });
             }
 
@@ -254,17 +253,17 @@
 
         toggleLocationsField: function () {
             if ('selected' === $(this).val()) {
-                $('#settings_trigger_locations').parent().removeClass('toto-hidden');
+                $('#settings_trigger_locations').parent().removeClass('hidden');
             } else {
-                $('#settings_trigger_locations').parent().addClass('toto-hidden');
+                $('#settings_trigger_locations').parent().addClass('hidden');
             }
         },
 
         toggleCustomIds: function () {
             if ($(this).val() && $(this).val().includes('is_custom')) {
-                $('#settings_custom_post_page_ids').parent().removeClass('toto-hidden');
+                $('#settings_custom_post_page_ids').parent().removeClass('hidden');
             } else {
-                $('#settings_custom_post_page_ids').parent().addClass('toto-hidden');
+                $('#settings_custom_post_page_ids').parent().addClass('hidden');
             }
         },
 
@@ -299,7 +298,7 @@
         },
 
         toggleTriggerContent: function () {
-            $('.btn-trigger-add').toggleClass('toto-hidden');
+            $('.btn-trigger-add').toggleClass('hidden');
             $('#triggers_rules').toggleClass('container-disabled');
         },
 
@@ -328,7 +327,7 @@
         },
 
         toggleAgreement: function () {
-            $('#agreement').toggleClass('toto-hidden');
+            $('#agreement').toggleClass('hidden');
         },
 
         handleMedia: function (e) {
@@ -341,26 +340,26 @@
                 .on('select', function () {
                     const uploaded_image = image.state().get('selection').first();
                     const image_url = uploaded_image.toJSON().url;
-                    $('.toto-image-preview',).attr('src', image_url).removeClass('toto-hidden');
+                    $('.toto-image-preview',).attr('src', image_url).removeClass('hidden');
                     $('#settings_image',).val(image_url).trigger('change');
-                    $('.toto-remove-image').removeClass('toto-hidden');
+                    $('.toto-remove-image').removeClass('hidden');
                 });
         },
 
         removeImage: function (e) {
             e.preventDefault();
-            $('.toto-image-preview',).attr('src', '').addClass('toto-hidden');
+            $('.toto-image-preview',).attr('src', '').addClass('hidden');
             $('#settings_image',).val('').trigger('change');
-            $('.toto-remove-image').addClass('toto-hidden');
+            $('.toto-remove-image').addClass('hidden');
         },
 
         displayTriggerSelect: function () {
             const val = $(this).val();
 
             if ('exit_intent' === val) {
-                $(this).next().addClass('toto-hidden');
+                $(this).next().addClass('hidden');
             } else {
-                $(this).next().removeClass('toto-hidden').val('').attr('placeholder', $(`option[value=${val}]`, $(this)).data('placeholder'));
+                $(this).next().removeClass('hidden').val('').attr('placeholder', $(`option[value=${val}]`, $(this)).data('placeholder'));
             }
 
         }
