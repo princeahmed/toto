@@ -38,6 +38,7 @@ class Toto_Install {
 			ip varchar(128)  NOT NULL DEFAULT '',
 			`type` varchar(32)  NOT NULL DEFAULT '',
 			url text  NOT NULL,
+			`data` text NULL,
 			created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 			updated_at DATETIME NOT NULL,
 			PRIMARY KEY  (id),

@@ -290,8 +290,8 @@ class Toto_Notifications {
 
 	}
 
-	public static function preview( $type ) {
-		$notification = (object) self::get_config( $type );
+	public static function preview( $type, $post_id ) {
+		$notification = (object) self::get_config( $type, $post_id );
 
 		ob_start();
 		include TOTO_INCLUDES . '/admin/views/notifications/view/' . strtolower( $type ) . '.php';
@@ -313,10 +313,10 @@ class Toto_Notifications {
 	public static function statistics_types( $type ) {
 
 		$types = [ 'impression', 'hover' ];
-		if ( in_array( $type, [ 'INFORMATIONAL', 'COUPON', 'RANDOM_REVIEW' ] ) ) {
-			$types[] = [ 'click', ];
+		if ( in_array( $type, [ 'INFORMATIONAL', 'COUPON', 'LIVE_COUNTER', 'RANDOM_REVIEW' ] ) ) {
+			$types[] = 'click';
 		} elseif ( in_array( $type, [ 'EMAIL_COLLECTOR', ] ) ) {
-			$types[] = [ 'submissions', ];
+			$types[] = 'submissions';
 		}
 
 		return $types;

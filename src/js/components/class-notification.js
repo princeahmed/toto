@@ -97,7 +97,7 @@ export default class Notification {
 
                 if (this.options.notification_id) {
                     /* Click statistics */
-                    jQuery.toto.send_tracking_data({
+                    jQuery.toto.send_statistics_data({
                         ...jQuery.toto.user(),
                         notification_id: this.options.notification_id,
                         type: 'click'

@@ -101,7 +101,7 @@ class Toto_Admin_Ajax {
 
 
 		ob_start();
-		$statistics->render_top_pages();
+		$statistics->render_tables();
 		$tables_html = ob_get_clean();
 
 		wp_send_json_success( [

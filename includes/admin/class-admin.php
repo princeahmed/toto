@@ -57,13 +57,13 @@ class Toto_Admin {
             <a href="#" class="toto-n-preview" data-post_id="<?php echo $post_id; ?>">
                 <i class="dashicons dashicons-visibility toto-mr-5"></i> Preview </a>
 
-        <?php } elseif ( 'type' == $column ) {
-			$type      = get_post_meta( $post_id, '_notification_type', true );
-			$type_name = ! empty( $type ) ? Toto_Notifications::get_config( $type )['name'] : '';
+		<?php } elseif ( 'type' == $column ) {
+			$type   = get_post_meta( $post_id, '_notification_type', true );
+			$config = ! empty( $type ) ? Toto_Notifications::get_config( $type ) : '';
 			?>
-            <span class="toto-n-type"><?php echo $type_name; ?></span>
+            <span class="toto-n-type"><i class="<?php echo $config['icon']; ?>"></i> <?php echo $config['name']; ?></span>
 
-        <?php } elseif ( 'status' == $column ) { ?>
+		<?php } elseif ( 'status' == $column ) { ?>
             <div class="toto-switcher">
                 <input type="checkbox" class="toto_n_status" id="notification-<?php echo $post_id; ?>" value="<?php echo $post_id; ?>"
 					<?php checked( 'publish', get_post_status( $post_id ) ); ?> />
@@ -73,8 +73,8 @@ class Toto_Admin {
                 </div>
             </div>
 
-        <?php } elseif ( 'shortcode' == $column ) { ?>
-            <span class="toto-n-shortcode" title="<?php _e('Copy Shortcode', 'toto') ?>"><i class="fa fa-copy"></i> <code>[toto id=<?php echo $post_id; ?>]</code></span>
+		<?php } elseif ( 'shortcode' == $column ) { ?>
+            <span class="toto-n-shortcode" title="<?php _e( 'Copy Shortcode', 'toto' ) ?>"><i class="fa fa-copy"></i> <code>[toto id=<?php echo $post_id; ?>]</code></span>
 		<?php }
 	}
 

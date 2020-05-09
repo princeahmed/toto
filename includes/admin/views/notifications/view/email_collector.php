@@ -26,5 +26,5 @@
 		<?php toto_branding($notification); ?>
     </div>
 
-    <span class="toto-close"></span>
+    <span class="toto-close"><?php echo $notification->display_close_button ? '&#10006;' : ''; ?></span>
 </div>

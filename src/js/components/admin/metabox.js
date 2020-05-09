@@ -16,12 +16,11 @@
             $(document).on('change', '#settings_trigger_locations', app.toggleCustomIds);
             $(document).on('click', '#trigger_add', app.addTrigger);
             $(document).on('click', '.toto-btn-delete', app.deleteTrigger);
-            $(document).on('click', '#settings_show_agreement', app.toggleAgreement);
             $(document).on('click', '.toto-choose-image', app.handleMedia);
             $(document).on('click', '.toto-remove-image', app.removeImage);
             $(document).on('click', '.toto-next, .toto-prev', app.handlePrevNext);
             $(document).on('change', '#settings_notification_sound', app.playSound);
-            
+
             $(document).on('change', '.handle-toggle', app.handleToggle);
         },
 
@@ -56,6 +55,7 @@
                 content_title_color: `toto-${type}-content-title`,
                 content_description_color: `toto-${type}-content-description`,
             };
+
             for (let [key, target] of Object.entries(colorHandlers)) {
 
 
@@ -85,14 +85,14 @@
                 });
             }
 
-
+            /* text change handlers */
             const textHandlers = {
                 title: `toto-${type}-title`,
                 description: `toto-${type}-description`,
                 coupon_code: `toto-${type}-coupon-code`,
-                button_text: `toto-${type}-button-text`,
-                footer_text: `toto-${type}-footer-text`,
-                agreement_text: `toto-${type}-agreement-text`,
+                button_text: `toto-${type}-button`,
+                footer_text: `toto-${type}-footer`,
+                agreement_text: `toto-agreement-checkbox-text>a`,
                 conversion_count: `toto-${type}-conversion-count`,
                 content_title: `toto-${type}-content-title`,
                 content_description: `toto-${type}-content-description`,
@@ -203,9 +203,12 @@
         },
 
         initMetaTabs: () => {
+            if ($('#auto_draft').length) return;
+
             const target = localStorage.getItem('totoActiveTab');
 
             if (target) {
+                $('.toto-tab-content-item').removeClass('active');
                 $(`.toto-meta-tabs .toto-tab-link[data-target=${target}]`).addClass('active').parent().prevAll('.toto-tab-item').find('.toto-tab-link').addClass('active');
                 $(`#${target}`).addClass('active');
             }
@@ -325,10 +328,6 @@
             } else {
                 $('.toto-btn-delete').show();
             }
-        },
-
-        toggleAgreement: function () {
-            $('#agreement').toggleClass('hidden');
         },
 
         handleMedia: function (e) {

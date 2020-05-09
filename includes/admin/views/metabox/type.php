@@ -1,4 +1,4 @@
-<div class="toto-tab-content-item toto-notification-types" id="notification_type">
+<div class="toto-tab-content-item toto-notification-types active" id="notification_type">
 	<?php
 
 	$default        = array_keys( Toto_Notifications::get_config() );

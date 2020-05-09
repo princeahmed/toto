@@ -35,7 +35,7 @@ class TOTO_Statistics {
 		$this->query_args = array_merge( [
 			'nid'        => $this->nid,
 			'start_date' => date( 'Y-m-d', strtotime( '-1 month' ) ),
-			'end_date'   => date( 'Y-m-d' ),
+			'end_date'   => date( 'Y-m-d', strtotime( 'tomorrow' ) ),
 		], $args );
 
 	}
@@ -398,11 +398,15 @@ class TOTO_Statistics {
         </div>
 	<?php }
 
-	public function render_top_pages() {
+	public function render_tables() {
 
 		echo '<div class="statistics-tables">';
 		if ( 'EMOJI_FEEDBACK' == $this->type ) {
 			include TOTO_INCLUDES . '/admin/views/pages/statistics-top-emoji.php';
+		}
+
+		if ( 'EMAIL_COLLECTOR' == $this->type ) {
+			include TOTO_INCLUDES . '/admin/views/pages/statistics-submitted-email.php';
 		}
 
 		include TOTO_INCLUDES . '/admin/views/pages/statistics-top-pages.php';
@@ -436,6 +440,40 @@ class TOTO_Statistics {
                     `type`
                 ORDER BY
                     `total` DESC
+                LIMIT {$offset}, {$per_page}
+                ";
+
+		return $wpdb->get_results( $sql );
+	}
+
+	public function get_submitted_email() {
+		global $wpdb;
+
+		$table = $wpdb->prefix . 'toto_notification_statistics';
+
+		$nid        = intval( $this->query_args['nid'] );
+		$start_date = esc_attr( $this->query_args['start_date'] );
+		$end_date   = esc_attr( $this->query_args['end_date'] );
+
+		$per_page = ! empty( $this->query_args['per_page'] ) ? intval( $this->query_args['per_page'] ) : 10;
+		$page     = ! empty( $this->query_args['page'] ) ? intval( $this->query_args['page'] ) : 1;
+		$offset   = $per_page * ( $page - 1 );
+
+		$where = " WHERE notification_id = {$nid} ";
+
+		$where .= " AND (`created_at` BETWEEN '{$start_date}' AND '{$end_date}')";
+		$where .= " AND `type` = 'submissions' ";
+
+
+		$sql = "SELECT
+                     `data` AS `email`,
+                     `ip`,
+                     `url`
+                FROM {$table} {$where}
+                GROUP BY
+                    `data`
+                ORDER BY
+                    `created_at` DESC
                 LIMIT {$offset}, {$per_page}
                 ";
 

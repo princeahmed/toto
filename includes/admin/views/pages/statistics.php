@@ -13,7 +13,7 @@
 
 	$statistics->chart();;
 
-	$statistics->render_top_pages();
+	$statistics->render_tables();
 
 	?>
 

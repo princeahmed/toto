@@ -14,6 +14,17 @@
                 },
 
                 success: () => {
+
+                    if (!$('.post-state', $(this).parents('tr')).length) {
+                        $('.row-title', $(this).parents('tr')).after(` — <span class="post-state"><span style="color: #a00;">Disabled</span></span>`)
+                    }
+
+                    if (checked) {
+                        $('.post-state', $(this).parents('tr')).removeClass('hidden');
+                    } else {
+                        $('.post-state', $(this).parents('tr')).addClass('hidden');
+                    }
+
                     const text = checked ? 'Disabled' : 'Enabled';
 
                     Swal.fire({
@@ -41,6 +52,7 @@
                 },
 
                 success: res => {
+
 
                     const header = `Type: ${res.type}`;
 

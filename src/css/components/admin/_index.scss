@@ -1,15 +1,24 @@
 .wp-list-table {
   .type-toto_notification {
 
-    & > td,& > th {
+    & > td, & > th {
       vertical-align: middle;
+    }
+
+    .toto-n-type {
+      font-size: 16px;
+
+      svg {
+        font-size: 20px;
+        margin-right: 5px;
+      }
     }
 
     .toto-n-shortcode {
       display: flex;
       align-items: center;
 
-      .fa-copy{
+      .fa-copy {
         background: #96C03D;
         padding: 7px;
         border-radius: 50%;
@@ -35,6 +44,6 @@
   }
 }
 
-.swal2-content .toto-wrapper{
+.swal2-content .toto-wrapper {
   margin: 20px auto;
 }

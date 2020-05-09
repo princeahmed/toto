@@ -53,23 +53,6 @@ import Notification from "./class-notification";
 
         },
 
-        send_submission_data: params => {
-
-            wp.ajax.send('toto_save_data', {
-                data: {data: params},
-
-                success: (res) => {
-                    console.log(res);
-                },
-
-                error: (error) => {
-                    console.log(error);
-                }
-
-            });
-
-        },
-
         send_statistics_data: params => {
 
             wp.ajax.send('toto_save_statistics', {

@@ -438,8 +438,8 @@ $fields->footer_text = ob_get_clean();
 
 //Agreement
 ob_start(); ?>
-    <div class="toto-form-group toto-switch-group">
-        <input type="checkbox" id="settings_show_agreement" name="settings[show_agreement]" <?php checked( true, $show_agreement ); ?> >
+    <div class="toto-form-group toto-switch-group" data-target="#settings_agreement_text,#settings_agreement_url">
+        <input type="checkbox" class="handle-toggle" id="settings_show_agreement" name="settings[show_agreement]" <?php checked( true, $show_agreement ); ?> >
 
         <label class="clickable" for="settings_show_agreement">Show Agreement</label>
 
@@ -568,7 +568,7 @@ ob_start(); ?>
 
 		?>
         <select name="settings[notification_sound]" id="settings_notification_sound">
-            <option value="-1"><?php _e( 'Select Sound', 'toto' ) ?></option>
+            <option value=""><?php _e( 'Select Sound', 'toto' ) ?></option>
 			<?php
 
 			foreach ( $sounds as $key => $title ) {
@@ -580,7 +580,7 @@ ob_start(); ?>
 
         <div class="play-sound hidden">
             <audio id="toto-sound">
-                <source src="<?php echo TOTO_ASSETS . '/sounds/' . $notification_sound . '.mp3'; ?>" type="audio/mpeg">
+                <source src="<?php echo ! empty( $notification_sound ) ? TOTO_ASSETS . '/sounds/' . $notification_sound . '.mp3' : ''; ?>" type="audio/mpeg">
                 Your browser does not support the audio element.
             </audio>
         </div>
