@@ -149,6 +149,7 @@
                 share_linkedin: `toto-${type}-button-linkedin`,
             };
 
+
             for (let [key, target] of Object.entries(toggleHandler)) {
                 $(`#settings_${key}`).on('change paste keyup', function () {
                     $(`#notification_preview .${target}`).toggleClass('hidden');

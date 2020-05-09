@@ -673,19 +673,19 @@ ob_start(); ?>
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_share_facebook" name="settings[share_facebook]" <?php checked( true, $share_facebook ); ?> >
 
-        <label class="clickable" for="settings_show_excited"><i class="fab fa-facebook"></i> Facebook Share</label>
+        <label class="clickable" for="settings_share_facebook"><i class="fab fa-facebook"></i> Facebook Share</label>
     </div>
 
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_share_twitter" name="settings[share_twitter]" <?php checked( true, $share_twitter ); ?> >
 
-        <label class="clickable" for="settings_show_excited"><i class="fab fa-twitter"></i> Twitter Share</label>
+        <label class="clickable" for="settings_share_twitter"><i class="fab fa-twitter"></i> Twitter Share</label>
     </div>
 
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_share_linkedin" name="settings[share_linkedin]" <?php checked( true, $share_linkedin ); ?> >
 
-        <label class="clickable" for="settings_show_excited"><i class="fab fa-linkedin"></i> Linkedin Share</label>
+        <label class="clickable" for="settings_share_linkedin"><i class="fab fa-linkedin"></i> Linkedin Share</label>
     </div>
 <?php
 $fields->share_url = ob_get_clean();

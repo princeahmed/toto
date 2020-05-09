@@ -9,7 +9,7 @@
 			$video = '';
 			if ( ! empty( $notification->video ) ) {
 				parse_str( parse_url( $notification->video, PHP_URL_QUERY ), $url_parts );
-				$video = $url_parts['v'];
+				$video = !empty($url_parts['v']) ? $url_parts['v'] : '';
 			}
 			?>
             <iframe class="toto-video-video-iframe" src="https://youtube.com/embed/<?php echo $video ?>" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
