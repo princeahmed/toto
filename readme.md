@@ -8,9 +8,11 @@ Completed:
 
 Todo:
 ---
-* Custom Notifications - Include with 
+* Custom Notifications - Include with custom data
                          latest conversations (Repeater)
                          Conversions Counter (Repeater)
+                         RANDOM_REVIEW (Repeater)
+                         
                          
 * PRO - Random Review, Countdown
 

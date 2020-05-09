@@ -46,6 +46,11 @@ export default class Notification {
     /* Function to build the toast element */
     build() {
 
+        /* check if already converted */
+        if (localStorage.getItem(`notification_${this.options.notification_id}_converted`)) {
+            return false;
+        }
+
         /* Display once per session option handle */
         if (this.options.once_per_session) {
 

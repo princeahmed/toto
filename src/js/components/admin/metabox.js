@@ -96,6 +96,7 @@
                 conversion_count: `toto-${type}-conversion-count`,
                 content_title: `toto-${type}-content-title`,
                 content_description: `toto-${type}-content-description`,
+                link_url_text: `toto-${type}-url>a`
             };
 
             for (let [key, target] of Object.entries(textHandlers)) {

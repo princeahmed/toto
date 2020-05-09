@@ -238,7 +238,14 @@ import Notification from "./class-notification";
                     main_element.querySelector('.toto-cookie-notification-button').addEventListener('click', event => {
 
                         const notification_id = main_element.getAttribute('data-notification-id');
-                        $.toto.remove_notification(main_element);
+
+                        $.toto.send_statistics_data({
+                            ...$.toto.user(),
+                            notification_id,
+                            type: 'click',
+                        });
+
+                        $.toto.notification.remove_notification(main_element);
 
                         /* Make sure to let the browser know of the conversion so that it is not shown again */
                         localStorage.setItem(`notification_${notification_id}_converted`, true);
