@@ -692,9 +692,9 @@ $fields->share_url = ob_get_clean();
 
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_video">YouTube Video Embed Url</label>
+        <label for="settings_video">YouTube Video Url</label>
         <input type="text" id="settings_video" name="settings[video]" value="<?php echo $video ?>"/>
-        <p class="description">Ex: https://www.youtube.com/embed/3WxQgvuT6ZI</p>
+        <p class="description">Ex: https://www.youtube.com/watch?v=3WxQgvuT6ZI</p>
     </div>
 <?php
 $fields->video = ob_get_clean();

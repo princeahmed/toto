@@ -127,8 +127,7 @@ class Toto_Notifications {
 				"icon" => "fa fa-video",
 
 				'title'       => ! empty( $settings->title ) ? $settings->title : "Demo of the product 🔥",
-				//'video'       => ! empty( $settings->video ) ? $settings->video : "https://www.youtube.com/embed/zWZa05uaiNA",
-				'video'       => '',
+				'video'       => ! empty( $settings->video ) ? $settings->video : "https://www.youtube.com/embed/zWZa05uaiNA",
 				'button_text' => ! empty( $settings->button_text ) ? $settings->button_text : "Sign up 🙌",
 			], $default ),
 
@@ -313,7 +312,7 @@ class Toto_Notifications {
 	public static function statistics_types( $type ) {
 
 		$types = [ 'impression', 'hover' ];
-		if ( in_array( $type, [ 'INFORMATIONAL', 'COUPON', 'LIVE_COUNTER', 'RANDOM_REVIEW' ] ) ) {
+		if ( in_array( $type, [ 'INFORMATIONAL', 'COUPON', 'LIVE_COUNTER', 'RANDOM_REVIEW', 'VIDEO' ] ) ) {
 			$types[] = 'click';
 		} elseif ( in_array( $type, [ 'EMAIL_COLLECTOR', ] ) ) {
 			$types[] = 'submissions';

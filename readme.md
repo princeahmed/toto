@@ -8,6 +8,10 @@ Completed:
 
 Todo:
 ---
+* Custom Notifications - Include with 
+                         latest conversations (Repeater)
+                         Conversions Counter (Repeater)
+                         
 * PRO - Random Review, Countdown
 
 2. Add Pagination On Data Page
