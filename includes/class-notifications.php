@@ -229,86 +229,78 @@ class Toto_Notifications {
 		return $type ? $all[ $type ] : $all;
 	}
 
-	public static function get_view( $post_id, $preview = false, $shortcode = false ) {
+	public static function get_view( $post_id, $shortcode = false ) {
 
 		$type         = get_post_meta( $post_id, '_notification_type', true );
 		$notification = (object) self::get_config( $type, $post_id );
 
+		$config = [
+			'display_mobile'        => $notification->display_mobile,
+			'display_trigger'       => $notification->display_trigger,
+			'display_trigger_value' => $notification->display_trigger_value,
+			'duration'              => $notification->display_duration == - 1 ? - 1 : $notification->display_duration * 1000,
+			'url'                   => $notification->url,
+			'close'                 => $notification->display_close_button,
+			'once_per_session'      => $notification->display_once_per_session,
+			'stop_on_focus'         => true,
+			'notification_id'       => $post_id,
+			'notification_type'     => $type,
+			'enable_sound'          => $notification->enable_sound,
+			'notification_sound'    => TOTO_ASSETS . '/sounds/' . $notification->notification_sound . '.mp3',
+			'sound_volume'          => $notification->sound_volume,
+		];
 
-		if ( ! $preview ) {
-			$type = get_post_meta( $post_id, '_notification_type', true );
+		$attr = [
+			'data-notification-id' => $post_id,
+		];
 
-			$config = [
-				'display_mobile'        => $notification->display_mobile,
-				'display_trigger'       => $notification->display_trigger,
-				'display_trigger_value' => $notification->display_trigger_value,
-				'duration'              => $notification->display_duration == - 1 ? - 1 : $notification->display_duration * 1000,
-				'url'                   => $notification->url,
-				'close'                 => $notification->display_close_button,
-				'once_per_session'      => $notification->display_once_per_session,
-				'stop_on_focus'         => true,
-				'notification_id'       => $post_id,
-				'notification_type'     => $type,
-				'enable_sound'          => $notification->enable_sound,
-				'notification_sound'    => TOTO_ASSETS . '/sounds/' . $notification->notification_sound . '.mp3',
-				'sound_volume'          => $notification->sound_volume,
-			];
+		$classes = [ 'toto' ];
 
-			$attr = [
-				'data-notification-id' => $post_id,
-			];
-
-			$classes = [ 'toto' ];
-
-			if ( $shortcode ) {
-				$classes[]              = 'shortcode';
-				$config['shortcode']    = true;
-				$config['position']     = null;
-				$attr['data-shortcode'] = "toto_notification_$post_id";
-			}
-
-			if ( ! $shortcode ) {
-				$classes[]             = "toto-{$notification->display_position}";
-				$attr['id']            = "toto_notification_$post_id";
-				$attr['data-position'] = $notification->display_position;
-			}
-
-			$attr['data-config'] = json_encode( $config );
-
-
-			ob_start();
-			?>
-
-            <div class="<?php echo implode( ' ', $classes ); ?>"
-				<?php
-
-				foreach ( $attr as $key => $value ) {
-					printf( " %s='%s'", $key, $value );
-				}
-
-				?>
-            >
-				<?php include TOTO_INCLUDES . '/admin/views/notifications/view/' . strtolower( $type ) . '.php'; ?>
-            </div>
-			<?php
-			echo ob_get_clean();
-		} else {
-			return include TOTO_INCLUDES . '/admin/views/notifications/view/' . strtolower( $type ) . '.php';
+		if ( $shortcode ) {
+			$classes[]              = 'shortcode';
+			$config['shortcode']    = true;
+			$config['position']     = null;
+			$attr['data-shortcode'] = "toto_notification_$post_id";
 		}
+
+		if ( ! $shortcode ) {
+			$classes[]             = "toto-{$notification->display_position}";
+			$attr['id']            = "toto_notification_$post_id";
+			$attr['data-position'] = $notification->display_position;
+		}
+
+		$attr['data-config'] = json_encode( $config );
+
+		ob_start();
+		?>
+
+        <div class="<?php echo implode( ' ', $classes ); ?>"
+			<?php
+
+			foreach ( $attr as $key => $value ) {
+				printf( " %s='%s'", $key, $value );
+			}
+
+			?>
+        >
+			<?php include TOTO_INCLUDES . '/admin/views/notifications/view/' . strtolower( $type ) . '.php'; ?>
+        </div>
+		<?php
+		echo ob_get_clean();
 
 	}
 
-	public static function preview( $type, $post_id = false ) {
+	public static function preview( $type ) {
+		$notification = (object) self::get_config( $type );
 
 		ob_start();
-		self::get_view( $post_id, true );
-		$notification = ob_get_clean();
+		include TOTO_INCLUDES . '/admin/views/notifications/view/' . strtolower( $type ) . '.php';
 
 		echo preg_replace( [ '/<form/', '/<\/form>/', '/required=\"required\"/' ], [
 			'<div',
 			'</div>',
 			''
-		], $notification );
+		], ob_get_clean() );
 	}
 
 	/**

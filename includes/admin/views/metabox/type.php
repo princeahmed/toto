@@ -5,9 +5,11 @@
 	$active_modules = toto_get_options( 'active_modules', $default );
 
 	foreach ( Toto_Notifications::get_config() as $type => $config ) {
-		if ( ! in_array( $type, $active_modules ) ) {
-			continue;
-		}
+
+//		if ( ! in_array( $type, $active_modules ) ) {
+//			continue;
+//		}
+
 		?>
         <div class="toto-notification-type <?php echo $current_type == $type ? 'active' : ''; ?>">
 

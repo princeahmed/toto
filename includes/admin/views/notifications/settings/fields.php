@@ -543,7 +543,7 @@ $fields->pulse_background_color = ob_get_clean();
 //Trigger Session
 ob_start(); ?>
     <div class="toto-form-group toto-switch-group" data-target="#settings_notification_sound,#settings_sound_volume">
-        <input type="checkbox" id="settings_enable_sound" name="settings[enable_sound]" <?php checked( true, $enable_sound ); ?> >
+        <input type="checkbox" class="handle-toggle" id="settings_enable_sound" name="settings[enable_sound]" <?php checked( true, $enable_sound ); ?> >
 
         <label class="clickable" for="settings_enable_sound">Enable Notification Sound</label>
 

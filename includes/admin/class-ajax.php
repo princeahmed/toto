@@ -43,12 +43,10 @@ class Toto_Admin_Ajax {
 				?>
             </div>
 		<?php }
-		$content_html = ob_get_clean();
+		$html = ob_get_clean();
 
 		wp_send_json_success( [
-			'html' => [
-				'content' => $content_html,
-			]
+			'html' => $html,
 		] );
 
 	}
@@ -57,7 +55,7 @@ class Toto_Admin_Ajax {
 	 * Handle notification post_status change
 	 */
 	public function handle_status_change() {
-	    //todo nonce check
+		//todo nonce check
 
 		$post_id = ! empty( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : '';
 		$status  = ! empty( $_REQUEST['status'] ) ? wp_unslash( $_REQUEST['status'] ) : 'draft';
@@ -79,7 +77,7 @@ class Toto_Admin_Ajax {
 	 */
 	public function get_statistics() {
 
-		include TOTO_INCLUDES.'/class-statistics.php';
+		include TOTO_INCLUDES . '/class-statistics.php';
 
 		$nid        = ! empty( $_REQUEST['nid'] ) ? intval( $_REQUEST['nid'] ) : '';
 		$start_date = ! empty( $_REQUEST['start_date'] ) ? wp_unslash( $_REQUEST['start_date'] ) : '';
@@ -107,9 +105,9 @@ class Toto_Admin_Ajax {
 		$tables_html = ob_get_clean();
 
 		wp_send_json_success( [
-			'summary_html'   => $summary_html,
-			'chart_html'     => $chart_html,
-			'tables_html' => $tables_html,
+			'summary_html' => $summary_html,
+			'chart_html'   => $chart_html,
+			'tables_html'  => $tables_html,
 		] );
 
 	}
@@ -118,7 +116,7 @@ class Toto_Admin_Ajax {
 	 * Get notification preview
 	 */
 	public function notification_preview() {
-	    //todo nonce checker
+		//todo nonce checker
 
 		$post_id   = ! empty( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : '';
 		$type      = get_post_meta( $post_id, '_notification_type', true );

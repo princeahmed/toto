@@ -21,6 +21,8 @@
             $(document).on('click', '.toto-remove-image', app.removeImage);
             $(document).on('click', '.toto-next, .toto-prev', app.handlePrevNext);
             $(document).on('change', '#settings_notification_sound', app.playSound);
+            
+            $(document).on('change', '.handle-toggle', app.handleToggle);
         },
 
         playSound: function () {
@@ -36,7 +38,6 @@
         handleToggle: function () {
             const target = $(this).parent().data('target');
             $(target).parent().toggleClass('hidden');
-
         },
 
         previewHandler: () => {
@@ -268,33 +269,33 @@
         },
 
         selectType: function () {
+
             $('.toto-notification-type').removeClass('active').find('input').prop('checked', false);
             $(this).addClass('active').find('input').prop('checked', true);
 
             $('.notification-preview-content').html($('.preview', $(this)).html());
 
-            app.updateFields(this);
-
-        },
-
-        updateFields: ($this) => {
+            const type = $('input', $(this)).val();
+            const post_id = $('#post_ID').val();
 
             wp.ajax.send('toto_update_fields', {
                 data: {
-                    type: $('input', $this).val(),
-                    post_id: $('#post_ID').val(),
+                    type,
+                    post_id,
                     _wpnonce: toto._wpnonce
                 },
 
                 success: res => {
                     $('.toto-tab-content>div:not(#notification_type)').remove();
-                    $('#notification_type').after(res.html.content);
-                    app.init();
+                    $('#notification_type').after(res.html);
 
+                    app.initSelect2();
+                    app.previewHandler();
                 },
 
                 error: error => console.log(error)
-            })
+            });
+
         },
 
         toggleTriggerContent: function () {
