@@ -3,7 +3,7 @@
 
 	<?php
 
-    include TOTO_INCLUDES.'/class-statistics.php';
+	include_once TOTO_INCLUDES . '/class-statistics.php';
 
 	$statistics = new TOTO_Statistics();
 
@@ -11,9 +11,9 @@
 
 	$statistics->summary();
 
-	$statistics->chart();
+	$statistics->chart();;
 
-	$statistics->top_pages();
+	$statistics->render_top_pages();
 
 	?>
 

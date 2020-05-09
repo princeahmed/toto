@@ -26,11 +26,6 @@ class Toto_Admin {
 	 */
 	public function admin_menu() {
 
-		add_submenu_page( 'edit.php?post_type=toto_notification', 'Notification Data', 'Data', 'manage_options', 'notification-data', [
-			$this,
-			'render_data_page'
-		] );
-
 		add_submenu_page( 'edit.php?post_type=toto_notification', 'Notification Statistics', 'Statistics', 'manage_options', 'notification-statistics', [
 			$this,
 			'render_statistics_page'
@@ -44,12 +39,6 @@ class Toto_Admin {
 		include TOTO_INCLUDES . '/admin/views/pages/statistics.php';
 	}
 
-	/**
-	 * Render the admin data page
-	 */
-	public function render_data_page() {
-		include TOTO_INCLUDES . '/admin/views/pages/data.php';
-	}
 
 	public function post_columns( $columns ) {
 		unset( $columns['date'] );
@@ -67,12 +56,14 @@ class Toto_Admin {
 		if ( 'preview' == $column ) { ?>
             <a href="#" class="toto-n-preview" data-post_id="<?php echo $post_id; ?>">
                 <i class="dashicons dashicons-visibility toto-mr-5"></i> Preview </a>
-		<?php } elseif ( 'type' == $column ) {
+
+        <?php } elseif ( 'type' == $column ) {
 			$type      = get_post_meta( $post_id, '_notification_type', true );
 			$type_name = ! empty( $type ) ? Toto_Notifications::get_config( $type )['name'] : '';
 			?>
             <span class="toto-n-type"><?php echo $type_name; ?></span>
-		<?php } elseif ( 'status' == $column ) { ?>
+
+        <?php } elseif ( 'status' == $column ) { ?>
             <div class="toto-switcher">
                 <input type="checkbox" class="toto_n_status" id="notification-<?php echo $post_id; ?>" value="<?php echo $post_id; ?>"
 					<?php checked( 'publish', get_post_status( $post_id ) ); ?> />
@@ -81,7 +72,8 @@ class Toto_Admin {
                     <label for="notification-<?php echo $post_id; ?>"></label>
                 </div>
             </div>
-		<?php } elseif ( 'shortcode' == $column ) { ?>
+
+        <?php } elseif ( 'shortcode' == $column ) { ?>
             <span class="toto-n-shortcode" title="<?php _e('Copy Shortcode', 'toto') ?>"><i class="fa fa-copy"></i> <code>[toto id=<?php echo $post_id; ?>]</code></span>
 		<?php }
 	}

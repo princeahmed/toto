@@ -16,6 +16,7 @@ $display_close_button     = ! empty( $notification['display_close_button'] ) ? $
 $display_branding         = ! empty( $notification['display_branding'] ) ? $notification['display_branding'] : '';
 $trigger_on               = ! empty( $notification['trigger_on'] ) ? $notification['trigger_on'] : '';
 $trigger_locations        = ! empty( $notification['trigger_locations'] ) ? $notification['trigger_locations'] : '';
+$display_for              = ! empty( $notification['display_for'] ) ? $notification['display_for'] : '';
 $custom_post_page_ids     = ! empty( $notification['custom_post_page_ids'] ) ? $notification['custom_post_page_ids'] : '';
 $triggers                 = ! empty( $notification['triggers'] ) ? $notification['triggers'] : '';
 $display_trigger          = ! empty( $notification['display_trigger'] ) ? $notification['display_trigger'] : '';
@@ -36,9 +37,6 @@ $button_color             = ! empty( $notification['button_color'] ) ? $notifica
 $number_color             = ! empty( $notification['number_color'] ) ? $notification['number_color'] : '';
 $number_background_color  = ! empty( $notification['number_background_color'] ) ? $notification['number_background_color'] : '';
 $pulse_background_color   = ! empty( $notification['pulse_background_color'] ) ? $notification['pulse_background_color'] : '';
-$data_send_is_enabled     = ! empty( $notification['data_send_is_enabled'] ) ? $notification['data_send_is_enabled'] : '';
-$data_send_webhook        = ! empty( $notification['data_send_webhook'] ) ? $notification['data_send_webhook'] : '';
-$data_send_email          = ! empty( $notification['data_send_email'] ) ? $notification['data_send_email'] : '';
 $minimum_activity         = ! empty( $notification['minimum_activity'] ) ? $notification['minimum_activity'] : '';
 $enable_sound             = ! empty( $notification['enable_sound'] ) ? $notification['enable_sound'] : '';
 $notification_sound       = ! empty( $notification['notification_sound'] ) ? $notification['notification_sound'] : '';
@@ -279,7 +277,7 @@ ob_start();
         <p class="description">Where should the notification show?</p>
     </div>
 
-    <div class="toto-form-group flex-row align-center <?php echo 'selected' == $trigger_on ? '' : 'hidden'; ?>">
+    <div class="toto-form-group <?php echo 'selected' == $trigger_on ? '' : 'hidden'; ?>">
         <label for="settings_trigger_locations" class="toto-mr-20">Select Locations: </label>
         <select name="settings[trigger_locations][]" class="toto-select2" id="settings_trigger_locations" multiple>
 			<?php
@@ -288,6 +286,7 @@ ob_start();
 			}
 			?>
         </select>
+        <p class="description">You can select multiple locations.</p>
     </div>
 
     <div class="toto-form-group <?php echo ! empty( $trigger_locations ) && in_array( 'is_custom', $trigger_locations ) ? '' : 'hidden'; ?>">
@@ -298,6 +297,33 @@ ob_start();
 
 <?php
 $fields->trigger = ob_get_clean();
+
+ob_start();
+?>
+    <div class="toto-form-group flex-row flex-wrap">
+        <label for="settings_display_for_all" class="toto-mr-20">Display For: </label>
+
+        <div class="toto-label-group">
+            <input type="radio" id="settings_display_for_all" name="settings[display_for]" value="all" <?php checked( 'all', $display_for ); ?>>
+            <label for="settings_display_for_all">Everyone</label>
+        </div>
+
+        <div class="toto-label-group">
+            <input type="radio" id="settings_display_for_logged_in" name="settings[display_for]" value="logged_in" <?php checked( 'logged_in', $display_for ); ?>>
+            <label for="settings_display_for_logged_in">Logged In Users</label>
+        </div>
+
+        <div class="toto-label-group">
+            <input type="radio" id="settings_display_for_logged_out" name="settings[display_for]" value="logged_out" <?php checked( 'logged_out', $display_for ); ?>>
+            <label for="settings_display_for_logged_out">Logged Out Users</label>
+        </div>
+
+        <div class="toto-break"></div>
+        <p class="description">Who should see the notification?</p>
+    </div>
+
+<?php
+$fields->display_for = ob_get_clean();
 
 //Display Trigger
 ob_start(); ?>
@@ -513,30 +539,6 @@ ob_start(); ?>
 <?php
 
 $fields->pulse_background_color = ob_get_clean();
-
-//Send Caught Data to External
-ob_start(); ?>
-    <div class="toto-form-group toto-switch-group">
-        <input type="checkbox" id="settings_data_send_is_enabled" name="settings[data_send_is_enabled]" <?php checked( true, $data_send_is_enabled ); ?> >
-
-        <label class="clickable" for="settings_data_send_is_enabled">Send Caught Data to External</label>
-    </div>
-
-    <div id="data_send" class="container-disabled">
-        <div class="toto-form-group">
-            <label for="settings_data_send_webhook">Webhook</label>
-            <input type="text" id="settings_data_send_webhook" name="settings[data_send_webhook]" value="<?php echo $data_send_webhook; ?>" placeholder="Webhook URL"/>
-            <p class="description">Leave empty to disable this field.</p>
-        </div>
-
-        <div class="toto-form-group">
-            <label for="settings_data_send_email">Email</label>
-            <input type="text" id="settings_data_send_email" name="settings[data_send_email]" value="<?php echo $data_send_email; ?>" placeholder="Valid email address"/>
-            <p class="description">Leave empty to disable this field.></p>
-        </div>
-    </div>
-<?php
-$fields->data_send_is_enabled = ob_get_clean();
 
 //Trigger Session
 ob_start(); ?>

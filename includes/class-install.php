@@ -30,15 +30,6 @@ class Toto_Install {
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
 		$tables = [
-			"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}toto_notification_data(
-         	id bigint(20) NOT NULL AUTO_INCREMENT,
-			notification_id bigint(20) NOT NULL,
-			data longtext DEFAULT NULL,
-			created_at DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
-			PRIMARY KEY  (id),
-			key notification_id (notification_id)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;",
-
 			"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}toto_notification_statistics(
          	id bigint(20) NOT NULL AUTO_INCREMENT,
          	unique_id varchar (32) NOT NULL DEFAULT '',

@@ -1,13 +1,10 @@
 .wp-list-table {
   .type-toto_notification {
 
-
     & > td,& > th {
       vertical-align: middle;
     }
 
-    .toto-n-type {
-    }
     .toto-n-shortcode {
       display: flex;
       align-items: center;
@@ -29,11 +26,15 @@
 
       .toto-n-preview {
         background: #96C03D;
-        padding: 10px;
+        padding: 7px 10px;
         border-radius: 5px;
         color: white;
       }
 
     }
   }
+}
+
+.swal2-content .toto-wrapper{
+  margin: 20px auto;
 }

@@ -12,6 +12,7 @@ class Toto_Notifications {
 			'url'                      => ! empty( $settings->url ) ? $settings->url : '',
 			'trigger_on'               => ! empty( $settings->trigger_on ) ? $settings->trigger_on : 'all',
 			'trigger_locations'        => ! empty( $settings->trigger_locations ) ? $settings->trigger_locations : [],
+			'display_for'              => ! empty( $settings->display_for ) ? $settings->display_for : 'all',
 			'triggers'                 => ! empty( $settings->triggers ) ? $settings->triggers : [],
 			'display_trigger'          => ! empty( $settings->display_trigger ) ? $settings->display_trigger : 'delay',
 			'display_trigger_value'    => ! empty( $settings->display_trigger_value ) ? $settings->display_trigger_value : 2,
@@ -38,10 +39,6 @@ class Toto_Notifications {
 			'show_agreement' => isset( $settings->show_agreement ) ? $settings->show_agreement : false,
 			'agreement_text' => ! empty( $settings->agreement_text ) ? $settings->agreement_text : "I read & agree the Privacy Policy",
 			'agreement_url'  => ! empty( $settings->agreement_url ) ? $settings->agreement_url : '',
-
-			'data_send_is_enabled' => ! empty( $settings->data_send_is_enabled ) ? $settings->data_send_is_enabled : 0,
-			'data_send_webhook'    => ! empty( $settings->data_send_webhook ) ? $settings->data_send_webhook : '',
-			'data_send_email'      => ! empty( $settings->data_send_email ) ? $settings->data_send_email : '',
 
 			'number_color'            => ! empty( $settings->number_color ) ? $settings->number_color : '#fff',
 			'number_background_color' => ! empty( $settings->number_background_color ) ? $settings->number_background_color : '#000',
@@ -323,11 +320,11 @@ class Toto_Notifications {
 	 */
 	public static function statistics_types( $type ) {
 
-		$types = [];
+		$types = [ 'impression', 'hover' ];
 		if ( in_array( $type, [ 'INFORMATIONAL', 'COUPON', 'RANDOM_REVIEW' ] ) ) {
-			$types = [ 'impression', 'hover', 'click', ];
+			$types[] = [ 'click', ];
 		} elseif ( in_array( $type, [ 'EMAIL_COLLECTOR', ] ) ) {
-			$types = [ 'impression', 'hover', 'submissions', ];
+			$types[] = [ 'submissions', ];
 		}
 
 		return $types;
@@ -345,6 +342,7 @@ class Toto_Notifications {
 
 		$default_display = [
 			'trigger',
+			'display_for',
 			'display_trigger',
 			'display_duration',
 			'display_position',
@@ -553,25 +551,39 @@ class Toto_Notifications {
 	 */
 	public static function can_show( $notification_id ) {
 
-		$trigger_on = get_post_meta( $notification_id, '_settings', true );
+		$settings = get_post_meta( $notification_id, '_settings', true );
 
-		if ( empty( $trigger_on['trigger_on'] ) ) {
+		//don't show on login/ reg pages
+		if ( $GLOBALS['pagenow'] === 'wp-login.php' ) {
+			return false;
+		}
+
+		//check display for
+		if ( ! empty( $display_for = $settings['display_for'] ) ) {
+			if ( 'logged_in' == $display_for && ! is_user_logged_in() ) {
+				return false;
+			}
+			if ( 'logged_out' == $display_for && is_user_logged_in() ) {
+				return false;
+			}
+		}
+
+		//check trigger locations
+		if ( empty( $settings['trigger_on'] ) ) {
 			return true;
 		}
 
-		$trigger_on = $trigger_on['trigger_on'];
+		$trigger_on = $settings['trigger_on'];
 
 		if ( $trigger_on == 'all' ) {
 			return true;
 		}
 
-		$locations = get_post_meta( $notification_id, '_settings', true );
-
-		if ( empty( $locations['trigger_locations'] ) ) {
+		if ( empty( $settings['trigger_locations'] ) ) {
 			return true;
 		}
 
-		$locations = $locations['trigger_locations'];
+		$locations = $settings['trigger_locations'];
 
 		if ( in_array( 'is_custom', $locations ) ) {
 			$ids = get_post_meta( $notification_id, '_settings', true )['custom_post_page_ids'];

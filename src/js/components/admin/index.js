@@ -1,17 +1,27 @@
 ;(function ($) {
     $(document).ready(function () {
 
-        Swal.fire('Any fool can use a computer');
-
         //Change notification status
         $('.column-status .toto-switcher').on('click', function () {
             const input = $('input', $(this));
             const checked = input.is(':checked');
+            const status = checked ? 'draft' : 'publish'
 
             wp.ajax.send('toto_n_status', {
                 data: {
                     post_id: input.val(),
-                    status: checked ? 'draft' : 'publish',
+                    status,
+                },
+
+                success: () => {
+                    const text = checked ? 'Disabled' : 'Enabled';
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Notification ' + text,
+                        timer: 2000,
+                        showConfirmButton: false,
+                    });
                 },
 
                 error: error => console.log(error)
@@ -24,11 +34,6 @@
             e.preventDefault();
 
             const postId = $(this).data('post_id');
-            const modal = $('#toto_modal');
-            const ph = $('.ph-item', modal);
-
-            modal.removeClass('hidden');
-            ph.removeClass('hidden');
 
             wp.ajax.send('toto_notification_preview', {
                 data: {
@@ -39,12 +44,14 @@
 
                     const header = `Type: ${res.type}`;
 
-                    $('.toto-modal-header h2', modal).html(header);
-                    $('.modal-body-content', modal).html(res.html);
+                    Swal.fire({
+                        //title: res.type,
+                        html: res.html,
+                        showCloseButton: true,
+                        showConfirmButton: false,
+                    });
 
                 },
-
-                complete: () => ph.addClass('hidden'),
 
                 error: error => console.log(error)
             })
@@ -52,27 +59,6 @@
 
         });
 
-        //hide notification preview on .close click
-        $(document).on('click', '.toto-modal-close', function () {
-            const modal = $(this).parents('.toto-modal');
-            modal.addClass('hidden');
-            $('.modal-body-content', modal).html('');
-            $('.toto-modal-header h2', modal).html('');
-            $('.ph-item', modal).removeClass('hidden')
-        });
-
-        //hide notification preview on out click
-        $('.toto-modal').not('.toto-modal-content').on('click', function (e) {
-            if (e.target !== this) {
-                return;
-            }
-
-            const modal = $(this);
-            modal.addClass('hidden');
-            $('.modal-body-content', modal).html('');
-            $('.toto-modal-header h2', modal).html('');
-            $('.ph-item', modal).removeClass('hidden')
-        });
 
         //Copy to clipboard
         $(document).on('click', '.toto-n-shortcode .fa-copy', function (e) {
@@ -85,6 +71,15 @@
             $temp.val(text).select();
             document.execCommand("copy");
             $temp.remove();
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Copied to Clipboard.',
+                text,
+                timer: 2000,
+                showConfirmButton: false,
+            });
+
         });
 
 

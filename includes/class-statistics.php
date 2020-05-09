@@ -7,10 +7,40 @@ class TOTO_Statistics {
 	public $type_title = [];
 	public $statistics_types;
 	public $query_args;
-	public $active_notifications;
 
 	public function __construct( $nid = false, $args = [] ) {
 
+		$this->nid  = $nid ? $nid : $this->get_active_notifications()[0]->ID;
+		$this->type = get_post_meta( $this->nid, '_notification_type', true );
+
+		$this->statistics_types = Toto_Notifications::statistics_types( $this->type );
+
+		$this->type_title = [
+			'impression'             => __( 'Impressions', 'toto' ),
+			'hover'                  => __( 'Mouse Hovers', 'toto' ),
+			'click'                  => __( 'Clicks', 'toto' ),
+			'submissions'            => __( 'Submissions', 'toto' ),
+			'feedback_emoji_angry'   => __( 'Feedback Emoji Angry', 'toto' ),
+			'feedback_emoji_sad'     => __( 'Feedback Emoji Sad', 'toto' ),
+			'feedback_emoji_neutral' => __( 'Feedback Emoji Neutral', 'toto' ),
+			'feedback_emoji_happy'   => __( 'Feedback Emoji Happy', 'toto' ),
+			'feedback_emoji_excited' => __( 'Feedback Emoji Excited', 'toto' ),
+			'feedback_score_1'       => __( 'Feedback Score 1', 'toto' ),
+			'feedback_score_2'       => __( 'Feedback Score 2', 'toto' ),
+			'feedback_score_3'       => __( 'Feedback Score 3', 'toto' ),
+			'feedback_score_4'       => __( 'Feedback Score 4', 'toto' ),
+			'feedback_score_5'       => __( 'Feedback Score 5', 'toto' ),
+		];
+
+		$this->query_args = array_merge( [
+			'nid'        => $this->nid,
+			'start_date' => date( 'Y-m-d', strtotime( '-1 month' ) ),
+			'end_date'   => date( 'Y-m-d' ),
+		], $args );
+
+	}
+
+	public function get_active_notifications() {
 		$args = [
 			'post_type'     => 'toto_notification',
 			'post_per_page' => - 1,
@@ -19,26 +49,7 @@ class TOTO_Statistics {
 			'orderby'       => 'date',
 		];
 
-		$this->active_notifications = get_posts( $args );
-
-		$this->nid              = $nid ? $nid : $this->active_notifications[0]->ID;
-		$this->type             = get_post_meta( $this->nid, '_notification_type', true );
-
-		$this->statistics_types = Toto_Notifications::statistics_types( $this->type );
-
-		$this->type_title       = [
-			'impression'  => __( 'Impressions', 'toto' ),
-			'hover'       => __( 'Mouse Hovers', 'toto' ),
-			'click'       => __( 'Clicks', 'toto' ),
-			'submissions' => __( 'Submissions', 'toto' ),
-		];
-
-		$this->query_args = array_merge( [
-			'nid'        => $this->nid,
-			'start_date' => date( 'Y-m-d', strtotime( '-7 days' ) ),
-			'end_date'   => date( 'Y-m-d' ),
-		], $args );
-
+		return get_posts( $args );
 	}
 
 	public function log_chart() {
@@ -70,6 +81,10 @@ class TOTO_Statistics {
                 ";
 
 		$logs = $wpdb->get_results( $sql, 'ARRAY_A' );
+
+		if ( empty( $logs ) ) {
+			return false;
+		}
 
 		/**
 		 * After getting the data
@@ -138,7 +153,6 @@ class TOTO_Statistics {
 
 		$table = $wpdb->prefix . 'toto_notification_statistics';
 
-
 		$nid        = intval( $this->query_args['nid'] );
 		$page       = ! empty( $this->query_args['page'] ) ? intval( $this->query_args['page'] ) : 1;
 		$per_page   = ! empty( $this->query_args['per_page'] ) ? intval( $this->query_args['per_page'] ) : 10;
@@ -198,40 +212,7 @@ class TOTO_Statistics {
 	}
 
 	public function filter_bar() {
-
-		?>
-        <div class="toto-mt-20 toto-filter-bar" id="toto_n_statistics_filter">
-            <div class="toto-input-group">
-                <div class="toto-form-group toto-mr-20">
-                    <label for="notification_id">Select Notification</label>
-                    <select name="notification_id" id="notification_id">
-						<?php
-
-						if ( ! empty( $this->active_notifications ) ) {
-							$posts = wp_list_pluck( $this->active_notifications, 'post_title', 'ID' );
-							foreach ( $posts as $id => $title ) {
-								printf( '<option value="%1$s">%2$s</option>', $id, $title );
-							}
-						}
-
-						?>
-
-                    </select>
-                </div>
-
-                <div class="toto-form-group toto-mr-20">
-                    <label for="start_date">Start Date</label>
-                    <input type="text" id="start_date" class="toto_date_field" name="start_date" value="<?php echo date( 'Y-m-d', strtotime( '-7 days' ) ); ?>">
-                </div>
-
-                <div class="toto-form-group toto-mr-20">
-                    <label for="end_date">End Date</label>
-                    <input type="text" id="end_date" class="toto_date_field" name="end_date" value="<?php echo date( 'Y-m-d', strtotime( 'today' ) ); ?>">
-                </div>
-
-            </div>
-        </div>
-		<?php
+		include TOTO_INCLUDES . '/admin/views/pages/statistics-filter-bar.php';
 	}
 
 	public function summary() { ?>
@@ -286,18 +267,15 @@ class TOTO_Statistics {
 				<?php
 
 				foreach ( $this->statistics_types as $statistics_type ) {
-					$count = ! empty( $this->log_chart()[ $statistics_type . '_total' ] ) ? $this->log_chart()[ $statistics_type . '_total' ] : 0;
-					?>
-                    <div class="statistics-summary">
-                        <div class="summary-icon">
-                            <img src="<?php echo TOTO_ASSETS . '/images/statistics/' . $statistics_type . '.png' ?>" alt="<?php echo $this->type_title[ $statistics_type ]; ?>">
-                        </div>
-                        <div class="summary-info">
-                            <div class="summary-number"><?php echo $count; ?></div>
-                            <div class="summary-title"><?php echo $this->type_title[ $statistics_type ]; ?></div>
-                        </div>
-                    </div>
-				<?php } ?>
+					include TOTO_INCLUDES . '/admin/views/pages/statistics-summary.php';
+				}
+
+				//emoji feedback summary
+				if ( 'EMOJI_FEEDBACK' == $this->type ) {
+					include TOTO_INCLUDES . '/admin/views/pages/statistics-summary-emoji.php';
+				}
+
+				?>
             </div>
         </div>
 		<?php
@@ -360,11 +338,54 @@ class TOTO_Statistics {
             </div>
 
             <div class="chart-content">
+
 				<?php if ( ! empty( $this->log_chart() ) ) {
 
+					//impression, hover & clicks
 					foreach ( $this->statistics_types as $statistics_type ) { ?>
                         <div class="chart-container">
                             <canvas id="<?php echo $statistics_type; ?>_chart" data-title="<?php echo $this->type_title[ $statistics_type ]; ?>" data-labels='<?php echo $this->log_chart()['labels']; ?>' data-value='<?php echo $this->log_chart()[ $statistics_type ]; ?>'></canvas>
+                        </div>
+					<?php }
+
+					//emoji feedback
+					if ( 'EMOJI_FEEDBACK' == $this->type ) {
+						$data_sets = [
+							(object) [
+								'label'       => 'Angry',
+								'data'        => $this->log_chart()['feedback_emoji_angry'],
+								'borderColor' => '#ED4956',
+								'fill'        => false,
+							],
+							(object) [
+								'label'       => 'Sad',
+								'data'        => $this->log_chart()['feedback_emoji_sad'],
+								'borderColor' => '#ed804c',
+								'fill'        => false,
+							],
+							(object) [
+								'label'       => 'Neutral',
+								'data'        => $this->log_chart()['feedback_emoji_neutral'],
+								'borderColor' => '#8f8f8f',
+								'fill'        => false,
+							],
+							(object) [
+								'label'       => 'Happy',
+								'data'        => $this->log_chart()['feedback_emoji_happy'],
+								'borderColor' => '#6c94ed',
+								'fill'        => false,
+							],
+							(object) [
+								'label'       => 'Excited',
+								'data'        => $this->log_chart()['feedback_emoji_excited'],
+								'borderColor' => '#4aed92',
+								'fill'        => false,
+							],
+						];
+
+						?>
+                        <div class="chart-container">
+                            <canvas id="emoji_chart" data-title="Feedback Submissions" data-labels='<?php echo $this->log_chart()['labels']; ?>' data-sets='<?php echo json_encode( $data_sets ); ?>'></canvas>
                         </div>
 					<?php }
 
@@ -377,108 +398,49 @@ class TOTO_Statistics {
         </div>
 	<?php }
 
-	public function top_pages() { ?>
-        <div class="statistics-top-pages <?php echo ! empty( $this->get_top_pages() ) ? '' : 'hidden'; ?>">
+	public function render_top_pages() {
 
-            <div class="top_pages_header">
-                <h3 class="top-pages-title"><?php _e( 'Top Pages', 'toto' ) ?></h3>
-                <p class="top-pages-description description"><?php _e( 'Most active pages on which notifications had most activity.', 'toto' ) ?></p>
-            </div>
+		echo '<div class="statistics-tables">';
+		if ( 'EMOJI_FEEDBACK' == $this->type ) {
+			include TOTO_INCLUDES . '/admin/views/pages/statistics-top-emoji.php';
+		}
 
-            <table class="widefat" id="top-pages-table">
-                <thead>
-                <tr>
-                    <th>#</th>
-                    <th><?php _e( 'URL', 'toto' ) ?></th>
-                    <th><?php _e( 'Type', 'toto' ) ?></th>
-                    <th><?php _e( 'Uniques', 'toto' ) ?></th>
-                    <th><?php _e( 'Sessions', 'toto' ) ?></th>
-                </tr>
-                </thead>
+		include TOTO_INCLUDES . '/admin/views/pages/statistics-top-pages.php';
+		echo '</div>';
+	}
 
-                <tbody>
+	public function get_top_emoji() {
+		global $wpdb;
 
-				<?php
+		$table = $wpdb->prefix . 'toto_notification_statistics';
 
-				if ( ! empty( $this->get_top_pages() ) ) {
-					$i = 1;
-					foreach ( $this->get_top_pages() as $item ) { ?>
-                        <tr>
-                            <td><?php echo $i; ?></td>
-                            <td><a href="<?php echo $item->url; ?>" target="_blank"><?php echo $item->url; ?></a></td>
-                            <td><?php echo $this->type_title[ $item->type ]; ?></td>
-                            <td><?php echo $item->total_uniques; ?></td>
-                            <td><?php echo $item->total_sessions; ?></td>
-                        </tr>
-						<?php
-						$i ++;
-					}
-				}
-				?>
+		$nid        = intval( $this->query_args['nid'] );
+		$start_date = esc_attr( $this->query_args['start_date'] );
+		$end_date   = esc_attr( $this->query_args['end_date'] );
 
-                </tbody>
+		$per_page = ! empty( $this->query_args['per_page'] ) ? intval( $this->query_args['per_page'] ) : 10;
+		$page     = ! empty( $this->query_args['page'] ) ? intval( $this->query_args['page'] ) : 1;
+		$offset   = $per_page * ( $page - 1 );
 
-                <tfoot class="hidden">
-                <tr>
-                    <td colspan="5">
-                        <div class="ph-item">
+		$where = " WHERE notification_id = {$nid} ";
 
-                            <div class="ph-col-12">
-                                <div class="ph-row toto-mb-50">
-                                    <div class="ph-col-6 big"></div>
-                                    <div class="ph-col-4 empty big"></div>
-                                    <div class="ph-col-2 big"></div>
-                                    <div class="ph-col-4"></div>
-                                    <div class="ph-col-8 empty"></div>
-                                    <div class="ph-col-6"></div>
-                                    <div class="ph-col-6 empty"></div>
-                                    <div class="ph-col-12"></div>
-                                </div>
-
-                                <div class="ph-row toto-mb-50">
-                                    <div class="ph-col-6 big"></div>
-                                    <div class="ph-col-4 empty big"></div>
-                                    <div class="ph-col-2 big"></div>
-                                    <div class="ph-col-4"></div>
-                                    <div class="ph-col-8 empty"></div>
-                                    <div class="ph-col-6"></div>
-                                    <div class="ph-col-6 empty"></div>
-                                    <div class="ph-col-12"></div>
-                                </div>
+		$where .= " AND (`created_at` BETWEEN '{$start_date}' AND '{$end_date}')";
+		$where .= " AND `type` LIKE 'feedback_emoji_%'";
 
 
-                                <div class="ph-row toto-mb-50">
-                                    <div class="ph-col-6 big"></div>
-                                    <div class="ph-col-4 empty big"></div>
-                                    <div class="ph-col-2 big"></div>
-                                    <div class="ph-col-4"></div>
-                                    <div class="ph-col-8 empty"></div>
-                                    <div class="ph-col-6"></div>
-                                    <div class="ph-col-6 empty"></div>
-                                    <div class="ph-col-12"></div>
-                                </div>
+		$sql = "SELECT
+                     `type`,
+                     COUNT(`id`) AS `total`
+                FROM {$table} {$where}
+                GROUP BY
+                    `type`
+                ORDER BY
+                    `total` DESC
+                LIMIT {$offset}, {$per_page}
+                ";
+
+		return $wpdb->get_results( $sql );
+	}
 
 
-                                <div class="ph-row toto-mb-50">
-                                    <div class="ph-col-6 big"></div>
-                                    <div class="ph-col-4 empty big"></div>
-                                    <div class="ph-col-2 big"></div>
-                                    <div class="ph-col-4"></div>
-                                    <div class="ph-col-8 empty"></div>
-                                    <div class="ph-col-6"></div>
-                                    <div class="ph-col-6 empty"></div>
-                                    <div class="ph-col-12"></div>
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </td>
-                </tr>
-                </tfoot>
-
-            </table>
-
-        </div>
-	<?php }
 }

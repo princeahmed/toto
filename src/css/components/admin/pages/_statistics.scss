@@ -26,7 +26,7 @@
     .summary-icon {
       margin-right: 20px;
 
-      img{
+      img {
         max-width: 75px;
       }
 
@@ -82,25 +82,25 @@
 
 .chart-container {
   margin-bottom: 50px;
-  border-bottom: 1px solid #ddd;
+  //border-bottom: 1px solid #ddd;
   padding-bottom: 50px;
 }
 
-.statistics-top-pages {
+.statistics-table-wrap {
   margin-top: 50px;
 
-  .top-pages-title {
+  .statistics-table-title {
     font-size: 24px;
     font-weight: bold;
     margin-bottom: 12px;
   }
 }
 
-.top_pages_header {
+.statistics-table-header {
   text-align: center;
 }
 
-#top-pages-table {
+.statistics-table {
   margin-top: 30px;
 
   thead {
@@ -123,8 +123,7 @@
 }
 
 #toto_show_more_pages {
-  margin: 0 auto;
+  margin: 25px auto 0 auto;
   display: block;
   padding: 10px 20px;
-  margin-top: 25px;
 }

@@ -20,11 +20,11 @@
         getData: function () {
 
             const p = $(this).parents('#toto_n_statistics_filter');
-            const ph = $('.summary-ph-wrap, .chart-ph, .statistics-top-pages tfoot');
+            const ph = $('.summary-ph-wrap, .chart-ph, .statistics-table tfoot');
 
             const summaryContent = $('.statistics-summary-wrap');
             const chartContent = $('.toto_n_statistics_chart');
-            const topPagesContent = $('.statistics-top-pages');
+            const contentSelector = $('.summary-content, .chart-content, .statistics-table tbody');
 
             const nid = $('#notification_id', p).val();
             const start_date = $('#start_date', p).val();
@@ -36,20 +36,20 @@
                 end_date,
             };
 
+
             ph.removeClass('hidden');
-            $('.summary-content, .chart-content, .statistics-top-pages tbody').addClass('hidden');
+            contentSelector.addClass('hidden');
 
             wp.ajax.send('toto_get_statistics', {
                 data,
 
                 success: (res) => {
+
+                    contentSelector.removeClass('hidden');
+
                     summaryContent.html(res.summary_html);
                     chartContent.html(res.chart_html);
-
-                    if (res.top_pages_html !== '') {
-                        $('.statistics-top-pages').removeClass('hidden');
-                        topPagesContent.html(res.top_pages_html);
-                    }
+                    $('.statistics-tables').replaceWith(res.tables_html);
 
                     app.initChart();
                 },
@@ -70,6 +70,7 @@
                 'hover',
                 'click',
                 'submissions',
+                'emoji',
             ];
 
             charts.forEach(key => app.chartConfig(key));
@@ -88,6 +89,7 @@
                 hover: ['rgba(62, 193, 255, 0.6)', 'rgba(62, 193, 255, 0.05)', '#3ec1ff'],
                 click: ['rgba(150, 192, 61, 0.4)', 'rgba(150, 192, 61, 0.05)', '#96c03d'],
                 submissions: ['rgba(150, 192, 61, 0.4)', 'rgba(150, 192, 61, 0.05)', '#96c03d'],
+                emoji: ['#000', '#000'],
             };
 
             const chart = document.getElementById(`${key}_chart`).getContext('2d');
@@ -96,17 +98,24 @@
             gradient.addColorStop(0, colors[key][0]);
             gradient.addColorStop(1, colors[key][1]);
 
+            let datasets = [{
+                data: el.data('value'),
+                backgroundColor: gradient,
+                borderColor: colors[key][2],
+                fill: true
+            }];
+
+            if (el.data('sets')) {
+                datasets = el.data('sets');
+            }
+
             new Chart(chart, {
                 type: 'line',
                 data: {
                     labels: el.data('labels'),
-                    datasets: [{
-                        data: el.data('value'),
-                        backgroundColor: gradient,
-                        borderColor: colors[key][2],
-                        fill: true
-                    }]
+                    datasets,
                 },
+
                 options: {
                     tooltips: {
                         mode: 'index',
@@ -114,6 +123,10 @@
                         callbacks: {
                             label: (tooltipItem, data) => {
                                 let value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+
+                                if (el.data('sets')) {
+                                    return `${app.nr(value)} ${data.datasets[tooltipItem.datasetIndex].label}`;
+                                }
 
                                 return app.nr(value);
                             }
@@ -124,14 +137,14 @@
                         text: el.data('title'),
                     },
                     legend: {
-                        display: false
+                        display: el.data('sets')
                     },
                     responsive: true,
                     maintainAspectRatio: false,
                     scales: {
                         yAxes: [{
                             gridLines: {
-                                display: false
+                                display: true
                             },
                             ticks: {
                                 userCallback: (value, index, values) => {
