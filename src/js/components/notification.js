@@ -288,7 +288,7 @@ import Notification from "./class-notification";
                             localStorage.setItem(`notification_${notification_id}_converted`, true);
 
                             setTimeout(() => {
-                                $.toto.remove_notification(main_element);
+                                $.toto.notification.remove_notification(main_element);
                             }, 950);
 
                         });

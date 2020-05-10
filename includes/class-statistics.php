@@ -275,6 +275,11 @@ class TOTO_Statistics {
 					include TOTO_INCLUDES . '/admin/views/pages/statistics-summary-emoji.php';
 				}
 
+				//score feedback summary
+				if ( 'SCORE_FEEDBACK' == $this->type ) {
+					include TOTO_INCLUDES . '/admin/views/pages/statistics-summary-score.php';
+				}
+
 				?>
             </div>
         </div>
@@ -348,7 +353,7 @@ class TOTO_Statistics {
                         </div>
 					<?php }
 
-					//emoji feedback
+					//emoji feedback chart
 					if ( 'EMOJI_FEEDBACK' == $this->type ) {
 						$data_sets = [
 							(object) [
@@ -389,6 +394,49 @@ class TOTO_Statistics {
                         </div>
 					<?php }
 
+
+					//score feedback chart
+					if ( 'SCORE_FEEDBACK' == $this->type ) {
+						$data_sets = [
+							(object) [
+								'label'       => '1',
+								'data'        => $this->log_chart()['feedback_score_1'],
+								'borderColor' => '#ED4956',
+								'fill'        => false,
+							],
+							(object) [
+								'label'       => '2',
+								'data'        => $this->log_chart()['feedback_score_2'],
+								'borderColor' => '#ed804c',
+								'fill'        => false,
+							],
+							(object) [
+								'label'       => '3',
+								'data'        => $this->log_chart()['feedback_score_3'],
+								'borderColor' => '#8f8f8f',
+								'fill'        => false,
+							],
+							(object) [
+								'label'       => '4',
+								'data'        => $this->log_chart()['feedback_score_4'],
+								'borderColor' => '#6c94ed',
+								'fill'        => false,
+							],
+							(object) [
+								'label'       => '5',
+								'data'        => $this->log_chart()['feedback_score_5'],
+								'borderColor' => '#4aed92',
+								'fill'        => false,
+							],
+						];
+
+						?>
+                        <div class="chart-container">
+                            <canvas id="score_chart" data-title="Feedback Submissions" data-labels='<?php echo $this->log_chart()['labels']; ?>' data-sets='<?php echo json_encode( $data_sets ); ?>'></canvas>
+                        </div>
+					<?php }
+
+
 				} else { ?>
                     <div class="toto_no_results">
                         <h2><i class="fa fa-exclamation-triangle"></i> <?php _e( 'No Data Found!', 'toto' ) ?></h2>
@@ -407,6 +455,11 @@ class TOTO_Statistics {
 
 		if ( 'EMAIL_COLLECTOR' == $this->type ) {
 			include TOTO_INCLUDES . '/admin/views/pages/statistics-submitted-email.php';
+		}
+
+		//score feedback table
+		if ( 'SCORE_FEEDBACK' == $this->type ) {
+			include TOTO_INCLUDES . '/admin/views/pages/statistics-table-feedback-score.php';
 		}
 
 		include TOTO_INCLUDES . '/admin/views/pages/statistics-top-pages.php';
@@ -430,6 +483,39 @@ class TOTO_Statistics {
 
 		$where .= " AND (`created_at` BETWEEN '{$start_date}' AND '{$end_date}')";
 		$where .= " AND `type` LIKE 'feedback_emoji_%'";
+
+
+		$sql = "SELECT
+                     `type`,
+                     COUNT(`id`) AS `total`
+                FROM {$table} {$where}
+                GROUP BY
+                    `type`
+                ORDER BY
+                    `total` DESC
+                LIMIT {$offset}, {$per_page}
+                ";
+
+		return $wpdb->get_results( $sql );
+	}
+
+	public function get_feedback_scores() {
+		global $wpdb;
+
+		$table = $wpdb->prefix . 'toto_notification_statistics';
+
+		$nid        = intval( $this->query_args['nid'] );
+		$start_date = esc_attr( $this->query_args['start_date'] );
+		$end_date   = esc_attr( $this->query_args['end_date'] );
+
+		$per_page = ! empty( $this->query_args['per_page'] ) ? intval( $this->query_args['per_page'] ) : 10;
+		$page     = ! empty( $this->query_args['page'] ) ? intval( $this->query_args['page'] ) : 1;
+		$offset   = $per_page * ( $page - 1 );
+
+		$where = " WHERE notification_id = {$nid} ";
+
+		$where .= " AND (`created_at` BETWEEN '{$start_date}' AND '{$end_date}')";
+		$where .= " AND `type` LIKE 'feedback_score_%'";
 
 
 		$sql = "SELECT

@@ -1,8 +1,6 @@
 ;(function ($) {
 
-    if (typeof Chart !== 'function') {
-        return;
-    }
+    if (typeof Chart !== 'function') return;
 
     Chart.defaults.global.elements.line.borderWidth = 4;
     Chart.defaults.global.elements.point.radius = 3;
@@ -10,6 +8,13 @@
 
     const app = {
         init: () => {
+
+            //datepicker
+            $('.toto_date_field').datepicker({
+                dateFormat: "yy-mm-dd",
+                //maxDate: 0,
+                changeYear: true
+            });
 
             $(document).on('change', '#toto_n_statistics_filter :input', app.getData);
 
@@ -71,7 +76,9 @@
                 'click',
                 'submissions',
                 'emoji',
+                'score',
             ];
+
 
             charts.forEach(key => app.chartConfig(key));
         },
@@ -80,9 +87,7 @@
 
             const el = $(`#${key}_chart`);
 
-            if (!el.length) {
-                return;
-            }
+            if (!el.length) return;
 
             const colors = {
                 impression: ['rgba(43, 227, 155, 0.6)', 'rgba(43, 227, 155, 0.05)', '#2BE39B'],
@@ -90,6 +95,7 @@
                 click: ['rgba(150, 192, 61, 0.4)', 'rgba(150, 192, 61, 0.05)', '#96c03d'],
                 submissions: ['rgba(150, 192, 61, 0.4)', 'rgba(150, 192, 61, 0.05)', '#96c03d'],
                 emoji: ['#000', '#000'],
+                score: ['#000', '#000'],
             };
 
             const chart = document.getElementById(`${key}_chart`).getContext('2d');
@@ -113,7 +119,7 @@
                 type: 'line',
                 data: {
                     labels: el.data('labels'),
-                    datasets,
+                    datasets: datasets,
                 },
 
                 options: {

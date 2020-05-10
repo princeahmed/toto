@@ -5,12 +5,7 @@
 
         $(document).on('change', '#toto_n_data_filter :input', getData);
 
-        //datepicker
-        $('.toto_date_field').datepicker({
-            dateFormat: "yy-mm-dd",
-            maxDate: 0,
-            changeYear: true
-        });
+
 
         function tooglePanelBody(e) {
             e.preventDefault();
