@@ -14,9 +14,9 @@
             </div>
 
 
-            <div class="toto-agreement-checkbox" <?php echo 'yes' != $notification->show_agreement ? 'style="display:none"' : ''; ?>>
+            <div class="toto-agreement-checkbox <?php echo 'yes' != $notification->show_agreement ? 'hidden' : ''; ?>">
                 <input type="checkbox" id="toto-agreement" name="agreement" required="required"/>
-                <label for="agreement" class="toto-agreement-checkbox-text" style="color: <?php echo $notification->description_color ?>">
+                <label for="toto-agreement" class="toto-agreement-checkbox-text" style="color: <?php echo $notification->description_color ?>">
                     <a href="<?php echo $notification->agreement_url ?>">
 						<?php echo $notification->agreement_text ?>
                     </a> </label>

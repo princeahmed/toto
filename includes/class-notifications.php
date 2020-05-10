@@ -316,7 +316,7 @@ class Toto_Notifications {
 		$types = [ 'impression', 'hover' ];
 		if ( in_array( $type, [ 'INFORMATIONAL', 'COUPON', 'LIVE_COUNTER', 'VIDEO', 'SOCIAL_SHARE', 'COOKIE_NOTIFICATION' ] ) ) {
 			$types[] = 'click';
-		} elseif ( in_array( $type, [ 'EMAIL_COLLECTOR', ] ) ) {
+		} elseif ( in_array( $type, [ 'EMAIL_COLLECTOR', 'REQUEST_COLLECTOR', ] ) ) {
 			$types[] = 'submissions';
 		}
 

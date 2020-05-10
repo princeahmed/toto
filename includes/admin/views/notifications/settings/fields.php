@@ -446,13 +446,13 @@ ob_start(); ?>
         <p class="description">Require the user to confirm his agreement by ticking a checkbox.</p>
     </div>
 
-    <div id="agreement" class="<?php echo true == $show_agreement ? '' : 'hidden'; ?>">
-        <div class="toto-form-group">
+    <div id="agreement">
+        <div class="toto-form-group <?php echo $show_agreement ? '' : 'hidden'; ?>">
             <label for="settings_agreement_text">Agreement Text</label>
             <input type="text" id="settings_agreement_text" name="settings[agreement_text]" value="<?php echo $agreement_text; ?>"/>
         </div>
 
-        <div class="toto-form-group">
+        <div class="toto-form-group <?php echo $show_agreement ? '' : 'hidden'; ?>">
             <label for="settings_agreement_url">Agreement URL</label>
             <input type="text" id="settings_agreement_url" name="settings[agreement_url]" value="<?php echo $agreement_url; ?>"/>
         </div>

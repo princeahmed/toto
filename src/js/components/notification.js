@@ -314,11 +314,11 @@ import Notification from "./class-notification";
                             $.toto.send_statistics_data({
                                 ...$.toto.user(),
                                 notification_id,
-                                type: 'collector',
+                                type: 'submissions',
                                 data: input
                             });
 
-                            $.toto.remove_notification(main_element);
+                            $.toto.notification.remove_notification(main_element);
 
                             /* Make sure to let the browser know of the conversion so that it is not shown again */
                             localStorage.setItem(`notification_${notification_id}_converted`, true);

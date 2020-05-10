@@ -17,28 +17,26 @@
         <div>
             <form class="toto-request-collector-form" id="toto-request-collector-form" name="" action="" method="GET" role="form">
                 <div class="toto-request-collector-row">
-                    <input type="text" class="" name="input" placeholder="<?php echo $notification->input_placeholder ?>" />
+                    <input type="text" class="toto-request-collector-input-placeholder" name="input" placeholder="<?php echo $notification->input_placeholder ?>" />
 
-                    <button type="submit" name="button" style="color: <?php echo $notification->button_color ?>; background: <?php echo $notification->button_background_color ?>"><?php echo $notification->button_text ?></button>
+                    <button type="submit" class="toto-request-collector-button" name="button" style="color: <?php echo $notification->button_color ?>; background: <?php echo $notification->button_background_color ?>"><?php echo $notification->button_text ?></button>
                 </div>
 
-                <?php if($notification->show_agreement): ?>
-                    <div class="toto-agreement-checkbox">
-                        <input type="checkbox" id="agreement" name="agreement" required="required" />
-                        <label for="agreement" class="toto-agreement-checkbox-text" style="color: <?php echo $notification->description_color ?>">
+                    <div class="toto-agreement-checkbox <?php echo $notification->show_agreement ? '' : 'hidden'; ?>">
+                        <input type="checkbox" id="toto-agreement" name="agreement"
+                            <?php echo $notification->show_agreement ? 'required="required' : ''; ?>" />
+                        <label for="toto-agreement" class="toto-agreement-checkbox-text" style="color: <?php echo $notification->description_color ?>">
                             <a href="<?php echo $notification->agreement_url ?>">
                                 <?php echo $notification->agreement_text ?>
                             </a>
                         </label>
                     </div>
-                <?php endif ?>
+
             </form>
 
-            <?php
-            toto_branding($notification);
-            ?>
+            <?php toto_branding($notification); ?>
         </div>
     </div>
 
-    <span class="toto-close"></span>
+    <span class="toto-close"><?php echo $notification->display_close_button ? '&#10006;' : ''; ?></span>
 </div>

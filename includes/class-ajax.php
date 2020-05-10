@@ -17,7 +17,7 @@ class Toto_Ajax {
 		$ip              = ! empty( $posted['ip'] ) ? wp_unslash( $posted['ip'] ) : '';
 		$type            = ! empty( $posted['type'] ) ? wp_unslash( $posted['type'] ) : '';
 		$url             = ! empty( $posted['current_page'] ) ? esc_url( urldecode( $posted['current_page'] ) ) : '';
-		$data            = ! empty( $posted['data'] ) ? esc_url( urldecode( $posted['data'] ) ) : '';
+		$data            = ! empty( $posted['data'] ) ? wp_unslash( $posted['data'] ) : '';
 		$date            = date( 'Y-m-d H:i:s' );
 
 		$unique_id = md5( $notification_id . $ip . $type . $url . date( 'Y-m-d' ) );

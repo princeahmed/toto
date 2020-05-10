@@ -453,8 +453,9 @@ class TOTO_Statistics {
 			include TOTO_INCLUDES . '/admin/views/pages/statistics-top-emoji.php';
 		}
 
-		if ( 'EMAIL_COLLECTOR' == $this->type ) {
-			include TOTO_INCLUDES . '/admin/views/pages/statistics-submitted-email.php';
+		// data table
+		if ( in_array( $this->type, [ 'EMAIL_COLLECTOR', 'REQUEST_COLLECTOR', ] ) ) {
+			include TOTO_INCLUDES . '/admin/views/pages/statistics-data.php';
 		}
 
 		//score feedback table
@@ -532,7 +533,7 @@ class TOTO_Statistics {
 		return $wpdb->get_results( $sql );
 	}
 
-	public function get_submitted_email() {
+	public function get_submitted_data() {
 		global $wpdb;
 
 		$table = $wpdb->prefix . 'toto_notification_statistics';
@@ -552,7 +553,7 @@ class TOTO_Statistics {
 
 
 		$sql = "SELECT
-                     `data` AS `email`,
+                     `data`,
                      `ip`,
                      `url`
                 FROM {$table} {$where}
