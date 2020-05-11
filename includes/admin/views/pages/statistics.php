@@ -1,5 +1,7 @@
+<?php defined('ABSPATH') || exit; ?>
+
 <div class="wrap">
-    <h1 class="wp-heading-inline">Notification Statistics</h1>
+    <h1 class="wp-heading-inline"><?php _e('Notification Statistics', 'toto') ?></h1>
 
 	<?php
 

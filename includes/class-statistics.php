@@ -1,5 +1,7 @@
 <?php
 
+defined('ABSPATH') || exit();
+
 class TOTO_Statistics {
 
 	public $nid;
@@ -8,6 +10,12 @@ class TOTO_Statistics {
 	public $statistics_types;
 	public $query_args;
 
+	/**
+	 * TOTO_Statistics constructor.
+	 *
+	 * @param bool $nid
+	 * @param array $args
+	 */
 	public function __construct( $nid = false, $args = [] ) {
 
 		$this->nid  = $nid ? $nid : $this->get_active_notifications()[0]->ID;
@@ -40,6 +48,11 @@ class TOTO_Statistics {
 
 	}
 
+	/**
+	 * Get publish notifications
+	 *
+	 * @return int[]|WP_Post[]
+	 */
 	public function get_active_notifications() {
 		$args = [
 			'post_type'     => 'toto_notification',
@@ -52,6 +65,11 @@ class TOTO_Statistics {
 		return get_posts( $args );
 	}
 
+	/**
+	 * Get the log chart data
+	 *
+	 * @return array|bool
+	 */
 	public function log_chart() {
 
 		/**
@@ -148,6 +166,13 @@ class TOTO_Statistics {
 
 	}
 
+	/**
+	 * Get the pages of the notification reacted most
+	 *
+	 * @param array $args
+	 *
+	 * @return array|object|null
+	 */
 	public function get_top_pages( $args = [] ) {
 		global $wpdb;
 
@@ -182,6 +207,13 @@ class TOTO_Statistics {
 		return $wpdb->get_results( $sql );
 	}
 
+	/**
+	 * Get the submitted data through notification
+	 *
+	 * @param array $args
+	 *
+	 * @return array|object|null
+	 */
 	public function get_saved_data( $args = [] ) {
 		global $wpdb;
 
@@ -211,10 +243,16 @@ class TOTO_Statistics {
 		return $wpdb->get_results( $sql );
 	}
 
+	/**
+	 * Statistics filter bar
+	 */
 	public function filter_bar() {
 		include TOTO_INCLUDES . '/admin/views/pages/statistics-filter-bar.php';
 	}
 
+	/**
+	 * Statistics summary
+	 */
 	public function summary() { ?>
         <div class="statistics-summary-wrap">
 
@@ -286,6 +324,9 @@ class TOTO_Statistics {
 		<?php
 	}
 
+	/**
+	 * Render the statitics chart
+	 */
 	public function chart() { ?>
         <div class="toto_n_statistics_chart">
             <div class="chart-ph hidden">
@@ -446,6 +487,9 @@ class TOTO_Statistics {
         </div>
 	<?php }
 
+	/**
+	 * Render data tables
+	 */
 	public function render_tables() {
 
 		echo '<div class="statistics-tables">';
@@ -454,7 +498,7 @@ class TOTO_Statistics {
 		}
 
 		// data table
-		if ( in_array( $this->type, [ 'EMAIL_COLLECTOR', 'REQUEST_COLLECTOR', ] ) ) {
+		if ( in_array( $this->type, [ 'EMAIL_COLLECTOR', 'REQUEST_COLLECTOR',  'COUNTDOWN_COLLECTOR', ] ) ) {
 			include TOTO_INCLUDES . '/admin/views/pages/statistics-data.php';
 		}
 
@@ -467,6 +511,11 @@ class TOTO_Statistics {
 		echo '</div>';
 	}
 
+	/**
+	 * Get most reacted emoji
+	 *
+	 * @return array|object|null
+	 */
 	public function get_top_emoji() {
 		global $wpdb;
 
@@ -500,6 +549,11 @@ class TOTO_Statistics {
 		return $wpdb->get_results( $sql );
 	}
 
+	/**
+	 * Get most scored feedback
+	 *
+	 * @return array|object|null
+	 */
 	public function get_feedback_scores() {
 		global $wpdb;
 
@@ -533,6 +587,9 @@ class TOTO_Statistics {
 		return $wpdb->get_results( $sql );
 	}
 
+	/**
+	 * @return array|object|null
+	 */
 	public function get_submitted_data() {
 		global $wpdb;
 

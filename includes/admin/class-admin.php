@@ -8,6 +8,8 @@ class Toto_Admin {
 		$this->includes();
 
 		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
+		add_action( 'save_post_toto_notification', [ $this, 'save_toto_meta' ] );
+
 		add_filter( 'manage_toto_notification_posts_columns', [ $this, 'post_columns' ] );
 		add_filter( 'manage_toto_notification_posts_custom_column', [ $this, 'columns_data' ], 10, 2 );
 	}
@@ -26,7 +28,7 @@ class Toto_Admin {
 	 */
 	public function admin_menu() {
 
-		add_submenu_page( 'edit.php?post_type=toto_notification', 'Notification Statistics', 'Statistics', 'manage_options', 'notification-statistics', [
+		add_submenu_page( 'edit.php?post_type=toto_notification', __( 'Notification Statistics', 'toto' ), __( 'Statistics', 'toto' ), 'manage_options', 'notification-statistics', [
 			$this,
 			'render_statistics_page'
 		] );
@@ -39,7 +41,13 @@ class Toto_Admin {
 		include TOTO_INCLUDES . '/admin/views/pages/statistics.php';
 	}
 
-
+	/**
+	 * Add extra columns to the notification table
+	 *
+	 * @param $columns
+	 *
+	 * @return mixed
+	 */
 	public function post_columns( $columns ) {
 		unset( $columns['date'] );
 		$columns['preview']   = __( 'Preview', 'toto' );
@@ -52,10 +60,17 @@ class Toto_Admin {
 		return $columns;
 	}
 
+	/**
+	 * Notification table column data
+	 *
+	 * @param $column
+	 * @param $post_id
+	 */
 	public function columns_data( $column, $post_id ) {
+
 		if ( 'preview' == $column ) { ?>
             <a href="#" class="toto-n-preview" data-post_id="<?php echo $post_id; ?>">
-                <i class="dashicons dashicons-visibility toto-mr-5"></i> Preview </a>
+                <i class="dashicons dashicons-visibility toto-mr-5"></i> <?php __( 'Preview', 'toto' ) ?> </a>
 
 		<?php } elseif ( 'type' == $column ) {
 			$type   = get_post_meta( $post_id, '_notification_type', true );
@@ -76,6 +91,47 @@ class Toto_Admin {
 		<?php } elseif ( 'shortcode' == $column ) { ?>
             <span class="toto-n-shortcode" title="<?php _e( 'Copy Shortcode', 'toto' ) ?>"><i class="fa fa-copy"></i> <code>[toto id=<?php echo $post_id; ?>]</code></span>
 		<?php }
+	}
+
+	public function save_toto_meta( $post_id ) {
+
+		if ( wp_doing_ajax() || wp_doing_cron() ) {
+			return;
+		}
+
+		if ( empty( $_REQUEST['notification_type'] ) ) {
+			return;
+		}
+
+		update_post_meta( $post_id, '_notification_type', wp_unslash( $_REQUEST['notification_type'] ) );
+
+		$settings = wp_unslash( $_REQUEST['settings'] );
+
+		$switch_fields = [
+			'display_close_button',
+			'display_branding',
+			'trigger_all_pages',
+			'display_once_per_session',
+			'display_mobile',
+			'show_agreement',
+			'enable_sound',
+			'show_angry',
+			'show_sad',
+			'show_neutral',
+			'show_happy',
+			'enable_sound',
+			'show_excited',
+			'share_facebook',
+			'share_twitter',
+			'share_linkedin',
+		];
+
+		foreach ( $switch_fields as $key ) {
+			$settings[ $key ] = ! isset( $settings[ $key ] ) || ! $settings[ $key ] ? false : true;
+		}
+
+		update_post_meta( $post_id, '_settings', $settings );
+
 	}
 
 }

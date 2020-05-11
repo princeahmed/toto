@@ -10,6 +10,8 @@ export default class Notification {
 
         /* Process the passed options and the default ones */
         this.options.delay = typeof options.delay === 'undefined' ? 3000 : options.delay;
+        this.options.should_show = typeof options.should_show === 'undefined' ? true : options.should_show;
+
         this.options.duration = typeof options.duration === 'undefined' ? 3000 : options.duration;
         this.options.selector = options.selector;
         this.options.url = options.url;
@@ -45,6 +47,9 @@ export default class Notification {
 
     /* Function to build the toast element */
     build() {
+
+        /* check if notification should show */
+        if (!this.options.should_show) return;
 
         /* check if already converted */
         if (localStorage.getItem(`notification_${this.options.notification_id}_converted`)) {

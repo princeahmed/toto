@@ -8,6 +8,9 @@ defined( 'ABSPATH' ) || exit;
  */
 class Toto_Install {
 
+	/**
+	 * Toto Activate
+	 */
 	public static function activate() {
 
 		$key = sanitize_key( toto()->name );

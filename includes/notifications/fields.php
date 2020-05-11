@@ -70,7 +70,7 @@ $fields = new stdClass();
 //Field Title
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_title">Title Message</label>
+        <label for="settings_title"><?php _e( 'Title Message', 'toto' ) ?></label>
         <input type="text" id="settings_title" name="settings[title]" value="<?php echo $title; ?>"/>
     </div>
 <?php
@@ -80,7 +80,7 @@ $fields->title = ob_get_clean();
 //Field Description
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_description">Description Message</label>
+        <label for="settings_description"><?php _e( 'Description Message', 'toto' ) ?></label>
         <input type="text" id="settings_description" name="settings[description]" value="<?php echo $description; ?>"/>
     </div>
 <?php
@@ -90,20 +90,21 @@ $fields->description = ob_get_clean();
 //Field Image
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_image">Image</label>
+        <label for="settings_image"><?php _e( 'Image', 'toto' ) ?></label>
 
-        <img src="<?php echo $image; ?>" alt="Notification Image" class="toto-image-preview <?php echo empty( $image ) ? 'hidden' : ''; ?>">
+        <img src="<?php echo $image; ?>" alt="<?php _e( 'Notification Image', 'toto' ) ?>" class="toto-image-preview <?php echo empty( $image ) ? 'hidden' : ''; ?>">
 
         <div class="toto-input-group">
             <input type="text" id="settings_image" name="settings[image]" value="<?php echo $image; ?>"/>
-            <button type="button" class="button button-primary toto-choose-image toto-ml-10 toto-mr-10">Choose Image
+            <button type="button" class="button button-primary toto-choose-image toto-ml-10 toto-mr-10">
+				<?php _e( 'Choose Image', 'toto' ) ?>
             </button>
             <button type="button" class="button button-link-delete toto-remove-image <?php echo empty( $image ) ? 'hidden' : ''; ?>">
-                Remove Image
+				<?php _e( 'Remove Image', 'toto' ) ?>
             </button>
         </div>
-        <p class="description">Leave empty for no image. Hint: icons8.com has a good library of small icons that you can
-            use.</p>
+        <p class="description"><?php _e( 'Leave empty for no image. Hint: icons8.com has a good library of small icons that you can
+            use.', 'toto' ) ?></p>
     </div>
 <?php
 
@@ -112,10 +113,10 @@ $fields->image = ob_get_clean();
 //Field URL
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_url">Notification URL</label>
+        <label for="settings_url"><?php _e( 'Notification URL', 'toto' ) ?></label>
         <input type="text" id="settings_url" name="settings[url]" value="<?php echo $url; ?>"/>
-        <p class="description">The URL you want to user to go to after clicking the notification. Leave empty for no
-            link.</p>
+        <p class="description"><?php _e( 'The URL you want to user to go to after clicking the notification. Leave empty for no
+            link.', 'toto' ) ?></p>
     </div>
 <?php
 
@@ -124,7 +125,7 @@ $fields->url = ob_get_clean();
 //Title Color
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_title_color">Title Color</label>
+        <label for="settings_title_color"><?php _e( 'Title Color', 'toto' ) ?></label>
         <input type="text" id="settings_title_color" class="toto-color-field" name="settings[title_color]" value="<?php echo $title_color; ?>"/>
     </div>
 <?php
@@ -134,7 +135,7 @@ $fields->title_color = ob_get_clean();
 //Description Color
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_description_color">Description Color</label>
+        <label for="settings_description_color"><?php _e( 'Description Color', 'toto' ) ?></label>
         <input type="text" id="settings_description_color" class="toto-color-field" name="settings[description_color]" value="<?php echo $description_color; ?>"/>
     </div>
 <?php
@@ -144,7 +145,7 @@ $fields->description_color = ob_get_clean();
 //Background Color
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_background_color">Background Color</label>
+        <label for="settings_background_color"><?php _e( 'Background Color', 'toto' ) ?></label>
         <input type="text" id="settings_background_color" class="toto-color-field" name="settings[background_color]" value="<?php echo $background_color; ?>"/>
     </div>
 <?php
@@ -154,7 +155,7 @@ $fields->background_color = ob_get_clean();
 //Content Title Color
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_content_title_color">Content Title Color</label>
+        <label for="settings_content_title_color"><?php _e( 'Content Title Color', 'toto' ) ?></label>
         <input type="text" id="settings_content_title_color" class="toto-color-field" name="settings[content_title_color]" value="<?php echo $content_title_color; ?>"/>
     </div>
 <?php
@@ -165,7 +166,7 @@ $fields->content_title_color = ob_get_clean();
 //Content Description Color
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_content_description_color">Content Description Color</label>
+        <label for="settings_content_description_color"><?php _e( 'Content Description Color', 'toto' ) ?></label>
         <input type="text" id="settings_content_description_color" class="toto-color-field" name="settings[content_description_color]" value="<?php echo $content_description_color; ?>"/>
     </div>
 <?php
@@ -175,13 +176,13 @@ $fields->content_description_color = ob_get_clean();
 //Border Radius
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_border_radius">Border Radius</label>
+        <label for="settings_border_radius"><?php _e( 'Border Radius', 'toto' ) ?></label>
         <select id="settings_border_radius" name="settings[border_radius]">
-            <option value="straight" <?php selected( 'straight', $border_radius ); ?>>Straight</option>
-            <option value="rounded" <?php selected( 'rounded', $border_radius ); ?>>Rounded</option>
-            <option value="round" <?php selected( 'round', $border_radius ) ?>>Round</option>
+            <option value="straight" <?php selected( 'straight', $border_radius ); ?>><?php _e( 'Straight', 'toto' ) ?></option>
+            <option value="rounded" <?php selected( 'rounded', $border_radius ); ?>><?php _e( 'Rounded', 'toto' ) ?></option>
+            <option value="round" <?php selected( 'round', $border_radius ) ?>><?php _e( 'Round', 'toto' ) ?></option>
         </select>
-        <p class="description">Change the shape of the corners of the notification</p>
+        <p class="description"><?php _e( 'Change the shape of the corners of the notification', 'toto' ) ?></p>
     </div>
 <?php
 
@@ -190,9 +191,9 @@ $fields->border_radius = ob_get_clean();
 //Display Duration
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_display_duration">Display Duration</label>
+        <label for="settings_display_duration"><?php _e( 'Display Duration', 'toto' ) ?></label>
         <input type="number" min="-1" id="settings_display_duration" name="settings[display_duration]" value="<?php echo $display_duration; ?>" required="required"/>
-        <p class="description">How many seconds to display the notification. Set -1 to display forever.</p>
+        <p class="description"><?php _e( 'How many seconds to display the notification. Set -1 to display forever.', 'toto' ) ?></p>
     </div>
 <?php
 $fields->display_duration = ob_get_clean();
@@ -200,9 +201,9 @@ $fields->display_duration = ob_get_clean();
 //Minimum activity
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_minimum_activity">Minimum activity</label>
+        <label for="settings_minimum_activity"><?php _e( 'Minimum activity', 'toto' ) ?></label>
         <input type="number" min="-1" id="settings_minimum_activity" name="settings[minimum_activity]" value="<?php echo $minimum_activity; ?>" required="required"/>
-        <p class="description">Minimum data needed to display the notification.</p>
+        <p class="description"><?php _e( 'Minimum data needed to display the notification.', 'toto' ) ?></p>
     </div>
 <?php
 $fields->minimum_activity = ob_get_clean();
@@ -210,27 +211,37 @@ $fields->minimum_activity = ob_get_clean();
 //Display Position
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_display_position">Display Position</label>
+        <label for="settings_display_position"><?php _e( 'Display Position', 'toto' ) ?></label>
         <select id="settings_display_position" name="settings[display_position]">
-            <option value="top_left" <?php selected( 'top_left', $display_position ) ?>>Top Left</option>
-            <option value="top_center" <?php selected( 'top_center', $display_position ) ?>>Top Center
+            <option value="top_left" <?php selected( 'top_left', $display_position ) ?>>
+				<?php _e( 'Top Left', 'toto' ) ?>
             </option>
-            <option value="top_right" <?php selected( 'top_right', $display_position ) ?>>Top Right
+            <option value="top_center" <?php selected( 'top_center', $display_position ) ?>>
+				<?php _e( 'Top Center', 'toto' ) ?>
             </option>
-            <option value="middle_left" <?php selected( 'middle_left', $display_position ) ?>>Middle Left
+            <option value="top_right" <?php selected( 'top_right', $display_position ) ?>>
+				<?php _e( 'Top Right', 'toto' ) ?>
             </option>
-            <option value="middle_center" <?php selected( 'middle_center', $display_position ) ?>>Middle Center
+            <option value="middle_left" <?php selected( 'middle_left', $display_position ) ?>>
+				<?php _e( 'Middle Left', 'toto' ) ?>
             </option>
-            <option value="middle_right" <?php selected( 'middle_right', $display_position ) ?>>Middle Right
+            <option value="middle_center" <?php selected( 'middle_center', $display_position ) ?>>
+				<?php _e( 'Middle Center', 'toto' ) ?>
             </option>
-            <option value="bottom_left" <?php selected( 'bottom_left', $display_position ) ?>>Bottom Left
+            <option value="middle_right" <?php selected( 'middle_right', $display_position ) ?>>
+				<?php _e( 'Middle Right', 'toto' ) ?>
             </option>
-            <option value="bottom_center" <?php selected( 'bottom_center', $display_position ) ?>>Bottom Center
+            <option value="bottom_left" <?php selected( 'bottom_left', $display_position ) ?>>
+				<?php _e( 'Bottom Left', 'toto' ) ?>
             </option>
-            <option value="bottom_right" <?php selected( 'bottom_right', $display_position ) ?>>Bottom Right
+            <option value="bottom_center" <?php selected( 'bottom_center', $display_position ) ?>>
+				<?php _e( 'Bottom Center', 'toto' ) ?>
+            </option>
+            <option value="bottom_right" <?php selected( 'bottom_right', $display_position ) ?>>
+				<?php _e( 'Bottom Right', 'toto' ) ?>
             </option>
         </select>
-        <p class="description">Position of the notification on the screen. Position doesn't change on the preview.</p>
+        <p class="description"><?php _e( 'Position of the notification on the screen. Position doesn\'t change on the preview.', 'toto' ) ?></p>
     </div>
 <?php
 $fields->display_position = ob_get_clean();
@@ -239,7 +250,7 @@ $fields->display_position = ob_get_clean();
 ob_start(); ?>
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_display_close_button" name="settings[display_close_button]" <?php checked( true, $display_close_button ); ?> />
-        <label for="settings_display_close_button">Display Close Button</label>
+        <label for="settings_display_close_button"><?php _e( 'Display Close Button', 'toto' ) ?></label>
     </div>
 <?php
 $fields->display_close_button = ob_get_clean();
@@ -248,7 +259,7 @@ $fields->display_close_button = ob_get_clean();
 ob_start(); ?>
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_display_branding" name="settings[display_branding]" <?php checked( true, $display_branding ) ?> />
-        <label for="settings_display_branding">Display Branding</label>
+        <label for="settings_display_branding"><?php _e( 'Display Branding', 'toto' ) ?></label>
     </div>
 <?php
 $fields->display_branding = ob_get_clean();
@@ -256,29 +267,29 @@ $fields->display_branding = ob_get_clean();
 ob_start();
 ?>
     <div class="toto-form-group flex-row flex-wrap">
-        <label for="settings_trigger_on_all" class="toto-mr-20">Trigger on: </label>
+        <label for="settings_trigger_on_all" class="toto-mr-20"><?php _e( 'Trigger on:', 'toto' ) ?></label>
 
         <div class="toto-label-group">
             <input type="radio" id="settings_trigger_on_all" name="settings[trigger_on]" value="all" <?php checked( 'all', $trigger_on ); ?>>
-            <label for="settings_trigger_on_all">Everywhere</label>
+            <label for="settings_trigger_on_all"><?php _e( 'Everywhere', 'toto' ) ?></label>
         </div>
 
         <div class="toto-label-group">
             <input type="radio" id="settings_trigger_on_selected" name="settings[trigger_on]" value="selected" <?php checked( 'selected', $trigger_on ); ?>>
-            <label for="settings_trigger_on_selected">Selected</label>
+            <label for="settings_trigger_on_selected"><?php _e( 'Selected Pages', 'toto' ) ?></label>
         </div>
 
         <div class="toto-label-group">
             <input type="radio" id="settings_trigger_on_shortcode" name="settings[trigger_on]" value="shortcode" <?php checked( 'shortcode', $trigger_on ); ?>>
-            <label for="settings_trigger_on_shortcode">Use Only As Shortcode</label>
+            <label for="settings_trigger_on_shortcode"><?php _e( 'Use Only As Shortcode', 'toto' ) ?></label>
         </div>
 
         <div class="toto-break"></div>
-        <p class="description">Where should the notification show?</p>
+        <p class="description"><?php _e( 'Where should the notification show?', 'toto' ) ?></p>
     </div>
 
     <div class="toto-form-group <?php echo 'selected' == $trigger_on ? '' : 'hidden'; ?>">
-        <label for="settings_trigger_locations" class="toto-mr-20">Select Locations: </label>
+        <label for="settings_trigger_locations" class="toto-mr-20"><?php _e( 'Select Locations:', 'toto' ) ?></label>
         <select name="settings[trigger_locations][]" class="toto-select2" id="settings_trigger_locations" multiple>
 			<?php
 			foreach ( toto_locations() as $key => $val ) {
@@ -286,13 +297,13 @@ ob_start();
 			}
 			?>
         </select>
-        <p class="description">You can select multiple locations.</p>
+        <p class="description"><?php _e( 'You can select multiple locations.', 'toto' ) ?></p>
     </div>
 
     <div class="toto-form-group <?php echo ! empty( $trigger_locations ) && in_array( 'is_custom', $trigger_locations ) ? '' : 'hidden'; ?>">
-        <label for="settings_custom_post_page_ids" class="toto-mr-20">Post/ Page IDs: </label>
+        <label for="settings_custom_post_page_ids" class="toto-mr-20"><?php _e( 'Post/ Page IDs:', 'toto' ) ?> </label>
         <input type="text" name="settings[custom_post_page_ids]" id="settings_custom_post_page_ids" value="<?php echo $custom_post_page_ids; ?>">
-        <p class="description">Comma Separated ID of Post, Page or Custom Post Type Posts.</p>
+        <p class="description"><?php _e( 'Comma Separated ID of Post, Page or Custom Post Type Posts.', 'toto' ) ?></p>
     </div>
 
 <?php
@@ -301,25 +312,25 @@ $fields->trigger = ob_get_clean();
 ob_start();
 ?>
     <div class="toto-form-group flex-row flex-wrap">
-        <label for="settings_display_for_all" class="toto-mr-20">Display For: </label>
+        <label for="settings_display_for_all" class="toto-mr-20"><?php _e( 'Display For:', 'toto' ) ?> </label>
 
         <div class="toto-label-group">
             <input type="radio" id="settings_display_for_all" name="settings[display_for]" value="all" <?php checked( 'all', $display_for ); ?>>
-            <label for="settings_display_for_all">Everyone</label>
+            <label for="settings_display_for_all"><?php _e( 'Everyone', 'toto' ) ?></label>
         </div>
 
         <div class="toto-label-group">
             <input type="radio" id="settings_display_for_logged_in" name="settings[display_for]" value="logged_in" <?php checked( 'logged_in', $display_for ); ?>>
-            <label for="settings_display_for_logged_in">Logged In Users</label>
+            <label for="settings_display_for_logged_in"><?php _e( 'Logged In Users', 'toto' ) ?></label>
         </div>
 
         <div class="toto-label-group">
             <input type="radio" id="settings_display_for_logged_out" name="settings[display_for]" value="logged_out" <?php checked( 'logged_out', $display_for ); ?>>
-            <label for="settings_display_for_logged_out">Logged Out Users</label>
+            <label for="settings_display_for_logged_out"><?php _e( 'Logged Out Users', 'toto' ) ?></label>
         </div>
 
         <div class="toto-break"></div>
-        <p class="description">Who should see the notification?</p>
+        <p class="description"><?php _e( 'Who should see the notification?', 'toto' ) ?></p>
     </div>
 
 <?php
@@ -328,17 +339,18 @@ $fields->display_for = ob_get_clean();
 //Display Trigger
 ob_start(); ?>
     <div class="toto-form-group" id="display_trigger">
-        <label for="settings_display_trigger">Display Trigger</label>
+        <label for="settings_display_trigger"><?php _e( 'Display Trigger', 'toto' ) ?></label>
 
         <div class="toto-input-group">
             <select id="settings_display_trigger" name="settings[display_trigger]">
                 <option value="delay" data-placeholder="Number of seconds to wait until notification shows up" <?php selected( 'delay', $display_trigger ) ?>>
-                    Delay
+					<?php _e( 'Delay', 'toto' ) ?>
                 </option>
-                <option value="exit_intent" <?php selected( 'exit_intent', $display_trigger ) ?>>Exit Intent
+                <option value="exit_intent" <?php selected( 'exit_intent', $display_trigger ) ?>>
+					<?php _e( 'Exit Intent', 'toto' ) ?>
                 </option>
                 <option value="scroll" data-placeholder="Percent of scrolling from the top down." <?php selected( 'scroll', $display_trigger ) ?>>
-                    Scroll Percentage
+					<?php _e( 'Scroll Percentage', 'toto' ) ?>
                 </option>
             </select>
 
@@ -346,7 +358,7 @@ ob_start(); ?>
 
         </div>
 
-        <p class="description">On what event the notification should show up.</p>
+        <p class="description"><?php _e( 'On what event the notification should show up.', 'toto' ) ?></p>
     </div>
 <?php
 $fields->display_trigger = ob_get_clean();
@@ -356,9 +368,9 @@ ob_start(); ?>
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_display_once_per_session" name="settings[display_once_per_session]" <?php checked( true, $display_once_per_session ); ?> >
 
-        <label class="clickable" for="settings_display_once_per_session">Display notification once per session</label>
+        <label class="clickable" for="settings_display_once_per_session"><?php _e( 'Display notification once per session', 'toto' ) ?></label>
 
-        <p class="description">A visitor session is cleared once the browser is closed.</p>
+        <p class="description"><?php _e( 'A visitor session is cleared once the browser is closed.', 'toto' ) ?></p>
     </div>
 <?php
 $fields->display_once_per_session = ob_get_clean();
@@ -368,10 +380,10 @@ ob_start(); ?>
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_display_mobile" name="settings[display_mobile]" <?php checked( true, $display_mobile ); ?> >
 
-        <label class="clickable" for="settings_display_mobile">Display on Mobile</label>
+        <label class="clickable" for="settings_display_mobile"><?php _e( 'Display on Mobile', 'toto' ) ?></label>
 
-        <p class="description">Wether or not to display the notification on when pixels available are smaller than
-            768px.</p>
+        <p class="description"><?php _e( 'Whether or not to display the notification on when pixels available are smaller than
+            768px.', 'toto' ) ?></p>
     </div>
 <?php
 $fields->display_mobile = ob_get_clean();
@@ -379,7 +391,7 @@ $fields->display_mobile = ob_get_clean();
 //Email Placeholder
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_email_placeholder">Email Placeholder</label>
+        <label for="settings_email_placeholder"><?php _e( 'Email Placeholder', 'toto' ) ?></label>
         <input type="text" id="settings_email_placeholder" name="settings[email_placeholder]" value="<?php echo $email_placeholder; ?>"/>
     </div>
 <?php
@@ -389,7 +401,7 @@ $fields->email_placeholder = ob_get_clean();
 //Button Text
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_button_text">Button Text</label>
+        <label for="settings_button_text"><?php _e( 'Button Text', 'toto' ) ?></label>
         <input type="text" id="settings_button_text" name="settings[button_text]" value="<?php echo $button_text; ?>"/>
     </div>
 <?php
@@ -399,7 +411,7 @@ $fields->button_text = ob_get_clean();
 //Button URL
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_button_url">Button URL</label>
+        <label for="settings_button_url"><?php _e( 'Button URL', 'toto' ) ?></label>
         <input type="text" id="settings_button_url" name="settings[button_url]" value="<?php echo $button_url; ?>"/>
     </div>
 <?php
@@ -409,7 +421,7 @@ $fields->button_url = ob_get_clean();
 //Last Active
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_last_activity">Count data from last X minutes</label>
+        <label for="settings_last_activity"><?php _e( 'Count data from last X minutes', 'toto' ) ?></label>
         <input type="number" id="settings_last_activity" name="settings[last_activity]" value="<?php echo $last_activity; ?>"/>
     </div>
 <?php
@@ -419,7 +431,7 @@ $fields->last_activity = ob_get_clean();
 //Coupon Code
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_coupon_code">Coupon Code</label>
+        <label for="settings_coupon_code"><?php _e( 'Coupon Code', 'toto' ) ?></label>
         <input type="text" id="settings_coupon_code" name="settings[coupon_code]" value="<?php echo $coupon_code; ?>"/>
     </div>
 <?php
@@ -429,7 +441,7 @@ $fields->coupon_code = ob_get_clean();
 //Footer Text
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_footer_text">Footer Text</label>
+        <label for="settings_footer_text"><?php _e( 'Footer Text', 'toto' ) ?></label>
         <input type="text" id="settings_footer_text" name="settings[footer_text]" value="<?php echo $footer_text; ?>"/>
     </div>
 <?php
@@ -441,19 +453,19 @@ ob_start(); ?>
     <div class="toto-form-group toto-switch-group" data-target="#settings_agreement_text,#settings_agreement_url">
         <input type="checkbox" class="handle-toggle" id="settings_show_agreement" name="settings[show_agreement]" <?php checked( true, $show_agreement ); ?> >
 
-        <label class="clickable" for="settings_show_agreement">Show Agreement</label>
+        <label class="clickable" for="settings_show_agreement"><?php _e( 'Show Agreement', 'toto' ) ?></label>
 
-        <p class="description">Require the user to confirm his agreement by ticking a checkbox.</p>
+        <p class="description"><?php _e( 'Require the user to confirm his agreement by ticking a checkbox.', 'toto' ) ?></p>
     </div>
 
     <div id="agreement">
         <div class="toto-form-group <?php echo $show_agreement ? '' : 'hidden'; ?>">
-            <label for="settings_agreement_text">Agreement Text</label>
+            <label for="settings_agreement_text"><?php _e( 'Agreement Text', 'toto' ) ?></label>
             <input type="text" id="settings_agreement_text" name="settings[agreement_text]" value="<?php echo $agreement_text; ?>"/>
         </div>
 
         <div class="toto-form-group <?php echo $show_agreement ? '' : 'hidden'; ?>">
-            <label for="settings_agreement_url">Agreement URL</label>
+            <label for="settings_agreement_url"><?php _e( 'Agreement URL', 'toto' ) ?></label>
             <input type="text" id="settings_agreement_url" name="settings[agreement_url]" value="<?php echo $agreement_url; ?>"/>
         </div>
     </div>
@@ -463,7 +475,7 @@ $fields->agreement = ob_get_clean();
 //Button Background Color
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_button_background_color">Button Background Color</label>
+        <label for="settings_button_background_color"><?php _e( 'Button Background Color', 'toto' ) ?></label>
         <input type="text" id="settings_button_background_color" class="toto-color-field" name="settings[button_background_color]" value="<?php echo $button_background_color; ?>"/>
     </div>
 <?php
@@ -473,7 +485,7 @@ $fields->button_background_color = ob_get_clean();
 //Button Background Color
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_button_background_color">Button Background Color</label>
+        <label for="settings_button_background_color"><?php _e( 'Button Background Color', 'toto' ) ?></label>
         <input type="text" id="settings_button_background_color" class="toto-color-field" name="settings[button_background_color]" value="<?php echo $button_background_color; ?>"/>
     </div>
 <?php
@@ -483,7 +495,7 @@ $fields->button_background_color = ob_get_clean();
 //Button Color
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_button_color">Button Color</label>
+        <label for="settings_button_color"><?php _e( 'Button Color', 'toto' ) ?></label>
         <input type="text" id="settings_button_color" class="toto-color-field" name="settings[button_color]" value="<?php echo $button_color; ?>"/>
     </div>
 <?php
@@ -493,7 +505,7 @@ $fields->button_color = ob_get_clean();
 //Number Color
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_number_color">Number Color</label>
+        <label for="settings_number_color"><?php _e( 'Number Color', 'toto' ) ?></label>
         <input type="text" id="settings_number_color" class="toto-color-field" name="settings[number_color]" value="<?php echo $number_color; ?>"/>
     </div>
 <?php
@@ -503,7 +515,7 @@ $fields->number_color = ob_get_clean();
 //Time Color
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_time_color">Time Color</label>
+        <label for="settings_time_color"><?php _e( 'Time Color', 'toto' ) ?></label>
         <input type="text" id="settings_time_color" class="toto-color-field" name="settings[time_color]" value="<?php echo $time_color; ?>"/>
     </div>
 <?php
@@ -513,7 +525,7 @@ $fields->time_color = ob_get_clean();
 //Time Background Color
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_time_background_color">Time Background Color</label>
+        <label for="settings_time_background_color"><?php _e( 'Time Background Color', 'toto' ) ?></label>
         <input type="text" id="settings_time_background_color" class="toto-color-field" name="settings[time_background_color]" value="<?php echo $time_background_color; ?>"/>
     </div>
 <?php
@@ -523,7 +535,7 @@ $fields->time_background_color = ob_get_clean();
 //Number Background Color
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_number_background_color">Number Background Color</label>
+        <label for="settings_number_background_color"><?php _e( 'Number Background Color', 'toto' ) ?></label>
         <input type="text" id="settings_number_background_color" class="toto-color-field" name="settings[number_background_color]" value="<?php echo $number_background_color; ?>"/>
     </div>
 <?php
@@ -533,7 +545,7 @@ $fields->number_background_color = ob_get_clean();
 //Pulse Background Color
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_pulse_background_color">Pulse Background Color</label>
+        <label for="settings_pulse_background_color"><?php _e( 'Pulse Background Color', 'toto' ) ?></label>
         <input type="text" id="settings_pulse_background_color" class="toto-color-field" name="settings[pulse_background_color]" value="<?php echo $pulse_background_color; ?>"/>
     </div>
 <?php
@@ -545,13 +557,13 @@ ob_start(); ?>
     <div class="toto-form-group toto-switch-group" data-target="#settings_notification_sound,#settings_sound_volume">
         <input type="checkbox" class="handle-toggle" id="settings_enable_sound" name="settings[enable_sound]" <?php checked( true, $enable_sound ); ?> >
 
-        <label class="clickable" for="settings_enable_sound">Enable Notification Sound</label>
+        <label class="clickable" for="settings_enable_sound"><?php _e( 'Enable Notification Sound', 'toto' ) ?></label>
 
-        <p class="description">Enable to play a sound when the notification will show.</p>
+        <p class="description"><?php _e( 'Enable to play a sound when the notification will show.', 'toto' ) ?></p>
     </div>
 
     <div class="toto-form-group <?php echo $enable_sound ? '' : 'hidden'; ?>">
-        <label for="settings_notification_sound">Select Notification Sound</label>
+        <label for="settings_notification_sound"><?php _e( 'Select Notification Sound', 'toto' ) ?></label>
 		<?php
 		$sounds = [
 			'to-the-point'     => __( 'To The Point', 'toto' ),
@@ -581,20 +593,20 @@ ob_start(); ?>
         <div class="play-sound hidden">
             <audio id="toto-sound">
                 <source src="<?php echo ! empty( $notification_sound ) ? TOTO_ASSETS . '/sounds/' . $notification_sound . '.mp3' : ''; ?>" type="audio/mpeg">
-                Your browser does not support the audio element.
+				<?php _e( 'Your browser does not support the audio element.', 'toto' ) ?>
             </audio>
         </div>
 
     </div>
     <div class="toto-form-group <?php echo $enable_sound ? '' : 'hidden'; ?>">
-        <label for="settings_sound_volume">Notification Sound Volume</label>
+        <label for="settings_sound_volume"><?php _e( 'Notification Sound Volume', 'toto' ) ?></label>
         <input type="hidden" name="settings[sound_volume]" id="settings_sound_volume" value="<?php echo $sound_volume; ?>"/>
 
         <div id="toto-volume-slider" class="toto-volume-slider" data-value="<?php echo $sound_volume; ?>">
             <div id="toto-volume-handle" class="toto-volume-handle ui-slider-handle"></div>
         </div>
 
-        <p class="description">Adjust the notification sound volume.</p>
+        <p class="description"><?php _e( 'Adjust the notification sound volume.', 'toto' ) ?></p>
 
     </div>
 
@@ -605,34 +617,34 @@ ob_start(); ?>
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_show_angry" name="settings[show_angry]" <?php checked( true, $show_angry ); ?> >
 
-        <label class="clickable" for="settings_show_angry">Show Angry</label>
+        <label class="clickable" for="settings_show_angry"><?php _e( 'Show Angry', 'toto' ) ?></label>
     </div>
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_show_sad" name="settings[show_sad]" <?php checked( true, $show_sad ); ?> >
 
-        <label class="clickable" for="settings_show_sad">Show Sad</label>
+        <label class="clickable" for="settings_show_sad"><?php _e( 'Show Sad', 'toto' ) ?></label>
     </div>
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_show_neutral" name="settings[show_neutral]" <?php checked( true, $show_neutral ); ?> >
 
-        <label class="clickable" for="settings_show_neutral">Show Neutral</label>
+        <label class="clickable" for="settings_show_neutral"><?php _e( 'Show Neutral', 'toto' ) ?></label>
     </div>
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_show_happy" name="settings[show_happy]" <?php checked( true, $show_happy ); ?> >
 
-        <label class="clickable" for="settings_show_happy">Show Happy</label>
+        <label class="clickable" for="settings_show_happy"><?php _e( 'Show Happy', 'toto' ) ?></label>
     </div>
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_show_excited" name="settings[show_excited]" <?php checked( true, $show_excited ); ?> >
 
-        <label class="clickable" for="settings_show_excited">Show Excited</label>
+        <label class="clickable" for="settings_show_excited"><?php _e( 'Show Excited', 'toto' ) ?></label>
     </div>
 <?php
 $fields->emoji = ob_get_clean();
 
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_conversions_count">How many conversions to show?</label>
+        <label for="settings_conversions_count"><?php _e('How many conversions to show?', 'toto') ?></label>
         <input type="text" id="settings_conversions_count" name="settings[conversions_count]" value="<?php echo $conversions_count ?>"/>
     </div>
 <?php
@@ -640,7 +652,7 @@ $fields->conversions_count = ob_get_clean();
 
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_content_title">Content Title</label>
+        <label for="settings_content_title"><?php _e('Content Title', 'toto') ?></label>
         <input type="text" id="settings_content_title" name="settings[content_title]" value="<?php echo $content_title ?>"/>
     </div>
 <?php
@@ -648,7 +660,7 @@ $fields->content_title = ob_get_clean();
 
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_content_description">Content Description</label>
+        <label for="settings_content_description"><?php _e('Content Description', 'toto') ?></label>
         <input type="text" id="settings_content_description" name="settings[content_description]" value="<?php echo $content_description ?>"/>
     </div>
 <?php
@@ -656,7 +668,7 @@ $fields->content_description = ob_get_clean();
 
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_input_placeholder">Input Placeholder</label>
+        <label for="settings_input_placeholder"><?php _e('Input Placeholder', 'toto') ?></label>
         <input type="text" id="settings_input_placeholder" name="settings[input_placeholder]" value="<?php echo $input_placeholder ?>"/>
     </div>
 <?php
@@ -664,53 +676,53 @@ $fields->input_placeholder = ob_get_clean();
 
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_share_url">Share URL</label>
+        <label for="settings_share_url"><?php _e('Share URL', 'toto') ?></label>
         <input type="text" id="settings_share_url" name="settings[share_url]" value="<?php echo $share_url ?>"/>
-        <p class="description">Leave empty if you want the URL to be dynamic to the current page where the notification
-            is shown.</p>
+        <p class="description"><?php _e('Leave empty if you want the URL to be dynamic to the current page where the notification
+            is shown.', 'toto') ?></p>
     </div>
 
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_share_facebook" name="settings[share_facebook]" <?php checked( true, $share_facebook ); ?> >
 
-        <label class="clickable" for="settings_share_facebook"><i class="fab fa-facebook"></i> Facebook Share</label>
+        <label class="clickable" for="settings_share_facebook"><i class="fab fa-facebook"></i> <?php _e('Facebook Share', 'toto') ?></label>
     </div>
 
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_share_twitter" name="settings[share_twitter]" <?php checked( true, $share_twitter ); ?> >
 
-        <label class="clickable" for="settings_share_twitter"><i class="fab fa-twitter"></i> Twitter Share</label>
+        <label class="clickable" for="settings_share_twitter"><i class="fab fa-twitter"></i> <?php _e('Twitter Share', 'toto') ?></label>
     </div>
 
     <div class="toto-form-group toto-switch-group">
         <input type="checkbox" id="settings_share_linkedin" name="settings[share_linkedin]" <?php checked( true, $share_linkedin ); ?> >
 
-        <label class="clickable" for="settings_share_linkedin"><i class="fab fa-linkedin"></i> Linkedin Share</label>
+        <label class="clickable" for="settings_share_linkedin"><i class="fab fa-linkedin"></i> <?php _e('Linkedin Share', 'toto') ?></label>
     </div>
 <?php
 $fields->share_url = ob_get_clean();
 
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_video">YouTube Video Url</label>
+        <label for="settings_video"><?php _e('YouTube Video Url', 'toto') ?></label>
         <input type="text" id="settings_video" name="settings[video]" value="<?php echo $video ?>"/>
-        <p class="description">Ex: https://www.youtube.com/watch?v=3WxQgvuT6ZI</p>
+        <p class="description"><?php _e('Ex: https://www.youtube.com/watch?v=3WxQgvuT6ZI', 'toto') ?></p>
     </div>
 <?php
 $fields->video = ob_get_clean();
 
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_end_date">End Date</label>
+        <label for="settings_end_date"><?php _e('End Date', 'toto') ?></label>
         <input type="text" id="settings_end_date" class="toto-date-time-picker" name="settings[end_date]" value="<?php echo $end_date ?>"/>
-        <p class="description">Ex: https://www.youtube.com/embed/3WxQgvuT6ZI</p>
+        <p class="description"><?php _e('Ex: https://www.youtube.com/embed/3WxQgvuT6ZI', 'toto') ?></p>
     </div>
 <?php
 $fields->end_date = ob_get_clean();
 
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_link_url">Link URL</label>
+        <label for="settings_link_url"><?php _e('Link URL', 'toto') ?></label>
         <input type="text" id="settings_link_url" class="toto-date-time-picker" name="settings[link_url]" value="<?php echo $link_url ?>"/>
     </div>
 <?php
@@ -718,7 +730,7 @@ $fields->link_url = ob_get_clean();
 
 ob_start(); ?>
     <div class="toto-form-group">
-        <label for="settings_link_url_text">Link URL Text</label>
+        <label for="settings_link_url_text"><?php _e('Link URL Text', 'toto') ?></label>
         <input type="text" id="settings_link_url_text" class="toto-date-time-picker" name="settings[link_url_text]" value="<?php echo $link_url_text ?>"/>
     </div>
 <?php

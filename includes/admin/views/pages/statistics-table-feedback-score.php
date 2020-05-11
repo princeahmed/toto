@@ -1,3 +1,5 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
+
 <div class="statistics-table-wrap <?php echo ! empty( $this->get_feedback_scores() ) ? '' : 'hidden'; ?>">
 
 	<div class="statistics-table-header">

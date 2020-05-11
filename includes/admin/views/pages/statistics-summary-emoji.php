@@ -1,4 +1,7 @@
 <?php
+
+defined( 'ABSPATH' ) || exit;
+
 $count = 0;
 
 $emoji_total = [
@@ -21,10 +24,10 @@ foreach ( $emoji_total as $item ) {
 
 <div class="statistics-summary">
     <div class="summary-icon">
-        <img src="<?php echo TOTO_ASSETS . '/images/statistics/submissions.png' ?>" alt="Emoji Feedbacks">
+        <img src="<?php echo TOTO_ASSETS . '/images/statistics/submissions.png' ?>" alt="<?php _e('Feedback Submissions', 'toto') ?>">
     </div>
     <div class="summary-info">
         <div class="summary-number"><?php echo $count; ?></div>
-        <div class="summary-title">Emoji Feedbacks</div>
+        <div class="summary-title"><?php _e('Feedback Submissions', 'toto') ?></div>
     </div>
 </div>

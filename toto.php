@@ -87,7 +87,6 @@ final class Toto {
 		include_once TOTO_INCLUDES . '/class-cpt.php';
 		include_once TOTO_INCLUDES . '/class-shortcodes.php';
 		include_once TOTO_INCLUDES . '/class-enqueue.php';
-		include_once TOTO_INCLUDES . '/class-form-handler.php';
 		include_once TOTO_INCLUDES . '/class-ajax.php';
 		include_once TOTO_INCLUDES . '/class-notifications.php';
 		include_once TOTO_INCLUDES . '/functions.php';

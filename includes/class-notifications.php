@@ -4,6 +4,14 @@ defined( 'ABSPATH' ) || exit;
 
 class Toto_Notifications {
 
+	/**
+     * Get notification config
+     *
+	 * @param bool $type
+	 * @param bool $post_id
+	 *
+	 * @return array|mixed
+	 */
 	public static function get_config( $type = false, $post_id = false ) {
 
 		$settings = (object) get_post_meta( $post_id, '_settings', true );
@@ -52,93 +60,86 @@ class Toto_Notifications {
 
 		$all = [
 			'INFORMATIONAL' => array_merge( [
-				"name" => "Informational",
+				"name" => __('Informational', 'toto'),
 				"icon" => "fa fa-info-circle",
 
 				'title'       => ! empty( $settings->title ) ? $settings->title : __( 'Flash Sale! 🔥', 'toto' ),
 				'description' => ! empty( $settings->description ) ? $settings->description : __( 'Limited sale until tonight, right now!', 'toto' ),
-				//'image'       => ! empty( $settings->image ) ? $settings->image : 'https://img.icons8.com/nolan/2x/cutting-coupon.png',
-				'image'       => '',
+				'image'       => ! empty( $settings->image ) ? $settings->image : 'https://img.icons8.com/nolan/2x/cutting-coupon.png',
 			], $default ),
 
 			'COUPON' => array_merge( [
-				"name" => "Coupon",
+				"name" => __('Coupon', 'toto'),
 				"icon" => "fa fa-piggy-bank",
 
-				'title'       => ! empty( $settings->title ) ? $settings->title : '35% OFF 🔥!',
-				'description' => ! empty( $settings->description ) ? $settings->description : 'Limited summer sale coupon code!',
-				//'image'       => ! empty( $settings->image ) ? $settings->image : 'https://img.icons8.com/nolan/2x/cutting-coupon.png',
-				'image'       => '',
-				'coupon_code' => ! empty( $settings->coupon_code ) ? $settings->coupon_code : 'COUPON20',
-				'button_text' => ! empty( $settings->button_text ) ? $settings->button_text : 'Get Coupon',
-				'footer_text' => ! empty( $settings->footer_text ) ? $settings->footer_text : 'No, I don\'t want to save money',
+				'title'       => ! empty( $settings->title ) ? $settings->title : __('35% OFF 🔥!', 'toto'),
+				'description' => ! empty( $settings->description ) ? $settings->description : __('Limited summer sale coupon code!', 'toto'),
+				'image'       => ! empty( $settings->image ) ? $settings->image : 'https://img.icons8.com/nolan/2x/cutting-coupon.png',
+				'coupon_code' => ! empty( $settings->coupon_code ) ? $settings->coupon_code : __('COUPON20', 'toto'),
+				'button_text' => ! empty( $settings->button_text ) ? $settings->button_text : __('Get Coupon', 'toto'),
+				'footer_text' => ! empty( $settings->footer_text ) ? $settings->footer_text : __('No, I don\'t want to save money', 'toto'),
 
 				'button_background_color' => ! empty( $settings->button_background_color ) ? $settings->button_background_color : '#000',
 				'button_color'            => ! empty( $settings->button_color ) ? $settings->button_color : '#fff',
 			], $default ),
 
 			'LIVE_COUNTER' => array_merge( [
-				"name" => "Live Counter",
+				"name" => __('Live Counter', 'toto'),
 				"icon" => "fa fa-globe",
 
-				'description'   => ! empty( $settings->description ) ? $settings->description : 'Active visitors now.',
+				'description'   => ! empty( $settings->description ) ? $settings->description : __('Active visitors now.', 'toto'),
 				'last_activity' => ! empty( $settings->last_activity ) ? $settings->last_activity : 15,
-				//"image"         => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/nolan/2x/cutting-coupon.png",
-				"image"         => '',
+				"image"         => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/nolan/2x/cutting-coupon.png",
 				"number"        => ! empty( $settings->number ) ? $settings->number : "15",
 			], $default ),
 
 			'EMAIL_COLLECTOR' => array_merge( [
-				"name" => "Email Collector",
+				"name" => __('Email Collector', 'toto'),
 				"icon" => "fa fa-envelope-open",
 
-				'title'             => ! empty( $settings->title ) ? $settings->title : "Sign up 🔥",
-				'description'       => ! empty( $settings->description ) ? $settings->description : "We do not send out spam emails & you can unsubscribe at any point.",
-				'email_placeholder' => ! empty( $settings->email_placeholder ) ? $settings->email_placeholder : "Your valid email",
-				'button_text'       => ! empty( $settings->button_text ) ? $settings->button_text : "Sign me up ✅",
+				'title'             => ! empty( $settings->title ) ? $settings->title : __('Sign up 🔥', 'toto'),
+				'description'       => ! empty( $settings->description ) ? $settings->description : __('We do not send out spam emails & you can unsubscribe at any point.', 'toto'),
+				'email_placeholder' => ! empty( $settings->email_placeholder ) ? $settings->email_placeholder : __('Your valid email', 'toto'),
+				'button_text'       => ! empty( $settings->button_text ) ? $settings->button_text : __('Sign me up ✅', 'toto'),
 			], $default ),
 
 			'LATEST_CONVERSION' => array_merge( [
-				"name" => "Latest Conversion",
+				"name" => __('Latest Conversion', 'toto'),
 				"icon" => "fa fa-funnel-dollar",
 
-				'title'             => ! empty( $settings->title ) ? $settings->title : "A cool person",
-				'description'       => ! empty( $settings->description ) ? $settings->description : "Signed up for the newsletter.",
-				//'image'             => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/color/2x/webhook.png",
-				'image'             => '',
-				'time_ago'          => ! empty( $settings->time_ago ) ? $settings->time_ago : "10 mins ago",
+				'title'             => ! empty( $settings->title ) ? $settings->title : __('A cool person', 'toto'),
+				'description'       => ! empty( $settings->description ) ? $settings->description : __('Signed up for the newsletter.', 'toto'),
+				'image'             => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/color/2x/webhook.png",
+				'time_ago'          => ! empty( $settings->time_ago ) ? $settings->time_ago : __('10 mins ago', 'toto'),
 				'conversions_count' => ! empty( $settings->conversions_count ) ? $settings->conversions_count : 1,
 			], $default ),
 
 			'CONVERSIONS_COUNTER' => array_merge( [
-				"name" => "Conversions Counter",
+				"name" => __('Conversions Counter', 'toto'),
 				"icon" => "fa fa-comment-dollar",
 
-				'title'         => ! empty( $settings->title ) ? $settings->title : "People bought the product",
-				//'image'         => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/officel/2x/return-purchase.png",
-				'image'         => '',
+				'title'         => ! empty( $settings->title ) ? $settings->title : __('People bought the product', 'toto'),
+				'image'         => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/officel/2x/return-purchase.png",
 				'number'        => ! empty( $settings->number ) ? $settings->number : "5",
-				'time'          => ! empty( $settings->time ) ? $settings->time : "In the last %s hours",
+				'time'          => ! empty( $settings->time ) ? $settings->time : __('In the last %s hours', 'toto'),
 				'last_activity' => ! empty( $settings->last_activity ) ? $settings->last_activity : 2,
 			], $default ),
 
 			'VIDEO' => array_merge( [
-				"name" => "Video",
+				"name" => __('Video', 'toto'),
 				"icon" => "fa fa-video",
 
-				'title'       => ! empty( $settings->title ) ? $settings->title : "Demo of the product 🔥",
-				//todo uncomment
-				//'video'       => ! empty( $settings->video ) ? $settings->video : "https://www.youtube.com/?v=zWZa05uaiNA",
-				'video'       => '',
-				'button_text' => ! empty( $settings->button_text ) ? $settings->button_text : "Sign up 🙌",
+				'title'       => ! empty( $settings->title ) ? $settings->title : __('Demo of the product 🔥', 'toto'),
+				'video'       => ! empty( $settings->video ) ? $settings->video : "https://www.youtube.com/?v=zWZa05uaiNA",
+				'button_text' => ! empty( $settings->button_text ) ? $settings->button_text : __('Sign up 🙌', 'toto'),
 			], $default ),
 
 			'SOCIAL_SHARE' => array_merge( [
-				"name" => "Social Share",
+				"name" => __('Social Share', 'toto'),
 				"icon" => "fa fa-share-alt",
 
-				'title'          => ! empty( $settings->title ) ? $settings->title : "Tell your friends 💻",
-				'description'    => ! empty( $settings->description ) ? $settings->description : "We appreciate all the shares to support us! Thank you!",
+				'title'          => ! empty( $settings->title ) ? $settings->title : __('Tell your friends 💻', 'toto'),
+				'description'    => ! empty( $settings->description ) ? $settings->description : __('We appreciate all the shares to support us! Thank you!', 'toto'),
 				'share_url'      => ! empty( $settings->share_url ) ? $settings->share_url : '',
 				'share_facebook' => isset( $settings->share_facebook ) ? $settings->share_facebook : true,
 				'share_twitter'  => isset( $settings->share_twitter ) ? $settings->share_twitter : true,
@@ -146,83 +147,83 @@ class Toto_Notifications {
 			], $default ),
 
 			'RANDOM_REVIEW' => array_merge( [
-				"name" => "Random Review",
+				"name" => __('Random Review', 'toto'),
 				"icon" => "fa fa-random",
 
-				'title'       => ! empty( $settings->title ) ? $settings->title : "John Doe",
-				'description' => ! empty( $settings->description ) ? $settings->description : "SocialProof is a 5 star product! 🔥",
+				'title'       => ! empty( $settings->title ) ? $settings->title : __('John Doe', 'toto'),
+				'description' => ! empty( $settings->description ) ? $settings->description : __('SocialProof is a 5 star product! 🔥', 'toto'),
 				'image'       => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/color/2x/person-male.png",
 				'stars'       => ! empty( $settings->stars ) ? $settings->stars : 5,
 			], $default ),
 
 			'EMOJI_FEEDBACK' => array_merge( [
-				"name" => "Emoji Feedback",
+				"name" => __('Emoji Feedback', 'toto'),
 				"icon" => "fa fa-smile-beam",
 
-				'title'                  => ! empty( $settings->title ) ? $settings->title : "Do you like our website?",
+				'title'                  => ! empty( $settings->title ) ? $settings->title : __('Do you like our website?', 'toto'),
 				'show_angry'             => isset( $settings->show_angry ) ? $settings->show_angry : true,
 				'show_sad'               => isset( $settings->show_sad ) ? $settings->show_sad : true,
 				'show_neutral'           => isset( $settings->show_neutral ) ? $settings->show_neutral : true,
 				'show_happy'             => isset( $settings->show_happy ) ? $settings->show_happy : true,
 				'show_excited'           => isset( $settings->show_excited ) ? $settings->show_excited : true,
-				"feedback_emoji_angry"   => ! empty( $settings->feedback_emoji_angry ) ? $settings->feedback_emoji_angry : "Angry",
-				"feedback_emoji_sad"     => ! empty( $settings->feedback_emoji_sad ) ? $settings->feedback_emoji_sad : "Sad",
-				"feedback_emoji_neutral" => ! empty( $settings->feedback_emoji_neutral ) ? $settings->feedback_emoji_neutral : "Neutral",
-				"feedback_emoji_happy"   => ! empty( $settings->feedback_emoji_happy ) ? $settings->feedback_emoji_happy : "Happy",
-				"feedback_emoji_excited" => ! empty( $settings->feedback_emoji_excited ) ? $settings->feedback_emoji_excited : "Excited",
+				"feedback_emoji_angry"   => ! empty( $settings->feedback_emoji_angry ) ? $settings->feedback_emoji_angry : __('Angry', 'toto'),
+				"feedback_emoji_sad"     => ! empty( $settings->feedback_emoji_sad ) ? $settings->feedback_emoji_sad : __('Sad', 'toto'),
+				"feedback_emoji_neutral" => ! empty( $settings->feedback_emoji_neutral ) ? $settings->feedback_emoji_neutral : __('Neutral', 'toto'),
+				"feedback_emoji_happy"   => ! empty( $settings->feedback_emoji_happy ) ? $settings->feedback_emoji_happy : __('Happy', 'toto'),
+				"feedback_emoji_excited" => ! empty( $settings->feedback_emoji_excited ) ? $settings->feedback_emoji_excited : __('Excited', 'toto'),
 			], $default ),
 
 			'COOKIE_NOTIFICATION' => array_merge( [
-				"name" => "Cookie Notification",
+				"name" => __('Cookie Notification', 'toto'),
 				"icon" => "fa fa-cookie",
 
-				'description'   => ! empty( $settings->description ) ? $settings->description : "This website uses cookies to ensure you get the best experience on our website.",
-				'button_text'   => ! empty( $settings->button_text ) ? $settings->button_text : "Okay 🔥",
+				'description'   => ! empty( $settings->description ) ? $settings->description : __('This website uses cookies to ensure you get the best experience on our website.', 'toto'),
+				'button_text'   => ! empty( $settings->button_text ) ? $settings->button_text : __('Okay 🔥', 'toto'),
 				'link_url'      => ! empty( $settings->link_url ) ? $settings->link_url : "",
-				'link_url_text' => ! empty( $settings->link_url_text ) ? $settings->link_url_text : "Learn More",
+				'link_url_text' => ! empty( $settings->link_url_text ) ? $settings->link_url_text : __('Learn More', 'toto'),
 				'image'         => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/plasticine/2x/cookie.png",
 			], $default ),
 
 			'SCORE_FEEDBACK' => array_merge( [
-				"name" => "Score Feedback",
+				"name" => __('Score Feedback', 'toto'),
 				"icon" => "fa fa-sort-numeric-up",
 
-				'title'            => ! empty( $settings->title ) ? $settings->title : "How'd you like our website?",
-				'description'      => ! empty( $settings->description ) ? $settings->description : "Rate from 1 to 5. 5 being excellent.",
-				"feedback_score_1" => ! empty( $settings->feedback_score_1 ) ? $settings->feedback_score_1 : "1",
-				"feedback_score_2" => ! empty( $settings->feedback_score_2 ) ? $settings->feedback_score_2 : "2",
-				"feedback_score_3" => ! empty( $settings->feedback_score_3 ) ? $settings->feedback_score_3 : "3",
-				"feedback_score_4" => ! empty( $settings->feedback_score_4 ) ? $settings->feedback_score_4 : "4",
-				"feedback_score_5" => ! empty( $settings->feedback_score_5 ) ? $settings->feedback_score_5 : "5",
+				'title'            => ! empty( $settings->title ) ? $settings->title : __('How\'d you like our website?', 'toto'),
+				'description'      => ! empty( $settings->description ) ? $settings->description : __('Rate from 1 to 5. 5 being excellent.', 'toto'),
+				"feedback_score_1" => ! empty( $settings->feedback_score_1 ) ? $settings->feedback_score_1 : __('1', 'toto'),
+				"feedback_score_2" => ! empty( $settings->feedback_score_2 ) ? $settings->feedback_score_2 : __('2', 'toto'),
+				"feedback_score_3" => ! empty( $settings->feedback_score_3 ) ? $settings->feedback_score_3 : __('3', 'toto'),
+				"feedback_score_4" => ! empty( $settings->feedback_score_4 ) ? $settings->feedback_score_4 : __('4', 'toto'),
+				"feedback_score_5" => ! empty( $settings->feedback_score_5 ) ? $settings->feedback_score_5 : __('5', 'toto'),
 			], $default ),
 
 			'REQUEST_COLLECTOR' => array_merge( [
-				"name" => "Request Collector",
+				"name" => __('Request Collector', 'toto'),
 				"icon" => "fa fa-user-plus",
 
-				'title'               => ! empty( $settings->title ) ? $settings->title : "John",
-				'description'         => ! empty( $settings->description ) ? $settings->description : "Support Team",
+				'title'               => ! empty( $settings->title ) ? $settings->title : __('John', 'toto'),
+				'description'         => ! empty( $settings->description ) ? $settings->description : __('Support Team', 'toto'),
 				'image'               => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/cotton/2x/online-support.png",
-				'content_title'       => ! empty( $settings->content_title ) ? $settings->content_title : "Any questions?",
-				'content_description' => ! empty( $settings->content_description ) ? $settings->content_description : "Let us know and we will get back to you!",
-				'input_placeholder'   => ! empty( $settings->input_placeholder ) ? $settings->input_placeholder : "Valid Phone Number",
-				'button_text'         => ! empty( $settings->button_text ) ? $settings->button_text : "Call me back ⚡️",
+				'content_title'       => ! empty( $settings->content_title ) ? $settings->content_title : __('Any questions?', 'toto'),
+				'content_description' => ! empty( $settings->content_description ) ? $settings->content_description : __('Let us know and we will get back to you!', 'toto'),
+				'input_placeholder'   => ! empty( $settings->input_placeholder ) ? $settings->input_placeholder : __('Valid Phone Number', 'toto'),
+				'button_text'         => ! empty( $settings->button_text ) ? $settings->button_text : __('Call me back ⚡️', 'toto'),
 			], $default ),
 
 			'COUNTDOWN_COLLECTOR' => array_merge( [
-				"name" => "Countdown Collector",
+				"name" => __('Countdown Collector', 'toto'),
 				"icon" => "fa fa-clock",
 
-				'title'             => ! empty( $settings->title ) ? $settings->title : "Building a website 💻",
-				'description'       => ! empty( $settings->description ) ? $settings->description : "Free Webinar by us.",
-				'content_title'     => ! empty( $settings->content_title ) ? $settings->content_title : "Hurry up! Registrations are closing soon.",
-				'input_placeholder' => ! empty( $settings->input_placeholder ) ? $settings->input_placeholder : "Valid Email",
-				'button_text'       => ! empty( $settings->button_text ) ? $settings->button_text : "Sign up ✅️",
-				'end_date'          => ! empty( $settings->end_date ) ? $settings->end_date : ( new \DateTime() )->modify( '+5 hours' )->format( 'Y-m-d H:i:s' ),
-				"days"              => ! empty( $settings->days ) ? $settings->days : "days",
-				"hours"             => ! empty( $settings->hours ) ? $settings->hours : "hours",
-				"minutes"           => ! empty( $settings->minutes ) ? $settings->minutes : "minutes",
-				"seconds"           => ! empty( $settings->seconds ) ? $settings->seconds : "seconds",
+				'title'             => ! empty( $settings->title ) ? $settings->title : __('Building a website 💻', 'toto'),
+				'description'       => ! empty( $settings->description ) ? $settings->description : __('Free Webinar by us.', 'toto'),
+				'content_title'     => ! empty( $settings->content_title ) ? $settings->content_title : __('Hurry up! Registrations are closing soon.', 'toto'),
+				'input_placeholder' => ! empty( $settings->input_placeholder ) ? $settings->input_placeholder : __('Valid Email', 'toto'),
+				'button_text'       => ! empty( $settings->button_text ) ? $settings->button_text : __('Sign up ✅️', 'toto'),
+				'end_date'          => ! empty( $settings->end_date ) ? $settings->end_date : date( 'Y-m-d h:i A', strtotime( '+5 hours' ) ),
+				"days"              => ! empty( $settings->days ) ? $settings->days : __('days', 'toto'),
+				"hours"             => ! empty( $settings->hours ) ? $settings->hours : __('hours', 'toto'),
+				"minutes"           => ! empty( $settings->minutes ) ? $settings->minutes : __('minutes', 'toto'),
+				"seconds"           => ! empty( $settings->seconds ) ? $settings->seconds : __('seconds', 'toto'),
 			], $default )
 
 		];
@@ -230,6 +231,14 @@ class Toto_Notifications {
 		return $type ? $all[ $type ] : $all;
 	}
 
+	/**
+     * Get notification frontend view
+     *
+	 * @param $post_id
+	 * @param bool $shortcode
+	 *
+	 * @throws Exception
+	 */
 	public static function get_view( $post_id, $shortcode = false ) {
 
 		$type         = get_post_meta( $post_id, '_notification_type', true );
@@ -249,7 +258,12 @@ class Toto_Notifications {
 			'enable_sound'          => $notification->enable_sound,
 			'notification_sound'    => TOTO_ASSETS . '/sounds/' . $notification->notification_sound . '.mp3',
 			'sound_volume'          => $notification->sound_volume,
+			'should_show'           => true,
 		];
+
+		if ( 'COUNTDOWN_COLLECTOR' == $type ) {
+			$config['should_show'] = new \DateTime( $notification->end_date ) > new \DateTime();
+		}
 
 		$attr = [
 			'data-notification-id' => $post_id,
@@ -284,18 +298,24 @@ class Toto_Notifications {
 
 			?>
         >
-			<?php include TOTO_INCLUDES . '/admin/views/notifications/view/' . strtolower( $type ) . '.php'; ?>
+			<?php include TOTO_INCLUDES . '/notifications/views/' . strtolower( $type ) . '.php'; ?>
         </div>
 		<?php
 		echo ob_get_clean();
 
 	}
 
+	/**
+     * Get notification preview
+     *
+	 * @param $type
+	 * @param $post_id
+	 */
 	public static function preview( $type, $post_id ) {
 		$notification = (object) self::get_config( $type, $post_id );
 
 		ob_start();
-		include TOTO_INCLUDES . '/admin/views/notifications/view/' . strtolower( $type ) . '.php';
+		include TOTO_INCLUDES . '/notifications/views/' . strtolower( $type ) . '.php';
 
 		echo preg_replace( [ '/<form/', '/<\/form>/', '/required=\"required\"/' ], [
 			'<div',
@@ -314,23 +334,44 @@ class Toto_Notifications {
 	public static function statistics_types( $type ) {
 
 		$types = [ 'impression', 'hover' ];
-		if ( in_array( $type, [ 'INFORMATIONAL', 'COUPON', 'LIVE_COUNTER', 'VIDEO', 'SOCIAL_SHARE', 'COOKIE_NOTIFICATION' ] ) ) {
+		if ( in_array( $type, [
+			'INFORMATIONAL',
+			'COUPON',
+			'LIVE_COUNTER',
+			'VIDEO',
+			'SOCIAL_SHARE',
+			'COOKIE_NOTIFICATION'
+		] ) ) {
 			$types[] = 'click';
-		} elseif ( in_array( $type, [ 'EMAIL_COLLECTOR', 'REQUEST_COLLECTOR', ] ) ) {
+		} elseif ( in_array( $type, [ 'EMAIL_COLLECTOR', 'REQUEST_COLLECTOR','COUNTDOWN_COLLECTOR', ] ) ) {
 			$types[] = 'submissions';
 		}
 
 		return $types;
 	}
 
+	/**
+     * Get notification setting fields based on type
+     *
+	 * @param $type
+	 * @param bool $field
+	 * @param bool $post_id
+	 *
+	 * @return mixed
+	 */
 	public static function settings_fields( $type, $field = false, $post_id = false ) {
 		$notification = self::get_config( $type, $post_id );
 
-		$fields = require TOTO_INCLUDES . '/admin/views/notifications/settings/fields.php';
+		$fields = require TOTO_INCLUDES . '/notifications/fields.php';
 
 		return $field ? $fields->$field : $fields;
 	}
 
+	/**
+	 * @param $type
+	 *
+	 * @return mixed
+	 */
 	public static function setting_tabs( $type ) {
 
 		$default_display = [
@@ -623,6 +664,11 @@ class Toto_Notifications {
 		return false;
 	}
 
+	/**
+     * Display frontend Notification
+     *
+	 * @throws Exception
+	 */
 	public static function display_notifications() {
 		$args = [
 			'post_type'   => 'toto_notification',

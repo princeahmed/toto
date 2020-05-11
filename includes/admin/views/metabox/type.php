@@ -1,16 +1,9 @@
+<?php defined( 'ABSPATH' ) || exit; ?>
+
 <div class="toto-tab-content-item toto-notification-types active" id="notification_type">
 	<?php
 
-	$default        = array_keys( Toto_Notifications::get_config() );
-	$active_modules = toto_get_options( 'active_modules', $default );
-
-	foreach ( Toto_Notifications::get_config() as $type => $config ) {
-
-//		if ( ! in_array( $type, $active_modules ) ) {
-//			continue;
-//		}
-
-		?>
+	foreach ( Toto_Notifications::get_config() as $type => $config ) { ?>
         <div class="toto-notification-type <?php echo $current_type == $type ? 'active' : ''; ?>">
 
             <h3 class="toto-notification-type-title"><?php echo $config['name']; ?></h3>

@@ -6,6 +6,7 @@
             app.initVolumeSlider();
             app.handlePrevNext();
             app.previewHandler();
+            app.initDateTimePicker();
 
             $(document).on('click', '.toto-meta-tabs .toto-tab-link', app.toggleNotificationTab);
             $(document).on('click', '.toto-notification-type', app.selectType);
@@ -22,6 +23,14 @@
             $(document).on('change', '#settings_notification_sound', app.playSound);
 
             $(document).on('change', '.handle-toggle', app.handleToggle);
+
+        },
+
+        initDateTimePicker: () => {
+            $('.toto-date-time-picker').datetimepicker({
+                timeFormat: "hh:mm TT",
+                dateFormat: "yy-mm-dd",
+            });
         },
 
         playSound: function () {
@@ -296,6 +305,8 @@
 
                     app.initSelect2();
                     app.previewHandler();
+                    app.initDateTimePicker();
+
                 },
 
                 error: error => console.log(error)

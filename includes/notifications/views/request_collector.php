@@ -22,15 +22,7 @@
                     <button type="submit" class="toto-request-collector-button" name="button" style="color: <?php echo $notification->button_color ?>; background: <?php echo $notification->button_background_color ?>"><?php echo $notification->button_text ?></button>
                 </div>
 
-                    <div class="toto-agreement-checkbox <?php echo $notification->show_agreement ? '' : 'hidden'; ?>">
-                        <input type="checkbox" id="toto-agreement" name="agreement"
-                            <?php echo $notification->show_agreement ? 'required="required' : ''; ?>" />
-                        <label for="toto-agreement" class="toto-agreement-checkbox-text" style="color: <?php echo $notification->description_color ?>">
-                            <a href="<?php echo $notification->agreement_url ?>">
-                                <?php echo $notification->agreement_text ?>
-                            </a>
-                        </label>
-                    </div>
+                    <?php toto_agreement($notification); ?>
 
             </form>
 
@@ -38,5 +30,5 @@
         </div>
     </div>
 
-    <span class="toto-close"><?php echo $notification->display_close_button ? '&#10006;' : ''; ?></span>
+    <?php toto_close($notification); ?>
 </div>

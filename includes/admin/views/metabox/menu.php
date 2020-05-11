@@ -1,4 +1,7 @@
 <?php
+
+defined( 'ABSPATH' ) || exit;
+
 global $post;
 
 $tabs = [
@@ -25,7 +28,7 @@ $tabs = [
 <ul class="toto-meta-tabs">
 
     <li class="toto-tab-item">
-        <a class="toto-tab-link active" data-target="notification_type"> <i class="fa fa-network-wired"></i> Type </a>
+        <a class="toto-tab-link active" data-target="notification_type"> <i class="fa fa-network-wired"></i> <?php _e('Type', 'toto') ?> </a>
     </li>
 
 	<?php foreach ( $tabs as $key => $tab ) { ?>

@@ -10,12 +10,12 @@
 
             <div>
                 <p class="toto-conversions-counter-title" style="color: <?php echo $notification->title_color ?>"><?php echo $notification->title ?></p>
-                <p class="toto-conversions-counter-time"><?php echo sprintf( 'In the last %s hours', $notification->last_activity ) ?></p>
+                <p class="toto-conversions-counter-time"><?php echo sprintf( __( 'In the last %s hours', 'toto' ), $notification->last_activity ) ?></p>
             </div>
         </div>
 
 		<?php toto_branding( $notification ); ?>
     </div>
 
-    <span class="toto-close"></span>
+	<?php toto_close( $notification ); ?>
 </div>

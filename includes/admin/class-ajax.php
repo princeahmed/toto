@@ -15,7 +15,7 @@ class Toto_Admin_Ajax {
 	}
 
 	/**
-	 * Update notification content fields based on notification type
+	 * Update notification content fields based on notification type select
 	 */
 	public function update_fields() {
 
@@ -55,7 +55,10 @@ class Toto_Admin_Ajax {
 	 * Handle notification post_status change
 	 */
 	public function handle_status_change() {
-		//todo nonce check
+
+	    if(!current_user_can('manage_options')){
+	    	return;
+	    }
 
 		$post_id = ! empty( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : '';
 		$status  = ! empty( $_REQUEST['status'] ) ? wp_unslash( $_REQUEST['status'] ) : 'draft';
@@ -73,7 +76,7 @@ class Toto_Admin_Ajax {
 
 
 	/**
-	 * Get notification saved statistics
+	 * Get notification saved statistics data
 	 */
 	public function get_statistics() {
 
@@ -116,8 +119,6 @@ class Toto_Admin_Ajax {
 	 * Get notification preview
 	 */
 	public function notification_preview() {
-		//todo nonce checker
-
 		$post_id   = ! empty( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : '';
 		$type      = get_post_meta( $post_id, '_notification_type', true );
 		$type_name = Toto_Notifications::get_config( $type )['name'];

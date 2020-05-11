@@ -2,9 +2,8 @@
 
 <div class="toto-wrapper toto-wrapper-<?php echo $notification->border_radius ?> toto-latest-conversion-wrapper" style="background: <?php echo $notification->background_color ?>">
     <div class="toto-latest-conversion-content">
-		<?php if ( ! empty( $notification->image ) ) { ?>
-            <img src="<?php echo $notification->image ?>" class="toto-latest-conversion-image"/>
-		<?php } ?>
+
+            <img src="<?php echo $notification->image ?>" class="toto-latest-conversion-image <?php echo ! empty( $notification->image ) ? '': 'hidden'; ?>"/>
 
         <div>
             <p class="toto-latest-conversion-title" style="color: <?php echo $notification->title_color ?>"><?php echo isset( $notification->who ) && $notification->who ? $notification->who : $notification->title ?></p>
@@ -16,7 +15,7 @@
 					if ( isset( $notification->last_action_date ) && $notification->last_action_date ) {
 						echo toto_get_timeago( $notification->last_action_date );
                     } else {
-						echo '10 mins ago';
+						echo __('10 mins ago', 'toto');
 					} ?>
                 </div>
 
@@ -27,5 +26,5 @@
         </div>
     </div>
 
-    <span class="toto-close"></span>
+    <?php toto_close($notification); ?>
 </div>

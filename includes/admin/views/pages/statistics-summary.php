@@ -1,4 +1,6 @@
 <?php
+defined( 'ABSPATH' ) || exit;
+
 $count = ! empty( $this->log_chart()[ $statistics_type . '_total' ] ) ? $this->log_chart()[ $statistics_type . '_total' ] : 0;
 ?>
 

@@ -2,9 +2,8 @@
 
 <div class="toto-wrapper toto-wrapper-<?php echo $notification->border_radius ?> toto-random-review-wrapper" style="background: <?php echo $notification->background_color ?>">
     <div class="toto-random-review-content">
-        <?php if(!empty($notification->image)): ?>
-        <img src="<?php echo $notification->image ?>" class="toto-random-review-image" />
-        <?php endif ?>
+
+        <img src="<?php echo $notification->image ?>" class="toto-random-review-image <?php echo ! empty( $notification->image ) ? '': 'hidden'; ?>" />
 
         <div>
             <div class="toto-random-review-header">
@@ -24,5 +23,5 @@
         </div>
     </div>
 
-    <span class="toto-close"></span>
+    <?php toto_close($notification); ?>
 </div>

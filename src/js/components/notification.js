@@ -3,6 +3,7 @@ import Notification from "./class-notification";
 ;(function ($) {
     $.toto = {
         init: () => {
+
             $('.toto').each((i, el) => {
                 const config = $(el).data('config');
 
@@ -376,7 +377,7 @@ import Notification from "./class-notification";
                         if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
                             clearInterval(countdown_interval);
 
-                            $.toto.remove_notification(main_element);
+                            $.toto.notification.remove_notification(main_element);
                         }
 
                         /* Set the new values */
@@ -401,11 +402,11 @@ import Notification from "./class-notification";
                             $.toto.send_statistics_data({
                                 ...$.toto.user(),
                                 notification_id: notification_id,
-                                type: 'collector',
+                                type: 'submissions',
                                 data: input
                             });
 
-                            $.toto.remove_notification(main_element);
+                            $.toto.notification.remove_notification(main_element);
 
                             /* Make sure to let the browser know of the conversion so that it is not shown again */
                             localStorage.setItem(`notification_${notification_id}_converted`, true);

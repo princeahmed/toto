@@ -4,10 +4,19 @@ defined( 'ABSPATH' ) || exit();
 
 class TOTO_Shortcodes {
 
+	/**
+	 * TOTO_Shortcodes constructor.
+	 */
 	public function __construct() {
 		add_shortcode( 'toto', [ $this, 'render_notification' ] );
 	}
 
+	/**
+	 * @param $atts
+	 *
+	 * @return false|string|void
+	 * @throws Exception
+	 */
 	public function render_notification( $atts ) {
 
 		$id = intval( $atts['id'] );
@@ -15,8 +24,6 @@ class TOTO_Shortcodes {
 		if ( ! $id ) {
 			return;
 		}
-
-
 
 		ob_start();
 		Toto_Notifications::get_view( $id, false, true );

@@ -1,5 +1,6 @@
 <?php
 
+/* block direct access */
 defined( 'ABSPATH' ) || exit;
 
 class Toto_Metabox {
