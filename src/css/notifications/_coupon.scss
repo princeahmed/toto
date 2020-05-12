@@ -1,37 +1,37 @@
 /* Coupon */
-.toto-coupon-wrapper {
+.trust-plus-coupon-wrapper {
 }
 
 @media (min-width: 576px) {
-    .toto-coupon-wrapper {
+    .trust-plus-coupon-wrapper {
         max-width: 480px !important;
     }
 }
-.toto-coupon-content {
+.trust-plus-coupon-content {
     padding: 8px !important;
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
 }
 
-.toto-coupon-title {
+.trust-plus-coupon-title {
     font-size: 18px !important;
     font-weight: bold !important;
     margin-bottom: 8px !important;
 }
 
-.toto-coupon-description {
+.trust-plus-coupon-description {
     font-size: 16px !important;
     margin-bottom: 8px !important;
 }
 
-.toto-coupon-image {
+.trust-plus-coupon-image {
     width: 170px !important;
     border-radius: 8px !important;
     margin-right: 16px !important;
 }
 
-.toto-coupon-coupon-code {
+.trust-plus-coupon-coupon-code {
     background: white;
     border-radius: 8px !important;
     padding: 8px !important;
@@ -42,7 +42,7 @@
     margin: 18px 0 !important;
 }
 
-.toto-coupon-button {
+.trust-plus-coupon-button {
     display: block !important;
     border-radius: 8px !important;
     padding: 8px !important;
@@ -52,13 +52,13 @@
     margin: 18px 0 !important;
 }
 
-.toto-coupon-button:hover {
+.trust-plus-coupon-button:hover {
     color: initial;
     opacity: .9 !important;
     text-decoration: none !important;
 }
 
-.toto-coupon-footer {
+.trust-plus-coupon-footer {
     font-size: 14px !important;
     text-decoration: underline !important;
 }

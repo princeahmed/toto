@@ -1,33 +1,33 @@
 /* Live Counter */
-.toto-live-counter-wrapper {
+.trust-plus-live-counter-wrapper {
 }
 
 @media (min-width: 576px) {
-    .toto-live-counter-wrapper {
+    .trust-plus-live-counter-wrapper {
         width: 280px !important;
     }
 }
 
-.toto-live-counter-content {
+.trust-plus-live-counter-content {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
 }
 
-.toto-live-counter-header {
+.trust-plus-live-counter-header {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
 }
 
-.toto-live-counter-number {
+.trust-plus-live-counter-number {
     padding: 3px 32px !important;
     border-radius: 4px !important;
     font-weight: bolder !important;
     font-size: 21px !important;
 }
 
-.toto-live-counter-description {
+.trust-plus-live-counter-description {
     font-size: 14px !important;
     margin-bottom: 16px !important;
 }

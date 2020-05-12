@@ -6,17 +6,18 @@ defined( 'ABSPATH' ) || exit;
  * Class WP_Plugin_Boilerplate_Install
  * Do the activate stuffs
  */
-class Toto_Install {
+class Trust_Plus_Install {
 
 	/**
 	 * Toto Activate
 	 */
 	public static function activate() {
+		update_option( 'trust_plus_version', trust_plus()->version );
+		update_option( 'trust_plus_flush_rewrite_rules', true );
 
-		$key = sanitize_key( toto()->name );
-		update_option( $key . '_version', toto()->version );
-		update_option( 'toto_flush_rewrite_rules', true );
-		update_option( 'toto_install_date', current_time( 'timestamp' ) );
+		if ( empty( get_option( 'trust_plus_install_date' ) ) ) {
+			update_option( 'trust_plus_install_date', current_time( 'timestamp' ) );
+		}
 
 		//Create Tables
 		self::create_tables();
@@ -33,7 +34,7 @@ class Toto_Install {
 		require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
 
 		$tables = [
-			"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}toto_notification_statistics(
+			"CREATE TABLE IF NOT EXISTS {$wpdb->prefix}trust_plus_statistics(
          	id bigint(20) NOT NULL AUTO_INCREMENT,
          	unique_id varchar (32) NOT NULL DEFAULT '',
 			notification_id bigint(20) NOT NULL,

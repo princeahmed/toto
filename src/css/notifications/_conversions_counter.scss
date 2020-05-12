@@ -1,20 +1,20 @@
 /* Conversions Counter */
-.toto-conversions-counter-wrapper {
+.trust-plus-conversions-counter-wrapper {
 }
 
 @media (min-width: 576px) {
-    .toto-conversions-counter-wrapper {
+    .trust-plus-conversions-counter-wrapper {
         width: 300px !important;
     }
 }
 
-.toto-conversions-counter-content {
+.trust-plus-conversions-counter-content {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
 }
 
-.toto-conversions-counter-header {
+.trust-plus-conversions-counter-header {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
@@ -23,7 +23,7 @@
     margin-bottom: 5px !important;
 }
 
-.toto-conversions-counter-number {
+.trust-plus-conversions-counter-number {
     padding: 3px 18px !important;
     border-radius: 4px !important;
     font-weight: bolder !important;
@@ -31,12 +31,12 @@
     margin-right: 5px !important;
 }
 
-.toto-conversions-counter-title {
+.trust-plus-conversions-counter-title {
     font-size: 15px !important;
     margin-bottom: 0 !important;
 }
 
-.toto-conversions-counter-time {
+.trust-plus-conversions-counter-time {
     font-size: 12px !important;
     margin-bottom: 0 !important;
     color: grey;

@@ -2,11 +2,11 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class Toto_Ajax {
+class Trust_Plus_Ajax {
 
 	public function __construct() {
-		add_action( 'wp_ajax_toto_save_statistics', [ $this, 'save_statistics' ] );
-		add_action( 'wp_ajax_nopriv_toto_save_statistics', [ $this, 'save_statistics' ] );
+		add_action( 'wp_ajax_trust_plus_save_statistics', [ $this, 'save_statistics' ] );
+		add_action( 'wp_ajax_nopriv_trust_plus_save_statistics', [ $this, 'save_statistics' ] );
 	}
 
 	public function save_statistics() {
@@ -24,7 +24,7 @@ class Toto_Ajax {
 
 
 		global $wpdb;
-		$table = $wpdb->prefix . 'toto_notification_statistics';
+		$table = $wpdb->prefix . 'trust_plus_statistics';
 
 		$sql = "INSERT INTO 
                         {$table} (`notification_id`,`unique_id`, `type`, `ip`, `url`,`data`, `created_at`, `updated_at`) 
@@ -43,4 +43,4 @@ class Toto_Ajax {
 
 }
 
-new Toto_Ajax();
+new Trust_Plus_Ajax();

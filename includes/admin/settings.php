@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class Toto_Settings {
+class Trust_Plus_Settings {
 	public function __construct() {
 		add_action( 'admin_init', [ $this, 'render_settings' ] );
 		add_filter( 'prince_on_off_switch_on_label', [ $this, 'switch_on_label' ], 10, 2 );
@@ -23,19 +23,19 @@ class Toto_Settings {
 			[
 				'id'    => 'general',
 				'icon'  => 'dashicons dashicons-admin-generic',
-				'title' => __( 'General Settings', 'toto' )
+				'title' => __( 'General Settings', 'social-proof-fomo-notification' )
 			],
 
 			[
 				'id'    => 'branding',
 				'icon'  => 'dashicons dashicons-shield',
-				'title' => __( 'Branding Settings', 'toto' )
+				'title' => __( 'Branding Settings', 'social-proof-fomo-notification' )
 			],
 
 			[
 				'id'    => 'statistics_reporting',
 				'icon'  => 'dashicons dashicons-chart-bar',
-				'title' => __( 'Statistics & Reporting', 'toto' )
+				'title' => __( 'Statistics & Reporting', 'social-proof-fomo-notification' )
 			],
 
 		];
@@ -47,22 +47,22 @@ class Toto_Settings {
 			//General
 			[
 				'id'       => 'modules',
-				'label'    => __( 'Modules', 'toto' ),
-				'desc'     => __( 'Enable/ Disable the modules that you need.', 'toto' ),
+				'label'    => __( 'Modules', 'social-proof-fomo-notification' ),
+				'desc'     => __( 'Enable/ Disable the modules that you need.', 'social-proof-fomo-notification' ),
 				'type'     => 'function',
 				'settings' => [
-					'function' => 'toto_enable_disable_modules_html',
+					'function' => 'trust_plus_enable_disable_modules_html',
 				],
 				'block'    => true,
 				'section'  => 'general',
-				'std'      => array_keys( Toto_Notifications::get_config() ),
+				'std'      => array_keys( Trust_Plus_Notifications::get_config() ),
 			],
 
 			//Branding
 			array(
 				'id'      => 'show_hide_branding',
-				'label'   => __( 'Show/ Hide Branding', 'toto' ),
-				'desc'    => __( 'Show/ Hide, Powered by text from notification.', 'toto' ),
+				'label'   => __( 'Show/ Hide Branding', 'social-proof-fomo-notification' ),
+				'desc'    => __( 'Show/ Hide, Powered by text from notification.', 'social-proof-fomo-notification' ),
 				'std'     => 'on',
 				'type'    => 'on_off',
 				'block'   => true,
@@ -73,9 +73,9 @@ class Toto_Settings {
 			array(
 				'id'        => 'branding_name',
 				'block'     => true,
-				'label'     => __( 'Branding Name', 'toto' ),
-				'desc'      => __( 'Enter the branding name.', 'toto' ),
-				'std'       => 'toto',
+				'label'     => __( 'Branding Name', 'social-proof-fomo-notification' ),
+				'desc'      => __( 'Enter the branding name.', 'social-proof-fomo-notification' ),
+				'std'       => 'social-proof-fomo-notification',
 				'type'      => 'text',
 				'section'   => 'branding',
 				'operator'  => 'or',
@@ -85,9 +85,9 @@ class Toto_Settings {
 			array(
 				'id'        => 'branding_url',
 				'block'     => true,
-				'label'     => __( 'Branding URL', 'toto' ),
-				'desc'      => __( 'Enter the branding URL.', 'toto' ),
-				'std'       => 'https://wordpress.org/plugin/toto-social-proof-notification',
+				'label'     => __( 'Branding URL', 'social-proof-fomo-notification' ),
+				'desc'      => __( 'Enter the branding URL.', 'social-proof-fomo-notification' ),
+				'std'       => 'https://wordpress.org/plugin/trust-plus-social-proof-notification',
 				'type'      => 'text',
 				'section'   => 'branding',
 				'operator'  => 'or',
@@ -97,8 +97,8 @@ class Toto_Settings {
 			//Statistics & Reporting Settings
 			array(
 				'id'      => 'enable_disable_statistics',
-				'label'   => __( 'Enable/ Disable Statistics', 'toto' ),
-				'desc'    => __( 'Enable/ Disable, Statistics Report.', 'toto' ),
+				'label'   => __( 'Enable/ Disable Statistics', 'social-proof-fomo-notification' ),
+				'desc'    => __( 'Enable/ Disable, Statistics Report.', 'social-proof-fomo-notification' ),
 				'std'     => 'on',
 				'type'    => 'on_off',
 				'block'   => true,
@@ -107,8 +107,8 @@ class Toto_Settings {
 
 			array(
 				'id'        => 'enable_disable_reporting',
-				'label'     => __( 'Enable/ Disable Email Reporting', 'toto' ),
-				'desc'      => __( 'Enable/ disable, statistics email report.', 'toto' ),
+				'label'     => __( 'Enable/ Disable Email Reporting', 'social-proof-fomo-notification' ),
+				'desc'      => __( 'Enable/ disable, statistics email report.', 'social-proof-fomo-notification' ),
 				'std'       => 'on',
 				'type'      => 'on_off',
 				'block'     => true,
@@ -119,8 +119,8 @@ class Toto_Settings {
 
 			array(
 				'id'        => 'reporting_frequency',
-				'label'     => __( 'Reporting Frequency', 'toto' ),
-				'desc'      => __( 'Select the reporting frequency, when you want to receive the email report.', 'toto' ),
+				'label'     => __( 'Reporting Frequency', 'social-proof-fomo-notification' ),
+				'desc'      => __( 'Select the reporting frequency, when you want to receive the email report.', 'social-proof-fomo-notification' ),
 				'std'       => 'daily',
 				'type'      => 'select',
 				'block'     => true,
@@ -128,16 +128,16 @@ class Toto_Settings {
 				'operator'  => 'or',
 				'condition' => 'enable_disable_reporting:is(on)',
 				'choices'   => [
-					'daily'   => __( 'Once Daily', 'toto' ),
-					'weekly'  => __( 'Once Weekly', 'toto' ),
-					'monthly' => __( 'Once Monthly', 'toto' ),
+					'daily'   => __( 'Once Daily', 'social-proof-fomo-notification' ),
+					'weekly'  => __( 'Once Weekly', 'social-proof-fomo-notification' ),
+					'monthly' => __( 'Once Monthly', 'social-proof-fomo-notification' ),
 				]
 			),
 
 			array(
 				'id'        => 'reporting_frequency_day',
-				'label'     => __( 'Select Reporting Day', 'toto' ),
-				'desc'      => __( 'Select the day of the Week, when you want to receive the email report.', 'toto' ),
+				'label'     => __( 'Select Reporting Day', 'social-proof-fomo-notification' ),
+				'desc'      => __( 'Select the day of the Week, when you want to receive the email report.', 'social-proof-fomo-notification' ),
 				'std'       => 'sun',
 				'type'      => 'select',
 				'block'     => true,
@@ -145,21 +145,21 @@ class Toto_Settings {
 				'operator'  => 'or',
 				'condition' => 'reporting_frequency:is(weekly)',
 				'choices'   => [
-					'sun' => __( 'Sunday', 'toto' ),
-					'mon' => __( 'Monday', 'toto' ),
-					'tue' => __( 'Tuesday', 'toto' ),
-					'wed' => __( 'Wednesday', 'toto' ),
-					'thu' => __( 'Thursday', 'toto' ),
-					'fri' => __( 'Friday', 'toto' ),
-					'sat' => __( 'Saturday', 'toto' ),
+					'sun' => __( 'Sunday', 'social-proof-fomo-notification' ),
+					'mon' => __( 'Monday', 'social-proof-fomo-notification' ),
+					'tue' => __( 'Tuesday', 'social-proof-fomo-notification' ),
+					'wed' => __( 'Wednesday', 'social-proof-fomo-notification' ),
+					'thu' => __( 'Thursday', 'social-proof-fomo-notification' ),
+					'fri' => __( 'Friday', 'social-proof-fomo-notification' ),
+					'sat' => __( 'Saturday', 'social-proof-fomo-notification' ),
 				]
 			),
 
 			array(
 				'id'        => 'reporting_email',
 				'block'     => true,
-				'label'     => __( 'Reporting Email', 'toto' ),
-				'desc'      => __( 'Enter the email, where the statistics report will be send.', 'toto' ),
+				'label'     => __( 'Reporting Email', 'social-proof-fomo-notification' ),
+				'desc'      => __( 'Enter the email, where the statistics report will be send.', 'social-proof-fomo-notification' ),
 				'std'       => get_option( 'admin_email' ),
 				'type'      => 'text',
 				'section'   => 'statistics_reporting',
@@ -170,9 +170,9 @@ class Toto_Settings {
 			array(
 				'id'        => 'reporting_email_subject',
 				'block'     => true,
-				'label'     => __( 'Reporting Email Subject', 'toto' ),
-				'desc'      => __( 'Enter the reporting email subject.', 'toto' ),
-				'std'       => sprintf( __( 'Daily Engagement Statistics of "%s".', 'toto' ), get_bloginfo( 'name' ) ),
+				'label'     => __( 'Reporting Email Subject', 'social-proof-fomo-notification' ),
+				'desc'      => __( 'Enter the reporting email subject.', 'social-proof-fomo-notification' ),
+				'std'       => sprintf( __( 'Daily Engagement Statistics of "%s".', 'social-proof-fomo-notification' ), get_bloginfo( 'name' ) ),
 				'type'      => 'text',
 				'section'   => 'statistics_reporting',
 				'operator'  => 'or',
@@ -182,12 +182,12 @@ class Toto_Settings {
 			array(
 				'id'        => 'reporting_test',
 				'block'     => true,
-				'label'     => __( 'Reporting Test', 'toto' ),
-				'desc'      => __( 'Test email report now.', 'toto' ),
+				'label'     => __( 'Reporting Test', 'social-proof-fomo-notification' ),
+				'desc'      => __( 'Test email report now.', 'social-proof-fomo-notification' ),
 				'std'       => '',
 				'type'      => 'function',
 				'settings'  => [
-					'function' => 'toto_reporting_test_btn',
+					'function' => 'trust_plus_reporting_test_btn',
 				],
 				'section'   => 'statistics_reporting',
 				'operator'  => 'or',
@@ -227,9 +227,9 @@ class Toto_Settings {
 
 	public function switch_on_label( $label, $field_id ) {
 		if ( in_array( $field_id, [ 'show_hide_branding' ] ) ) {
-			$label = __( 'Show', 'toto' );
+			$label = __( 'Show', 'social-proof-fomo-notification' );
 		} elseif ( in_array( $field_id, [ 'enable_disable_statistics', 'enable_disable_reporting' ] ) ) {
-			$label = __( 'Enable', 'toto' );
+			$label = __( 'Enable', 'social-proof-fomo-notification' );
 		}
 
 		return $label;
@@ -237,9 +237,9 @@ class Toto_Settings {
 
 	public function switch_off_label( $label, $field_id ) {
 		if ( in_array( $field_id, [ 'show_hide_branding' ] ) ) {
-			$label = __( 'Hide', 'toto' );
+			$label = __( 'Hide', 'social-proof-fomo-notification' );
 		} elseif ( in_array( $field_id, [ 'enable_disable_statistics', 'enable_disable_reporting' ] ) ) {
-			$label = __( 'Disable', 'toto' );
+			$label = __( 'Disable', 'social-proof-fomo-notification' );
 		}
 
 		return $label;
@@ -255,7 +255,7 @@ class Toto_Settings {
 	 *
 	 */
 	public function settings_version_text( $text ) {
-		return __( 'TOTO - ' . TOTO_VERSION, 'toto' );
+		return __( 'TOTO - ' . TRUST_PLUS_VERSION, 'social-proof-fomo-notification' );
 	}
 
 	/**
@@ -269,14 +269,14 @@ class Toto_Settings {
 	 */
 	public function settings_page_logo( $html ) {
 		//todo change logo url
-		return '<a href="http://wordpress.org/plugins/toto" target="_blank"> <img style="position: relative; height: auto;margin-top: 3px;" src="' . TOTO_ASSETS . '/images/toto-logo.png"> </a>';
+		return '<a href="http://wordpress.org/plugins/trust_plus" target="_blank"> <img style="position: relative; height: auto;margin-top: 3px;" src="' . TRUST_PLUS_ASSETS . '/images/trust-plus-logo.png"> </a>';
 	}
 
 	/**
 	 * Add settings menu to Main menu
 	 */
 	public function settings_menu() {
-		return 'edit.php?post_type=toto_notification';
+		return 'edit.php?post_type=trust_plus';
 	}
 
 	/**
@@ -285,7 +285,7 @@ class Toto_Settings {
 	 * @return string
 	 */
 	public function prince_settings_id() {
-		return 'toto_settings';
+		return 'trust_plus_settings';
 	}
 
 	/**
@@ -294,7 +294,7 @@ class Toto_Settings {
 	 * @return string
 	 */
 	public function prince_options_id() {
-		return 'toto_options';
+		return 'trust_plus_options';
 	}
 
 	public function update_modules( $options ) {
@@ -303,30 +303,30 @@ class Toto_Settings {
 
 }
 
-new Toto_Settings();
+new Trust_Plus_Settings();
 
-function toto_reporting_test_btn() {
-	printf( '<a href="#" class="button button-primary button-large">%s</a>', __( 'Test Report', 'toto' ) );
+function trust_plus_reporting_test_btn() {
+	printf( '<a href="#" class="button button-primary button-large">%s</a>', __( 'Test Report', 'social-proof-fomo-notification' ) );
 }
 
-function toto_enable_disable_modules_html() {
+function trust_plus_enable_disable_modules_html() {
 
-	$default        = array_keys( Toto_Notifications::get_config() );
-	$active_modules = toto_get_options( 'active_modules', $default );
+	$default        = array_keys( Trust_Plus_Notifications::get_config() );
+	$active_modules = trust_plus_get_options( 'active_modules', $default );
 
 	?>
-    <div class="toto-modules">
-		<?php foreach ( Toto_Notifications::get_config() as $type => $config ) { ?>
-            <div class="toto-module">
+    <div class="trust-plus-modules">
+		<?php foreach ( Trust_Plus_Notifications::get_config() as $type => $config ) { ?>
+            <div class="trust-plus-module">
 
-                <h3 class="toto-module-title"><?php echo $config['name']; ?></h3>
+                <h3 class="trust-plus-module-title"><?php echo $config['name']; ?></h3>
 
-                <div class="toto-module-icon">
+                <div class="trust-plus-module-icon">
                     <i class="<?php echo $config['icon']; ?>"></i>
                 </div>
 
-                <div class="toto-switcher">
-                    <input type="checkbox" name="toto_options[active_modules][]" id="<?php echo $type; ?>" value="<?php echo $type; ?>"
+                <div class="trust-plus-switcher">
+                    <input type="checkbox" name="trust_plus_options[active_modules][]" id="<?php echo $type; ?>" value="<?php echo $type; ?>"
 						<?php echo in_array( $type, $active_modules ) ? 'checked' : ''; ?> />
 
                     <div>

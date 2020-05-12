@@ -1,18 +1,18 @@
 <?php defined( 'ABSPATH' ) || die(); ?>
-<div class="toto-wrapper toto-wrapper-<?php echo $notification->border_radius ?> toto-informational-wrapper" style="background: <?php echo $notification->background_color ?>">
+<div class="trust-plus-wrapper trust-plus-wrapper-<?php echo $notification->border_radius ?> trust-plus-informational-wrapper" style="background: <?php echo $notification->background_color ?>">
 
-    <div class="toto-informational-content">
+    <div class="trust-plus-informational-content">
 
-            <img src="<?php echo $notification->image ?>" class="toto-informational-image <?php echo ! empty( $notification->image ) ? '': 'hidden'; ?>"/>
+            <img src="<?php echo $notification->image ?>" class="trust-plus-informational-image <?php echo ! empty( $notification->image ) ? '': 'hidden'; ?>"/>
 
         <div>
-            <p class="toto-informational-title" style="color: <?php echo $notification->title_color ?>"><?php echo $notification->title ?></p>
-            <p class="toto-informational-description" style="color: <?php echo $notification->description_color ?>"><?php echo $notification->description ?></p>
+            <p class="trust-plus-informational-title" style="color: <?php echo $notification->title_color ?>"><?php echo $notification->title ?></p>
+            <p class="trust-plus-informational-description" style="color: <?php echo $notification->description_color ?>"><?php echo $notification->description ?></p>
 
-			<?php toto_branding( $notification ); ?>
+			<?php trust_plus_branding( $notification ); ?>
 
         </div>
     </div>
 
-    <?php toto_close($notification); ?>
+    <?php trust_plus_close($notification); ?>
 </div>

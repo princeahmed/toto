@@ -13,8 +13,10 @@ Todo:
                          Conversions Counter (Repeater)
                          RANDOM_REVIEW (Repeater)
                          
-                         
+                     
+* Name the plugin to boost-social-proof-fomo-notification    
 * PRO - Random Review, Countdown
+* Fix: Statistics summary, count
 
 2. Add Pagination On Data Page
 3. Add Per Page Box on Data Page

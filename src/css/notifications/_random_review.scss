@@ -1,45 +1,45 @@
 /* Random Review */
-.toto-random-review-wrapper {
+.trust-plus-random-review-wrapper {
 }
 
 @media (min-width: 576px) {
-    .toto-random-review-wrapper {
+    .trust-plus-random-review-wrapper {
         max-width: 400px !important;
     }
 }
 
-.toto-random-review-content {
+.trust-plus-random-review-content {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
 }
 
-.toto-random-review-header {
+.trust-plus-random-review-header {
     display: flex !important;
     flex-direction: row !important;
     justify-content: space-between !important;
     align-items: center !important;
 }
 
-.toto-random-review-stars {
+.trust-plus-random-review-stars {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
 }
 
-.toto-random-review-title {
+.trust-plus-random-review-title {
     font-weight: bold !important;
     margin-bottom: 0 !important;
     margin-right: 10px;
 }
 
-.toto-random-review-description {
+.trust-plus-random-review-description {
     font-size: 14px !important;
     font-style: italic;
     margin-bottom: 0 !important;
 }
 
-.toto-random-review-image {
+.trust-plus-random-review-image {
     min-width: 65px !important;
     height: 65px !important;
     margin-right: 8px !important;

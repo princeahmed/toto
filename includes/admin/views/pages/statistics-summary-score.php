@@ -24,10 +24,10 @@ foreach ( $score_total as $item ) {
 
 <div class="statistics-summary">
     <div class="summary-icon">
-        <img src="<?php echo TOTO_ASSETS . '/images/statistics/submissions.png' ?>" alt="<?php _e('Feedback Submissions', 'toto'); ?>">
+        <img src="<?php echo TRUST_PLUS_ASSETS . '/images/statistics/submissions.png' ?>" alt="<?php _e('Feedback Submissions', 'social-proof-fomo-notification'); ?>">
     </div>
     <div class="summary-info">
         <div class="summary-number"><?php echo $count; ?></div>
-        <div class="summary-title"><?php _e('Feedback Submissions', 'toto'); ?></div>
+        <div class="summary-title"><?php _e('Feedback Submissions', 'social-proof-fomo-notification'); ?></div>
     </div>
 </div>

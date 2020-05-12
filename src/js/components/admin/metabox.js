@@ -8,18 +8,18 @@
             app.previewHandler();
             app.initDateTimePicker();
 
-            $(document).on('click', '.toto-meta-tabs .toto-tab-link', app.toggleNotificationTab);
-            $(document).on('click', '.toto-notification-type', app.selectType);
+            $(document).on('click', '.trust-plus-meta-tabs .trust-plus-tab-link', app.toggleNotificationTab);
+            $(document).on('click', '.trust-plus-notification-type', app.selectType);
             $(document).on('change', '#settings_trigger_all_pages', app.toggleTriggerContent);
             $(document).on('change', '#settings_data_send_is_enabled', app.toggleDataSendContent);
             $(document).on('change', '[name="settings[trigger_on]"]', app.toggleLocationsField);
             $(document).on('change', '#settings_display_trigger', app.displayTriggerSelect);
             $(document).on('change', '#settings_trigger_locations', app.toggleCustomIds);
             $(document).on('click', '#trigger_add', app.addTrigger);
-            $(document).on('click', '.toto-btn-delete', app.deleteTrigger);
-            $(document).on('click', '.toto-choose-image', app.handleMedia);
-            $(document).on('click', '.toto-remove-image', app.removeImage);
-            $(document).on('click', '.toto-next, .toto-prev', app.handlePrevNext);
+            $(document).on('click', '.trust-plus-btn-delete', app.deleteTrigger);
+            $(document).on('click', '.trust-plus-choose-image', app.handleMedia);
+            $(document).on('click', '.trust-plus-remove-image', app.removeImage);
+            $(document).on('click', '.trust-plus-next, .trust-plus-prev', app.handlePrevNext);
             $(document).on('change', '#settings_notification_sound', app.playSound);
 
             $(document).on('change', '.handle-toggle', app.handleToggle);
@@ -27,7 +27,7 @@
         },
 
         initDateTimePicker: () => {
-            $('.toto-date-time-picker').datetimepicker({
+            $('.trust-plus-date-time-picker').datetimepicker({
                 timeFormat: "hh:mm TT",
                 dateFormat: "yy-mm-dd",
             });
@@ -35,9 +35,9 @@
 
         playSound: function () {
             const sound = $(this).val();
-            $('#toto-sound source').attr('src', `${toto.totoURL}/assets/sounds/${sound}.mp3`);
+            $('#trust-plus-sound source').attr('src', `${trustPlus.trust_plus_url}/assets/sounds/${sound}.mp3`);
 
-            const audio = $('#toto-sound');
+            const audio = $('#trust-plus-sound');
             audio[0].pause();
             audio[0].load();
             audio[0].oncanplaythrough = audio[0].play();
@@ -50,19 +50,19 @@
 
         previewHandler: () => {
 
-            if (!$('.toto-notification-type.active input').length) {
+            if (!$('.trust-plus-notification-type.active input').length) {
                 return;
             }
 
-            const type = $('.toto-notification-type.active input').val().toLowerCase().replace('_', '-');
+            const type = $('.trust-plus-notification-type.active input').val().toLowerCase().replace('_', '-');
 
             const colorHandlers = {
-                title_color: `toto-${type}-title`,
-                description_color: `toto-${type}-description`,
-                button_color: `toto-${type}-button`,
-                number_color: `toto-${type}-number`,
-                content_title_color: `toto-${type}-content-title`,
-                content_description_color: `toto-${type}-content-description`,
+                title_color: `trust-plus-${type}-title`,
+                description_color: `trust-plus-${type}-description`,
+                button_color: `trust-plus-${type}-button`,
+                number_color: `trust-plus-${type}-number`,
+                content_title_color: `trust-plus-${type}-content-title`,
+                content_description_color: `trust-plus-${type}-content-description`,
             };
 
             for (let [key, target] of Object.entries(colorHandlers)) {
@@ -79,10 +79,10 @@
 
             //Background Color Handlers
             const bgColorHandlers = {
-                background_color: `toto-wrapper`,
-                button_background_color: `toto-${type}-button`,
-                number_background_color: `toto-${type}-number`,
-                pulse_background_color: `toto-toast-pulse`,
+                background_color: `trust-plus-wrapper`,
+                button_background_color: `trust-plus-${type}-button`,
+                number_background_color: `trust-plus-${type}-number`,
+                pulse_background_color: `trust-plus-toast-pulse`,
             };
             for (let [key, target] of Object.entries(bgColorHandlers)) {
                 $(`#settings_${key}`).wpColorPicker({
@@ -96,16 +96,16 @@
 
             /* text change handlers */
             const textHandlers = {
-                title: `toto-${type}-title`,
-                description: `toto-${type}-description`,
-                coupon_code: `toto-${type}-coupon-code`,
-                button_text: `toto-${type}-button`,
-                footer_text: `toto-${type}-footer`,
-                agreement_text: `toto-agreement-checkbox-text>a`,
-                conversion_count: `toto-${type}-conversion-count`,
-                content_title: `toto-${type}-content-title`,
-                content_description: `toto-${type}-content-description`,
-                link_url_text: `toto-${type}-url>a`,
+                title: `trust-plus-${type}-title`,
+                description: `trust-plus-${type}-description`,
+                coupon_code: `trust-plus-${type}-coupon-code`,
+                button_text: `trust-plus-${type}-button`,
+                footer_text: `trust-plus-${type}-footer`,
+                agreement_text: `trust-plus-agreement-checkbox-text>a`,
+                conversion_count: `trust-plus-${type}-conversion-count`,
+                content_title: `trust-plus-${type}-content-title`,
+                content_description: `trust-plus-${type}-content-description`,
+                link_url_text: `trust-plus-${type}-url>a`,
             };
 
             for (let [key, target] of Object.entries(textHandlers)) {
@@ -116,8 +116,8 @@
 
             // srcHandler
             const srcHandler = {
-                image: `toto-${type}-image`,
-                video: `toto-${type}-video-iframe`,
+                image: `trust-plus-${type}-image`,
+                video: `trust-plus-${type}-video-iframe`,
             };
             for (let [key, target] of Object.entries(srcHandler)) {
                 $(`#settings_${key}`).on('change paste keyup', function () {
@@ -126,17 +126,17 @@
             }
 
             //border radius handler
-            const borderRadiusHandler = {border_radius: `toto-wrapper`};
+            const borderRadiusHandler = {border_radius: `trust-plus-wrapper`};
             for (let [key, target] of Object.entries(borderRadiusHandler)) {
                 $(`#settings_${key}`).on('change paste keyup', function () {
-                    $(`#notification_preview .${target}`).removeClass("toto-wrapper-round toto-wrapper-rounded  toto-wrapper-straight").addClass(`toto-wrapper-${$(this).val()}`);
+                    $(`#notification_preview .${target}`).removeClass("trust-plus-wrapper-round trust-plus-wrapper-rounded  trust-plus-wrapper-straight").addClass(`trust-plus-wrapper-${$(this).val()}`);
                 });
             }
 
             //placeholder handler
             const placeHolderHandler = {
-                email_placeholder: `toto-${type}-email-placeholder`,
-                input_placeholder: `toto-${type}-input-placeholder`,
+                email_placeholder: `trust-plus-${type}-email-placeholder`,
+                input_placeholder: `trust-plus-${type}-input-placeholder`,
             };
             for (let [key, target] of Object.entries(placeHolderHandler)) {
                 $(`#settings_${key}`).on('change paste keyup', function () {
@@ -146,17 +146,17 @@
 
             //toggle handler
             const toggleHandler = {
-                show_agreement: `toto-agreement-checkbox`,
-                display_branding: `toto-site`,
-                display_close_button: `toto-close`,
-                show_angry: `toto-${type}-angry`,
-                show_sad: `toto-${type}-sad`,
-                show_neutral: `toto-${type}-neutral`,
-                show_happy: `toto-${type}-happy`,
-                show_excited: `toto-${type}-excited`,
-                share_facebook: `toto-${type}-button-facebook`,
-                share_twitter: `toto-${type}-button-twitter`,
-                share_linkedin: `toto-${type}-button-linkedin`,
+                show_agreement: `trust-plus-agreement-checkbox`,
+                display_branding: `trust-plus-site`,
+                display_close_button: `trust-plus-close`,
+                show_angry: `trust-plus-${type}-angry`,
+                show_sad: `trust-plus-${type}-sad`,
+                show_neutral: `trust-plus-${type}-neutral`,
+                show_happy: `trust-plus-${type}-happy`,
+                show_excited: `trust-plus-${type}-excited`,
+                share_facebook: `trust-plus-${type}-button-facebook`,
+                share_twitter: `trust-plus-${type}-button-twitter`,
+                share_linkedin: `trust-plus-${type}-button-linkedin`,
             };
 
 
@@ -173,10 +173,10 @@
                 e.preventDefault();
             }
 
-            const target = localStorage.getItem('totoActiveTab');
-            const prev = $('.toto-prev');
-            const next = $('.toto-next');
-            const next_prev = $('.toto-next, .toto-prev');
+            const target = localStorage.getItem('trustPlusActiveTab');
+            const prev = $('.trust-plus-prev');
+            const next = $('.trust-plus-next');
+            const next_prev = $('.trust-plus-next, .trust-plus-prev');
 
             if (target) {
                 if ('notification_type' === target) {
@@ -193,22 +193,22 @@
                 next.removeClass('container-disabled');
             }
 
-            if ($(this).hasClass('toto-next')) {
-                $(`.toto-tab-link[data-target="${target}"]`).parent().next().find('.toto-tab-link').trigger('click');
+            if ($(this).hasClass('trust-plus-next')) {
+                $(`.trust-plus-tab-link[data-target="${target}"]`).parent().next().find('.trust-plus-tab-link').trigger('click');
             }
 
-            if ($(this).hasClass('toto-prev')) {
-                $(`.toto-tab-link[data-target="${target}"]`).parent().prev().find('.toto-tab-link').trigger('click');
+            if ($(this).hasClass('trust-plus-prev')) {
+                $(`.trust-plus-tab-link[data-target="${target}"]`).parent().prev().find('.trust-plus-tab-link').trigger('click');
             }
 
         },
 
         initSelect2: () => {
             $('#settings_trigger_locations').select2({
-                placeholder: 'Select Locations',
+                placeholder: trustPlus.i18n.select_locations,
             });
 
-            $(document).on('focus', '.toto-form-group :input', function () {
+            $(document).on('focus', '.trust-plus-form-group :input', function () {
                 $(this).attr('autocomplete', 'new-password');
             });
         },
@@ -216,21 +216,21 @@
         initMetaTabs: () => {
             if ($('#auto_draft').length) return;
 
-            const target = localStorage.getItem('totoActiveTab');
+            const target = localStorage.getItem('trustPlusActiveTab');
 
             if (target) {
-                $('.toto-tab-content-item').removeClass('active');
-                $(`.toto-meta-tabs .toto-tab-link[data-target=${target}]`).addClass('active').parent().prevAll('.toto-tab-item').find('.toto-tab-link').addClass('active');
+                $('.trust-plus-tab-content-item').removeClass('active');
+                $(`.trust-plus-meta-tabs .trust-plus-tab-link[data-target=${target}]`).addClass('active').parent().prevAll('.trust-plus-tab-item').find('.trust-plus-tab-link').addClass('active');
                 $(`#${target}`).addClass('active');
             }
 
         },
 
         initVolumeSlider: () => {
-            const handle = $("#toto-volume-handle");
+            const handle = $("#trust-plus-volume-handle");
 
-            $("#toto-volume-slider").slider({
-                value: $('#toto-volume-slider').data('value'),
+            $("#trust-plus-volume-slider").slider({
+                value: $('#trust-plus-volume-slider').data('value'),
                 create: function () {
                     handle.text($(this).slider("value"));
                 },
@@ -241,7 +241,7 @@
                 },
 
                 change: function (event, ui) {
-                    const audio = $('#toto-sound');
+                    const audio = $('#trust-plus-sound');
 
                     audio.prop('volume', ui.value / 100);
                     audio[0].pause();
@@ -257,10 +257,10 @@
             e.preventDefault();
             const target = $(this).data('target');
 
-            localStorage.setItem('totoActiveTab', target);
-            $('.toto-meta-tabs .toto-tab-link, .toto-tab-content-item').removeClass('active');
+            localStorage.setItem('trustPlusActiveTab', target);
+            $('.trust-plus-meta-tabs .trust-plus-tab-link, .trust-plus-tab-content-item').removeClass('active');
 
-            $(this).addClass('active').parent().prevAll('.toto-tab-item').find('.toto-tab-link').addClass('active');
+            $(this).addClass('active').parent().prevAll('.trust-plus-tab-item').find('.trust-plus-tab-link').addClass('active');
             $(`#${target}`).addClass('active');
 
             app.handlePrevNext();
@@ -284,7 +284,7 @@
 
         selectType: function () {
 
-            $('.toto-notification-type').removeClass('active').find('input').prop('checked', false);
+            $('.trust-plus-notification-type').removeClass('active').find('input').prop('checked', false);
             $(this).addClass('active').find('input').prop('checked', true);
 
             $('.notification-preview-content').html($('.preview', $(this)).html());
@@ -292,15 +292,15 @@
             const type = $('input', $(this)).val();
             const post_id = $('#post_ID').val();
 
-            wp.ajax.send('toto_update_fields', {
+            wp.ajax.send('trust_plus_update_fields', {
                 data: {
                     type,
                     post_id,
-                    _wpnonce: toto._wpnonce
+                    _wpnonce: trustPlus._wpnonce
                 },
 
                 success: res => {
-                    $('.toto-tab-content>div:not(#notification_type)').remove();
+                    $('.trust-plus-tab-content>div:not(#notification_type)').remove();
                     $('#notification_type').after(res.html);
 
                     app.initSelect2();
@@ -324,22 +324,22 @@
         },
 
         addTrigger: () => {
-            $('#triggers_rules>.toto-input-group:first-child').clone().appendTo('#triggers_rules');
+            $('#triggers_rules>.trust-plus-input-group:first-child').clone().appendTo('#triggers_rules');
 
-            if ($('#triggers_rules>.toto-input-group').length < 2) {
-                $('.toto-btn-delete').hide();
+            if ($('#triggers_rules>.trust-plus-input-group').length < 2) {
+                $('.trust-plus-btn-delete').hide();
             } else {
-                $('.toto-btn-delete').show();
+                $('.trust-plus-btn-delete').show();
             }
         },
 
         deleteTrigger: function () {
             $(this).parent().remove();
 
-            if ($('#triggers_rules>.toto-input-group').length < 2) {
-                $('.toto-btn-delete').hide();
+            if ($('#triggers_rules>.trust-plus-input-group').length < 2) {
+                $('.trust-plus-btn-delete').hide();
             } else {
-                $('.toto-btn-delete').show();
+                $('.trust-plus-btn-delete').show();
             }
         },
 
@@ -347,23 +347,23 @@
             e.preventDefault();
 
             const image = wp.media({
-                title: 'Choose Image',
+                title: trustPlus.i18n.choos_image,
                 multiple: false
             }).open()
                 .on('select', function () {
                     const uploaded_image = image.state().get('selection').first();
                     const image_url = uploaded_image.toJSON().url;
-                    $('.toto-image-preview',).attr('src', image_url).removeClass('hidden');
+                    $('.trust-plus-image-preview',).attr('src', image_url).removeClass('hidden');
                     $('#settings_image',).val(image_url).trigger('change');
-                    $('.toto-remove-image').removeClass('hidden');
+                    $('.trust-plus-remove-image').removeClass('hidden');
                 });
         },
 
         removeImage: function (e) {
             e.preventDefault();
-            $('.toto-image-preview',).attr('src', '').addClass('hidden');
+            $('.trust-plus-image-preview',).attr('src', '').addClass('hidden');
             $('#settings_image',).val('').trigger('change');
-            $('.toto-remove-image').addClass('hidden');
+            $('.trust-plus-remove-image').addClass('hidden');
         },
 
         displayTriggerSelect: function () {

@@ -1,10 +1,10 @@
 $margin: 10px;
 $height: 30px;
 
-.toto-meta-tabs {
+.trust-plus-meta-tabs {
   display: flex;
 
-  .toto-tab-item {
+  .trust-plus-tab-item {
     position: relative;
     margin: $margin 11px $margin 0;
     width: 20%;
@@ -25,7 +25,7 @@ $height: 30px;
       margin: 0;
     }
 
-    .toto-tab-link {
+    .trust-plus-tab-link {
       position: relative;
       color: #2c3f4c;
       background-color: #edeff0;
@@ -54,7 +54,7 @@ $height: 30px;
 
     }
 
-    &:not(:last-child) > .toto-tab-link {
+    &:not(:last-child) > .trust-plus-tab-link {
       &:after {
         content: '';
         position: absolute;
@@ -71,7 +71,7 @@ $height: 30px;
     }
 
     &:first-child{
-      .toto-tab-link{
+      .trust-plus-tab-link{
         border-top-left-radius: 5px;
         border-bottom-left-radius: 5px;
       }
@@ -79,7 +79,7 @@ $height: 30px;
 
     &:last-child{
       margin-right: 0;
-      .toto-tab-link{
+      .trust-plus-tab-link{
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
       }

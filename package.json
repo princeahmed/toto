@@ -1,19 +1,19 @@
 {
-  "name": "toto",
+  "name": "social-proof-fomo-notification",
   "version": "1.0.0",
   "description": "Completed:\r ---\r 1.",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/princeahmed/toto.git"
+    "url": "git+https://github.com/princeahmed/trust_plus.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/princeahmed/toto/issues"
+    "url": "https://github.com/princeahmed/trust_plus/issues"
   },
-  "homepage": "https://github.com/princeahmed/toto#readme",
+  "homepage": "https://github.com/princeahmed/trust_plus#readme",
   "scripts": {
     "start": "gulp",
     "build": "gulp build --prod"

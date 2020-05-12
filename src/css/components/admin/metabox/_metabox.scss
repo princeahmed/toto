@@ -3,7 +3,7 @@
 
 $primary: #96c03d;
 
-#toto_type {
+#trust_plus_type {
   border-radius: 10px;
   padding: 10px 10px;
 
@@ -14,8 +14,8 @@ $primary: #96c03d;
 
 }
 
-.toto-tab-content {
-  .toto-tab-content-item {
+.trust-plus-tab-content {
+  .trust-plus-tab-content-item {
     display: none;
 
     &.active {
@@ -37,7 +37,7 @@ $primary: #96c03d;
 }
 
 .triggers_rules {
-  .toto-input-group {
+  .trust-plus-input-group {
     margin-bottom: 15px;
   }
 }
@@ -56,7 +56,7 @@ $primary: #96c03d;
   }
 }
 
-.toto-volume-slider {
+.trust-plus-volume-slider {
   margin: 10px 0;
   display: flex;
   align-items: center;
@@ -65,7 +65,7 @@ $primary: #96c03d;
   position: relative;
   border-radius: 4px;
 
-  .toto-volume-handle {
+  .trust-plus-volume-handle {
     padding: 8px;
     color: white;
     background: $primary;
@@ -76,7 +76,7 @@ $primary: #96c03d;
 
 }
 
-.toto-next-prev{
+.trust-plus-next-prev{
   display: flex;
   justify-content: space-between;
 

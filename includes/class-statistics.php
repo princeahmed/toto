@@ -1,8 +1,8 @@
 <?php
 
-defined('ABSPATH') || exit();
+defined( 'ABSPATH' ) || exit();
 
-class TOTO_Statistics {
+class Trust_Plus_Statistics {
 
 	public $nid;
 	public $type;
@@ -11,7 +11,7 @@ class TOTO_Statistics {
 	public $query_args;
 
 	/**
-	 * TOTO_Statistics constructor.
+	 * Trust_Plus_Statistics constructor.
 	 *
 	 * @param bool $nid
 	 * @param array $args
@@ -21,23 +21,23 @@ class TOTO_Statistics {
 		$this->nid  = $nid ? $nid : $this->get_active_notifications()[0]->ID;
 		$this->type = get_post_meta( $this->nid, '_notification_type', true );
 
-		$this->statistics_types = Toto_Notifications::statistics_types( $this->type );
+		$this->statistics_types = Trust_Plus_Notifications::statistics_types( $this->type );
 
 		$this->type_title = [
-			'impression'             => __( 'Impressions', 'toto' ),
-			'hover'                  => __( 'Mouse Hovers', 'toto' ),
-			'click'                  => __( 'Clicks', 'toto' ),
-			'submissions'            => __( 'Submissions', 'toto' ),
-			'feedback_emoji_angry'   => __( 'Feedback Emoji Angry', 'toto' ),
-			'feedback_emoji_sad'     => __( 'Feedback Emoji Sad', 'toto' ),
-			'feedback_emoji_neutral' => __( 'Feedback Emoji Neutral', 'toto' ),
-			'feedback_emoji_happy'   => __( 'Feedback Emoji Happy', 'toto' ),
-			'feedback_emoji_excited' => __( 'Feedback Emoji Excited', 'toto' ),
-			'feedback_score_1'       => __( 'Feedback Score 1', 'toto' ),
-			'feedback_score_2'       => __( 'Feedback Score 2', 'toto' ),
-			'feedback_score_3'       => __( 'Feedback Score 3', 'toto' ),
-			'feedback_score_4'       => __( 'Feedback Score 4', 'toto' ),
-			'feedback_score_5'       => __( 'Feedback Score 5', 'toto' ),
+			'impression'             => __( 'Impressions', 'social-proof-fomo-notification' ),
+			'hover'                  => __( 'Mouse Hovers', 'social-proof-fomo-notification' ),
+			'click'                  => __( 'Clicks', 'social-proof-fomo-notification' ),
+			'submissions'            => __( 'Submissions', 'social-proof-fomo-notification' ),
+			'feedback_emoji_angry'   => __( 'Feedback Emoji Angry', 'social-proof-fomo-notification' ),
+			'feedback_emoji_sad'     => __( 'Feedback Emoji Sad', 'social-proof-fomo-notification' ),
+			'feedback_emoji_neutral' => __( 'Feedback Emoji Neutral', 'social-proof-fomo-notification' ),
+			'feedback_emoji_happy'   => __( 'Feedback Emoji Happy', 'social-proof-fomo-notification' ),
+			'feedback_emoji_excited' => __( 'Feedback Emoji Excited', 'social-proof-fomo-notification' ),
+			'feedback_score_1'       => __( 'Feedback Score 1', 'social-proof-fomo-notification' ),
+			'feedback_score_2'       => __( 'Feedback Score 2', 'social-proof-fomo-notification' ),
+			'feedback_score_3'       => __( 'Feedback Score 3', 'social-proof-fomo-notification' ),
+			'feedback_score_4'       => __( 'Feedback Score 4', 'social-proof-fomo-notification' ),
+			'feedback_score_5'       => __( 'Feedback Score 5', 'social-proof-fomo-notification' ),
 		];
 
 		$this->query_args = array_merge( [
@@ -55,11 +55,11 @@ class TOTO_Statistics {
 	 */
 	public function get_active_notifications() {
 		$args = [
-			'post_type'     => 'toto_notification',
-			'post_per_page' => - 1,
-			'post_status'   => 'publish',
-			'order'         => 'ASC',
-			'orderby'       => 'date',
+			'post_type'   => 'trust_plus',
+			'numberposts' => - 1,
+			'post_status' => 'publish',
+			'order'       => 'ASC',
+			'orderby'     => 'date',
 		];
 
 		return get_posts( $args );
@@ -75,7 +75,7 @@ class TOTO_Statistics {
 		/**
 		 * Get the statistics date from database
 		 */ global $wpdb;
-		$table = $wpdb->prefix . 'toto_notification_statistics';
+		$table = $wpdb->prefix . 'trust_plus_statistics';
 
 		$nid        = intval( $this->query_args['nid'] );
 		$start_date = esc_attr( $this->query_args['start_date'] );
@@ -176,7 +176,7 @@ class TOTO_Statistics {
 	public function get_top_pages( $args = [] ) {
 		global $wpdb;
 
-		$table = $wpdb->prefix . 'toto_notification_statistics';
+		$table = $wpdb->prefix . 'trust_plus_statistics';
 
 		$nid        = intval( $this->query_args['nid'] );
 		$page       = ! empty( $this->query_args['page'] ) ? intval( $this->query_args['page'] ) : 1;
@@ -208,46 +208,10 @@ class TOTO_Statistics {
 	}
 
 	/**
-	 * Get the submitted data through notification
-	 *
-	 * @param array $args
-	 *
-	 * @return array|object|null
-	 */
-	public function get_saved_data( $args = [] ) {
-		global $wpdb;
-
-		$table = $wpdb->prefix . 'toto_notification_data';
-
-		$args = array_merge( [
-			'page'       => 1,
-			'per_page'   => 10,
-			'start_date' => date( 'Y-m-d', strtotime( '-7 days' ) ),
-			'end_date'   => date( 'Y-m-d' ),
-		], $args );
-
-		$nid        = esc_attr( $args['nid'] );
-		$page       = intval( $args['page'] );
-		$per_page   = intval( $args['per_page'] );
-		$start_date = esc_attr( $args['start_date'] );
-		$end_date   = esc_attr( $args['end_date'] );
-
-		$offset = $per_page * ( $page - 1 );
-
-		$where = "WHERE notification_id = {$nid} ";
-
-		$where .= "AND (`created_at` BETWEEN '{$start_date}' AND '{$end_date}')";
-
-		$sql = "SELECT data, created_at FROM {$table} {$where} ORDER BY id DESC LIMIT {$offset}, {$per_page}";
-
-		return $wpdb->get_results( $sql );
-	}
-
-	/**
 	 * Statistics filter bar
 	 */
 	public function filter_bar() {
-		include TOTO_INCLUDES . '/admin/views/pages/statistics-filter-bar.php';
+		include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics-filter-bar.php';
 	}
 
 	/**
@@ -305,17 +269,17 @@ class TOTO_Statistics {
 				<?php
 
 				foreach ( $this->statistics_types as $statistics_type ) {
-					include TOTO_INCLUDES . '/admin/views/pages/statistics-summary.php';
+					include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics-summary.php';
 				}
 
 				//emoji feedback summary
 				if ( 'EMOJI_FEEDBACK' == $this->type ) {
-					include TOTO_INCLUDES . '/admin/views/pages/statistics-summary-emoji.php';
+					include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics-summary-emoji.php';
 				}
 
 				//score feedback summary
 				if ( 'SCORE_FEEDBACK' == $this->type ) {
-					include TOTO_INCLUDES . '/admin/views/pages/statistics-summary-score.php';
+					include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics-summary-score.php';
 				}
 
 				?>
@@ -328,7 +292,7 @@ class TOTO_Statistics {
 	 * Render the statitics chart
 	 */
 	public function chart() { ?>
-        <div class="toto_n_statistics_chart">
+        <div class="trust_plus_n_statistics_chart">
             <div class="chart-ph hidden">
                 <div class="ph-item">
 
@@ -479,8 +443,8 @@ class TOTO_Statistics {
 
 
 				} else { ?>
-                    <div class="toto_no_results">
-                        <h2><i class="fa fa-exclamation-triangle"></i> <?php _e( 'No Data Found!', 'toto' ) ?></h2>
+                    <div class="trust_plus_no_results">
+                        <h2><i class="fa fa-exclamation-triangle"></i> <?php _e( 'No Data Found!', 'social-proof-fomo-notification' ) ?></h2>
                     </div>
 				<?php } ?>
             </div>
@@ -494,20 +458,20 @@ class TOTO_Statistics {
 
 		echo '<div class="statistics-tables">';
 		if ( 'EMOJI_FEEDBACK' == $this->type ) {
-			include TOTO_INCLUDES . '/admin/views/pages/statistics-top-emoji.php';
+			include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics-top-emoji.php';
 		}
 
 		// data table
-		if ( in_array( $this->type, [ 'EMAIL_COLLECTOR', 'REQUEST_COLLECTOR',  'COUNTDOWN_COLLECTOR', ] ) ) {
-			include TOTO_INCLUDES . '/admin/views/pages/statistics-data.php';
+		if ( in_array( $this->type, [ 'EMAIL_COLLECTOR', 'REQUEST_COLLECTOR', 'COUNTDOWN_COLLECTOR', ] ) ) {
+			include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics-data.php';
 		}
 
 		//score feedback table
 		if ( 'SCORE_FEEDBACK' == $this->type ) {
-			include TOTO_INCLUDES . '/admin/views/pages/statistics-table-feedback-score.php';
+			include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics-table-feedback-score.php';
 		}
 
-		include TOTO_INCLUDES . '/admin/views/pages/statistics-top-pages.php';
+		include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics-top-pages.php';
 		echo '</div>';
 	}
 
@@ -519,7 +483,7 @@ class TOTO_Statistics {
 	public function get_top_emoji() {
 		global $wpdb;
 
-		$table = $wpdb->prefix . 'toto_notification_statistics';
+		$table = $wpdb->prefix . 'trust_plus_statistics';
 
 		$nid        = intval( $this->query_args['nid'] );
 		$start_date = esc_attr( $this->query_args['start_date'] );
@@ -557,7 +521,7 @@ class TOTO_Statistics {
 	public function get_feedback_scores() {
 		global $wpdb;
 
-		$table = $wpdb->prefix . 'toto_notification_statistics';
+		$table = $wpdb->prefix . 'trust_plus_statistics';
 
 		$nid        = intval( $this->query_args['nid'] );
 		$start_date = esc_attr( $this->query_args['start_date'] );
@@ -593,7 +557,7 @@ class TOTO_Statistics {
 	public function get_submitted_data() {
 		global $wpdb;
 
-		$table = $wpdb->prefix . 'toto_notification_statistics';
+		$table = $wpdb->prefix . 'trust_plus_statistics';
 
 		$nid        = intval( $this->query_args['nid'] );
 		$start_date = esc_attr( $this->query_args['start_date'] );
@@ -623,6 +587,5 @@ class TOTO_Statistics {
 
 		return $wpdb->get_results( $sql );
 	}
-
 
 }

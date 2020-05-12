@@ -24,7 +24,7 @@ $primary: #96c03d;
   align-items: baseline;
 }
 
-.toto-btn-delete {
+.trust-plus-btn-delete {
   margin-left: 15px;
   padding: 0 15px;
   cursor: pointer;
@@ -43,46 +43,46 @@ $primary: #96c03d;
   display: none !important;
 }
 
-.toto-mr-5 {
+.trust-plus-mr-5 {
   margin-right: 5px;
 }
 
-.toto-mt-auto {
+.trust-plus-mt-auto {
   margin-top: auto;
 }
-.toto-ml-auto {
+.trust-plus-ml-auto {
   margin-left: auto;
 }
 
-.toto-ml-5 {
+.trust-plus-ml-5 {
   margin-left: 5px;
 }
 
-.toto-mr-10 {
+.trust-plus-mr-10 {
   margin-right: 10px !important;
 }
 
-.toto-mt-20 {
+.trust-plus-mt-20 {
   margin-top: 20px !important;
 }
 
-.toto-mr-20 {
+.trust-plus-mr-20 {
   margin-right: 20px !important;
 }
 
-.toto-ml-10 {
+.trust-plus-ml-10 {
   margin-left: 10px !important;
 }
 
-.toto-mb-20 {
+.trust-plus-mb-20 {
   margin-bottom: 20px !important;
 }
 
-.toto-mb-50 {
+.trust-plus-mb-50 {
   margin-bottom: 50px !important;
 }
 
-.toto-image-preview {
+.trust-plus-image-preview {
   width: max-content;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -90,13 +90,13 @@ $primary: #96c03d;
   max-width: 100px;
 }
 
-.toto-break {
+.trust-plus-break {
   flex-basis: 100%;
   height: 0;
 }
 
 //Button
-.toto-btn {
+.trust-plus-btn {
   border: none;
   padding: 0 30px;
   border-radius: 3px;
@@ -111,7 +111,7 @@ $primary: #96c03d;
 }
 
 //Panel
-.toto-panel {
+.trust-plus-panel {
   background: #fff;
   padding: 10px 15px;
   border-radius: 5px;
@@ -144,11 +144,11 @@ $primary: #96c03d;
 }
 
 //Pagination
-.toto-pagination-wrap {
+.trust-plus-pagination-wrap {
   text-align: center;
 }
 
-.toto-pagination {
+.trust-plus-pagination {
   display: inline-flex;
 
   .page-item {

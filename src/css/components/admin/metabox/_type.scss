@@ -1,9 +1,9 @@
-.toto-notification-types {
+.trust-plus-notification-types {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 
-  .toto-notification-type {
+  .trust-plus-notification-type {
     width: 49%;
     display: flex;
     border: 1px solid #ddd;
@@ -16,7 +16,7 @@
     box-sizing: border-box;
     cursor: pointer;
 
-    .toto-notification-type-title {
+    .trust-plus-notification-type-title {
       margin-top: 0;
     }
 
@@ -33,7 +33,7 @@
       background: #96c03d;
       color: #fff;
 
-      .toto-notification-type-title {
+      .trust-plus-notification-type-title {
         color: inherit;
       }
 

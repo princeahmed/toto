@@ -1,30 +1,30 @@
 /* Informational */
-.toto-informational-wrapper {
+.trust-plus-informational-wrapper {
 }
 
 @media (min-width: 576px) {
-    .toto-informational-wrapper {
+    .trust-plus-informational-wrapper {
         max-width: 400px !important;
     }
 }
 
-.toto-informational-content {
+.trust-plus-informational-content {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
 }
 
-.toto-informational-title {
+.trust-plus-informational-title {
     font-weight: bold !important;
     margin-bottom: 0 !important;
 }
 
-.toto-informational-description {
+.trust-plus-informational-description {
     font-size: 14px !important;
     margin-bottom: 0 !important;
 }
 
-.toto-informational-image {
+.trust-plus-informational-image {
     min-width: 65px !important;
     height: 65px !important;
     margin-right: 8px !important;

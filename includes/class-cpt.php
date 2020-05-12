@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class Toto_CPT {
+class Trust_Plus_CPT {
 
 	/**
 	 * Post_Types constructor.
@@ -18,7 +18,7 @@ class Toto_CPT {
 	 * @since 1.0.0
 	 */
 	function register_post_types() {
-		register_post_type( 'toto_notification', array(
+		register_post_type( 'trust_plus', array(
 			'labels'        => $this::get_posts_labels( __( 'Notifications', 'wp-plugin-boilerplate' ), __( 'Notification', 'wp-plugin-boilerplate' ), __( 'Notifications', 'wp-plugin-boilerplate' ) ),
 			'supports'      => [ 'title' ],
 			'show_ui'      => true,
@@ -64,11 +64,11 @@ class Toto_CPT {
 	 * @since 2.0.2
 	 */
 	function flush_rewrite_rules() {
-		if ( get_option( 'toto_flush_rewrite_rules' ) ) {
+		if ( get_option( 'trust_plus_flush_rewrite_rules' ) ) {
 			flush_rewrite_rules();
-			delete_option( 'toto_flush_rewrite_rules' );
+			delete_option( 'trust_plus_flush_rewrite_rules' );
 		}
 	}
 }
 
-new Toto_CPT();
+new Trust_Plus_CPT();

@@ -2,25 +2,25 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class Toto_Admin {
+class Trust_Plus_Admin {
 
 	public function __construct() {
 		$this->includes();
 
 		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
-		add_action( 'save_post_toto_notification', [ $this, 'save_toto_meta' ] );
+		add_action( 'save_post_trust_plus', [ $this, 'save_trust_plus_meta' ] );
 
-		add_filter( 'manage_toto_notification_posts_columns', [ $this, 'post_columns' ] );
-		add_filter( 'manage_toto_notification_posts_custom_column', [ $this, 'columns_data' ], 10, 2 );
+		add_filter( 'manage_trust_plus_posts_columns', [ $this, 'post_columns' ] );
+		add_filter( 'manage_trust_plus_posts_custom_column', [ $this, 'columns_data' ], 10, 2 );
 	}
 
 	/**
 	 * Include necessary admin files
 	 */
 	public function includes() {
-		include_once TOTO_INCLUDES . '/admin/class-metabox.php';
-		include_once TOTO_INCLUDES . '/admin/class-ajax.php';
-		include_once TOTO_INCLUDES . '/admin/toto-settings.php';
+		include_once TRUST_PLUS_INCLUDES . '/admin/class-metabox.php';
+		include_once TRUST_PLUS_INCLUDES . '/admin/class-ajax.php';
+		include_once TRUST_PLUS_INCLUDES . '/admin/settings.php';
 	}
 
 	/**
@@ -28,7 +28,7 @@ class Toto_Admin {
 	 */
 	public function admin_menu() {
 
-		add_submenu_page( 'edit.php?post_type=toto_notification', __( 'Notification Statistics', 'toto' ), __( 'Statistics', 'toto' ), 'manage_options', 'notification-statistics', [
+		add_submenu_page( 'edit.php?post_type=trust_plus', __( 'Notification Statistics', 'social-proof-fomo-notification' ), __( 'Statistics', 'social-proof-fomo-notification' ), 'manage_options', 'notification-statistics', [
 			$this,
 			'render_statistics_page'
 		] );
@@ -38,7 +38,7 @@ class Toto_Admin {
 	 * Render the admin statistics page
 	 */
 	public function render_statistics_page() {
-		include TOTO_INCLUDES . '/admin/views/pages/statistics.php';
+		include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics.php';
 	}
 
 	/**
@@ -50,12 +50,12 @@ class Toto_Admin {
 	 */
 	public function post_columns( $columns ) {
 		unset( $columns['date'] );
-		$columns['preview']   = __( 'Preview', 'toto' );
-		$columns['type']      = __( 'Type', 'toto' );
-		$columns['status']    = __( 'Status', 'toto' );
-		$columns['shortcode'] = __( 'Shortcode', 'toto' );
+		$columns['preview']   = __( 'Preview', 'social-proof-fomo-notification' );
+		$columns['type']      = __( 'Type', 'social-proof-fomo-notification' );
+		$columns['status']    = __( 'Status', 'social-proof-fomo-notification' );
+		$columns['shortcode'] = __( 'Shortcode', 'social-proof-fomo-notification' );
 
-		$columns['date'] = __( 'Date', 'toto' );
+		$columns['date'] = __( 'Date', 'social-proof-fomo-notification' );
 
 		return $columns;
 	}
@@ -69,18 +69,24 @@ class Toto_Admin {
 	public function columns_data( $column, $post_id ) {
 
 		if ( 'preview' == $column ) { ?>
-            <a href="#" class="toto-n-preview" data-post_id="<?php echo $post_id; ?>">
-                <i class="dashicons dashicons-visibility toto-mr-5"></i> <?php __( 'Preview', 'toto' ) ?> </a>
+            <a href="#" class="trust-plus-n-preview" data-post_id="<?php echo $post_id; ?>">
+                <i class="dashicons dashicons-visibility trust-plus-mr-5"></i> <?php __( 'Preview', 'social-proof-fomo-notification' ) ?>
+            </a>
 
 		<?php } elseif ( 'type' == $column ) {
-			$type   = get_post_meta( $post_id, '_notification_type', true );
-			$config = ! empty( $type ) ? Toto_Notifications::get_config( $type ) : '';
+			$type = get_post_meta( $post_id, '_notification_type', true );
+
+			if ( empty( $type ) ) {
+				return;
+			}
+
+			$config = Trust_Plus_Notifications::get_config( $type );
 			?>
-            <span class="toto-n-type"><i class="<?php echo $config['icon']; ?>"></i> <?php echo $config['name']; ?></span>
+            <span class="trust-plus-n-type"><i class="<?php echo $config['icon']; ?>"></i> <?php echo $config['name']; ?></span>
 
 		<?php } elseif ( 'status' == $column ) { ?>
-            <div class="toto-switcher">
-                <input type="checkbox" class="toto_n_status" id="notification-<?php echo $post_id; ?>" value="<?php echo $post_id; ?>"
+            <div class="trust-plus-switcher">
+                <input type="checkbox" class="trust_plus_n_status" id="notification-<?php echo $post_id; ?>" value="<?php echo $post_id; ?>"
 					<?php checked( 'publish', get_post_status( $post_id ) ); ?> />
 
                 <div>
@@ -89,11 +95,11 @@ class Toto_Admin {
             </div>
 
 		<?php } elseif ( 'shortcode' == $column ) { ?>
-            <span class="toto-n-shortcode" title="<?php _e( 'Copy Shortcode', 'toto' ) ?>"><i class="fa fa-copy"></i> <code>[toto id=<?php echo $post_id; ?>]</code></span>
+            <span class="trust-plus-n-shortcode" title="<?php _e( 'Copy Shortcode', 'social-proof-fomo-notification' ) ?>"><i class="fa fa-copy"></i> <code>[trust_plus id=<?php echo $post_id; ?>]</code></span>
 		<?php }
 	}
 
-	public function save_toto_meta( $post_id ) {
+	public function save_trust_plus_meta( $post_id ) {
 
 		if ( wp_doing_ajax() || wp_doing_cron() ) {
 			return;
@@ -136,4 +142,4 @@ class Toto_Admin {
 
 }
 
-new Toto_Admin();
+new Trust_Plus_Admin();

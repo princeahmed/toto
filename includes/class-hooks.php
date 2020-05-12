@@ -2,16 +2,16 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class Toto_Hooks {
+class Trust_Plus_Hooks {
 
 	/**
-	 * Toto_Hooks constructor.
+	 * Trust_Plus_Hooks constructor.
 	 */
 	public function __construct() {
 		add_action( 'wp_print_footer_scripts', [ $this, 'render_notifications' ] );
 
 		add_filter( 'display_post_states', [ $this, 'notification_state' ] );
-		add_filter( 'views_edit-toto_notification', [ $this, 'edit_quick_links' ] );
+		add_filter( 'views_edit-trust_plus', [ $this, 'edit_quick_links' ] );
 
 	}
 
@@ -25,11 +25,11 @@ class Toto_Hooks {
 	public function edit_quick_links( $views ) {
 
 		if ( ! empty( $views['draft'] ) ) {
-			$views['draft'] = str_replace( 'Drafts', __( 'Disabled', 'toto' ), $views['draft'] );
+			$views['draft'] = str_replace( 'Drafts', __( 'Disabled', 'social-proof-fomo-notification' ), $views['draft'] );
 		}
 
 		if ( ! empty( $views['publish'] ) ) {
-			$views['publish'] = str_replace( 'Published', __( 'Enabled', 'toto' ), $views['publish'] );
+			$views['publish'] = str_replace( 'Published', __( 'Enabled', 'social-proof-fomo-notification' ), $views['publish'] );
 		}
 
 		return $views;
@@ -44,7 +44,7 @@ class Toto_Hooks {
 	 */
 	public function notification_state( $states ) {
 
-		if ( 'toto_notification' == get_post_type() && ! empty( $states['draft'] ) ) {
+		if ( 'trust_plus' == get_post_type() && ! empty( $states['draft'] ) ) {
 			$states['draft'] = '<span style="color: #a00;">Disabled</span>';
 		}
 
@@ -55,9 +55,9 @@ class Toto_Hooks {
 	 * Display frontend notification
 	 */
 	public function render_notifications() {
-		Toto_Notifications::display_notifications();
+		Trust_Plus_Notifications::display_notifications();
 	}
 
 }
 
-new Toto_Hooks();
+new Trust_Plus_Hooks();

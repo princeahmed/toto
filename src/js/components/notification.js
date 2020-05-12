@@ -1,19 +1,19 @@
 import Notification from "./class-notification";
 
 ;(function ($) {
-    $.toto = {
+    $.trustPlus = {
         init: () => {
 
-            $('.toto').each((i, el) => {
+            $('.trustPlus').each((i, el) => {
                 const config = $(el).data('config');
 
                 let callbacks = {};
-                if (config.notification_type in $.toto.callbacks()) {
-                    callbacks = $.toto.callbacks()[config.notification_type];
+                if (config.notification_type in $.trustPlus.callbacks()) {
+                    callbacks = $.trustPlus.callbacks()[config.notification_type];
 
                 }
 
-                new $.toto.notification({
+                new $.trustPlus.notification({
                     ...config
                 }).initiate(callbacks);
 
@@ -23,12 +23,12 @@ import Notification from "./class-notification";
         get_location: () => {
 
             /* Return the ip from session store if any */
-            const savedLocation = localStorage.getItem('user_location');
+            const savedLocation = localStorage.getItem('trust_plus_user_location');
             if (savedLocation && savedLocation !== '') {
                 return savedLocation;
             } else {
                 let xmlHttp = new XMLHttpRequest();
-                xmlHttp.open('GET', `https://www.iplocate.io/api/lookup/${toto.userIp}`, false);
+                xmlHttp.open('GET', `https://www.iplocate.io/api/lookup`, false);
                 xmlHttp.send(null);
 
                 /* Try and get details from the response */
@@ -36,13 +36,14 @@ import Notification from "./class-notification";
                     let response = JSON.parse(xmlHttp.responseText);
 
                     let user_location = JSON.stringify({
+                        ip: response.ip,
                         city: response.city,
                         country: response.country,
                         country_code: response.country_code
                     });
 
                     /* Set it to the session storage to avoid multiple requests to this website */
-                    localStorage.setItem('user_location', user_location);
+                    localStorage.setItem('trust_plus_user_location', user_location);
 
                     return user_location;
 
@@ -56,11 +57,8 @@ import Notification from "./class-notification";
 
         send_statistics_data: params => {
 
-            wp.ajax.send('toto_save_statistics', {
+            wp.ajax.send('trust_plus_save_statistics', {
                 data: {data: params},
-
-                success: (res) => {
-                },
 
                 error: (error) => console.log(error)
 
@@ -70,12 +68,7 @@ import Notification from "./class-notification";
 
         user: () => {
             return {
-                /* Get user IP */
-                ip: toto.userIp,
-
-                /* Location data */
-                location: $.toto.get_location(),
-
+                ...$.trustPlus.get_location(),
                 /* Current accessed page */
                 current_page: encodeURIComponent(window.location.href)
             }
@@ -97,21 +90,21 @@ import Notification from "./class-notification";
                 displayed: main_element => {
 
                     /* On click the footer remove element */
-                    main_element.querySelector('.toto-coupon-footer').addEventListener('click', event => {
+                    main_element.querySelector('.trust-plus-coupon-footer').addEventListener('click', event => {
 
-                        $.toto.notification.remove_notification(main_element);
+                        $.trustPlus.notification.remove_notification(main_element);
 
                         event.preventDefault();
 
                     });
 
                     /* On click event to the button */
-                    main_element.querySelector('.toto-coupon-button').addEventListener('click', event => {
+                    main_element.querySelector('.trust-plus-coupon-button').addEventListener('click', event => {
 
                         let notification_id = main_element.getAttribute('data-notification-id');
 
-                        $.toto.send_statistics_data({
-                            ...$.toto.user(),
+                        $.trustPlus.send_statistics_data({
+                            ...$.trustPlus.user(),
                             notification_id: notification_id,
                             type: 'click',
                         });
@@ -125,7 +118,7 @@ import Notification from "./class-notification";
                 displayed: main_element => {
 
                     /* Form submission */
-                    main_element.querySelector('#toto-email-collector-form').addEventListener('submit', event => {
+                    main_element.querySelector('#trust-plus-email-collector-form').addEventListener('submit', event => {
 
                         let email = event.currentTarget.querySelector('[name="email"]').value;
                         let notification_id = main_element.getAttribute('data-notification-id');
@@ -133,14 +126,14 @@ import Notification from "./class-notification";
                         if (email.trim() !== '') {
 
                             /* Data collection from the form */
-                            $.toto.send_statistics_data({
-                                ...$.toto.user(),
+                            $.trustPlus.send_statistics_data({
+                                ...$.trustPlus.user(),
                                 notification_id,
                                 type: 'submissions',
                                 data: email
                             });
 
-                            $.toto.notification.remove_notification(main_element);
+                            $.trustPlus.notification.remove_notification(main_element);
 
                             /* Make sure to let the browser know of the conversion so that it is not shown again */
                             localStorage.setItem(`notification_${notification_id}_converted`, true);
@@ -157,12 +150,12 @@ import Notification from "./class-notification";
                 displayed: main_element => {
 
                     /* On click event to the button */
-                    main_element.querySelector('.toto-video-button').addEventListener('click', event => {
+                    main_element.querySelector('.trust-plus-video-button').addEventListener('click', event => {
 
                         let notification_id = main_element.getAttribute('data-notification-id');
 
-                        $.toto.send_statistics_data({
-                            ...$.toto.user(),
+                        $.trustPlus.send_statistics_data({
+                            ...$.trustPlus.user(),
                             notification_id,
                             type: 'click',
                         });
@@ -176,12 +169,12 @@ import Notification from "./class-notification";
                 displayed: main_element => {
 
                     /* On click event to the button */
-                    main_element.querySelector('.toto-social-share-button').addEventListener('click', event => {
+                    main_element.querySelector('.trust-plus-social-share-button').addEventListener('click', event => {
 
                         let notification_id = main_element.getAttribute('data-notification-id');
 
-                        $.toto.send_statistics_data({
-                            ...$.toto.user(),
+                        $.trustPlus.send_statistics_data({
+                            ...$.trustPlus.user(),
                             notification_id,
                             type: 'click',
                         });
@@ -195,16 +188,16 @@ import Notification from "./class-notification";
                 displayed: main_element => {
 
                     /* On click event to the button */
-                    let emojis = main_element.querySelectorAll('.toto-emoji-feedback-emoji');
+                    let emojis = main_element.querySelectorAll('.trust-plus-emoji-feedback-emoji');
 
                     for (let emoji of emojis) {
                         emoji.addEventListener('click', event => {
 
                             /* Trigger the animation */
-                            emoji.className += ' toto-emoji-feedback-emoji-clicked';
+                            emoji.className += ' trust-plus-emoji-feedback-emoji-clicked';
 
                             /* Get all the other emojis and remove them */
-                            let other_emojis = main_element.querySelectorAll('.toto-emoji-feedback-emoji:not(.toto-emoji-feedback-emoji-clicked)');
+                            let other_emojis = main_element.querySelectorAll('.trust-plus-emoji-feedback-emoji:not(.trust-plus-emoji-feedback-emoji-clicked)');
                             for (let other_emoji of other_emojis) {
                                 other_emoji.remove();
                             }
@@ -212,8 +205,8 @@ import Notification from "./class-notification";
                             let notification_id = main_element.getAttribute('data-notification-id');
                             let feedback = emoji.getAttribute('data-type');
 
-                            $.toto.send_statistics_data({
-                                ...$.toto.user(),
+                            $.trustPlus.send_statistics_data({
+                                ...$.trustPlus.user(),
                                 notification_id,
                                 type: `feedback_emoji_${feedback}`,
                             });
@@ -222,7 +215,7 @@ import Notification from "./class-notification";
                             localStorage.setItem(`notification_${notification_id}_converted`, true);
 
                             setTimeout(() => {
-                                $.toto.notification.remove_notification(main_element);
+                                $.trustPlus.notification.remove_notification(main_element);
                             }, 950);
 
                         });
@@ -236,17 +229,17 @@ import Notification from "./class-notification";
                 displayed: main_element => {
 
                     /* On click the footer remove element */
-                    main_element.querySelector('.toto-cookie-notification-button').addEventListener('click', event => {
+                    main_element.querySelector('.trust-plus-cookie-notification-button').addEventListener('click', event => {
 
                         const notification_id = main_element.getAttribute('data-notification-id');
 
-                        $.toto.send_statistics_data({
-                            ...$.toto.user(),
+                        $.trustPlus.send_statistics_data({
+                            ...$.trustPlus.user(),
                             notification_id,
                             type: 'click',
                         });
 
-                        $.toto.notification.remove_notification(main_element);
+                        $.trustPlus.notification.remove_notification(main_element);
 
                         /* Make sure to let the browser know of the conversion so that it is not shown again */
                         localStorage.setItem(`notification_${notification_id}_converted`, true);
@@ -262,16 +255,16 @@ import Notification from "./class-notification";
                 displayed: main_element => {
 
                     /* On click event to the button */
-                    let scores = main_element.querySelectorAll('.toto-score-feedback-button');
+                    let scores = main_element.querySelectorAll('.trust-plus-score-feedback-button');
 
                     for (let score of scores) {
                         score.addEventListener('click', event => {
 
                             /* Trigger the animation */
-                            score.className += ' toto-score-feedback-button-clicked';
+                            score.className += ' trust-plus-score-feedback-button-clicked';
 
                             /* Get all the other emojis and remove them */
-                            let other_scores = main_element.querySelectorAll('.toto-score-feedback-button:not(.toto-score-feedback-button-clicked)');
+                            let other_scores = main_element.querySelectorAll('.trust-plus-score-feedback-button:not(.trust-plus-score-feedback-button-clicked)');
                             for (let other_score of other_scores) {
                                 other_score.remove();
                             }
@@ -279,8 +272,8 @@ import Notification from "./class-notification";
                             const notification_id = main_element.getAttribute('data-notification-id');
                             const feedback = score.getAttribute('data-score');
 
-                            $.toto.send_statistics_data({
-                                ...$.toto.user(),
+                            $.trustPlus.send_statistics_data({
+                                ...$.trustPlus.user(),
                                 notification_id,
                                 type: `feedback_score_${feedback}`,
                             });
@@ -289,7 +282,7 @@ import Notification from "./class-notification";
                             localStorage.setItem(`notification_${notification_id}_converted`, true);
 
                             setTimeout(() => {
-                                $.toto.notification.remove_notification(main_element);
+                                $.trustPlus.notification.remove_notification(main_element);
                             }, 950);
 
                         });
@@ -303,7 +296,7 @@ import Notification from "./class-notification";
                 displayed: main_element => {
 
                     /* Form submission */
-                    main_element.querySelector('#toto-request-collector-form').addEventListener('submit', event => {
+                    main_element.querySelector('#trust-plus-request-collector-form').addEventListener('submit', event => {
 
                         let input = event.currentTarget.querySelector('[name="input"]').value;
                         let notification_id = main_element.getAttribute('data-notification-id');
@@ -312,14 +305,14 @@ import Notification from "./class-notification";
                         if (input.trim() !== '') {
 
                             /* Data collection from the form */
-                            $.toto.send_statistics_data({
-                                ...$.toto.user(),
+                            $.trustPlus.send_statistics_data({
+                                ...$.trustPlus.user(),
                                 notification_id,
                                 type: 'submissions',
                                 data: input
                             });
 
-                            $.toto.notification.remove_notification(main_element);
+                            $.trustPlus.notification.remove_notification(main_element);
 
                             /* Make sure to let the browser know of the conversion so that it is not shown again */
                             localStorage.setItem(`notification_${notification_id}_converted`, true);
@@ -377,7 +370,7 @@ import Notification from "./class-notification";
                         if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
                             clearInterval(countdown_interval);
 
-                            $.toto.notification.remove_notification(main_element);
+                            $.trustPlus.notification.remove_notification(main_element);
                         }
 
                         /* Set the new values */
@@ -390,7 +383,7 @@ import Notification from "./class-notification";
                     const countdown_interval = setInterval(countdown, 1000);
 
                     /* Form submission */
-                    main_element.querySelector('#toto-countdown-collector-form').addEventListener('submit', event => {
+                    main_element.querySelector('#trust-plus-countdown-collector-form').addEventListener('submit', event => {
 
                         let input = event.currentTarget.querySelector('[name="input"]').value;
                         let notification_id = main_element.getAttribute('data-notification-id');
@@ -399,14 +392,14 @@ import Notification from "./class-notification";
                         if (input.trim() !== '') {
 
                             /* Data collection from the form */
-                            $.toto.send_statistics_data({
-                                ...$.toto.user(),
+                            $.trustPlus.send_statistics_data({
+                                ...$.trustPlus.user(),
                                 notification_id: notification_id,
                                 type: 'submissions',
                                 data: input
                             });
 
-                            $.toto.notification.remove_notification(main_element);
+                            $.trustPlus.notification.remove_notification(main_element);
 
                             /* Make sure to let the browser know of the conversion so that it is not shown again */
                             localStorage.setItem(`notification_${notification_id}_converted`, true);
@@ -423,5 +416,5 @@ import Notification from "./class-notification";
 
     };
 
-    $(document).ready($.toto.init);
+    $(document).ready($.trustPlus.init);
 })(jQuery);

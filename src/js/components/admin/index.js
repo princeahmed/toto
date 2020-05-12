@@ -2,12 +2,12 @@
     $(document).ready(function () {
 
         //Change notification status
-        $('.column-status .toto-switcher').on('click', function () {
+        $('.column-status .trust-plus-switcher').on('click', function () {
             const input = $('input', $(this));
             const checked = input.is(':checked');
             const status = checked ? 'draft' : 'publish'
 
-            wp.ajax.send('toto_n_status', {
+            wp.ajax.send('trust_plus_n_status', {
                 data: {
                     post_id: input.val(),
                     status,
@@ -16,7 +16,7 @@
                 success: () => {
 
                     if (!$('.post-state', $(this).parents('tr')).length) {
-                        $('.row-title', $(this).parents('tr')).after(` — <span class="post-state"><span style="color: #a00;">Disabled</span></span>`)
+                        $('.row-title', $(this).parents('tr')).after(` — <span class="post-state"><span style="color: #a00;">${trustPlus.i18n.disabled}</span></span>`)
                     }
 
                     if (checked) {
@@ -25,11 +25,11 @@
                         $('.post-state', $(this).parents('tr')).addClass('hidden');
                     }
 
-                    const text = checked ? 'Disabled' : 'Enabled';
+                    const text = checked ? trustPlus.i18n.disabled : trustPlus.i18n.enabled;
 
                     Swal.fire({
                         icon: 'success',
-                        title: 'Notification ' + text,
+                        title: trustPlus.i18n.notification + ' ' + text,
                         timer: 2000,
                         showConfirmButton: false,
                     });
@@ -41,12 +41,12 @@
         });
 
         //Modal Preview open
-        $('.toto-n-preview').on('click', function (e) {
+        $('.trust-plus-n-preview').on('click', function (e) {
             e.preventDefault();
 
             const postId = $(this).data('post_id');
 
-            wp.ajax.send('toto_notification_preview', {
+            wp.ajax.send('trust_plus_preview', {
                 data: {
                     post_id: postId,
                 },
@@ -57,7 +57,6 @@
                     const header = `Type: ${res.type}`;
 
                     Swal.fire({
-                        //title: res.type,
                         html: res.html,
                         showCloseButton: true,
                         showConfirmButton: false,
@@ -73,7 +72,7 @@
 
 
         //Copy to clipboard
-        $(document).on('click', '.toto-n-shortcode .fa-copy', function (e) {
+        $(document).on('click', '.trust-plus-n-shortcode .fa-copy', function (e) {
             e.preventDefault();
 
             const text = $(this).next().text();
@@ -86,7 +85,7 @@
 
             Swal.fire({
                 icon: 'success',
-                title: 'Copied to Clipboard.',
+                title: trustPlus.i18n.copied,
                 text,
                 timer: 2000,
                 showConfirmButton: false,

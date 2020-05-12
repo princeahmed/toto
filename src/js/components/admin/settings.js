@@ -1,6 +1,6 @@
 ;(function ($) {
     $(document).ready(function () {
-        $(document).on('click', '.toto-switcher', function () {
+        $(document).on('click', '.trust-plus-switcher', function () {
 
             const checkbox = $(this).find('input[type=checkbox]');
 

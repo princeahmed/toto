@@ -1,30 +1,24 @@
 <?php defined( 'ABSPATH' ) || die() ?>
 
-<div class="toto-wrapper toto-email-collector-wrapper toto-wrapper-<?php echo $notification->border_radius ?>" style="background: <?php echo $notification->background_color ?>">
-    <div class="toto-email-collector-content">
-        <p class="toto-email-collector-title" style="color: <?php echo $notification->title_color ?>"><?php echo $notification->title ?></p>
-        <p class="toto-email-collector-description" style="color: <?php echo $notification->description_color ?>"><?php echo $notification->description ?></p>
+<div class="trust-plus-wrapper trust-plus-email-collector-wrapper trust-plus-wrapper-<?php echo $notification->border_radius ?>" style="background: <?php echo $notification->background_color ?>">
+    <div class="trust-plus-email-collector-content">
+        <p class="trust-plus-email-collector-title" style="color: <?php echo $notification->title_color ?>"><?php echo $notification->title ?></p>
+        <p class="trust-plus-email-collector-description" style="color: <?php echo $notification->description_color ?>"><?php echo $notification->description ?></p>
 
 
-        <form id="toto-email-collector-form" class="toto-email-collector-form" name="" action="" method="GET" role="form">
-            <div class="toto-email-collector-row">
-                <input type="email" class="toto-email-collector-email-placeholder" name="email" placeholder="<?php echo $notification->email_placeholder ?>" required="required"/>
+        <form id="trust-plus-email-collector-form" class="trust-plus-email-collector-form" name="" action="" method="GET" role="form">
+            <div class="trust-plus-email-collector-row">
+                <input type="email" class="trust-plus-email-collector-email-placeholder" name="email" placeholder="<?php echo $notification->email_placeholder ?>" required="required"/>
 
-                <button type="submit" class="toto-email-collector-button" name="button" style="color: <?php echo $notification->button_color ?>; background: <?php echo $notification->button_background_color ?>"><?php echo $notification->button_text ?></button>
+                <button type="submit" class="trust-plus-email-collector-button" name="button" style="color: <?php echo $notification->button_color ?>; background: <?php echo $notification->button_background_color ?>"><?php echo $notification->button_text ?></button>
             </div>
 
 
-            <div class="toto-agreement-checkbox <?php echo 'yes' != $notification->show_agreement ? 'hidden' : ''; ?>">
-                <input type="checkbox" id="toto-agreement" name="agreement" required="required"/>
-                <label for="toto-agreement" class="toto-agreement-checkbox-text" style="color: <?php echo $notification->description_color ?>">
-                    <a href="<?php echo $notification->agreement_url ?>">
-						<?php echo $notification->agreement_text ?>
-                    </a> </label>
-            </div>
+            <?php trust_plus_agreement($notification); ?>
         </form>
 
-		<?php toto_branding( $notification ); ?>
+		<?php trust_plus_branding( $notification ); ?>
     </div>
 
-	<?php toto_close( $notification ); ?>
+	<?php trust_plus_close( $notification ); ?>
 </div>

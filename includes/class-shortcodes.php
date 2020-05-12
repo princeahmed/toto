@@ -2,13 +2,13 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class TOTO_Shortcodes {
+class Trust_Plus_Shortcodes {
 
 	/**
-	 * TOTO_Shortcodes constructor.
+	 * Trust_Plus_Shortcodes constructor.
 	 */
 	public function __construct() {
-		add_shortcode( 'toto', [ $this, 'render_notification' ] );
+		add_shortcode( 'social-proof-fomo-notification', [ $this, 'render_notification' ] );
 	}
 
 	/**
@@ -26,7 +26,7 @@ class TOTO_Shortcodes {
 		}
 
 		ob_start();
-		Toto_Notifications::get_view( $id, false, true );
+		Trust_Plus_Notifications::get_view( $id, false, true );
 
 		return ob_get_clean();
 
@@ -34,4 +34,4 @@ class TOTO_Shortcodes {
 
 }
 
-new TOTO_Shortcodes();
+new Trust_Plus_Shortcodes();

@@ -1,4 +1,4 @@
-.toto-modal {
+.trust-plus-modal {
   position: fixed;
   z-index: 9999;
   left: 0;
@@ -10,12 +10,12 @@
   background-color: rgba(0, 0, 0, 0.4);
 }
 
-.toto-modal-content {
+.trust-plus-modal-content {
   background-color: #fefefe;
   margin: 15% auto;
   width: 70%;
 
-  .toto-modal-header {
+  .trust-plus-modal-header {
     padding: 2px 16px;
     background-color: $primary;
     color: white;
@@ -37,7 +37,7 @@
 
   }
 
-  .toto-modal-body {
+  .trust-plus-modal-body {
     display: flex;
     justify-content: center;
     padding: 50px;
@@ -49,7 +49,7 @@
 
   }
 
-  .toto-modal-footer {
+  .trust-plus-modal-footer {
     padding: 2px 16px;
     background-color: $primary;
     color: white;
@@ -57,14 +57,14 @@
 
 }
 
-.toto-modal-close {
+.trust-plus-modal-close {
   color: #fff;
   font-size: 28px;
   font-weight: bold;
 }
 
-.toto-modal-close:hover,
-.toto-modal-close:focus {
+.trust-plus-modal-close:hover,
+.trust-plus-modal-close:focus {
   color: black;
   text-decoration: none;
   cursor: pointer;

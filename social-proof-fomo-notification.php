@@ -1,13 +1,13 @@
 <?php
 
 /**
- * Plugin Name: Toto
+ * Plugin Name: Trust Plus
  * Plugin URI:  https://princeboss.com
  * Description: Make WordPress plugin Quickly.
  * Version:     1.0.0
  * Author:      Prince
  * Author URI:  http://princeboss.com
- * Text Domain: toto
+ * Text Domain: trust_plus
  * Domain Path: /languages/
  */
 
@@ -19,13 +19,13 @@ defined( 'ABSPATH' ) || exit();
  *
  * @since 1.0.0
  */
-final class Toto {
+final class Trust_Plus {
 
 	public $version = '1.0.0';
 
 	public $min_php = '5.6.0';
 
-	public $name = 'Toto';
+	public $name = 'Trust Plus';
 
 	protected static $instance = null;
 
@@ -35,7 +35,7 @@ final class Toto {
 			$this->define_constants();
 			$this->includes();
 			$this->init_hooks();
-			do_action( 'toto_loaded' );
+			do_action( 'trust_plus_loaded' );
 		}
 
 	}
@@ -70,31 +70,31 @@ final class Toto {
 	}
 
 	public function define_constants() {
-		define( 'TOTO_VERSION', $this->version );
-		define( 'TOTO_FILE', __FILE__ );
-		define( 'TOTO_PATH', dirname( TOTO_FILE ) );
-		define( 'TOTO_INCLUDES', TOTO_PATH . '/includes' );
-		define( 'TOTO_URL', plugins_url( '', TOTO_FILE ) );
-		define( 'TOTO_ASSETS', TOTO_URL . '/assets' );
-		define( 'TOTO_TEMPLATES', TOTO_PATH . '/templates' );
+		define( 'TRUST_PLUS_VERSION', $this->version );
+		define( 'TRUST_PLUS_FILE', __FILE__ );
+		define( 'TRUST_PLUS_PATH', dirname( TRUST_PLUS_FILE ) );
+		define( 'TRUST_PLUS_INCLUDES', TRUST_PLUS_PATH . '/includes' );
+		define( 'TRUST_PLUS_URL', plugins_url( '', TRUST_PLUS_FILE ) );
+		define( 'TRUST_PLUS_ASSETS', TRUST_PLUS_URL . '/assets' );
+		define( 'TRUST_PLUS_TEMPLATES', TRUST_PLUS_PATH . '/templates' );
 	}
 
 	public function includes() {
 
 		/* core includes */
-		include_once TOTO_INCLUDES . '/class-install.php';
-		include_once TOTO_INCLUDES . '/class-hooks.php';
-		include_once TOTO_INCLUDES . '/class-cpt.php';
-		include_once TOTO_INCLUDES . '/class-shortcodes.php';
-		include_once TOTO_INCLUDES . '/class-enqueue.php';
-		include_once TOTO_INCLUDES . '/class-ajax.php';
-		include_once TOTO_INCLUDES . '/class-notifications.php';
-		include_once TOTO_INCLUDES . '/functions.php';
-		include_once TOTO_INCLUDES . '/prince-options/prince-options.php';
+		include_once TRUST_PLUS_INCLUDES . '/class-install.php';
+		include_once TRUST_PLUS_INCLUDES . '/class-hooks.php';
+		include_once TRUST_PLUS_INCLUDES . '/class-cpt.php';
+		include_once TRUST_PLUS_INCLUDES . '/class-shortcodes.php';
+		include_once TRUST_PLUS_INCLUDES . '/class-enqueue.php';
+		include_once TRUST_PLUS_INCLUDES . '/class-ajax.php';
+		include_once TRUST_PLUS_INCLUDES . '/class-notifications.php';
+		include_once TRUST_PLUS_INCLUDES . '/functions.php';
+		include_once TRUST_PLUS_INCLUDES . '/prince-options/prince-options.php';
 
 		/* admin includes */
 		if ( is_admin() ) {
-			include_once TOTO_INCLUDES . '/admin/class-admin.php';
+			include_once TRUST_PLUS_INCLUDES . '/admin/class-admin.php';
 		}
 
 	}
@@ -102,7 +102,7 @@ final class Toto {
 	public function init_hooks() {
 
 		/* Installation */
-		register_activation_hook( TOTO_FILE, [ 'Toto_Install', 'activate' ] );
+		register_activation_hook( TRUST_PLUS_FILE, [ 'Trust_Plus_Install', 'activate' ] );
 
 		/* Localize our plugin */
 		add_action( 'init', [ $this, 'localization_setup' ] );
@@ -132,8 +132,8 @@ final class Toto {
 
 }
 
-function toto() {
-	return Toto::instance();
+function trust_plus() {
+	return Trust_Plus::instance();
 }
 
-toto();
+trust_plus();

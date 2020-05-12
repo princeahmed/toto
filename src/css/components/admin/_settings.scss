@@ -34,11 +34,11 @@ $primary: #96c03d;
 
 /*Notification Modules*/
 
-.toto-modules {
+.trust-plus-modules {
   display: flex;
   flex-wrap: wrap;
 
-  .toto-module {
+  .trust-plus-module {
     width: calc(20% - 20px);
     position: relative;
     align-items: center;
@@ -78,16 +78,16 @@ $primary: #96c03d;
 
     //=== ITEM IS PRO ===
     &.module-is-pro {
-      .toto-module-badge {
+      .trust-plus-module-badge {
         background: linear-gradient(180deg, #F7369E, #3023AE);
         padding: 13px 9.65px;
       }
 
-      .toto-module-title{
+      .trust-plus-module-title{
         color: #8D8F9C;
       }
 
-      .toto-module-icon{
+      .trust-plus-module-icon{
         color: #8D8F9C;
       }
 
@@ -107,7 +107,7 @@ $primary: #96c03d;
 /**
 * Switch Toggle
 */
-.toto-switcher input[type="checkbox"] {
+.trust-plus-switcher input[type="checkbox"] {
   display: none;
 
   &:checked ~ div {
@@ -153,12 +153,12 @@ $primary: #96c03d;
 
 }
 
-.toto-switcher div,
-.toto-switcher label {
+.trust-plus-switcher div,
+.trust-plus-switcher label {
   border-radius: 50px;
 }
 
-.toto-switcher div {
+.trust-plus-switcher div {
   height: 30px;
   width: 50px;
   background: rgba(43, 43, 43, 1);
@@ -171,7 +171,7 @@ $primary: #96c03d;
   transition: all .2s ease;
 }
 
-.toto-switcher label {
+.trust-plus-switcher label {
   height: 20px;
   width: 20px;
   background: rgba(255, 255, 255, 1);
