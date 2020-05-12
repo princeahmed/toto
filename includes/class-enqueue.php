@@ -69,7 +69,7 @@ class Trust_Plus_Enqueue {
 		/* Create localized JS array */
 		$localized_array = [
 			'_wpnonce'       => wp_create_nonce(),
-			'site_urL'       => site_url(),
+			'site_url'       => site_url(),
 			'trust_plus_url' => plugins_url( '', TRUST_PLUS_FILE ),
 			'i18n'           => [
 				'disabled'         => __( 'Disabled', 'social-proof-fomo-notification' ),

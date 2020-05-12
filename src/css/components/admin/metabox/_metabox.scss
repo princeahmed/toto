@@ -76,11 +76,11 @@ $primary: #96c03d;
 
 }
 
-.trust-plus-next-prev{
+.trust-plus-next-prev {
   display: flex;
   justify-content: space-between;
 
-  a{
+  a {
     background: $primary;
     color: #fff;
     text-decoration: none;
@@ -90,10 +90,31 @@ $primary: #96c03d;
     display: flex;
     align-items: center;
 
-    svg{
+    svg {
       margin: 0 5px;
     }
 
   }
 
+}
+
+
+body.post-type-trust_plus {
+  #submitdiv {
+
+    & > .ui-sortable-handle {
+      background: #96C03D;
+      color: #fff;
+      margin-top: -1px;
+    }
+
+    #publish {
+      background: #96C03D;
+      border-color: #ddd;
+    }
+
+    #visibility, .edit-timestamp {
+      display: none;
+    }
+  }
 }

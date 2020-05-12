@@ -32,6 +32,7 @@
     .column-preview {
       float: none;
       display: flex;
+      align-items: center;
 
       .trust-plus-n-preview {
         background: #96C03D;
@@ -41,9 +42,20 @@
       }
 
     }
+
+    .column-status{
+      display: flex;
+      align-items: center;
+    }
+
   }
 }
 
 .swal2-content .trust-plus-wrapper {
   margin: 20px auto;
+}
+
+.trust-plus-ajax-loader {
+  display: none;
+  margin-right: 5px;
 }

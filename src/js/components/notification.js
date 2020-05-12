@@ -4,7 +4,7 @@ import Notification from "./class-notification";
     $.trustPlus = {
         init: () => {
 
-            $('.trustPlus').each((i, el) => {
+            $('.trust-plus').each((i, el) => {
                 const config = $(el).data('config');
 
                 let callbacks = {};

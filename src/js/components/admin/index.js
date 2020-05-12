@@ -1,11 +1,16 @@
 ;(function ($) {
     $(document).ready(function () {
 
+
         //Change notification status
-        $('.column-status .trust-plus-switcher').on('click', function () {
+        $('.column-status .trust-plus-switcher').on('click', function (e) {
+            e.preventDefault();
+            const ajaxLoader = $('.trust-plus-ajax-loader', $(this).parents('td'));
+            ajaxLoader.toggle();
+
             const input = $('input', $(this));
             const checked = input.is(':checked');
-            const status = checked ? 'draft' : 'publish'
+            const status = checked ? 'draft' : 'publish';
 
             wp.ajax.send('trust_plus_n_status', {
                 data: {
@@ -35,6 +40,10 @@
                     });
                 },
 
+                complete: () => {
+                    ajaxLoader.toggle();
+                },
+
                 error: error => console.log(error)
             })
 
@@ -43,6 +52,9 @@
         //Modal Preview open
         $('.trust-plus-n-preview').on('click', function (e) {
             e.preventDefault();
+
+            const ajaxLoader = $('.trust-plus-ajax-loader', $(this).parents('td'));
+            ajaxLoader.toggle();
 
             const postId = $(this).data('post_id');
 
@@ -63,6 +75,8 @@
                     });
 
                 },
+
+                complete: () => ajaxLoader.toggle(),
 
                 error: error => console.log(error)
             })

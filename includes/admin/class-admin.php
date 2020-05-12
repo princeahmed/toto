@@ -69,8 +69,10 @@ class Trust_Plus_Admin {
 	public function columns_data( $column, $post_id ) {
 
 		if ( 'preview' == $column ) { ?>
-            <a href="#" class="trust-plus-n-preview" data-post_id="<?php echo $post_id; ?>">
-                <i class="dashicons dashicons-visibility trust-plus-mr-5"></i> <?php __( 'Preview', 'social-proof-fomo-notification' ) ?>
+			<img class="trust-plus-ajax-loader" src="<?php echo site_url( 'wp-includes/images/wpspin.gif' ); ?>">
+
+			<a href="#" class="trust-plus-n-preview" data-post_id="<?php echo $post_id; ?>">
+                <i class="dashicons dashicons-visibility trust-plus-mr-5"></i> <?php _e( 'Preview', 'social-proof-fomo-notification' ) ?>
             </a>
 
 		<?php } elseif ( 'type' == $column ) {
@@ -82,10 +84,13 @@ class Trust_Plus_Admin {
 
 			$config = Trust_Plus_Notifications::get_config( $type );
 			?>
-            <span class="trust-plus-n-type"><i class="<?php echo $config['icon']; ?>"></i> <?php echo $config['name']; ?></span>
+
+			<span class="trust-plus-n-type"><i class="<?php echo $config['icon']; ?>"></i> <?php echo $config['name']; ?></span>
 
 		<?php } elseif ( 'status' == $column ) { ?>
-            <div class="trust-plus-switcher">
+			<img class="trust-plus-ajax-loader" src="<?php echo site_url( 'wp-includes/images/wpspin.gif' ); ?>">
+
+			<div class="trust-plus-switcher">
                 <input type="checkbox" class="trust_plus_n_status" id="notification-<?php echo $post_id; ?>" value="<?php echo $post_id; ?>"
 					<?php checked( 'publish', get_post_status( $post_id ) ); ?> />
 
