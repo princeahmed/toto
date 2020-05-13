@@ -34,11 +34,11 @@ $primary: #96c03d;
 
 /*Notification Modules*/
 
-.trust-plus-modules {
+.notification-plus-modules {
   display: flex;
   flex-wrap: wrap;
 
-  .trust-plus-module {
+  .notification-plus-module {
     width: calc(20% - 20px);
     position: relative;
     align-items: center;
@@ -78,16 +78,16 @@ $primary: #96c03d;
 
     //=== ITEM IS PRO ===
     &.module-is-pro {
-      .trust-plus-module-badge {
+      .notification-plus-module-badge {
         background: linear-gradient(180deg, #F7369E, #3023AE);
         padding: 13px 9.65px;
       }
 
-      .trust-plus-module-title{
+      .notification-plus-module-title{
         color: #8D8F9C;
       }
 
-      .trust-plus-module-icon{
+      .notification-plus-module-icon{
         color: #8D8F9C;
       }
 
@@ -107,7 +107,7 @@ $primary: #96c03d;
 /**
 * Switch Toggle
 */
-.trust-plus-switcher input[type="checkbox"] {
+.notification-plus-switcher input[type="checkbox"] {
   display: none;
 
   &:checked ~ div {
@@ -153,12 +153,12 @@ $primary: #96c03d;
 
 }
 
-.trust-plus-switcher div,
-.trust-plus-switcher label {
+.notification-plus-switcher div,
+.notification-plus-switcher label {
   border-radius: 50px;
 }
 
-.trust-plus-switcher div {
+.notification-plus-switcher div {
   height: 30px;
   width: 50px;
   background: rgba(43, 43, 43, 1);
@@ -171,7 +171,7 @@ $primary: #96c03d;
   transition: all .2s ease;
 }
 
-.trust-plus-switcher label {
+.notification-plus-switcher label {
   height: 20px;
   width: 20px;
   background: rgba(255, 255, 255, 1);

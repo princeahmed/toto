@@ -2,13 +2,13 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class Trust_Plus_Shortcodes {
+class Notification_Plus_Shortcodes {
 
 	/**
-	 * Trust_Plus_Shortcodes constructor.
+	 * Notification_Plus_Shortcodes constructor.
 	 */
 	public function __construct() {
-		add_shortcode( 'social-proof-fomo-notification', [ $this, 'render_notification' ] );
+		add_shortcode( 'notification_plus', [ $this, 'render_notification' ] );
 	}
 
 	/**
@@ -26,7 +26,7 @@ class Trust_Plus_Shortcodes {
 		}
 
 		ob_start();
-		Trust_Plus_Notifications::get_view( $id, false, true );
+		Notification_Plus_Notifications::get_view( $id, true );
 
 		return ob_get_clean();
 
@@ -34,4 +34,4 @@ class Trust_Plus_Shortcodes {
 
 }
 
-new Trust_Plus_Shortcodes();
+new Notification_Plus_Shortcodes();

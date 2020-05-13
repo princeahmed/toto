@@ -3,16 +3,16 @@
 
 
         //Change notification status
-        $('.column-status .trust-plus-switcher').on('click', function (e) {
+        $('.column-status .notification-plus-switcher').on('click', function (e) {
             e.preventDefault();
-            const ajaxLoader = $('.trust-plus-ajax-loader', $(this).parents('td'));
+            const ajaxLoader = $('.notification-plus-ajax-loader', $(this).parents('td'));
             ajaxLoader.toggle();
 
             const input = $('input', $(this));
             const checked = input.is(':checked');
             const status = checked ? 'draft' : 'publish';
 
-            wp.ajax.send('trust_plus_n_status', {
+            wp.ajax.send('notification_plus_n_status', {
                 data: {
                     post_id: input.val(),
                     status,
@@ -21,7 +21,7 @@
                 success: () => {
 
                     if (!$('.post-state', $(this).parents('tr')).length) {
-                        $('.row-title', $(this).parents('tr')).after(` — <span class="post-state"><span style="color: #a00;">${trustPlus.i18n.disabled}</span></span>`)
+                        $('.row-title', $(this).parents('tr')).after(` — <span class="post-state"><span style="color: #a00;">${notificationPlus.i18n.disabled}</span></span>`)
                     }
 
                     if (checked) {
@@ -30,11 +30,11 @@
                         $('.post-state', $(this).parents('tr')).addClass('hidden');
                     }
 
-                    const text = checked ? trustPlus.i18n.disabled : trustPlus.i18n.enabled;
+                    const text = checked ? notificationPlus.i18n.disabled : notificationPlus.i18n.enabled;
 
                     Swal.fire({
                         icon: 'success',
-                        title: trustPlus.i18n.notification + ' ' + text,
+                        title: notificationPlus.i18n.notification + ' ' + text,
                         timer: 2000,
                         showConfirmButton: false,
                     });
@@ -50,15 +50,15 @@
         });
 
         //Modal Preview open
-        $('.trust-plus-n-preview').on('click', function (e) {
+        $('.notification-plus-n-preview').on('click', function (e) {
             e.preventDefault();
 
-            const ajaxLoader = $('.trust-plus-ajax-loader', $(this).parents('td'));
+            const ajaxLoader = $('.notification-plus-ajax-loader', $(this).parents('td'));
             ajaxLoader.toggle();
 
             const postId = $(this).data('post_id');
 
-            wp.ajax.send('trust_plus_preview', {
+            wp.ajax.send('notification_plus_preview', {
                 data: {
                     post_id: postId,
                 },
@@ -86,7 +86,7 @@
 
 
         //Copy to clipboard
-        $(document).on('click', '.trust-plus-n-shortcode .fa-copy', function (e) {
+        $(document).on('click', '.notification-plus-n-shortcode .fa-copy', function (e) {
             e.preventDefault();
 
             const text = $(this).next().text();
@@ -99,7 +99,7 @@
 
             Swal.fire({
                 icon: 'success',
-                title: trustPlus.i18n.copied,
+                title: notificationPlus.i18n.copied,
                 text,
                 timer: 2000,
                 showConfirmButton: false,

@@ -2,16 +2,16 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class Trust_Plus_Hooks {
+class Notification_Plus_Hooks {
 
 	/**
-	 * Trust_Plus_Hooks constructor.
+	 * Notification_Plus_Hooks constructor.
 	 */
 	public function __construct() {
 		add_action( 'wp_print_footer_scripts', [ $this, 'render_notifications' ] );
 
 		add_filter( 'display_post_states', [ $this, 'notification_state' ] );
-		add_filter( 'views_edit-trust_plus', [ $this, 'edit_quick_links' ] );
+		add_filter( 'views_edit-notification_plus', [ $this, 'edit_quick_links' ] );
 
 	}
 
@@ -25,11 +25,11 @@ class Trust_Plus_Hooks {
 	public function edit_quick_links( $views ) {
 
 		if ( ! empty( $views['draft'] ) ) {
-			$views['draft'] = str_replace( 'Drafts', __( 'Disabled', 'social-proof-fomo-notification' ), $views['draft'] );
+			$views['draft'] = str_replace( 'Drafts', __( 'Disabled', 'notification-plus' ), $views['draft'] );
 		}
 
 		if ( ! empty( $views['publish'] ) ) {
-			$views['publish'] = str_replace( 'Published', __( 'Enabled', 'social-proof-fomo-notification' ), $views['publish'] );
+			$views['publish'] = str_replace( 'Published', __( 'Enabled', 'notification-plus' ), $views['publish'] );
 		}
 
 		return $views;
@@ -44,7 +44,7 @@ class Trust_Plus_Hooks {
 	 */
 	public function notification_state( $states ) {
 
-		if ( 'trust_plus' == get_post_type() && ! empty( $states['draft'] ) ) {
+		if ( 'notification_plus' == get_post_type() && ! empty( $states['draft'] ) ) {
 			$states['draft'] = '<span style="color: #a00;">Disabled</span>';
 		}
 
@@ -55,9 +55,9 @@ class Trust_Plus_Hooks {
 	 * Display frontend notification
 	 */
 	public function render_notifications() {
-		Trust_Plus_Notifications::display_notifications();
+		Notification_Plus_Notifications::display_notifications();
 	}
 
 }
 
-new Trust_Plus_Hooks();
+new Notification_Plus_Hooks();

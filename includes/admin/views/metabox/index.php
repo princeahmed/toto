@@ -7,16 +7,16 @@ global $post_id;
 $current_type = get_post_meta( $post_id, '_notification_type', true );
 
 if ( ! $current_type ) {
-	$current_type = array_key_first(Trust_Plus_Notifications::get_config());
+	$current_type = array_key_first(Notification_Plus_Notifications::get_config());
 }
 
-include TRUST_PLUS_INCLUDES . '/admin/views/metabox/preview.php';
-include TRUST_PLUS_INCLUDES . '/admin/views/metabox/menu.php';
-include TRUST_PLUS_INCLUDES . '/admin/views/metabox/tabs.php';
+include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/preview.php';
+include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/menu.php';
+include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/tabs.php';
 
 ?>
-<div class="trust-plus-next-prev">
-    <a href="#" class="trust-plus-prev"><i class="fa fa-angle-left"></i> <?php _e( 'Previous', 'social-proof-fomo-notification' ); ?>
-    </a> <a href="#" class="trust-plus-next"><?php _e( 'Next', 'social-proof-fomo-notification' ); ?>
+<div class="notification-plus-next-prev">
+    <a href="#" class="notification-plus-prev"><i class="fa fa-angle-left"></i> <?php _e( 'Previous', 'notification-plus' ); ?>
+    </a> <a href="#" class="notification-plus-next"><?php _e( 'Next', 'notification-plus' ); ?>
         <i class="fa fa-angle-right"></i></a>
 </div>

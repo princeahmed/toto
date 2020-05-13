@@ -1,40 +1,40 @@
 /* Cookie Notification */
-.trust-plus-cookie-notification-wrapper {
+.notification-plus-cookie-notification-wrapper {
 }
 
 @media (min-width: 576px) {
-    .trust-plus-cookie-notification-wrapper {
+    .notification-plus-cookie-notification-wrapper {
         max-width: 400px !important;
     }
 }
 
-.trust-plus-cookie-notification-content {
+.notification-plus-cookie-notification-content {
     display: flex !important;
     flex-direction: column !important;
 }
 
-.trust-plus-cookie-notification-header {
+.notification-plus-cookie-notification-header {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
 }
 
-.trust-plus-cookie-notification-image {
+.notification-plus-cookie-notification-image {
     min-width: 50px !important;
     height: 50px !important;
     margin-right: 8px !important;
 }
 
-.trust-plus-cookie-notification-description {
+.notification-plus-cookie-notification-description {
     font-size: 14px !important;
     margin-bottom: 0 !important;
 }
 
-.trust-plus-cookie-notification-url {
+.notification-plus-cookie-notification-url {
     font-weight: bold !important;
 }
 
-.trust-plus-cookie-notification-button {
+.notification-plus-cookie-notification-button {
     border-radius: 4px !important;
     padding: 6px !important;
     text-align: center !important;
@@ -47,7 +47,7 @@
     transition: opacity .3s !important;
 }
 
-.trust-plus-cookie-notification-button:hover {
+.notification-plus-cookie-notification-button:hover {
     opacity: .9 !important;
     cursor: pointer !important;
 }

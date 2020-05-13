@@ -1,43 +1,43 @@
 /* Email Collector */
-.trust-plus-email-collector-wrapper {
+.notification-plus-email-collector-wrapper {
 }
 
 @media (min-width: 576px) {
-    .trust-plus-email-collector-wrapper {
+    .notification-plus-email-collector-wrapper {
         max-width: 390px !important;
     }
 }
 
-.trust-plus-email-collector-content {
+.notification-plus-email-collector-content {
     padding: 16px !important;
     display: flex !important;
     flex-direction: column !important;
 }
 
-.trust-plus-email-collector-title {
+.notification-plus-email-collector-title {
     font-weight: bold !important;
     font-size: 21px !important;
     margin-bottom: 18px !important;
 }
 
-.trust-plus-email-collector-description {
+.notification-plus-email-collector-description {
     font-size: 14px !important;
     margin-bottom: 18px !important;
 }
 
-.trust-plus-email-collector-form {
+.notification-plus-email-collector-form {
     display: flex !important;
     flex-direction: column !important;
     margin-bottom: 18px !important;
 }
 
-.trust-plus-email-collector-row {
+.notification-plus-email-collector-row {
     display: flex !important;
     flex-direction: row !important;
     margin-bottom: 15px !important;
 }
 
-.trust-plus-email-collector-row input {
+.notification-plus-email-collector-row input {
     border: 0 !important;
     background: white;
     padding: 6px 12px !important;
@@ -47,11 +47,11 @@
     border-bottom-left-radius: 3px !important;
     border-top-left-radius: 3px !important;
 }
-.trust-plus-email-collector-row input:focus {
+.notification-plus-email-collector-row input:focus {
     outline: 0
 }
 
-.trust-plus-email-collector-row button {
+.notification-plus-email-collector-row button {
     cursor: pointer !important;
     background: black;
     border: 0 !important;
@@ -63,6 +63,6 @@
     border-top-right-radius: 3px !important;
 }
 
-.trust-plus-email-collector-row button:focus {
+.notification-plus-email-collector-row button:focus {
     outline: 0
 }

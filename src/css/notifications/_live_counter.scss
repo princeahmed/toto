@@ -1,33 +1,33 @@
 /* Live Counter */
-.trust-plus-live-counter-wrapper {
+.notification-plus-live-counter-wrapper {
 }
 
 @media (min-width: 576px) {
-    .trust-plus-live-counter-wrapper {
+    .notification-plus-live-counter-wrapper {
         width: 280px !important;
     }
 }
 
-.trust-plus-live-counter-content {
+.notification-plus-live-counter-content {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
 }
 
-.trust-plus-live-counter-header {
+.notification-plus-live-counter-header {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
 }
 
-.trust-plus-live-counter-number {
+.notification-plus-live-counter-number {
     padding: 3px 32px !important;
     border-radius: 4px !important;
     font-weight: bolder !important;
     font-size: 21px !important;
 }
 
-.trust-plus-live-counter-description {
+.notification-plus-live-counter-description {
     font-size: 14px !important;
     margin-bottom: 16px !important;
 }

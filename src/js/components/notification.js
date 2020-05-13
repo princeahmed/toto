@@ -1,19 +1,19 @@
 import Notification from "./class-notification";
 
 ;(function ($) {
-    $.trustPlus = {
+    $.notificationPlus = {
         init: () => {
 
-            $('.trust-plus').each((i, el) => {
+            $('.notification-plus').each((i, el) => {
                 const config = $(el).data('config');
 
                 let callbacks = {};
-                if (config.notification_type in $.trustPlus.callbacks()) {
-                    callbacks = $.trustPlus.callbacks()[config.notification_type];
+                if (config.notification_type in $.notificationPlus.callbacks()) {
+                    callbacks = $.notificationPlus.callbacks()[config.notification_type];
 
                 }
 
-                new $.trustPlus.notification({
+                new $.notificationPlus.notification({
                     ...config
                 }).initiate(callbacks);
 
@@ -23,7 +23,7 @@ import Notification from "./class-notification";
         get_location: () => {
 
             /* Return the ip from session store if any */
-            const savedLocation = localStorage.getItem('trust_plus_user_location');
+            const savedLocation = localStorage.getItem('notification_plus_user_location');
             if (savedLocation && savedLocation !== '') {
                 return savedLocation;
             } else {
@@ -43,7 +43,7 @@ import Notification from "./class-notification";
                     });
 
                     /* Set it to the session storage to avoid multiple requests to this website */
-                    localStorage.setItem('trust_plus_user_location', user_location);
+                    localStorage.setItem('notification_plus_user_location', user_location);
 
                     return user_location;
 
@@ -57,7 +57,7 @@ import Notification from "./class-notification";
 
         send_statistics_data: params => {
 
-            wp.ajax.send('trust_plus_save_statistics', {
+            wp.ajax.send('notification_plus_save_statistics', {
                 data: {data: params},
 
                 error: (error) => console.log(error)
@@ -68,7 +68,7 @@ import Notification from "./class-notification";
 
         user: () => {
             return {
-                ...$.trustPlus.get_location(),
+                ...$.notificationPlus.get_location(),
                 /* Current accessed page */
                 current_page: encodeURIComponent(window.location.href)
             }
@@ -90,21 +90,21 @@ import Notification from "./class-notification";
                 displayed: main_element => {
 
                     /* On click the footer remove element */
-                    main_element.querySelector('.trust-plus-coupon-footer').addEventListener('click', event => {
+                    main_element.querySelector('.notification-plus-coupon-footer').addEventListener('click', event => {
 
-                        $.trustPlus.notification.remove_notification(main_element);
+                        $.notificationPlus.notification.remove_notification(main_element);
 
                         event.preventDefault();
 
                     });
 
                     /* On click event to the button */
-                    main_element.querySelector('.trust-plus-coupon-button').addEventListener('click', event => {
+                    main_element.querySelector('.notification-plus-coupon-button').addEventListener('click', event => {
 
                         let notification_id = main_element.getAttribute('data-notification-id');
 
-                        $.trustPlus.send_statistics_data({
-                            ...$.trustPlus.user(),
+                        $.notificationPlus.send_statistics_data({
+                            ...$.notificationPlus.user(),
                             notification_id: notification_id,
                             type: 'click',
                         });
@@ -118,7 +118,7 @@ import Notification from "./class-notification";
                 displayed: main_element => {
 
                     /* Form submission */
-                    main_element.querySelector('#trust-plus-email-collector-form').addEventListener('submit', event => {
+                    main_element.querySelector('#notification-plus-email-collector-form').addEventListener('submit', event => {
 
                         let email = event.currentTarget.querySelector('[name="email"]').value;
                         let notification_id = main_element.getAttribute('data-notification-id');
@@ -126,14 +126,14 @@ import Notification from "./class-notification";
                         if (email.trim() !== '') {
 
                             /* Data collection from the form */
-                            $.trustPlus.send_statistics_data({
-                                ...$.trustPlus.user(),
+                            $.notificationPlus.send_statistics_data({
+                                ...$.notificationPlus.user(),
                                 notification_id,
                                 type: 'submissions',
                                 data: email
                             });
 
-                            $.trustPlus.notification.remove_notification(main_element);
+                            $.notificationPlus.notification.remove_notification(main_element);
 
                             /* Make sure to let the browser know of the conversion so that it is not shown again */
                             localStorage.setItem(`notification_${notification_id}_converted`, true);
@@ -150,12 +150,12 @@ import Notification from "./class-notification";
                 displayed: main_element => {
 
                     /* On click event to the button */
-                    main_element.querySelector('.trust-plus-video-button').addEventListener('click', event => {
+                    main_element.querySelector('.notification-plus-video-button').addEventListener('click', event => {
 
                         let notification_id = main_element.getAttribute('data-notification-id');
 
-                        $.trustPlus.send_statistics_data({
-                            ...$.trustPlus.user(),
+                        $.notificationPlus.send_statistics_data({
+                            ...$.notificationPlus.user(),
                             notification_id,
                             type: 'click',
                         });
@@ -169,12 +169,12 @@ import Notification from "./class-notification";
                 displayed: main_element => {
 
                     /* On click event to the button */
-                    main_element.querySelector('.trust-plus-social-share-button').addEventListener('click', event => {
+                    main_element.querySelector('.notification-plus-social-share-button').addEventListener('click', event => {
 
                         let notification_id = main_element.getAttribute('data-notification-id');
 
-                        $.trustPlus.send_statistics_data({
-                            ...$.trustPlus.user(),
+                        $.notificationPlus.send_statistics_data({
+                            ...$.notificationPlus.user(),
                             notification_id,
                             type: 'click',
                         });
@@ -188,16 +188,16 @@ import Notification from "./class-notification";
                 displayed: main_element => {
 
                     /* On click event to the button */
-                    let emojis = main_element.querySelectorAll('.trust-plus-emoji-feedback-emoji');
+                    let emojis = main_element.querySelectorAll('.notification-plus-emoji-feedback-emoji');
 
                     for (let emoji of emojis) {
                         emoji.addEventListener('click', event => {
 
                             /* Trigger the animation */
-                            emoji.className += ' trust-plus-emoji-feedback-emoji-clicked';
+                            emoji.className += ' notification-plus-emoji-feedback-emoji-clicked';
 
                             /* Get all the other emojis and remove them */
-                            let other_emojis = main_element.querySelectorAll('.trust-plus-emoji-feedback-emoji:not(.trust-plus-emoji-feedback-emoji-clicked)');
+                            let other_emojis = main_element.querySelectorAll('.notification-plus-emoji-feedback-emoji:not(.notification-plus-emoji-feedback-emoji-clicked)');
                             for (let other_emoji of other_emojis) {
                                 other_emoji.remove();
                             }
@@ -205,8 +205,8 @@ import Notification from "./class-notification";
                             let notification_id = main_element.getAttribute('data-notification-id');
                             let feedback = emoji.getAttribute('data-type');
 
-                            $.trustPlus.send_statistics_data({
-                                ...$.trustPlus.user(),
+                            $.notificationPlus.send_statistics_data({
+                                ...$.notificationPlus.user(),
                                 notification_id,
                                 type: `feedback_emoji_${feedback}`,
                             });
@@ -215,7 +215,7 @@ import Notification from "./class-notification";
                             localStorage.setItem(`notification_${notification_id}_converted`, true);
 
                             setTimeout(() => {
-                                $.trustPlus.notification.remove_notification(main_element);
+                                $.notificationPlus.notification.remove_notification(main_element);
                             }, 950);
 
                         });
@@ -229,17 +229,17 @@ import Notification from "./class-notification";
                 displayed: main_element => {
 
                     /* On click the footer remove element */
-                    main_element.querySelector('.trust-plus-cookie-notification-button').addEventListener('click', event => {
+                    main_element.querySelector('.notification-plus-cookie-notification-button').addEventListener('click', event => {
 
                         const notification_id = main_element.getAttribute('data-notification-id');
 
-                        $.trustPlus.send_statistics_data({
-                            ...$.trustPlus.user(),
+                        $.notificationPlus.send_statistics_data({
+                            ...$.notificationPlus.user(),
                             notification_id,
                             type: 'click',
                         });
 
-                        $.trustPlus.notification.remove_notification(main_element);
+                        $.notificationPlus.notification.remove_notification(main_element);
 
                         /* Make sure to let the browser know of the conversion so that it is not shown again */
                         localStorage.setItem(`notification_${notification_id}_converted`, true);
@@ -255,16 +255,16 @@ import Notification from "./class-notification";
                 displayed: main_element => {
 
                     /* On click event to the button */
-                    let scores = main_element.querySelectorAll('.trust-plus-score-feedback-button');
+                    let scores = main_element.querySelectorAll('.notification-plus-score-feedback-button');
 
                     for (let score of scores) {
                         score.addEventListener('click', event => {
 
                             /* Trigger the animation */
-                            score.className += ' trust-plus-score-feedback-button-clicked';
+                            score.className += ' notification-plus-score-feedback-button-clicked';
 
                             /* Get all the other emojis and remove them */
-                            let other_scores = main_element.querySelectorAll('.trust-plus-score-feedback-button:not(.trust-plus-score-feedback-button-clicked)');
+                            let other_scores = main_element.querySelectorAll('.notification-plus-score-feedback-button:not(.notification-plus-score-feedback-button-clicked)');
                             for (let other_score of other_scores) {
                                 other_score.remove();
                             }
@@ -272,8 +272,8 @@ import Notification from "./class-notification";
                             const notification_id = main_element.getAttribute('data-notification-id');
                             const feedback = score.getAttribute('data-score');
 
-                            $.trustPlus.send_statistics_data({
-                                ...$.trustPlus.user(),
+                            $.notificationPlus.send_statistics_data({
+                                ...$.notificationPlus.user(),
                                 notification_id,
                                 type: `feedback_score_${feedback}`,
                             });
@@ -282,7 +282,7 @@ import Notification from "./class-notification";
                             localStorage.setItem(`notification_${notification_id}_converted`, true);
 
                             setTimeout(() => {
-                                $.trustPlus.notification.remove_notification(main_element);
+                                $.notificationPlus.notification.remove_notification(main_element);
                             }, 950);
 
                         });
@@ -296,7 +296,7 @@ import Notification from "./class-notification";
                 displayed: main_element => {
 
                     /* Form submission */
-                    main_element.querySelector('#trust-plus-request-collector-form').addEventListener('submit', event => {
+                    main_element.querySelector('#notification-plus-request-collector-form').addEventListener('submit', event => {
 
                         let input = event.currentTarget.querySelector('[name="input"]').value;
                         let notification_id = main_element.getAttribute('data-notification-id');
@@ -305,14 +305,14 @@ import Notification from "./class-notification";
                         if (input.trim() !== '') {
 
                             /* Data collection from the form */
-                            $.trustPlus.send_statistics_data({
-                                ...$.trustPlus.user(),
+                            $.notificationPlus.send_statistics_data({
+                                ...$.notificationPlus.user(),
                                 notification_id,
                                 type: 'submissions',
                                 data: input
                             });
 
-                            $.trustPlus.notification.remove_notification(main_element);
+                            $.notificationPlus.notification.remove_notification(main_element);
 
                             /* Make sure to let the browser know of the conversion so that it is not shown again */
                             localStorage.setItem(`notification_${notification_id}_converted`, true);
@@ -370,7 +370,7 @@ import Notification from "./class-notification";
                         if (days === 0 && hours === 0 && minutes === 0 && seconds === 0) {
                             clearInterval(countdown_interval);
 
-                            $.trustPlus.notification.remove_notification(main_element);
+                            $.notificationPlus.notification.remove_notification(main_element);
                         }
 
                         /* Set the new values */
@@ -383,7 +383,7 @@ import Notification from "./class-notification";
                     const countdown_interval = setInterval(countdown, 1000);
 
                     /* Form submission */
-                    main_element.querySelector('#trust-plus-countdown-collector-form').addEventListener('submit', event => {
+                    main_element.querySelector('#notification-plus-countdown-collector-form').addEventListener('submit', event => {
 
                         let input = event.currentTarget.querySelector('[name="input"]').value;
                         let notification_id = main_element.getAttribute('data-notification-id');
@@ -392,14 +392,14 @@ import Notification from "./class-notification";
                         if (input.trim() !== '') {
 
                             /* Data collection from the form */
-                            $.trustPlus.send_statistics_data({
-                                ...$.trustPlus.user(),
+                            $.notificationPlus.send_statistics_data({
+                                ...$.notificationPlus.user(),
                                 notification_id: notification_id,
                                 type: 'submissions',
                                 data: input
                             });
 
-                            $.trustPlus.notification.remove_notification(main_element);
+                            $.notificationPlus.notification.remove_notification(main_element);
 
                             /* Make sure to let the browser know of the conversion so that it is not shown again */
                             localStorage.setItem(`notification_${notification_id}_converted`, true);
@@ -416,5 +416,5 @@ import Notification from "./class-notification";
 
     };
 
-    $(document).ready($.trustPlus.init);
+    $(document).ready($.notificationPlus.init);
 })(jQuery);

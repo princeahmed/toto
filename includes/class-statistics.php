@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class Trust_Plus_Statistics {
+class Notification_Plus_Statistics {
 
 	public $nid;
 	public $type;
@@ -11,7 +11,7 @@ class Trust_Plus_Statistics {
 	public $query_args;
 
 	/**
-	 * Trust_Plus_Statistics constructor.
+	 * Notification_Plus_Statistics constructor.
 	 *
 	 * @param bool $nid
 	 * @param array $args
@@ -21,23 +21,23 @@ class Trust_Plus_Statistics {
 		$this->nid  = $nid ? $nid : $this->get_active_notifications()[0]->ID;
 		$this->type = get_post_meta( $this->nid, '_notification_type', true );
 
-		$this->statistics_types = Trust_Plus_Notifications::statistics_types( $this->type );
+		$this->statistics_types = Notification_Plus_Notifications::statistics_types( $this->type );
 
 		$this->type_title = [
-			'impression'             => __( 'Impressions', 'social-proof-fomo-notification' ),
-			'hover'                  => __( 'Mouse Hovers', 'social-proof-fomo-notification' ),
-			'click'                  => __( 'Clicks', 'social-proof-fomo-notification' ),
-			'submissions'            => __( 'Submissions', 'social-proof-fomo-notification' ),
-			'feedback_emoji_angry'   => __( 'Feedback Emoji Angry', 'social-proof-fomo-notification' ),
-			'feedback_emoji_sad'     => __( 'Feedback Emoji Sad', 'social-proof-fomo-notification' ),
-			'feedback_emoji_neutral' => __( 'Feedback Emoji Neutral', 'social-proof-fomo-notification' ),
-			'feedback_emoji_happy'   => __( 'Feedback Emoji Happy', 'social-proof-fomo-notification' ),
-			'feedback_emoji_excited' => __( 'Feedback Emoji Excited', 'social-proof-fomo-notification' ),
-			'feedback_score_1'       => __( 'Feedback Score 1', 'social-proof-fomo-notification' ),
-			'feedback_score_2'       => __( 'Feedback Score 2', 'social-proof-fomo-notification' ),
-			'feedback_score_3'       => __( 'Feedback Score 3', 'social-proof-fomo-notification' ),
-			'feedback_score_4'       => __( 'Feedback Score 4', 'social-proof-fomo-notification' ),
-			'feedback_score_5'       => __( 'Feedback Score 5', 'social-proof-fomo-notification' ),
+			'impression'             => __( 'Impressions', 'notification-plus' ),
+			'hover'                  => __( 'Mouse Hovers', 'notification-plus' ),
+			'click'                  => __( 'Clicks', 'notification-plus' ),
+			'submissions'            => __( 'Submissions', 'notification-plus' ),
+			'feedback_emoji_angry'   => __( 'Feedback Emoji Angry', 'notification-plus' ),
+			'feedback_emoji_sad'     => __( 'Feedback Emoji Sad', 'notification-plus' ),
+			'feedback_emoji_neutral' => __( 'Feedback Emoji Neutral', 'notification-plus' ),
+			'feedback_emoji_happy'   => __( 'Feedback Emoji Happy', 'notification-plus' ),
+			'feedback_emoji_excited' => __( 'Feedback Emoji Excited', 'notification-plus' ),
+			'feedback_score_1'       => __( 'Feedback Score 1', 'notification-plus' ),
+			'feedback_score_2'       => __( 'Feedback Score 2', 'notification-plus' ),
+			'feedback_score_3'       => __( 'Feedback Score 3', 'notification-plus' ),
+			'feedback_score_4'       => __( 'Feedback Score 4', 'notification-plus' ),
+			'feedback_score_5'       => __( 'Feedback Score 5', 'notification-plus' ),
 		];
 
 		$this->query_args = array_merge( [
@@ -55,7 +55,7 @@ class Trust_Plus_Statistics {
 	 */
 	public function get_active_notifications() {
 		$args = [
-			'post_type'   => 'trust_plus',
+			'post_type'   => 'notification_plus',
 			'numberposts' => - 1,
 			'post_status' => 'publish',
 			'order'       => 'ASC',
@@ -75,7 +75,7 @@ class Trust_Plus_Statistics {
 		/**
 		 * Get the statistics date from database
 		 */ global $wpdb;
-		$table = $wpdb->prefix . 'trust_plus_statistics';
+		$table = $wpdb->prefix . 'notification_plus_statistics';
 
 		$nid        = intval( $this->query_args['nid'] );
 		$start_date = esc_attr( $this->query_args['start_date'] );
@@ -176,7 +176,7 @@ class Trust_Plus_Statistics {
 	public function get_top_pages( $args = [] ) {
 		global $wpdb;
 
-		$table = $wpdb->prefix . 'trust_plus_statistics';
+		$table = $wpdb->prefix . 'notification_plus_statistics';
 
 		$nid        = intval( $this->query_args['nid'] );
 		$page       = ! empty( $this->query_args['page'] ) ? intval( $this->query_args['page'] ) : 1;
@@ -211,7 +211,7 @@ class Trust_Plus_Statistics {
 	 * Statistics filter bar
 	 */
 	public function filter_bar() {
-		include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics-filter-bar.php';
+		include NOTIFICATION_PLUS_INCLUDES . '/admin/views/pages/statistics-filter-bar.php';
 	}
 
 	/**
@@ -269,17 +269,17 @@ class Trust_Plus_Statistics {
 				<?php
 
 				foreach ( $this->statistics_types as $statistics_type ) {
-					include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics-summary.php';
+					include NOTIFICATION_PLUS_INCLUDES . '/admin/views/pages/statistics-summary.php';
 				}
 
 				//emoji feedback summary
 				if ( 'EMOJI_FEEDBACK' == $this->type ) {
-					include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics-summary-emoji.php';
+					include NOTIFICATION_PLUS_INCLUDES . '/admin/views/pages/statistics-summary-emoji.php';
 				}
 
 				//score feedback summary
 				if ( 'SCORE_FEEDBACK' == $this->type ) {
-					include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics-summary-score.php';
+					include NOTIFICATION_PLUS_INCLUDES . '/admin/views/pages/statistics-summary-score.php';
 				}
 
 				?>
@@ -292,7 +292,7 @@ class Trust_Plus_Statistics {
 	 * Render the statitics chart
 	 */
 	public function chart() { ?>
-        <div class="trust_plus_n_statistics_chart">
+        <div class="notification_plus_n_statistics_chart">
             <div class="chart-ph hidden">
                 <div class="ph-item">
 
@@ -443,8 +443,8 @@ class Trust_Plus_Statistics {
 
 
 				} else { ?>
-                    <div class="trust_plus_no_results">
-                        <h2><i class="fa fa-exclamation-triangle"></i> <?php _e( 'No Data Found!', 'social-proof-fomo-notification' ) ?></h2>
+                    <div class="notification_plus_no_results">
+                        <h2><i class="fa fa-exclamation-triangle"></i> <?php _e( 'No Data Found!', 'notification-plus' ) ?></h2>
                     </div>
 				<?php } ?>
             </div>
@@ -458,20 +458,20 @@ class Trust_Plus_Statistics {
 
 		echo '<div class="statistics-tables">';
 		if ( 'EMOJI_FEEDBACK' == $this->type ) {
-			include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics-top-emoji.php';
+			include NOTIFICATION_PLUS_INCLUDES . '/admin/views/pages/statistics-top-emoji.php';
 		}
 
 		// data table
 		if ( in_array( $this->type, [ 'EMAIL_COLLECTOR', 'REQUEST_COLLECTOR', 'COUNTDOWN_COLLECTOR', ] ) ) {
-			include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics-data.php';
+			include NOTIFICATION_PLUS_INCLUDES . '/admin/views/pages/statistics-data.php';
 		}
 
 		//score feedback table
 		if ( 'SCORE_FEEDBACK' == $this->type ) {
-			include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics-table-feedback-score.php';
+			include NOTIFICATION_PLUS_INCLUDES . '/admin/views/pages/statistics-table-feedback-score.php';
 		}
 
-		include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics-top-pages.php';
+		include NOTIFICATION_PLUS_INCLUDES . '/admin/views/pages/statistics-top-pages.php';
 		echo '</div>';
 	}
 
@@ -483,7 +483,7 @@ class Trust_Plus_Statistics {
 	public function get_top_emoji() {
 		global $wpdb;
 
-		$table = $wpdb->prefix . 'trust_plus_statistics';
+		$table = $wpdb->prefix . 'notification_plus_statistics';
 
 		$nid        = intval( $this->query_args['nid'] );
 		$start_date = esc_attr( $this->query_args['start_date'] );
@@ -521,7 +521,7 @@ class Trust_Plus_Statistics {
 	public function get_feedback_scores() {
 		global $wpdb;
 
-		$table = $wpdb->prefix . 'trust_plus_statistics';
+		$table = $wpdb->prefix . 'notification_plus_statistics';
 
 		$nid        = intval( $this->query_args['nid'] );
 		$start_date = esc_attr( $this->query_args['start_date'] );
@@ -557,7 +557,7 @@ class Trust_Plus_Statistics {
 	public function get_submitted_data() {
 		global $wpdb;
 
-		$table = $wpdb->prefix . 'trust_plus_statistics';
+		$table = $wpdb->prefix . 'notification_plus_statistics';
 
 		$nid        = intval( $this->query_args['nid'] );
 		$start_date = esc_attr( $this->query_args['start_date'] );

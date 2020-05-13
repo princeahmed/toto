@@ -2,32 +2,32 @@
 
 defined( 'ABSPATH' ) || exit;
 
-function trust_plus_locations() {
+function notification_plus_locations() {
 
 	return array(
-		'is_front_page' => __( 'Front Page', 'social-proof-fomo-notification' ),
-		'is_home'       => __( 'Blog Page', 'social-proof-fomo-notification' ),
-		'is_singular'   => __( 'All Posts, Pages and Custom Post Types', 'social-proof-fomo-notification' ),
-		'is_single'     => __( 'All Posts', 'social-proof-fomo-notification' ),
-		'is_page'       => __( 'All Pages', 'social-proof-fomo-notification' ),
-		'is_attachment' => __( 'All Attachments', 'social-proof-fomo-notification' ),
-		'is_search'     => __( 'Search Results', 'social-proof-fomo-notification' ),
-		'is_404'        => __( '404 Error Page', 'social-proof-fomo-notification' ),
-		'is_archive'    => __( 'All Archives', 'social-proof-fomo-notification' ),
-		'is_category'   => __( 'All Category Archives', 'social-proof-fomo-notification' ),
-		'is_tag'        => __( 'All Tag Archives', 'social-proof-fomo-notification' ),
-		'is_custom'     => __( 'Custom Post or Page IDs', 'social-proof-fomo-notification' ),
+		'is_front_page' => __( 'Front Page', 'notification-plus' ),
+		'is_home'       => __( 'Blog Page', 'notification-plus' ),
+		'is_singular'   => __( 'All Posts, Pages and Custom Post Types', 'notification-plus' ),
+		'is_single'     => __( 'All Posts', 'notification-plus' ),
+		'is_page'       => __( 'All Pages', 'notification-plus' ),
+		'is_attachment' => __( 'All Attachments', 'notification-plus' ),
+		'is_search'     => __( 'Search Results', 'notification-plus' ),
+		'is_404'        => __( '404 Error Page', 'notification-plus' ),
+		'is_archive'    => __( 'All Archives', 'notification-plus' ),
+		'is_category'   => __( 'All Category Archives', 'notification-plus' ),
+		'is_tag'        => __( 'All Tag Archives', 'notification-plus' ),
+		'is_custom'     => __( 'Custom Post or Page IDs', 'notification-plus' ),
 	);
 }
 
 
-function trust_plus_get_options( $key, $default = null ) {
-	$settings = get_option( 'trust_plus_options' );
+function notification_plus_get_options( $key, $default = null ) {
+	$settings = get_option( 'notification_plus_options' );
 
 	return ! empty( $settings[ $key ] ) ? $settings[ $key ] : $default;
 }
 
-function trust_plus_get_timeago( $date ) {
+function notification_plus_get_timeago( $date ) {
 
 	$estimate_time = time() - ( new \DateTime( $date ) )->getTimestamp();
 
@@ -58,20 +58,20 @@ function trust_plus_get_timeago( $date ) {
 	}
 }
 
-function trust_plus_branding( $notification ) {
+function notification_plus_branding( $notification ) {
 	if ( $notification->display_branding ) {
 		if ( isset( $notification->branding ) && ! empty( $notification->branding->name ) && ! empty( $notification->branding->url ) ) {
-			printf( '<a href="%s" class="trust-plus-site">%s</a>', $notification->branding->url, $notification->branding->name );
+			printf( '<a href="%s" class="notification-plus-site">%s</a>', $notification->branding->url, $notification->branding->name );
 		} else {
-			echo '<a href="#" class="trust-plus-site">🔥 by Toto</a>';
+			echo '<a href="#" class="notification-plus-site">🔥 by Toto</a>';
 		}
 	}
 }
 
-function trust_plus_agreement( $notification ) { ?>
-    <div class="trust-plus-agreement-checkbox <?php echo $notification->show_agreement ? '' : 'hidden'; ?>">
+function notification_plus_agreement( $notification ) { ?>
+    <div class="notification-plus-agreement-checkbox <?php echo $notification->show_agreement ? '' : 'hidden'; ?>">
         <input type="checkbox" name="agreement" <?php echo $notification->show_agreement ? 'required="required"' : ''; ?> />
-        <label class="trust-plus-agreement-checkbox-text" style="color: <?php echo $notification->description_color ?>">
+        <label class="notification-plus-agreement-checkbox-text" style="color: <?php echo $notification->description_color ?>">
             <a href="<?php echo $notification->agreement_url ?>">
 				<?php echo $notification->agreement_text ?>
             </a> </label>
@@ -79,7 +79,7 @@ function trust_plus_agreement( $notification ) { ?>
 	<?php
 }
 
-function trust_plus_close( $notification ) {
-	printf( '    <span class="trust-plus-close">%s</span>', $notification->display_close_button ? '&#10006;' : '' );
+function notification_plus_close( $notification ) {
+	printf( '    <span class="notification-plus-close">%s</span>', $notification->display_close_button ? '&#10006;' : '' );
 }
 

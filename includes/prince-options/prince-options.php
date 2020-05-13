@@ -382,7 +382,7 @@ if ( ! class_exists( 'Prince_Options_Loader' ) ) {
 				// Once is enough.
 				remove_filter( 'gettext', array( $this, 'prince_change_image_button' ) );
 
-				return apply_filters( 'prince_upload_text', __( 'Done', 'wp-radio' ) );
+				return apply_filters( 'prince_upload_text', __( 'Done', 'notification-plus' ) );
 
 			}
 

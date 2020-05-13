@@ -1,4 +1,4 @@
-/* trustPlus Notify Class */
+/* notificationPlus Notify Class */
 export default class Notification {
 
     /* Create and initiate the class with the proper parameters */
@@ -72,8 +72,8 @@ export default class Notification {
 
         /* Create the html element */
         let main_element = this.options.shortcode ?
-            document.querySelector(`[data-shortcode="trust_plus_${this.options.notification_id}"]`)
-            : document.getElementById(`trust_plus_${this.options.notification_id}`);
+            document.querySelector(`[data-shortcode="notification_plus_${this.options.notification_id}"]`)
+            : document.getElementById(`notification_plus_${this.options.notification_id}`);
 
 
         /* Add the close button icon if needed */
@@ -81,7 +81,7 @@ export default class Notification {
 
             /* Create a span for close element */
             // let close_button = document.createElement('span');
-            let close_button = main_element.querySelector('span[class="trust-plus-close"]');
+            let close_button = main_element.querySelector('span[class="notification-plus-close"]');
 
             /* Click to remove handler */
             close_button.addEventListener('click', event => {
@@ -99,7 +99,7 @@ export default class Notification {
         if (typeof this.options.url !== 'undefined' && this.options.url !== '') {
 
             /* Add the css class to make the toast clickable with a pointer */
-            main_element.className += ' trust-plus-clickable';
+            main_element.className += ' notification-plus-clickable';
 
             main_element.addEventListener('click', event => {
 
@@ -107,8 +107,8 @@ export default class Notification {
 
                 if (this.options.notification_id) {
                     /* Click statistics */
-                    jQuery.trustPlus.send_statistics_data({
-                        ...jQuery.trustPlus.user(),
+                    jQuery.notificationPlus.send_statistics_data({
+                        ...jQuery.notificationPlus.user(),
                         notification_id: this.options.notification_id,
                         type: 'click'
                     });
@@ -225,8 +225,8 @@ export default class Notification {
             if (this.options.notification_id) {
 
                 /* Impression notification */
-                jQuery.trustPlus.send_statistics_data({
-                    ...jQuery.trustPlus.user(),
+                jQuery.notificationPlus.send_statistics_data({
+                    ...jQuery.notificationPlus.user(),
                     notification_id: this.options.notification_id,
                     type: 'impression'
                 });
@@ -237,8 +237,8 @@ export default class Notification {
                     /* Make sure that we didnt already send this data on the user session */
                     if (!sessionStorage.getItem(`notification_hover_${this.options.notification_id}`)) {
 
-                        jQuery.trustPlus.send_statistics_data({
-                            ...jQuery.trustPlus.user(),
+                        jQuery.notificationPlus.send_statistics_data({
+                            ...jQuery.notificationPlus.user(),
                             notification_id: this.options.notification_id,
                             type: 'hover'
                         });
@@ -311,7 +311,7 @@ export default class Notification {
 
                 document.addEventListener('scroll', event => {
 
-                    if (!scroll_triggered && jQuery.trustPlus.get_scroll_percentage() > this.options.display_trigger_value) {
+                    if (!scroll_triggered && jQuery.notificationPlus.get_scroll_percentage() > this.options.display_trigger_value) {
 
                         display();
 
@@ -346,7 +346,7 @@ export default class Notification {
                     element.parentNode.removeChild(element);
                 }
                 /* Recalculate position of other notifications */
-                jQuery.trustPlus.notification.reposition();
+                jQuery.notificationPlus.notification.reposition();
 
             }, 400);
 
@@ -358,7 +358,7 @@ export default class Notification {
 
     /* Positioning function on the screen of all the notifications */
     static reposition() {
-        let toasts = document.querySelectorAll(`div[class*="trustPlus"][class*="on-"]`);
+        let toasts = document.querySelectorAll(`div[class*="notificationPlus"][class*="on-"]`);
 
         /* Get the height for later positioning usage in the middle of the screen */
         let height = window.innerHeight > 0 ? window.innerHeight : screen.height;

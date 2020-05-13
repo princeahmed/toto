@@ -13,8 +13,9 @@ Todo:
                          Conversions Counter (Repeater)
                          RANDOM_REVIEW (Repeater)
                          
-                     
-* Name the plugin to boost-social-proof-fomo-notification    
+               
+* add emoji plus instead of text +      
+* Name the plugin to notification-plus    
 * PRO - Random Review, Countdown
 * Fix: Statistics summary, count
 

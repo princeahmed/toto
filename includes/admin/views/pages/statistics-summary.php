@@ -6,7 +6,7 @@ $count = ! empty( $this->log_chart()[ $statistics_type . '_total' ] ) ? $this->l
 
 <div class="statistics-summary">
 	<div class="summary-icon">
-		<img src="<?php echo TRUST_PLUS_ASSETS . '/images/statistics/' . $statistics_type . '.png' ?>" alt="<?php echo $this->type_title[ $statistics_type ]; ?>">
+		<img src="<?php echo NOTIFICATION_PLUS_ASSETS . '/images/statistics/' . $statistics_type . '.png' ?>" alt="<?php echo $this->type_title[ $statistics_type ]; ?>">
 	</div>
 	<div class="summary-info">
 		<div class="summary-number"><?php echo $count; ?></div>

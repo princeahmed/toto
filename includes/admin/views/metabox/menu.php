@@ -25,15 +25,15 @@ $tabs = [
 
 ?>
 
-<ul class="trust-plus-meta-tabs">
+<ul class="notification-plus-meta-tabs">
 
-    <li class="trust-plus-tab-item">
-        <a class="trust-plus-tab-link active" data-target="notification_type"> <i class="fa fa-network-wired"></i> <?php _e('Type', 'social-proof-fomo-notification') ?> </a>
+    <li class="notification-plus-tab-item">
+        <a class="notification-plus-tab-link active" data-target="notification_type"> <i class="fa fa-network-wired"></i> <?php _e('Type', 'notification-plus') ?> </a>
     </li>
 
 	<?php foreach ( $tabs as $key => $tab ) { ?>
-        <li class="trust-plus-tab-item">
-            <a href="#" class="trust-plus-tab-link" data-target="<?php echo $key; ?>">
+        <li class="notification-plus-tab-item">
+            <a href="#" class="notification-plus-tab-link" data-target="<?php echo $key; ?>">
                 <i class="fa <?php echo $tab['icon']; ?>"></i>
 				<?php echo $tab['title']; ?>
             </a>

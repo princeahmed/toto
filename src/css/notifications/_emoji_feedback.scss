@@ -1,26 +1,26 @@
 /* Emoji Feedback */
-.trust-plus-emoji-feedback-wrapper {
+.notification-plus-emoji-feedback-wrapper {
 }
 
 @media (min-width: 576px) {
-    .trust-plus-emoji-feedback-wrapper {
+    .notification-plus-emoji-feedback-wrapper {
         max-width: 400px !important;
     }
 }
 
-.trust-plus-emoji-feedback-content {
+.notification-plus-emoji-feedback-content {
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
 }
 
-.trust-plus-emoji-feedback-title {
+.notification-plus-emoji-feedback-title {
     font-weight: bold !important;
     font-size: 16px !important;
     margin: 5px 10px 10px 10px !important;
 }
 
-.trust-plus-emoji-feedback-emojis {
+.notification-plus-emoji-feedback-emojis {
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
@@ -29,23 +29,23 @@
     width: 100% !important;
 }
 
-.trust-plus-emoji-feedback-emoji {
+.notification-plus-emoji-feedback-emoji {
     margin: 0 5px !important;
     transition: all .3s ease-in-out;
     width: 35px !important;
     height: 35px !important;
 }
 
-.trust-plus-emoji-feedback-emoji:hover {
+.notification-plus-emoji-feedback-emoji:hover {
     transform: scale(1.1);
     cursor: pointer;
 }
 
-.trust-plus-emoji-feedback-emoji-clicked {
-    animation: trust-plus-emoji-feedback-emoji-click 1s !important;
+.notification-plus-emoji-feedback-emoji-clicked {
+    animation: notification-plus-emoji-feedback-emoji-click 1s !important;
 }
 
-@keyframes trust-plus-emoji-feedback-emoji-click {
+@keyframes notification-plus-emoji-feedback-emoji-click {
     0% {
         transform: scale(1.1);
         opacity: 1;

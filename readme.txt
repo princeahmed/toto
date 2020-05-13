@@ -1,6 +1,9 @@
-=== WordPress Plugin Boilerplate ===
+=== Notification Plus - Social Proof, Fomo Notification for WordPress ===
 Contributors: princeahmed
-Tags: wordpress, plugin
+Tags: social proof, notification, fomo, woocommerce recent sells, notificationx,
+ woocommerce upsell, notification bar, wp fomo, wpfomify, email subscription notification,
+ review feedback notification, email subscription, countdown popup, popup
+
 Requires at least: 4.4
 Tested up to: 5.3
 Requires PHP: 5.6
@@ -12,21 +15,14 @@ WordPress Plugin Boilerplate for Developers.
 
 == Description ==
 
-Develop Your plugin by using the WordPress Plugin Boilerplate.
-
-https://youtu.be/AnJtcDCEWDk
-
-> [Demo](http://princeboss.com/) | [Get The Premium Version](http://princeboss.com/) | [Documentation](https://princeboss.com/)
+Engage users by displaying different type of notification such as: Social Proof,
+Fomo, WooCommercer Recent Sales & Upsells, Email Subscription Form, Countdown Timer,
+Review Feedback, Social Shares, Coupon, Video Popup and Many More Notification & Popup.
 
 
-== WordPress Boilerplate Plugin Features: ==
+== Notification Plus Plugin Features: ==
 * Dynamic Assets Management With Webpack.
 * Well Structured Codes
-
-
-== INSTALLATION AND USAGE: ==
-
-The installation is fairly simple and straightforward. If you have ever installed any WordPress plugin, then there is nothing new for you.
 
 
 == HOW DOES IT WORK / FUNCTIONALITY EXPLAINED: ==
@@ -35,24 +31,29 @@ It makes your works easy.
 
 == Compatibility ==
 
-You should at least have PHP version – 5.6 for the smooth operation of this state-of-the-art plugin. We tested this plugin thoroughly to make sure it operates seamlessly under every situation. We did not detect any problem or conflict during our test. Still, we are open to issues as we understand that WordPress is a vast ecosystem and anything can happen.
+You should at least have PHP version – 5.6 for the smooth operation of this state-of-the-art plugin.
+We tested this plugin thoroughly to make sure it operates seamlessly under every situation.
+We did not detect any problem or conflict during our test.
+Still, we are open to issues as we understand that WordPress is a vast ecosystem and anything can happen.
 
 == CONTRIBUTE ==
 
-This may have bugs and lack of features. If you want to contribute to this project, you are more than welcome. Please open an issue on [GITHUB Repository](https://github.com/princeahmed/wp-plugin-boilerplate)
+This may have bugs and lack of features. If you want to contribute to this project, you are more than welcome. Please open an issue on [GITHUB Repository](https://github.com/princeahmed/)
 
 
 == Frequently Asked Questions ==
 
-= Can I ask/suggest for a new feature? =
-Yes, of course. We do not create products for ourselves. You are always welcome to suggest new features and improvements.
+= Is coding skill needed to use Notification+? =
+Not at all! NotificationX has simple and super user-friendly setup wizard to help you configure the notification without any need of code intervention.
 
+= Can I use Notification Plus on non eCommerce websites? =
+Yes, Notification Plus can be used to display comment activity, promotional announcements and more which can be use on any website.
+
+= Is our website’s data legally safe with Notification+? =
+Yes. Your data is legally safe and we guarantee to not make use of your data under any circumstances. And your data stays at your site, so zero risk, its not like other SaaS based solution.
 
 == Screenshots ==
 
-1. My Awesome Plugin.
 
 
 == Changelog ==
-= 1.0.0 (27 December, 1999) =
-*   Initial release

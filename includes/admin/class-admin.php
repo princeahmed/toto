@@ -2,25 +2,25 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class Trust_Plus_Admin {
+class Notification_Plus_Admin {
 
 	public function __construct() {
 		$this->includes();
 
 		add_action( 'admin_menu', [ $this, 'admin_menu' ] );
-		add_action( 'save_post_trust_plus', [ $this, 'save_trust_plus_meta' ] );
+		add_action( 'save_post_notification_plus', [ $this, 'save_notification_plus_meta' ] );
 
-		add_filter( 'manage_trust_plus_posts_columns', [ $this, 'post_columns' ] );
-		add_filter( 'manage_trust_plus_posts_custom_column', [ $this, 'columns_data' ], 10, 2 );
+		add_filter( 'manage_notification_plus_posts_columns', [ $this, 'post_columns' ] );
+		add_filter( 'manage_notification_plus_posts_custom_column', [ $this, 'columns_data' ], 10, 2 );
 	}
 
 	/**
 	 * Include necessary admin files
 	 */
 	public function includes() {
-		include_once TRUST_PLUS_INCLUDES . '/admin/class-metabox.php';
-		include_once TRUST_PLUS_INCLUDES . '/admin/class-ajax.php';
-		include_once TRUST_PLUS_INCLUDES . '/admin/settings.php';
+		include_once NOTIFICATION_PLUS_INCLUDES . '/admin/class-metabox.php';
+		include_once NOTIFICATION_PLUS_INCLUDES . '/admin/class-ajax.php';
+		include_once NOTIFICATION_PLUS_INCLUDES . '/admin/settings.php';
 	}
 
 	/**
@@ -28,7 +28,7 @@ class Trust_Plus_Admin {
 	 */
 	public function admin_menu() {
 
-		add_submenu_page( 'edit.php?post_type=trust_plus', __( 'Notification Statistics', 'social-proof-fomo-notification' ), __( 'Statistics', 'social-proof-fomo-notification' ), 'manage_options', 'notification-statistics', [
+		add_submenu_page( 'edit.php?post_type=notification_plus', __( 'Notification Statistics', 'notification-plus' ), __( 'Statistics', 'notification-plus' ), 'manage_options', 'notification-statistics', [
 			$this,
 			'render_statistics_page'
 		] );
@@ -38,7 +38,7 @@ class Trust_Plus_Admin {
 	 * Render the admin statistics page
 	 */
 	public function render_statistics_page() {
-		include TRUST_PLUS_INCLUDES . '/admin/views/pages/statistics.php';
+		include NOTIFICATION_PLUS_INCLUDES . '/admin/views/pages/statistics.php';
 	}
 
 	/**
@@ -50,12 +50,12 @@ class Trust_Plus_Admin {
 	 */
 	public function post_columns( $columns ) {
 		unset( $columns['date'] );
-		$columns['preview']   = __( 'Preview', 'social-proof-fomo-notification' );
-		$columns['type']      = __( 'Type', 'social-proof-fomo-notification' );
-		$columns['status']    = __( 'Status', 'social-proof-fomo-notification' );
-		$columns['shortcode'] = __( 'Shortcode', 'social-proof-fomo-notification' );
+		$columns['preview']   = __( 'Preview', 'notification-plus' );
+		$columns['type']      = __( 'Type', 'notification-plus' );
+		$columns['status']    = __( 'Status', 'notification-plus' );
+		$columns['shortcode'] = __( 'Shortcode', 'notification-plus' );
 
-		$columns['date'] = __( 'Date', 'social-proof-fomo-notification' );
+		$columns['date'] = __( 'Date', 'notification-plus' );
 
 		return $columns;
 	}
@@ -69,10 +69,10 @@ class Trust_Plus_Admin {
 	public function columns_data( $column, $post_id ) {
 
 		if ( 'preview' == $column ) { ?>
-			<img class="trust-plus-ajax-loader" src="<?php echo site_url( 'wp-includes/images/wpspin.gif' ); ?>">
+			<img class="notification-plus-ajax-loader" src="<?php echo site_url( 'wp-includes/images/wpspin.gif' ); ?>">
 
-			<a href="#" class="trust-plus-n-preview" data-post_id="<?php echo $post_id; ?>">
-                <i class="dashicons dashicons-visibility trust-plus-mr-5"></i> <?php _e( 'Preview', 'social-proof-fomo-notification' ) ?>
+			<a href="#" class="notification-plus-n-preview" data-post_id="<?php echo $post_id; ?>">
+                <i class="dashicons dashicons-visibility notification-plus-mr-5"></i> <?php _e( 'Preview', 'notification-plus' ) ?>
             </a>
 
 		<?php } elseif ( 'type' == $column ) {
@@ -82,16 +82,16 @@ class Trust_Plus_Admin {
 				return;
 			}
 
-			$config = Trust_Plus_Notifications::get_config( $type );
+			$config = Notification_Plus_Notifications::get_config( $type );
 			?>
 
-			<span class="trust-plus-n-type"><i class="<?php echo $config['icon']; ?>"></i> <?php echo $config['name']; ?></span>
+			<span class="notification-plus-n-type"><i class="<?php echo $config['icon']; ?>"></i> <?php echo $config['name']; ?></span>
 
 		<?php } elseif ( 'status' == $column ) { ?>
-			<img class="trust-plus-ajax-loader" src="<?php echo site_url( 'wp-includes/images/wpspin.gif' ); ?>">
+			<img class="notification-plus-ajax-loader" src="<?php echo site_url( 'wp-includes/images/wpspin.gif' ); ?>">
 
-			<div class="trust-plus-switcher">
-                <input type="checkbox" class="trust_plus_n_status" id="notification-<?php echo $post_id; ?>" value="<?php echo $post_id; ?>"
+			<div class="notification-plus-switcher">
+                <input type="checkbox" class="notification_plus_n_status" id="notification-<?php echo $post_id; ?>" value="<?php echo $post_id; ?>"
 					<?php checked( 'publish', get_post_status( $post_id ) ); ?> />
 
                 <div>
@@ -100,11 +100,11 @@ class Trust_Plus_Admin {
             </div>
 
 		<?php } elseif ( 'shortcode' == $column ) { ?>
-            <span class="trust-plus-n-shortcode" title="<?php _e( 'Copy Shortcode', 'social-proof-fomo-notification' ) ?>"><i class="fa fa-copy"></i> <code>[trust_plus id=<?php echo $post_id; ?>]</code></span>
+            <span class="notification-plus-n-shortcode" title="<?php _e( 'Copy Shortcode', 'notification-plus' ) ?>"><i class="fa fa-copy"></i> <code>[notification_plus id=<?php echo $post_id; ?>]</code></span>
 		<?php }
 	}
 
-	public function save_trust_plus_meta( $post_id ) {
+	public function save_notification_plus_meta( $post_id ) {
 
 		if ( wp_doing_ajax() || wp_doing_cron() ) {
 			return;
@@ -147,4 +147,4 @@ class Trust_Plus_Admin {
 
 }
 
-new Trust_Plus_Admin();
+new Notification_Plus_Admin();

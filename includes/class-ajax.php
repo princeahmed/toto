@@ -2,11 +2,11 @@
 
 defined( 'ABSPATH' ) || exit();
 
-class Trust_Plus_Ajax {
+class Notification_Plus_Ajax {
 
 	public function __construct() {
-		add_action( 'wp_ajax_trust_plus_save_statistics', [ $this, 'save_statistics' ] );
-		add_action( 'wp_ajax_nopriv_trust_plus_save_statistics', [ $this, 'save_statistics' ] );
+		add_action( 'wp_ajax_notification_plus_save_statistics', [ $this, 'save_statistics' ] );
+		add_action( 'wp_ajax_nopriv_notification_plus_save_statistics', [ $this, 'save_statistics' ] );
 	}
 
 	public function save_statistics() {
@@ -24,7 +24,7 @@ class Trust_Plus_Ajax {
 
 
 		global $wpdb;
-		$table = $wpdb->prefix . 'trust_plus_statistics';
+		$table = $wpdb->prefix . 'notification_plus_statistics';
 
 		$sql = "INSERT INTO 
                         {$table} (`notification_id`,`unique_id`, `type`, `ip`, `url`,`data`, `created_at`, `updated_at`) 
@@ -43,4 +43,4 @@ class Trust_Plus_Ajax {
 
 }
 
-new Trust_Plus_Ajax();
+new Notification_Plus_Ajax();

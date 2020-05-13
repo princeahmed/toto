@@ -24,7 +24,7 @@ $primary: #96c03d;
   align-items: baseline;
 }
 
-.trust-plus-btn-delete {
+.notification-plus-btn-delete {
   margin-left: 15px;
   padding: 0 15px;
   cursor: pointer;
@@ -43,46 +43,46 @@ $primary: #96c03d;
   display: none !important;
 }
 
-.trust-plus-mr-5 {
+.notification-plus-mr-5 {
   margin-right: 5px;
 }
 
-.trust-plus-mt-auto {
+.notification-plus-mt-auto {
   margin-top: auto;
 }
-.trust-plus-ml-auto {
+.notification-plus-ml-auto {
   margin-left: auto;
 }
 
-.trust-plus-ml-5 {
+.notification-plus-ml-5 {
   margin-left: 5px;
 }
 
-.trust-plus-mr-10 {
+.notification-plus-mr-10 {
   margin-right: 10px !important;
 }
 
-.trust-plus-mt-20 {
+.notification-plus-mt-20 {
   margin-top: 20px !important;
 }
 
-.trust-plus-mr-20 {
+.notification-plus-mr-20 {
   margin-right: 20px !important;
 }
 
-.trust-plus-ml-10 {
+.notification-plus-ml-10 {
   margin-left: 10px !important;
 }
 
-.trust-plus-mb-20 {
+.notification-plus-mb-20 {
   margin-bottom: 20px !important;
 }
 
-.trust-plus-mb-50 {
+.notification-plus-mb-50 {
   margin-bottom: 50px !important;
 }
 
-.trust-plus-image-preview {
+.notification-plus-image-preview {
   width: max-content;
   border: 1px solid #ddd;
   border-radius: 5px;
@@ -90,13 +90,13 @@ $primary: #96c03d;
   max-width: 100px;
 }
 
-.trust-plus-break {
+.notification-plus-break {
   flex-basis: 100%;
   height: 0;
 }
 
 //Button
-.trust-plus-btn {
+.notification-plus-btn {
   border: none;
   padding: 0 30px;
   border-radius: 3px;
@@ -111,7 +111,7 @@ $primary: #96c03d;
 }
 
 //Panel
-.trust-plus-panel {
+.notification-plus-panel {
   background: #fff;
   padding: 10px 15px;
   border-radius: 5px;
@@ -144,11 +144,11 @@ $primary: #96c03d;
 }
 
 //Pagination
-.trust-plus-pagination-wrap {
+.notification-plus-pagination-wrap {
   text-align: center;
 }
 
-.trust-plus-pagination {
+.notification-plus-pagination {
   display: inline-flex;
 
   .page-item {

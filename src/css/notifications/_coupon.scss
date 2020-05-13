@@ -1,37 +1,37 @@
 /* Coupon */
-.trust-plus-coupon-wrapper {
+.notification-plus-coupon-wrapper {
 }
 
 @media (min-width: 576px) {
-    .trust-plus-coupon-wrapper {
+    .notification-plus-coupon-wrapper {
         max-width: 480px !important;
     }
 }
-.trust-plus-coupon-content {
+.notification-plus-coupon-content {
     padding: 8px !important;
     display: flex !important;
     flex-direction: row !important;
     align-items: center !important;
 }
 
-.trust-plus-coupon-title {
+.notification-plus-coupon-title {
     font-size: 18px !important;
     font-weight: bold !important;
     margin-bottom: 8px !important;
 }
 
-.trust-plus-coupon-description {
+.notification-plus-coupon-description {
     font-size: 16px !important;
     margin-bottom: 8px !important;
 }
 
-.trust-plus-coupon-image {
+.notification-plus-coupon-image {
     width: 170px !important;
     border-radius: 8px !important;
     margin-right: 16px !important;
 }
 
-.trust-plus-coupon-coupon-code {
+.notification-plus-coupon-coupon-code {
     background: white;
     border-radius: 8px !important;
     padding: 8px !important;
@@ -42,7 +42,7 @@
     margin: 18px 0 !important;
 }
 
-.trust-plus-coupon-button {
+.notification-plus-coupon-button {
     display: block !important;
     border-radius: 8px !important;
     padding: 8px !important;
@@ -52,13 +52,13 @@
     margin: 18px 0 !important;
 }
 
-.trust-plus-coupon-button:hover {
+.notification-plus-coupon-button:hover {
     color: initial;
     opacity: .9 !important;
     text-decoration: none !important;
 }
 
-.trust-plus-coupon-footer {
+.notification-plus-coupon-footer {
     font-size: 14px !important;
     text-decoration: underline !important;
 }

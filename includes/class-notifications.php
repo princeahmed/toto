@@ -2,7 +2,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-class Trust_Plus_Notifications {
+class Notification_Plus_Notifications {
 
 	/**
 	 * Get notification config
@@ -60,86 +60,86 @@ class Trust_Plus_Notifications {
 
 		$all = [
 			'INFORMATIONAL' => array_merge( [
-				"name" => __( 'Informational', 'social-proof-fomo-notification' ),
+				"name" => __( 'Informational', 'notification-plus' ),
 				"icon" => "fa fa-info-circle",
 
-				'title'       => ! empty( $settings->title ) ? $settings->title : __( 'Flash Sale! 🔥', 'social-proof-fomo-notification' ),
-				'description' => ! empty( $settings->description ) ? $settings->description : __( 'Limited sale until tonight, right now!', 'social-proof-fomo-notification' ),
+				'title'       => ! empty( $settings->title ) ? $settings->title : __( 'Flash Sale! 🔥', 'notification-plus' ),
+				'description' => ! empty( $settings->description ) ? $settings->description : __( 'Limited sale until tonight, right now!', 'notification-plus' ),
 				'image'       => ! empty( $settings->image ) ? $settings->image : 'https://img.icons8.com/nolan/2x/cutting-coupon.png',
 			], $default ),
 
 			'COUPON' => array_merge( [
-				"name" => __( 'Coupon', 'social-proof-fomo-notification' ),
+				"name" => __( 'Coupon', 'notification-plus' ),
 				"icon" => "fa fa-piggy-bank",
 
-				'title'       => ! empty( $settings->title ) ? $settings->title : __( '35% OFF 🔥!', 'social-proof-fomo-notification' ),
-				'description' => ! empty( $settings->description ) ? $settings->description : __( 'Limited summer sale coupon code!', 'social-proof-fomo-notification' ),
+				'title'       => ! empty( $settings->title ) ? $settings->title : __( '35% OFF 🔥!', 'notification-plus' ),
+				'description' => ! empty( $settings->description ) ? $settings->description : __( 'Limited summer sale coupon code!', 'notification-plus' ),
 				'image'       => ! empty( $settings->image ) ? $settings->image : 'https://img.icons8.com/nolan/2x/cutting-coupon.png',
-				'coupon_code' => ! empty( $settings->coupon_code ) ? $settings->coupon_code : __( 'COUPON20', 'social-proof-fomo-notification' ),
-				'button_text' => ! empty( $settings->button_text ) ? $settings->button_text : __( 'Get Coupon', 'social-proof-fomo-notification' ),
-				'footer_text' => ! empty( $settings->footer_text ) ? $settings->footer_text : __( 'No, I don\'t want to save money', 'social-proof-fomo-notification' ),
+				'coupon_code' => ! empty( $settings->coupon_code ) ? $settings->coupon_code : __( 'COUPON20', 'notification-plus' ),
+				'button_text' => ! empty( $settings->button_text ) ? $settings->button_text : __( 'Get Coupon', 'notification-plus' ),
+				'footer_text' => ! empty( $settings->footer_text ) ? $settings->footer_text : __( 'No, I don\'t want to save money', 'notification-plus' ),
 
 				'button_background_color' => ! empty( $settings->button_background_color ) ? $settings->button_background_color : '#000',
 				'button_color'            => ! empty( $settings->button_color ) ? $settings->button_color : '#fff',
 			], $default ),
 
 			'LIVE_COUNTER' => array_merge( [
-				"name" => __( 'Live Counter', 'social-proof-fomo-notification' ),
+				"name" => __( 'Live Counter', 'notification-plus' ),
 				"icon" => "fa fa-globe",
 
-				'description'   => ! empty( $settings->description ) ? $settings->description : __( 'Active visitors now.', 'social-proof-fomo-notification' ),
+				'description'   => ! empty( $settings->description ) ? $settings->description : __( 'Active visitors now.', 'notification-plus' ),
 				'last_activity' => ! empty( $settings->last_activity ) ? $settings->last_activity : 15,
 				"image"         => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/nolan/2x/cutting-coupon.png",
 				"number"        => ! empty( $settings->number ) ? $settings->number : "15",
 			], $default ),
 
 			'EMAIL_COLLECTOR' => array_merge( [
-				"name" => __( 'Email Collector', 'social-proof-fomo-notification' ),
+				"name" => __( 'Email Collector', 'notification-plus' ),
 				"icon" => "fa fa-envelope-open",
 
-				'title'             => ! empty( $settings->title ) ? $settings->title : __( 'Sign up 🔥', 'social-proof-fomo-notification' ),
-				'description'       => ! empty( $settings->description ) ? $settings->description : __( 'We do not send out spam emails & you can unsubscribe at any point.', 'social-proof-fomo-notification' ),
-				'email_placeholder' => ! empty( $settings->email_placeholder ) ? $settings->email_placeholder : __( 'Your valid email', 'social-proof-fomo-notification' ),
-				'button_text'       => ! empty( $settings->button_text ) ? $settings->button_text : __( 'Sign me up ✅', 'social-proof-fomo-notification' ),
+				'title'             => ! empty( $settings->title ) ? $settings->title : __( 'Sign up 🔥', 'notification-plus' ),
+				'description'       => ! empty( $settings->description ) ? $settings->description : __( 'We do not send out spam emails & you can unsubscribe at any point.', 'notification-plus' ),
+				'email_placeholder' => ! empty( $settings->email_placeholder ) ? $settings->email_placeholder : __( 'Your valid email', 'notification-plus' ),
+				'button_text'       => ! empty( $settings->button_text ) ? $settings->button_text : __( 'Sign me up ✅', 'notification-plus' ),
 			], $default ),
 
 			'LATEST_CONVERSION' => array_merge( [
-				"name" => __( 'Latest Conversion', 'social-proof-fomo-notification' ),
+				"name" => __( 'Latest Conversion', 'notification-plus' ),
 				"icon" => "fa fa-funnel-dollar",
 
-				'title'             => ! empty( $settings->title ) ? $settings->title : __( 'A cool person', 'social-proof-fomo-notification' ),
-				'description'       => ! empty( $settings->description ) ? $settings->description : __( 'Signed up for the newsletter.', 'social-proof-fomo-notification' ),
+				'title'             => ! empty( $settings->title ) ? $settings->title : __( 'A cool person', 'notification-plus' ),
+				'description'       => ! empty( $settings->description ) ? $settings->description : __( 'Signed up for the newsletter.', 'notification-plus' ),
 				'image'             => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/color/2x/webhook.png",
-				'time_ago'          => ! empty( $settings->time_ago ) ? $settings->time_ago : __( '10 mins ago', 'social-proof-fomo-notification' ),
+				'time_ago'          => ! empty( $settings->time_ago ) ? $settings->time_ago : __( '10 mins ago', 'notification-plus' ),
 				'conversions_count' => ! empty( $settings->conversions_count ) ? $settings->conversions_count : 1,
 			], $default ),
 
 			'CONVERSIONS_COUNTER' => array_merge( [
-				"name" => __( 'Conversions Counter', 'social-proof-fomo-notification' ),
+				"name" => __( 'Conversions Counter', 'notification-plus' ),
 				"icon" => "fa fa-comment-dollar",
 
-				'title'         => ! empty( $settings->title ) ? $settings->title : __( 'People bought the product', 'social-proof-fomo-notification' ),
+				'title'         => ! empty( $settings->title ) ? $settings->title : __( 'People bought the product', 'notification-plus' ),
 				'image'         => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/officel/2x/return-purchase.png",
 				'number'        => ! empty( $settings->number ) ? $settings->number : "5",
-				'time'          => ! empty( $settings->time ) ? $settings->time : __( 'In the last %s hours', 'social-proof-fomo-notification' ),
+				'time'          => ! empty( $settings->time ) ? $settings->time : __( 'In the last %s hours', 'notification-plus' ),
 				'last_activity' => ! empty( $settings->last_activity ) ? $settings->last_activity : 2,
 			], $default ),
 
 			'VIDEO' => array_merge( [
-				"name" => __( 'Video', 'social-proof-fomo-notification' ),
+				"name" => __( 'Video', 'notification-plus' ),
 				"icon" => "fa fa-video",
 
-				'title'       => ! empty( $settings->title ) ? $settings->title : __( 'Demo of the product 🔥', 'social-proof-fomo-notification' ),
+				'title'       => ! empty( $settings->title ) ? $settings->title : __( 'Demo of the product 🔥', 'notification-plus' ),
 				'video'       => ! empty( $settings->video ) ? $settings->video : "https://www.youtube.com/?v=zWZa05uaiNA",
-				'button_text' => ! empty( $settings->button_text ) ? $settings->button_text : __( 'Sign up 🙌', 'social-proof-fomo-notification' ),
+				'button_text' => ! empty( $settings->button_text ) ? $settings->button_text : __( 'Sign up 🙌', 'notification-plus' ),
 			], $default ),
 
 			'SOCIAL_SHARE' => array_merge( [
-				"name" => __( 'Social Share', 'social-proof-fomo-notification' ),
+				"name" => __( 'Social Share', 'notification-plus' ),
 				"icon" => "fa fa-share-alt",
 
-				'title'          => ! empty( $settings->title ) ? $settings->title : __( 'Tell your friends 💻', 'social-proof-fomo-notification' ),
-				'description'    => ! empty( $settings->description ) ? $settings->description : __( 'We appreciate all the shares to support us! Thank you!', 'social-proof-fomo-notification' ),
+				'title'          => ! empty( $settings->title ) ? $settings->title : __( 'Tell your friends 💻', 'notification-plus' ),
+				'description'    => ! empty( $settings->description ) ? $settings->description : __( 'We appreciate all the shares to support us! Thank you!', 'notification-plus' ),
 				'share_url'      => ! empty( $settings->share_url ) ? $settings->share_url : '',
 				'share_facebook' => isset( $settings->share_facebook ) ? $settings->share_facebook : true,
 				'share_twitter'  => isset( $settings->share_twitter ) ? $settings->share_twitter : true,
@@ -147,83 +147,83 @@ class Trust_Plus_Notifications {
 			], $default ),
 
 			'RANDOM_REVIEW' => array_merge( [
-				"name" => __( 'Random Review', 'social-proof-fomo-notification' ),
+				"name" => __( 'Random Review', 'notification-plus' ),
 				"icon" => "fa fa-random",
 
-				'title'       => ! empty( $settings->title ) ? $settings->title : __( 'John Doe', 'social-proof-fomo-notification' ),
-				'description' => ! empty( $settings->description ) ? $settings->description : __( 'SocialProof is a 5 star product! 🔥', 'social-proof-fomo-notification' ),
+				'title'       => ! empty( $settings->title ) ? $settings->title : __( 'John Doe', 'notification-plus' ),
+				'description' => ! empty( $settings->description ) ? $settings->description : __( 'SocialProof is a 5 star product! 🔥', 'notification-plus' ),
 				'image'       => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/color/2x/person-male.png",
 				'stars'       => ! empty( $settings->stars ) ? $settings->stars : 5,
 			], $default ),
 
 			'EMOJI_FEEDBACK' => array_merge( [
-				"name" => __( 'Emoji Feedback', 'social-proof-fomo-notification' ),
+				"name" => __( 'Emoji Feedback', 'notification-plus' ),
 				"icon" => "fa fa-smile-beam",
 
-				'title'                  => ! empty( $settings->title ) ? $settings->title : __( 'Do you like our website?', 'social-proof-fomo-notification' ),
+				'title'                  => ! empty( $settings->title ) ? $settings->title : __( 'Do you like our website?', 'notification-plus' ),
 				'show_angry'             => isset( $settings->show_angry ) ? $settings->show_angry : true,
 				'show_sad'               => isset( $settings->show_sad ) ? $settings->show_sad : true,
 				'show_neutral'           => isset( $settings->show_neutral ) ? $settings->show_neutral : true,
 				'show_happy'             => isset( $settings->show_happy ) ? $settings->show_happy : true,
 				'show_excited'           => isset( $settings->show_excited ) ? $settings->show_excited : true,
-				"feedback_emoji_angry"   => ! empty( $settings->feedback_emoji_angry ) ? $settings->feedback_emoji_angry : __( 'Angry', 'social-proof-fomo-notification' ),
-				"feedback_emoji_sad"     => ! empty( $settings->feedback_emoji_sad ) ? $settings->feedback_emoji_sad : __( 'Sad', 'social-proof-fomo-notification' ),
-				"feedback_emoji_neutral" => ! empty( $settings->feedback_emoji_neutral ) ? $settings->feedback_emoji_neutral : __( 'Neutral', 'social-proof-fomo-notification' ),
-				"feedback_emoji_happy"   => ! empty( $settings->feedback_emoji_happy ) ? $settings->feedback_emoji_happy : __( 'Happy', 'social-proof-fomo-notification' ),
-				"feedback_emoji_excited" => ! empty( $settings->feedback_emoji_excited ) ? $settings->feedback_emoji_excited : __( 'Excited', 'social-proof-fomo-notification' ),
+				"feedback_emoji_angry"   => ! empty( $settings->feedback_emoji_angry ) ? $settings->feedback_emoji_angry : __( 'Angry', 'notification-plus' ),
+				"feedback_emoji_sad"     => ! empty( $settings->feedback_emoji_sad ) ? $settings->feedback_emoji_sad : __( 'Sad', 'notification-plus' ),
+				"feedback_emoji_neutral" => ! empty( $settings->feedback_emoji_neutral ) ? $settings->feedback_emoji_neutral : __( 'Neutral', 'notification-plus' ),
+				"feedback_emoji_happy"   => ! empty( $settings->feedback_emoji_happy ) ? $settings->feedback_emoji_happy : __( 'Happy', 'notification-plus' ),
+				"feedback_emoji_excited" => ! empty( $settings->feedback_emoji_excited ) ? $settings->feedback_emoji_excited : __( 'Excited', 'notification-plus' ),
 			], $default ),
 
 			'COOKIE_NOTIFICATION' => array_merge( [
-				"name" => __( 'Cookie Notification', 'social-proof-fomo-notification' ),
+				"name" => __( 'Cookie Notification', 'notification-plus' ),
 				"icon" => "fa fa-cookie",
 
-				'description'   => ! empty( $settings->description ) ? $settings->description : __( 'This website uses cookies to ensure you get the best experience on our website.', 'social-proof-fomo-notification' ),
-				'button_text'   => ! empty( $settings->button_text ) ? $settings->button_text : __( 'Okay 🔥', 'social-proof-fomo-notification' ),
+				'description'   => ! empty( $settings->description ) ? $settings->description : __( 'This website uses cookies to ensure you get the best experience on our website.', 'notification-plus' ),
+				'button_text'   => ! empty( $settings->button_text ) ? $settings->button_text : __( 'Okay 🔥', 'notification-plus' ),
 				'link_url'      => ! empty( $settings->link_url ) ? $settings->link_url : "",
-				'link_url_text' => ! empty( $settings->link_url_text ) ? $settings->link_url_text : __( 'Learn More', 'social-proof-fomo-notification' ),
+				'link_url_text' => ! empty( $settings->link_url_text ) ? $settings->link_url_text : __( 'Learn More', 'notification-plus' ),
 				'image'         => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/plasticine/2x/cookie.png",
 			], $default ),
 
 			'SCORE_FEEDBACK' => array_merge( [
-				"name" => __( 'Score Feedback', 'social-proof-fomo-notification' ),
+				"name" => __( 'Score Feedback', 'notification-plus' ),
 				"icon" => "fa fa-sort-numeric-up",
 
-				'title'            => ! empty( $settings->title ) ? $settings->title : __( 'How\'d you like our website?', 'social-proof-fomo-notification' ),
-				'description'      => ! empty( $settings->description ) ? $settings->description : __( 'Rate from 1 to 5. 5 being excellent.', 'social-proof-fomo-notification' ),
-				"feedback_score_1" => ! empty( $settings->feedback_score_1 ) ? $settings->feedback_score_1 : __( '1', 'social-proof-fomo-notification' ),
-				"feedback_score_2" => ! empty( $settings->feedback_score_2 ) ? $settings->feedback_score_2 : __( '2', 'social-proof-fomo-notification' ),
-				"feedback_score_3" => ! empty( $settings->feedback_score_3 ) ? $settings->feedback_score_3 : __( '3', 'social-proof-fomo-notification' ),
-				"feedback_score_4" => ! empty( $settings->feedback_score_4 ) ? $settings->feedback_score_4 : __( '4', 'social-proof-fomo-notification' ),
-				"feedback_score_5" => ! empty( $settings->feedback_score_5 ) ? $settings->feedback_score_5 : __( '5', 'social-proof-fomo-notification' ),
+				'title'            => ! empty( $settings->title ) ? $settings->title : __( 'How\'d you like our website?', 'notification-plus' ),
+				'description'      => ! empty( $settings->description ) ? $settings->description : __( 'Rate from 1 to 5. 5 being excellent.', 'notification-plus' ),
+				"feedback_score_1" => ! empty( $settings->feedback_score_1 ) ? $settings->feedback_score_1 : __( '1', 'notification-plus' ),
+				"feedback_score_2" => ! empty( $settings->feedback_score_2 ) ? $settings->feedback_score_2 : __( '2', 'notification-plus' ),
+				"feedback_score_3" => ! empty( $settings->feedback_score_3 ) ? $settings->feedback_score_3 : __( '3', 'notification-plus' ),
+				"feedback_score_4" => ! empty( $settings->feedback_score_4 ) ? $settings->feedback_score_4 : __( '4', 'notification-plus' ),
+				"feedback_score_5" => ! empty( $settings->feedback_score_5 ) ? $settings->feedback_score_5 : __( '5', 'notification-plus' ),
 			], $default ),
 
 			'REQUEST_COLLECTOR' => array_merge( [
-				"name" => __( 'Request Collector', 'social-proof-fomo-notification' ),
+				"name" => __( 'Request Collector', 'notification-plus' ),
 				"icon" => "fa fa-user-plus",
 
-				'title'               => ! empty( $settings->title ) ? $settings->title : __( 'John', 'social-proof-fomo-notification' ),
-				'description'         => ! empty( $settings->description ) ? $settings->description : __( 'Support Team', 'social-proof-fomo-notification' ),
+				'title'               => ! empty( $settings->title ) ? $settings->title : __( 'John', 'notification-plus' ),
+				'description'         => ! empty( $settings->description ) ? $settings->description : __( 'Support Team', 'notification-plus' ),
 				'image'               => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/cotton/2x/online-support.png",
-				'content_title'       => ! empty( $settings->content_title ) ? $settings->content_title : __( 'Any questions?', 'social-proof-fomo-notification' ),
-				'content_description' => ! empty( $settings->content_description ) ? $settings->content_description : __( 'Let us know and we will get back to you!', 'social-proof-fomo-notification' ),
-				'input_placeholder'   => ! empty( $settings->input_placeholder ) ? $settings->input_placeholder : __( 'Valid Phone Number', 'social-proof-fomo-notification' ),
-				'button_text'         => ! empty( $settings->button_text ) ? $settings->button_text : __( 'Call me back ⚡️', 'social-proof-fomo-notification' ),
+				'content_title'       => ! empty( $settings->content_title ) ? $settings->content_title : __( 'Any questions?', 'notification-plus' ),
+				'content_description' => ! empty( $settings->content_description ) ? $settings->content_description : __( 'Let us know and we will get back to you!', 'notification-plus' ),
+				'input_placeholder'   => ! empty( $settings->input_placeholder ) ? $settings->input_placeholder : __( 'Valid Phone Number', 'notification-plus' ),
+				'button_text'         => ! empty( $settings->button_text ) ? $settings->button_text : __( 'Call me back ⚡️', 'notification-plus' ),
 			], $default ),
 
 			'COUNTDOWN_COLLECTOR' => array_merge( [
-				"name" => __( 'Countdown Collector', 'social-proof-fomo-notification' ),
+				"name" => __( 'Countdown Collector', 'notification-plus' ),
 				"icon" => "fa fa-clock",
 
-				'title'             => ! empty( $settings->title ) ? $settings->title : __( 'Building a website 💻', 'social-proof-fomo-notification' ),
-				'description'       => ! empty( $settings->description ) ? $settings->description : __( 'Free Webinar by us.', 'social-proof-fomo-notification' ),
-				'content_title'     => ! empty( $settings->content_title ) ? $settings->content_title : __( 'Hurry up! Registrations are closing soon.', 'social-proof-fomo-notification' ),
-				'input_placeholder' => ! empty( $settings->input_placeholder ) ? $settings->input_placeholder : __( 'Valid Email', 'social-proof-fomo-notification' ),
-				'button_text'       => ! empty( $settings->button_text ) ? $settings->button_text : __( 'Sign up ✅️', 'social-proof-fomo-notification' ),
+				'title'             => ! empty( $settings->title ) ? $settings->title : __( 'Building a website 💻', 'notification-plus' ),
+				'description'       => ! empty( $settings->description ) ? $settings->description : __( 'Free Webinar by us.', 'notification-plus' ),
+				'content_title'     => ! empty( $settings->content_title ) ? $settings->content_title : __( 'Hurry up! Registrations are closing soon.', 'notification-plus' ),
+				'input_placeholder' => ! empty( $settings->input_placeholder ) ? $settings->input_placeholder : __( 'Valid Email', 'notification-plus' ),
+				'button_text'       => ! empty( $settings->button_text ) ? $settings->button_text : __( 'Sign up ✅️', 'notification-plus' ),
 				'end_date'          => ! empty( $settings->end_date ) ? $settings->end_date : date( 'Y-m-d h:i A', strtotime( '+5 hours' ) ),
-				"days"              => ! empty( $settings->days ) ? $settings->days : __( 'days', 'social-proof-fomo-notification' ),
-				"hours"             => ! empty( $settings->hours ) ? $settings->hours : __( 'hours', 'social-proof-fomo-notification' ),
-				"minutes"           => ! empty( $settings->minutes ) ? $settings->minutes : __( 'minutes', 'social-proof-fomo-notification' ),
-				"seconds"           => ! empty( $settings->seconds ) ? $settings->seconds : __( 'seconds', 'social-proof-fomo-notification' ),
+				"days"              => ! empty( $settings->days ) ? $settings->days : __( 'days', 'notification-plus' ),
+				"hours"             => ! empty( $settings->hours ) ? $settings->hours : __( 'hours', 'notification-plus' ),
+				"minutes"           => ! empty( $settings->minutes ) ? $settings->minutes : __( 'minutes', 'notification-plus' ),
+				"seconds"           => ! empty( $settings->seconds ) ? $settings->seconds : __( 'seconds', 'notification-plus' ),
 			], $default )
 
 		];
@@ -256,7 +256,7 @@ class Trust_Plus_Notifications {
 			'notification_id'       => $post_id,
 			'notification_type'     => $type,
 			'enable_sound'          => $notification->enable_sound,
-			'notification_sound'    => TRUST_PLUS_ASSETS . '/sounds/' . $notification->notification_sound . '.mp3',
+			'notification_sound'    => NOTIFICATION_PLUS_ASSETS . '/sounds/' . $notification->notification_sound . '.mp3',
 			'sound_volume'          => $notification->sound_volume,
 			'should_show'           => true,
 		];
@@ -269,18 +269,18 @@ class Trust_Plus_Notifications {
 			'data-notification-id' => $post_id,
 		];
 
-		$classes = [ 'trust-plus' ];
+		$classes = [ 'notification-plus' ];
 
 		if ( $shortcode ) {
 			$classes[]              = 'shortcode';
 			$config['shortcode']    = true;
 			$config['position']     = null;
-			$attr['data-shortcode'] = "trust_plus_$post_id";
+			$attr['data-shortcode'] = "notification_plus_$post_id";
 		}
 
 		if ( ! $shortcode ) {
-			$classes[]             = "trust-plus-{$notification->display_position}";
-			$attr['id']            = "trust_plus_$post_id";
+			$classes[]             = "notification-plus-{$notification->display_position}";
+			$attr['id']            = "notification_plus_$post_id";
 			$attr['data-position'] = $notification->display_position;
 		}
 
@@ -298,7 +298,7 @@ class Trust_Plus_Notifications {
 
 			?>
         >
-			<?php include TRUST_PLUS_INCLUDES . '/notifications/views/' . strtolower( $type ) . '.php'; ?>
+			<?php include NOTIFICATION_PLUS_INCLUDES . '/notifications/views/' . strtolower( $type ) . '.php'; ?>
         </div>
 		<?php
 		echo ob_get_clean();
@@ -315,7 +315,7 @@ class Trust_Plus_Notifications {
 		$notification = (object) self::get_config( $type, $post_id );
 
 		ob_start();
-		include TRUST_PLUS_INCLUDES . '/notifications/views/' . strtolower( $type ) . '.php';
+		include NOTIFICATION_PLUS_INCLUDES . '/notifications/views/' . strtolower( $type ) . '.php';
 
 		echo preg_replace( [ '/<form/', '/<\/form>/', '/required=\"required\"/' ], [
 			'<div',
@@ -362,7 +362,7 @@ class Trust_Plus_Notifications {
 	public static function settings_fields( $type, $field = false, $post_id = false ) {
 		$notification = self::get_config( $type, $post_id );
 
-		$fields = require TRUST_PLUS_INCLUDES . '/notifications/fields.php';
+		$fields = require NOTIFICATION_PLUS_INCLUDES . '/notifications/fields.php';
 
 		return $field ? $fields->$field : $fields;
 	}
@@ -671,7 +671,7 @@ class Trust_Plus_Notifications {
 	 */
 	public static function display_notifications() {
 		$args = [
-			'post_type'   => 'trust_plus',
+			'post_type'   => 'notification_plus',
 			'post_status' => 'publish',
 			'numberposts' => - 1,
 		];
@@ -686,7 +686,7 @@ class Trust_Plus_Notifications {
 					continue;
 				}
 
-				Trust_Plus_Notifications::get_view( $post_id );
+				Notification_Plus_Notifications::get_view( $post_id );
 
 			}
 

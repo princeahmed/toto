@@ -10,13 +10,13 @@
         init: () => {
 
             //datepicker
-            $('.trust_plus_date_field').datepicker({
+            $('.notification_plus_date_field').datepicker({
                 dateFormat: "yy-mm-dd",
                 //maxDate: 0,
                 changeYear: true
             });
 
-            $(document).on('change', '#trust_plus_n_statistics_filter :input', app.getData);
+            $(document).on('change', '#notification_plus_n_statistics_filter :input', app.getData);
 
             app.initChart();
 
@@ -24,11 +24,11 @@
 
         getData: function () {
 
-            const p = $(this).parents('#trust_plus_n_statistics_filter');
+            const p = $(this).parents('#notification_plus_n_statistics_filter');
             const ph = $('.summary-ph-wrap, .chart-ph, .statistics-table tfoot');
 
             const summaryContent = $('.statistics-summary-wrap');
-            const chartContent = $('.trust_plus_n_statistics_chart');
+            const chartContent = $('.notification_plus_n_statistics_chart');
             const contentSelector = $('.summary-content, .chart-content, .statistics-table tbody');
 
             const nid = $('#notification_id', p).val();
@@ -45,7 +45,7 @@
             ph.removeClass('hidden');
             contentSelector.addClass('hidden');
 
-            wp.ajax.send('trust_plus_get_statistics', {
+            wp.ajax.send('notification_plus_get_statistics', {
                 data,
 
                 success: (res) => {

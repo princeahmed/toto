@@ -260,7 +260,7 @@ if ( ! class_exists( 'Prince_Options_MetaBox' ) ) {
 						$required_setting = array(
 							array(
 								'id'        => 'title',
-								'label'     => __( 'Title', 'wp-radio' ),
+								'label'     => __( 'Title', 'notification-plus' ),
 								'desc'      => '',
 								'std'       => '',
 								'type'      => 'text',

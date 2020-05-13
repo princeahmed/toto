@@ -1,8 +1,8 @@
 :root {
-  --trust-plus-spacing: 20px;
+  --notification-plus-spacing: 20px;
 }
 
-.trust-plus {
+.notification-plus {
   visibility: hidden;
   position: fixed;
   opacity: 0;
@@ -17,66 +17,66 @@
 
 }
 
-.trust-plus-clickable {
+.notification-plus-clickable {
   cursor: pointer !important;
 }
 
-.trust-plus * {
+.notification-plus * {
   margin: 0
 }
 
-.trust-plus.on {
+.notification-plus.on {
   visibility: visible !important;
   opacity: 1 !important;
 }
 
-.trust-plus.off {
+.notification-plus.off {
   opacity: 0 !important;
   visibility: visible !important;
 }
 
-.trust-plus-close {
+.notification-plus-close {
   opacity: .4 !important;
   position: absolute !important;
   top: 4px !important;
   right: 12px !important;
 }
 
-.trust-plus-close:hover {
+.notification-plus-close:hover {
   cursor: pointer !important;
 }
 
-.trust-plus-rounded {
+.notification-plus-rounded {
   border-radius: 8px !important;
 }
 
 
 /* Toasts positions */
-.trust-plus-top_left {
-  left: var(--trust-plus-spacing);
-  top: var(--trust-plus-spacing);
+.notification-plus-top_left {
+  left: var(--notification-plus-spacing);
+  top: var(--notification-plus-spacing);
 }
 
-.trust-plus-top_center {
+.notification-plus-top_center {
   margin: auto;
   left: 0;
   right: 0;
-  top: var(--trust-plus-spacing);
+  top: var(--notification-plus-spacing);
   width: max-content;
 }
 
-.trust-plus-top_right {
-  right: var(--trust-plus-spacing);
-  top: var(--trust-plus-spacing);
+.notification-plus-top_right {
+  right: var(--notification-plus-spacing);
+  top: var(--notification-plus-spacing);
 }
 
-.trust-plus-middle_left {
-  left: var(--trust-plus-spacing);
+.notification-plus-middle_left {
+  left: var(--notification-plus-spacing);
   margin: auto 0;
   top: calc(45%);
 }
 
-.trust-plus-middle_center {
+.notification-plus-middle_center {
   margin: auto;
   top: 0;
   left: 0;
@@ -84,33 +84,33 @@
   width: max-content;
 }
 
-.trust-plus-middle_right {
-  right: var(--trust-plus-spacing);
+.notification-plus-middle_right {
+  right: var(--notification-plus-spacing);
   margin: auto 0;
   top: calc(45%);
 }
 
-.trust-plus-bottom_left {
-  left: var(--trust-plus-spacing);
-  bottom: var(--trust-plus-spacing);
+.notification-plus-bottom_left {
+  left: var(--notification-plus-spacing);
+  bottom: var(--notification-plus-spacing);
 }
 
-.trust-plus-bottom_center {
+.notification-plus-bottom_center {
   margin: auto;
   left: 0;
   right: 0;
-  bottom: var(--trust-plus-spacing);
+  bottom: var(--notification-plus-spacing);
   width: max-content;
 }
 
-.trust-plus-bottom_right {
-  right: var(--trust-plus-spacing);
-  bottom: var(--trust-plus-spacing);
+.notification-plus-bottom_right {
+  right: var(--notification-plus-spacing);
+  bottom: var(--notification-plus-spacing);
 }
 
 
 /* Common used classes for notifications */
-.trust-plus-wrapper {
+.notification-plus-wrapper {
   padding: 10px !important;
   color: black;
   box-shadow: 0 3px 6px -1px rgba(0, 0, 0, .12), 0 10px 36px -4px rgba(77, 96, 232, .3) !important;
@@ -124,23 +124,23 @@
 
 }
 
-.trust-plus-wrapper-straight {
+.notification-plus-wrapper-straight {
   border-radius: 0px !important;
 }
 
-.trust-plus-wrapper-rounded {
+.notification-plus-wrapper-rounded {
   border-radius: 8px !important;
 }
 
-.trust-plus-wrapper-round {
+.notification-plus-wrapper-round {
   border-radius: 100px !important;
 }
 
-.trust-plus-site {
+.notification-plus-site {
   font-size: 10px !important;
 }
 
-.trust-plus-toast-pulse {
+.notification-plus-toast-pulse {
   margin: 18px !important;
   display: block !important;
   width: 25px !important;
@@ -148,14 +148,14 @@
   border-radius: 50% !important;
   background: #17bf21;
   box-shadow: 0 0 0 rgba(39, 204, 48, 0.4) !important;
-  animation: trust-plus-toast-pulse 2s infinite !important;
+  animation: notification-plus-toast-pulse 2s infinite !important;
 }
 
-.trust-plus-toast-pulse:hover {
+.notification-plus-toast-pulse:hover {
 
 }
 
-@keyframes trust-plus-toast-pulse {
+@keyframes notification-plus-toast-pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(39, 204, 48, 0.4);
   }
@@ -167,22 +167,22 @@
   }
 }
 
-.trust-plus-toast-star {
+.notification-plus-toast-star {
   font-size: 14px;
   color: #ffc100;
 }
 
-.trust-plus-agreement-checkbox {
+.notification-plus-agreement-checkbox {
   display: flex;
   align-items: center;
 }
 
-.trust-plus-agreement-checkbox-text {
+.notification-plus-agreement-checkbox-text {
   font-size: 12px;
   margin-left: 5px;
   margin-top: 8px;
 }
 
-#trust-plus-agreement {
+#notification-plus-agreement {
   margin-top: 8px;
 }

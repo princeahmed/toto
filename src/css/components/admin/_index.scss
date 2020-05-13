@@ -1,11 +1,11 @@
 .wp-list-table {
-  .type-trust_plus {
+  .type-notification_plus {
 
     & > td, & > th {
       vertical-align: middle;
     }
 
-    .trust-plus-n-type {
+    .notification-plus-n-type {
       font-size: 16px;
 
       svg {
@@ -14,7 +14,7 @@
       }
     }
 
-    .trust-plus-n-shortcode {
+    .notification-plus-n-shortcode {
       display: flex;
       align-items: center;
 
@@ -34,7 +34,7 @@
       display: flex;
       align-items: center;
 
-      .trust-plus-n-preview {
+      .notification-plus-n-preview {
         background: #96C03D;
         padding: 7px 10px;
         border-radius: 5px;
@@ -43,7 +43,7 @@
 
     }
 
-    .column-status{
+    .column-status {
       display: flex;
       align-items: center;
     }
@@ -51,11 +51,17 @@
   }
 }
 
-.swal2-content .trust-plus-wrapper {
+.swal2-content .notification-plus-wrapper {
   margin: 20px auto;
 }
 
-.trust-plus-ajax-loader {
+.notification-plus-ajax-loader {
   display: none;
   margin-right: 5px;
+}
+
+.menu-icon-notification_plus .wp-menu-image {
+  img {
+    width: 20px;
+  }
 }

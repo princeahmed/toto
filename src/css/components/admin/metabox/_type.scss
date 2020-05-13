@@ -1,9 +1,9 @@
-.trust-plus-notification-types {
+.notification-plus-notification-types {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 
-  .trust-plus-notification-type {
+  .notification-plus-notification-type {
     width: 49%;
     display: flex;
     border: 1px solid #ddd;
@@ -16,7 +16,7 @@
     box-sizing: border-box;
     cursor: pointer;
 
-    .trust-plus-notification-type-title {
+    .notification-plus-notification-type-title {
       margin-top: 0;
     }
 
@@ -33,7 +33,7 @@
       background: #96c03d;
       color: #fff;
 
-      .trust-plus-notification-type-title {
+      .notification-plus-notification-type-title {
         color: inherit;
       }
 
