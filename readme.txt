@@ -1,4 +1,4 @@
-=== Notification Plus - Social Proof, Fomo Notification for WordPress ===
+=== Notification Plus - Social Proof, Fomo Notifications for WordPress ===
 Contributors: princeahmed
 Tags: social proof, notification, fomo, woocommerce recent sells, notificationx,
  woocommerce upsell, notification bar, wp fomo, wpfomify, email subscription notification,
@@ -11,23 +11,31 @@ Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WordPress Plugin Boilerplate for Developers.
+
+Engage visitors by displaying different type of notification such as: Social Proof,
+Fomo, WooCommerce Recent Sales & Upsells, Email Subscription Form, Countdown Timer,
+Review Feedback, Social Shares, Coupon, Video Popup and Many More Notification & Popup.
 
 == Description ==
 
-Engage users by displaying different type of notification such as: Social Proof,
-Fomo, WooCommercer Recent Sales & Upsells, Email Subscription Form, Countdown Timer,
-Review Feedback, Social Shares, Coupon, Video Popup and Many More Notification & Popup.
+Let your visitors to know about your special offers, deals, announcement, etc. with a call to action.
+Notification+ brings the best notification popup solution for WordPress.
+You could turn on the end, start time, you will get detail statistics how your notification popups are working as well.
+Engage and Convert Your Users By Displaying 14+ Types Of Notifications of This Plugin.
 
-
-== Notification Plus Plugin Features: ==
-* Dynamic Assets Management With Webpack.
-* Well Structured Codes
+== NOTIFICATION PLUS PLUGIN FEATURES: ==
+* Social Proof Notification Popup
+* Popup on Exit-Intent, Time Delay and Scroll Percentage
+* Countdown Timer Popup
 
 
 == HOW DOES IT WORK / FUNCTIONALITY EXPLAINED: ==
 
-It makes your works easy.
+Notification+ helps you to grab the attention of your website visitors and gain their trust instantly by showing real-time sales and engagement notifications.
+It creates urgency among your visitors in order to purchase your products right now. No one wants to be left out, after all.
+
+For detecting the visitors's location a third party service has been used.
+Here is the [link](https://www.iplocate.io "ip-api.com") of the service and here are the [Terms and Policies](https://www.iplocate.io/legal "Terms and Policies") of the service.
 
 == Compatibility ==
 
@@ -46,8 +54,8 @@ This may have bugs and lack of features. If you want to contribute to this proje
 = Is coding skill needed to use Notification+? =
 Not at all! NotificationX has simple and super user-friendly setup wizard to help you configure the notification without any need of code intervention.
 
-= Can I use Notification Plus on non eCommerce websites? =
-Yes, Notification Plus can be used to display comment activity, promotional announcements and more which can be use on any website.
+= Can I use Notification+ on non eCommerce websites? =
+Yes, Notification+ can be used to display promotional announcements, email subscription form, countdown timer, review feedback and more which can be use on any website.
 
 = Is our website’s data legally safe with Notification+? =
 Yes. Your data is legally safe and we guarantee to not make use of your data under any circumstances. And your data stays at your site, so zero risk, its not like other SaaS based solution.
