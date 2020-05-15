@@ -1,6 +1,6 @@
 <?php defined( 'ABSPATH' ) || die() ?>
 
-<div class="notification-plus-wrapper notification-plus-wrapper-<?php echo $notification->border_radius ?> notification-plus-emoji-feedback-wrapper" style="background: <?php echo $notification->background_color ?>">
+<div class="notification-plus-wrapper notification-plus-wrapper-<?php echo $notification->border_radius ?> notification-plus-emoji-feedback-wrapper" style="background: <?php echo $notification->background_color ?>;max-width: <?php echo $notification->max_width; ?>">
     <div class="notification-plus-emoji-feedback-content">
         <p class="notification-plus-emoji-feedback-title" style="color: <?php echo $notification->title_color ?>"><?php echo $notification->title ?></p>
 

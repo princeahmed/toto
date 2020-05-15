@@ -30,11 +30,14 @@ class Notification_Plus_Notifications {
 			'display_position'         => ! empty( $settings->display_position ) ? $settings->display_position : 'bottom_left',
 			'display_close_button'     => isset( $settings->display_close_button ) ? $settings->display_close_button : true,
 			'display_branding'         => isset( $settings->display_branding ) ? $settings->display_branding : true,
-			'title_color'              => ! empty( $settings->title_color ) ? $settings->title_color : '#000',
-			'description_color'        => ! empty( $settings->description_color ) ? $settings->description_color : '#000',
-			'background_color'         => ! empty( $settings->background_color ) ? $settings->background_color : '#fff',
-			'border_radius'            => ! empty( $settings->border_radius ) ? $settings->border_radius : 'rounded',
-			'custom_post_page_ids'     => ! empty( $settings->custom_post_page_ids ) ? $settings->custom_post_page_ids : '',
+			'branding_name'            => ! empty( $settings->branding_name ) ? $settings->branding_name : '🔥 by Notification Plus',
+			'branding_url'             => ! empty( $settings->branding_url ) ? $settings->branding_url : '#',
+
+			'title_color'          => ! empty( $settings->title_color ) ? $settings->title_color : '#000',
+			'description_color'    => ! empty( $settings->description_color ) ? $settings->description_color : '#000',
+			'background_color'     => ! empty( $settings->background_color ) ? $settings->background_color : '#fff',
+			'border_radius'        => ! empty( $settings->border_radius ) ? $settings->border_radius : 'rounded',
+			'custom_post_page_ids' => ! empty( $settings->custom_post_page_ids ) ? $settings->custom_post_page_ids : '',
 
 			'button_url'               => ! empty( $settings->button_url ) ? $settings->button_url : '',
 			'display_minimum_activity' => ! empty( $settings->display_minimum_activity ) ? $settings->display_minimum_activity : 0,
@@ -56,6 +59,11 @@ class Notification_Plus_Notifications {
 
 			'button_background_color' => ! empty( $settings->button_background_color ) ? $settings->button_background_color : '#272727',
 			'button_color'            => ! empty( $settings->button_color ) ? $settings->button_color : '#fff',
+
+			'time_color'            => ! empty( $settings->time_color ) ? $settings->time_color : '#fff',
+			'time_background_color' => ! empty( $settings->time_background_color ) ? $settings->time_background_color : '#000',
+
+			'max_width' => ! empty( $settings->max_width ) ? $settings->max_width . 'px' : 'auto',
 		];
 
 		$all = [
@@ -389,7 +397,13 @@ class Notification_Plus_Notifications {
 		$fields = [
 			'INFORMATIONAL' => [
 				'content'   => [ 'title', 'description', 'image', 'url', ],
-				'customize' => [ 'title_color', 'description_color', 'background_color', 'border_radius', ],
+				'customize' => [
+					'title_color',
+					'description_color',
+					'background_color',
+					'border_radius',
+					//'max_width',
+				],
 			],
 
 			'COUPON' => [
@@ -409,6 +423,7 @@ class Notification_Plus_Notifications {
 					'button_background_color',
 					'button_color',
 					'border_radius',
+					//'max_width',
 				],
 			],
 
@@ -421,6 +436,7 @@ class Notification_Plus_Notifications {
 					'background_color',
 					'pulse_background_color',
 					'border_radius',
+					//'max_width',
 				],
 			],
 
@@ -439,6 +455,7 @@ class Notification_Plus_Notifications {
 					'button_background_color',
 					'button_color',
 					'border_radius',
+					//'max_width',
 				],
 			],
 
@@ -455,6 +472,7 @@ class Notification_Plus_Notifications {
 					'title_color',
 					'background_color',
 					'border_radius',
+					//'max_width',
 				],
 			],
 
@@ -467,6 +485,7 @@ class Notification_Plus_Notifications {
 					'button_background_color',
 					'button_color',
 					'border_radius',
+					//'max_width',
 				],
 			],
 
@@ -479,6 +498,7 @@ class Notification_Plus_Notifications {
 					'button_text',
 					'end_date',
 					'agreement',
+					//'max_width',
 				],
 
 				'customize' => [
@@ -491,78 +511,106 @@ class Notification_Plus_Notifications {
 					'button_background_color',
 					'button_color',
 					'border_radius',
+					//'max_width',
 				],
 			],
 
 			'EMOJI_FEEDBACK' => [
 				'content' => [ 'title', 'emoji' ],
 
-				'customize' => [ 'title_color', 'background_color', 'border_radius', ],
-			],
-
-			'LATEST_CONVERSION' => [
-				'content' => [ 'title', 'description', 'image', 'url', 'conversions_count', ],
-
-				'customize' => [ 'title_color', 'description_color', 'background_color', 'border_radius', ],
-			],
-
-			'RANDOM_REVIEW' => [
-				'content' => [ 'url' ],
-
-				'customize' => [ 'title_color', 'description_color', 'background_color', 'border_radius', ],
-			],
-
-			'REQUEST_COLLECTOR' => [
-				'content' => [
-					'title',
-					'description',
-					'image',
-					'content_title',
-					'content_description',
-					'input_placeholder',
-					'button_text',
-					'agreement',
-				],
-
 				'customize' => [
 					'title_color',
-					'description_color',
-					'content_title_color',
-					'content_description_color',
 					'background_color',
-					'button_background_color',
-					'button_color',
 					'border_radius',
+					//'max_width',
 				],
-			],
 
-			'SCORE_FEEDBACK' => [
-				'content' => [ 'title', 'description', ],
+				'LATEST_CONVERSION' => [
+					'content' => [ 'title', 'description', 'image', 'url', 'conversions_count', ],
 
-				'customize' => [
-					'title_color',
-					'description_color',
-					'background_color',
-					'button_background_color',
-					'button_color',
+					'customize' => [
+						'title_color',
+						'description_color',
+						'background_color',
+						'border_radius',
+						//'max_width',
+					],
 				],
-			],
 
-			'SOCIAL_SHARE' => [
-				'content' => [ 'title', 'description', 'share_url', ],
+				'RANDOM_REVIEW' => [
+					'content' => [ 'url' ],
 
-				'customize' => [ 'title_color', 'description_color', 'background_color', 'border_radius', ],
-			],
+					'customize' => [
+						'title_color',
+						'description_color',
+						'background_color',
+						'border_radius',
+						//'max_width',
+					],
+				],
 
-			'VIDEO' => [
-				'content' => [ 'title', 'video', 'button_url', 'button_text', ],
+				'REQUEST_COLLECTOR' => [
+					'content' => [
+						'title',
+						'description',
+						'image',
+						'content_title',
+						'content_description',
+						'input_placeholder',
+						'button_text',
+						'agreement',
+						//'max_width',
+					],
 
-				'customize' => [
-					'title_color',
-					'background_color',
-					'button_background_color',
-					'button_color',
-					'border_radius',
+					'customize' => [
+						'title_color',
+						'description_color',
+						'content_title_color',
+						'content_description_color',
+						'background_color',
+						'button_background_color',
+						'button_color',
+						'border_radius',
+						//'max_width',
+					],
+				],
+
+				'SCORE_FEEDBACK' => [
+					'content' => [ 'title', 'description', ],
+
+					'customize' => [
+						'title_color',
+						'description_color',
+						'background_color',
+						'button_background_color',
+						'button_color',
+						//'max_width',
+					],
+				],
+
+				'SOCIAL_SHARE' => [
+					'content' => [ 'title', 'description', 'share_url', ],
+
+					'customize' => [
+						'title_color',
+						'description_color',
+						'background_color',
+						'border_radius',
+						//'max_width',
+					],
+				],
+
+				'VIDEO' => [
+					'content' => [ 'title', 'video', 'button_url', 'button_text', ],
+
+					'customize' => [
+						'title_color',
+						'background_color',
+						'button_background_color',
+						'button_color',
+						'border_radius',
+						//'max_width',
+					]
 				],
 			],
 

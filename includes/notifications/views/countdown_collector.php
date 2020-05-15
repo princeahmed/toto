@@ -4,7 +4,8 @@
 <?php $date_ended = new \DateTime( $notification->end_date ) < new \DateTime(); ?>
 <?php $date = ( new \DateTime( $notification->end_date ) )->diff( new \DateTime() ); ?>
 
-<div class="notification-plus-wrapper notification-plus-wrapper-<?php echo $notification->border_radius ?> notification-plus-countdown-collector-wrapper" style="background: <?php echo $notification->background_color ?>">
+<div class="notification-plus-wrapper notification-plus-wrapper-<?php echo $notification->border_radius ?> notification-plus-countdown-collector-wrapper"
+     style="background: <?php echo $notification->background_color ?>;max-width: <?php echo $notification->max_width; ?>">
     <div class="notification-plus-countdown-collector-content">
         <p class="notification-plus-countdown-collector-title" style="color: <?php echo $notification->title_color ?>"><?php echo $notification->title ?></p>
         <p class="notification-plus-countdown-collector-description" style="color: <?php echo $notification->description_color ?>"><?php echo $notification->description ?></p>
@@ -15,22 +16,22 @@
             <input type="hidden" name="end_date" value="<?php echo ( new \DateTime( $notification->end_date ) )->getTimestamp() ?>"/>
 
             <div class="notification-plus-countdown-collector-timer-block">
-                <div class="notification-plus-countdown-collector-time" data-type="days"><?php echo $date_ended ? '0' : $date->format( '%a' ) ?></div>
+                <div class="notification-plus-countdown-collector-time" <?php printf('style="color:%1$s; background-color:%2$s"', $notification->time_color, $notification->time_background_color); ?> data-type="days"><?php echo $date_ended ? '0' : $date->format( '%a' ) ?></div>
                 <p class="notification-plus-countdown-collector-time-text"><?php _e( 'days', 'notification-plus' ) ?></p>
             </div>
 
             <div class="notification-plus-countdown-collector-timer-block">
-                <div class="notification-plus-countdown-collector-time" data-type="hours"><?php echo $date_ended ? '0' : $date->format( '%h' ) ?></div>
+                <div class="notification-plus-countdown-collector-time" <?php printf('style="color:%1$s; background-color:%2$s"', $notification->time_color, $notification->time_background_color); ?> data-type="hours"><?php echo $date_ended ? '0' : $date->format( '%h' ) ?></div>
                 <p class="notification-plus-countdown-collector-time-text"><?php _e( 'hours', 'notification-plus' ) ?></p>
             </div>
 
             <div class="notification-plus-countdown-collector-timer-block">
-                <div class="notification-plus-countdown-collector-time" data-type="minutes"><?php echo $date_ended ? '0' : $date->format( '%i' ) ?></div>
+                <div class="notification-plus-countdown-collector-time" <?php printf('style="color:%1$s; background-color:%2$s"', $notification->time_color, $notification->time_background_color); ?> data-type="minutes"><?php echo $date_ended ? '0' : $date->format( '%i' ) ?></div>
                 <p class="notification-plus-countdown-collector-time-text"><?php _e( 'minutes', 'notification-plus' ) ?></p>
             </div>
 
             <div class="notification-plus-countdown-collector-timer-block">
-                <div class="notification-plus-countdown-collector-time" data-type="seconds"><?php echo $date_ended ? '0' : $date->format( '%s' ) ?></div>
+                <div class="notification-plus-countdown-collector-time" <?php printf('style="color:%1$s; background-color:%2$s"', $notification->time_color, $notification->time_background_color); ?> data-type="seconds"><?php echo $date_ended ? '0' : $date->format( '%s' ) ?></div>
                 <p class="notification-plus-countdown-collector-time-text"><?php _e( 'seconds', 'notification-plus' ) ?></p>
             </div>
         </div>

@@ -14,7 +14,12 @@ Todo:
                          RANDOM_REVIEW (Repeater)
                          
                
-* add emoji plus instead of text +      
+* add emoji plus instead of text +   
+* add height/ width control on the customization tab
+* add theme and data source type tab to the notification edit screen
+* for each data source item there will be various option like for product woocommerce, edd
+for review freemius, trustpilot
+   
 * Name the plugin to notification-plus    
 * PRO - Random Review, Countdown
 * Fix: Statistics summary, count

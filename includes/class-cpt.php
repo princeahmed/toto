@@ -19,7 +19,7 @@ class Notification_Plus_CPT {
 	 */
 	function register_post_types() {
 		register_post_type( 'notification_plus', array(
-			'labels'        => $this::get_posts_labels( __( 'Notification+', 'notification-plus' ), __( 'Notification', 'notification-plus' ), __( 'Notifications', 'notification-plus' ) ),
+			'labels'        => $this::get_posts_labels( __( 'Notification Plus', 'notification-plus' ), __( 'Notification', 'notification-plus' ), __( 'Notifications', 'notification-plus' ) ),
 			'supports'      => [ 'title' ],
 			'show_ui'      => true,
 			'menu_position' => 5,

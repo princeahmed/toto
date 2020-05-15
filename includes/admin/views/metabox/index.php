@@ -7,7 +7,7 @@ global $post_id;
 $current_type = get_post_meta( $post_id, '_notification_type', true );
 
 if ( ! $current_type ) {
-	$current_type = array_key_first(Notification_Plus_Notifications::get_config());
+	$current_type = array_key_first( Notification_Plus_Notifications::get_config() );
 }
 
 include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/preview.php';

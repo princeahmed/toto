@@ -1,29 +1,30 @@
 <?php
-
 /**
- * Plugin Name: Prince Options
- * Plugin URI:  https://github.com/princeahmed/Settings/
- * Description: Options UI Builder for WordPress. A simple way to create & save Options and Meta Boxes for free or premium themes.
+ * Plugin Name: Prince Settings
+ * Plugin URI:  https://github.com/princeahmed/prince/
+ * Description: Settings UI Builder for WordPress. A simple way to create & save Settings and Meta Boxes for free or premium themes.
  * Version:     1.0.0
  * Author:      Prince Ahmed
  * Author URI:  http://princeahmed.com
  * License:     GPLv3
- * Text Domain: prince-options
+ * Text Domain: prince-text-doamin
  */
 
+//todo: change the text domain with the plugin's text domain
+
 /**
- * This is the Options loader class.
+ * This is the Settings loader class.
  *
  * @package   Prince
  * @author    Prince Ahmed <israilahmed5@gmail.com>
  * @copyright Copyright (c) 2019, Prince Ahmed
  */
 
+namespace Prince\Settings;
 
+if ( ! class_exists( 'Prince\Settings\Loader' ) ) {
 
-if ( ! class_exists( 'Prince_Options_Loader' ) ) {
-
-	class Prince_Options_Loader {
+	class Loader {
 
 		/**
 		 * PHP5 constructor method.
@@ -161,7 +162,7 @@ if ( ! class_exists( 'Prince_Options_Loader' ) ) {
 			add_action( 'prince_after_settings_save', 'prince_save_css' );
 
 			/* AJAX call to create a new contextual help */
-			add_action( 'wp_ajax_add_the_contextual_help', array( $this, 'add_the_contextual_help' ) );
+			//add_action( 'wp_ajax_add_the_contextual_help', array( $this, 'add_the_contextual_help' ) );
 
 			/* AJAX call to create a new choice */
 			add_action( 'wp_ajax_add_choice', array( $this, 'add_choice' ) );
@@ -398,6 +399,6 @@ if ( ! class_exists( 'Prince_Options_Loader' ) ) {
 	 * @since     1.0.0
 	 */
 
-	new Prince_Options_Loader();
+	$settings_loader = new Loader();
 
 }

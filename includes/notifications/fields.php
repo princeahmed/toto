@@ -14,6 +14,8 @@ $display_position         = ! empty( $notification['display_position'] ) ? $noti
 $display_duration         = ! empty( $notification['display_duration'] ) ? $notification['display_duration'] : '';
 $display_close_button     = ! empty( $notification['display_close_button'] ) ? $notification['display_close_button'] : '';
 $display_branding         = ! empty( $notification['display_branding'] ) ? $notification['display_branding'] : '';
+$branding_name            = ! empty( $notification['branding_name'] ) ? $notification['branding_name'] : '';
+$branding_url             = ! empty( $notification['branding_url'] ) ? $notification['branding_url'] : '';
 $trigger_on               = ! empty( $notification['trigger_on'] ) ? $notification['trigger_on'] : '';
 $trigger_locations        = ! empty( $notification['trigger_locations'] ) ? $notification['trigger_locations'] : '';
 $display_for              = ! empty( $notification['display_for'] ) ? $notification['display_for'] : '';
@@ -63,6 +65,7 @@ $time_background_color     = ! empty( $notification['time_background_color'] ) ?
 $end_date                  = ! empty( $notification['end_date'] ) ? $notification['end_date'] : '';
 $link_url                  = ! empty( $notification['link_url'] ) ? $notification['link_url'] : '';
 $link_url_text             = ! empty( $notification['link_url_text'] ) ? $notification['link_url_text'] : '';
+$max_width                 = ! empty( $notification['max_width'] ) ? $notification['max_width'] : '';
 
 
 $fields = new stdClass();
@@ -257,10 +260,21 @@ $fields->display_close_button = ob_get_clean();
 
 //Display Branding
 ob_start(); ?>
-    <div class="notification-plus-form-group notification-plus-switch-group">
-        <input type="checkbox" id="settings_display_branding" name="settings[display_branding]" <?php checked( true, $display_branding ) ?> />
+    <div class="notification-plus-form-group notification-plus-switch-group" data-target="#settings_branding_name,#settings_branding_url">
+        <input type="checkbox" class="handle-toggle" id="settings_display_branding" name="settings[display_branding]" <?php checked( true, $display_branding ) ?> />
         <label for="settings_display_branding"><?php _e( 'Display Branding', 'notification-plus' ) ?></label>
     </div>
+
+    <div class="notification-plus-form-group">
+        <label for="settings_branding_name"><?php _e( 'Branding Name', 'notification-plus' ) ?></label>
+        <input type="text" id="settings_branding_name" name="settings[branding_name]" value="<?php echo $branding_name; ?>">
+    </div>
+
+    <div class="notification-plus-form-group">
+        <label for="settings_branding_url"><?php _e( 'Branding URL', 'notification-plus' ) ?></label>
+        <input type="text" id="settings_branding_url" name="settings[branding_url]" value="<?php echo $branding_url; ?>">
+    </div>
+
 <?php
 $fields->display_branding = ob_get_clean();
 
@@ -644,7 +658,7 @@ $fields->emoji = ob_get_clean();
 
 ob_start(); ?>
     <div class="notification-plus-form-group">
-        <label for="settings_conversions_count"><?php _e('How many conversions to show?', 'notification-plus') ?></label>
+        <label for="settings_conversions_count"><?php _e( 'How many conversions to show?', 'notification-plus' ) ?></label>
         <input type="text" id="settings_conversions_count" name="settings[conversions_count]" value="<?php echo $conversions_count ?>"/>
     </div>
 <?php
@@ -652,7 +666,7 @@ $fields->conversions_count = ob_get_clean();
 
 ob_start(); ?>
     <div class="notification-plus-form-group">
-        <label for="settings_content_title"><?php _e('Content Title', 'notification-plus') ?></label>
+        <label for="settings_content_title"><?php _e( 'Content Title', 'notification-plus' ) ?></label>
         <input type="text" id="settings_content_title" name="settings[content_title]" value="<?php echo $content_title ?>"/>
     </div>
 <?php
@@ -660,7 +674,7 @@ $fields->content_title = ob_get_clean();
 
 ob_start(); ?>
     <div class="notification-plus-form-group">
-        <label for="settings_content_description"><?php _e('Content Description', 'notification-plus') ?></label>
+        <label for="settings_content_description"><?php _e( 'Content Description', 'notification-plus' ) ?></label>
         <input type="text" id="settings_content_description" name="settings[content_description]" value="<?php echo $content_description ?>"/>
     </div>
 <?php
@@ -668,7 +682,7 @@ $fields->content_description = ob_get_clean();
 
 ob_start(); ?>
     <div class="notification-plus-form-group">
-        <label for="settings_input_placeholder"><?php _e('Input Placeholder', 'notification-plus') ?></label>
+        <label for="settings_input_placeholder"><?php _e( 'Input Placeholder', 'notification-plus' ) ?></label>
         <input type="text" id="settings_input_placeholder" name="settings[input_placeholder]" value="<?php echo $input_placeholder ?>"/>
     </div>
 <?php
@@ -676,64 +690,78 @@ $fields->input_placeholder = ob_get_clean();
 
 ob_start(); ?>
     <div class="notification-plus-form-group">
-        <label for="settings_share_url"><?php _e('Share URL', 'notification-plus') ?></label>
+        <label for="settings_share_url"><?php _e( 'Share URL', 'notification-plus' ) ?></label>
         <input type="text" id="settings_share_url" name="settings[share_url]" value="<?php echo $share_url ?>"/>
-        <p class="description"><?php _e('Leave empty if you want the URL to be dynamic to the current page where the notification
-            is shown.', 'notification-plus') ?></p>
+        <p class="description"><?php _e( 'Leave empty if you want the URL to be dynamic to the current page where the notification
+            is shown.', 'notification-plus' ) ?></p>
     </div>
 
     <div class="notification-plus-form-group notification-plus-switch-group">
         <input type="checkbox" id="settings_share_facebook" name="settings[share_facebook]" <?php checked( true, $share_facebook ); ?> >
 
-        <label class="clickable" for="settings_share_facebook"><i class="fab fa-facebook"></i> <?php _e('Facebook Share', 'notification-plus') ?></label>
+        <label class="clickable" for="settings_share_facebook"><i class="fab fa-facebook"></i> <?php _e( 'Facebook Share', 'notification-plus' ) ?>
+        </label>
     </div>
 
     <div class="notification-plus-form-group notification-plus-switch-group">
         <input type="checkbox" id="settings_share_twitter" name="settings[share_twitter]" <?php checked( true, $share_twitter ); ?> >
 
-        <label class="clickable" for="settings_share_twitter"><i class="fab fa-twitter"></i> <?php _e('Twitter Share', 'notification-plus') ?></label>
+        <label class="clickable" for="settings_share_twitter"><i class="fab fa-twitter"></i> <?php _e( 'Twitter Share', 'notification-plus' ) ?>
+        </label>
     </div>
 
     <div class="notification-plus-form-group notification-plus-switch-group">
         <input type="checkbox" id="settings_share_linkedin" name="settings[share_linkedin]" <?php checked( true, $share_linkedin ); ?> >
 
-        <label class="clickable" for="settings_share_linkedin"><i class="fab fa-linkedin"></i> <?php _e('Linkedin Share', 'notification-plus') ?></label>
+        <label class="clickable" for="settings_share_linkedin"><i class="fab fa-linkedin"></i> <?php _e( 'Linkedin Share', 'notification-plus' ) ?>
+        </label>
     </div>
 <?php
 $fields->share_url = ob_get_clean();
 
 ob_start(); ?>
     <div class="notification-plus-form-group">
-        <label for="settings_video"><?php _e('YouTube Video Url', 'notification-plus') ?></label>
+        <label for="settings_video"><?php _e( 'YouTube Video Url', 'notification-plus' ) ?></label>
         <input type="text" id="settings_video" name="settings[video]" value="<?php echo $video ?>"/>
-        <p class="description"><?php _e('Ex: https://www.youtube.com/watch?v=3WxQgvuT6ZI', 'notification-plus') ?></p>
+        <p class="description"><?php _e( 'Ex: https://www.youtube.com/watch?v=3WxQgvuT6ZI', 'notification-plus' ) ?></p>
     </div>
 <?php
 $fields->video = ob_get_clean();
 
 ob_start(); ?>
     <div class="notification-plus-form-group">
-        <label for="settings_end_date"><?php _e('End Date', 'notification-plus') ?></label>
+        <label for="settings_end_date"><?php _e( 'End Date', 'notification-plus' ) ?></label>
         <input type="text" id="settings_end_date" class="notification-plus-date-time-picker" name="settings[end_date]" value="<?php echo $end_date ?>"/>
-        <p class="description"><?php _e('Ex: https://www.youtube.com/embed/3WxQgvuT6ZI', 'notification-plus') ?></p>
+        <p class="description"><?php _e( 'Ex: https://www.youtube.com/embed/3WxQgvuT6ZI', 'notification-plus' ) ?></p>
     </div>
 <?php
 $fields->end_date = ob_get_clean();
 
 ob_start(); ?>
     <div class="notification-plus-form-group">
-        <label for="settings_link_url"><?php _e('Link URL', 'notification-plus') ?></label>
-        <input type="text" id="settings_link_url" class="notification-plus-date-time-picker" name="settings[link_url]" value="<?php echo $link_url ?>"/>
+        <label for="settings_link_url"><?php _e( 'Link URL', 'notification-plus' ) ?></label>
+        <input type="text" id="settings_link_url" name="settings[link_url]" value="<?php echo $link_url ?>"/>
     </div>
 <?php
 $fields->link_url = ob_get_clean();
 
+// Link Url Text
 ob_start(); ?>
     <div class="notification-plus-form-group">
-        <label for="settings_link_url_text"><?php _e('Link URL Text', 'notification-plus') ?></label>
-        <input type="text" id="settings_link_url_text" class="notification-plus-date-time-picker" name="settings[link_url_text]" value="<?php echo $link_url_text ?>"/>
+        <label for="settings_link_url_text"><?php _e( 'Link URL Text', 'notification-plus' ) ?></label>
+        <input type="text" id="settings_link_url_text" name="settings[link_url_text]" value="<?php echo $link_url_text ?>"/>
     </div>
 <?php
 $fields->link_url_text = ob_get_clean();
+
+//Max Width
+ob_start(); ?>
+    <div class="notification-plus-form-group">
+        <label for="settings_max_width"><?php _e( 'Maximum Width (px)', 'notification-plus' ) ?></label>
+        <input type="number" min="0" id="settings_max_width" name="settings[max_width]" value="<?php echo $max_width; ?>"/>
+        <p class="description"><?php _e( 'Set the maximum notification width size in pixel. Keep blank to be set the width auto', 'notification-plus' ) ?></p>
+    </div>
+<?php
+$fields->max_width = ob_get_clean();
 
 return $fields;

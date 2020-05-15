@@ -1,19 +1,19 @@
 <?php
 /**
- * Prince Options.
+ * Prince Settings.
  *
  * @package Prince
  */
 
 
-if ( ! class_exists( 'Prince_Options' ) ) {
+if ( ! class_exists( 'Settings' ) ) {
 
 	/**
-	 * Prince Options class.
+	 * Prince Settings class.
 	 *
-	 * This class loads all the methods and helpers specific to a Options page.
+	 * This class loads all the methods and helpers specific to a Settings page.
 	 */
-	class Prince_Options {
+	class Settings {
 
 		/**
 		 * An array of options.
@@ -249,7 +249,7 @@ if ( ! class_exists( 'Prince_Options' ) ) {
 
 						echo '<ul id="prince-header">';
 
-						$link = '<a href="http://wordpress.org/plugins/wp-radio" target="_blank"> <img src="' . PRINCE_ASSETS_URL . '/images/Prince-Crown-Logo-White-50x44.png"> </a>';
+						$link = '<a href="http://wordpress.org/plugins/wp-radio" target="_blank"> <img src="' . PRINCE_ASSETS_URL . 'Prince-Crown-Logo-White-50x44.png"> </a>';
 						echo '<li id="prince-logo">' . wp_kses_post( apply_filters( 'prince_header_logo_link', $link, $page['id'] ) ) . '</li>';
 
 						echo '<li id="prince-version"><span>' . esc_html( apply_filters( 'prince_header_version_text', 'Prince', $page['id'] ) ) . '</span></li>';
@@ -262,10 +262,10 @@ if ( ! class_exists( 'Prince_Options' ) ) {
 
 						// Remove forms on the custom settings pages.
 						if ( $show_buttons ) {
-							echo '<form action="options.php" method="post" id="prince-options-api">';
+							echo '<form action="options.php" method="post" id="prince-settings-api">';
 							settings_fields( $option['id'] );
 						} else {
-							echo '<div id="prince-options-api">';
+							echo '<div id="prince-settings-api">';
 						}
 
 						// Sub Header.
@@ -1004,6 +1004,6 @@ if ( ! function_exists( 'prince_register_settings' ) ) {
 			return;
 		}
 
-		new Prince_Options( $args );
+		new Settings( $args );
 	}
 }

@@ -20,7 +20,6 @@ function notification_plus_locations() {
 	);
 }
 
-
 function notification_plus_get_options( $key, $default = null ) {
 	$settings = get_option( 'notification_plus_options' );
 
@@ -59,13 +58,7 @@ function notification_plus_get_timeago( $date ) {
 }
 
 function notification_plus_branding( $notification ) {
-	if ( $notification->display_branding ) {
-		if ( isset( $notification->branding ) && ! empty( $notification->branding->name ) && ! empty( $notification->branding->url ) ) {
-			printf( '<a href="%s" class="notification-plus-site">%s</a>', $notification->branding->url, $notification->branding->name );
-		} else {
-			echo '<a href="#" class="notification-plus-site">🔥 by Toto</a>';
-		}
-	}
+		printf( '<a href="%1$s" class="notification-plus-site %2$s">%3$s</a>', $notification->branding_url, $notification->display_branding ? '' : 'hidden', $notification->branding_name );
 }
 
 function notification_plus_agreement( $notification ) { ?>

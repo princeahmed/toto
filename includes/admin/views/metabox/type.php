@@ -20,4 +20,8 @@
 
         </div>
 	<?php } ?>
+
+    <div class="notification-plus-ajax-loader">
+        <img src="<?php echo site_url( 'wp-includes/images/wpspin-2x.gif' ); ?>">
+    </div>
 </div>

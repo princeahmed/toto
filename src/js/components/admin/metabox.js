@@ -56,6 +56,7 @@
 
             const type = $('.notification-plus-notification-type.active input').val().toLowerCase().replace('_', '-');
 
+            //colors handlers
             const colorHandlers = {
                 title_color: `notification-plus-${type}-title`,
                 description_color: `notification-plus-${type}-description`,
@@ -63,6 +64,7 @@
                 number_color: `notification-plus-${type}-number`,
                 content_title_color: `notification-plus-${type}-content-title`,
                 content_description_color: `notification-plus-${type}-content-description`,
+                time_color: `notification-plus-${type}-time`,
             };
 
             for (let [key, target] of Object.entries(colorHandlers)) {
@@ -83,6 +85,7 @@
                 button_background_color: `notification-plus-${type}-button`,
                 number_background_color: `notification-plus-${type}-number`,
                 pulse_background_color: `notification-plus-toast-pulse`,
+                time_background_color: `notification-plus-${type}-time`,
             };
             for (let [key, target] of Object.entries(bgColorHandlers)) {
                 $(`#settings_${key}`).wpColorPicker({
@@ -106,6 +109,7 @@
                 content_title: `notification-plus-${type}-content-title`,
                 content_description: `notification-plus-${type}-content-description`,
                 link_url_text: `notification-plus-${type}-url>a`,
+                branding_name: `notification-plus-site`,
             };
 
             for (let [key, target] of Object.entries(textHandlers)) {
@@ -216,7 +220,7 @@
         initMetaTabs: () => {
             if ($('#auto_draft').length) return;
 
-            const target = localStorage.getItem('notificationPlusActiveTab');
+            let target = localStorage.getItem('notificationPlusActiveTab');
 
             if (target) {
                 $('.notification-plus-tab-content-item').removeClass('active');
@@ -284,6 +288,8 @@
 
         selectType: function () {
 
+            $('#notification_type').addClass('loading');
+
             $('.notification-plus-notification-type').removeClass('active').find('input').prop('checked', false);
             $(this).addClass('active').find('input').prop('checked', true);
 
@@ -303,9 +309,18 @@
                     $('.notification-plus-tab-content>div:not(#notification_type)').remove();
                     $('#notification_type').after(res.html);
 
+                },
+
+                complete: () => {
                     app.initSelect2();
                     app.previewHandler();
                     app.initDateTimePicker();
+                    $('#notification_type').removeClass('loading');
+                    $('.notification-plus-tab-link[data-target="content"]').trigger('click');
+
+                    $([document.documentElement, document.body]).animate({
+                        scrollTop: $('#notification_plus_type').offset().top
+                    }, 400);
 
                 },
 

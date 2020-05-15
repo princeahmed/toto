@@ -1,5 +1,7 @@
 <?php
 
+namespace Prince\Settings;
+
 /**
  * Prince Meta Box API
  *
@@ -9,9 +11,9 @@
  * @author    Prince Ahmed <israilahmed5@gmail.com>
  * @copyright Copyright (c) 2019, Prince Ahmed
  */
-if ( ! class_exists( 'Prince_Options_MetaBox' ) ) {
+if ( ! class_exists( 'MetaBox' ) ) {
 
-	class Prince_Options_MetaBox {
+	class MetaBox {
 
 		/* variable to store the meta box array */
 		private $meta_box;
@@ -21,11 +23,11 @@ if ( ! class_exists( 'Prince_Options_MetaBox' ) ) {
 		 *
 		 * This method adds other methods of the class to specific hooks within WordPress.
 		 *
+		 * @uses      add_action()
+		 *
 		 * @return    void
 		 *
 		 * @access    public
-		 * @uses      add_action()
-		 *
 		 * @since     1.0
 		 */
 		function __construct( $meta_box ) {
@@ -52,11 +54,11 @@ if ( ! class_exists( 'Prince_Options_MetaBox' ) ) {
 		/**
 		 * Adds meta box to any post type
 		 *
+		 * @uses      add_meta_box()
+		 *
 		 * @return    void
 		 *
 		 * @access    public
-		 * @uses      add_meta_box()
-		 *
 		 * @since     1.0
 		 */
 		function add_meta_boxes() {
@@ -103,7 +105,6 @@ if ( ! class_exists( 'Prince_Options_MetaBox' ) ) {
 					'field_id'           => $field['id'],
 					'field_name'         => $field['id'],
 					'field_value'        => $field_value,
-					'field_block'        => isset( $field['block'] ) ? true : false,
 					'field_desc'         => isset( $field['desc'] ) ? $field['desc'] : '',
 					'field_std'          => isset( $field['std'] ) ? $field['std'] : '',
 					'field_rows'         => isset( $field['rows'] ) && ! empty( $field['rows'] ) ? $field['rows'] : 10,
@@ -120,7 +121,7 @@ if ( ! class_exists( 'Prince_Options_MetaBox' ) ) {
 					'meta'               => true
 				);
 
-				if ( isset( $field['attrs'] ) && ! empty( array_filter( $field['attrs'] ) ) ) {
+				if ( isset($field['attrs']) && ! empty( array_filter( $field['attrs'] ) ) ) {
 					$attrs = '';
 					foreach ( array_filter( $field['attrs'] ) as $key => $value ) {
 						$attrs .= ' ' . $key . '="' . $value . '" ';
@@ -210,7 +211,7 @@ if ( ! class_exists( 'Prince_Options_MetaBox' ) ) {
 			global $pagenow;
 
 			/* don't save if $_POST is empty */
-			if ( empty( $_POST ) || ( isset( $_POST['vc_inline'] ) && esc_attr( $_POST['vc_inline'] ) == true ) ) {
+			if ( empty( $_POST ) || ( isset( $_POST['vc_inline'] ) && esc_attr($_POST['vc_inline']) == true ) ) {
 				return $post_id;
 			}
 
@@ -235,7 +236,7 @@ if ( ! class_exists( 'Prince_Options_MetaBox' ) ) {
 			}
 
 			/* check permissions */
-			if ( isset( $_POST['post_type'] ) && 'page' == esc_attr( $_POST['post_type'] ) ) {
+			if ( isset( $_POST['post_type'] ) && 'page' == esc_attr($_POST['post_type']) ) {
 				if ( ! current_user_can( 'edit_page', $post_id ) ) {
 					return $post_id;
 				}
@@ -272,7 +273,7 @@ if ( ! class_exists( 'Prince_Options_MetaBox' ) ) {
 						);
 
 						/* get the settings array */
-						$settings = isset( $_POST[ $field['id'] . '_settings_array' ] ) ? unserialize( prince_decode( esc_attr( $_POST[ $field['id'] . '_settings_array' ] ) ) ) : array();
+						$settings = isset( $_POST[ $field['id'] . '_settings_array' ] ) ? unserialize( prince_decode( esc_attr($_POST[ $field['id'] . '_settings_array' ]) ) ) : array();
 
 						/* settings are empty for some odd ass reason get the defaults */
 						if ( empty( $settings ) ) {
@@ -328,12 +329,12 @@ if ( ! class_exists( 'Prince_Options_MetaBox' ) ) {
 						}
 
 						/* set up new data with validated data */
-						$new = prince_validate_setting( $_POST[ $field['id'] ] , $field['type'], $field['id'] );
+						$new = prince_validate_setting( esc_attr($_POST[ $field['id'] ]), $field['type'], $field['id'] );
 
 					} else {
 
 						/* run through validattion */
-						$new = prince_validate_setting( esc_attr( $_POST[ $field['id'] ] ), $field['type'], $field['id'] );
+						$new = prince_validate_setting( esc_attr($_POST[ $field['id'] ]), $field['type'], $field['id'] );
 
 					}
 

@@ -51,7 +51,7 @@ if ( ! function_exists( 'prince_register_settings_page' ) ) {
 								'page_title'      => apply_filters( 'prince_settings_page_title', __( 'Settings', 'notification-plus' ) ),
 								'menu_title'      => apply_filters( 'prince_settings_menu_title', __( 'Settings', 'notification-plus' ) ),
 								'capability'      => $caps = apply_filters( 'prince_settings_capability', 'edit_theme_options' ),
-								'menu_slug'       => apply_filters( 'prince_settings_menu_slug', 'prince-options' ),
+								'menu_slug'       => apply_filters( 'prince_settings_menu_slug', 'prince-settings' ),
 								'icon_url'        => apply_filters( 'prince_settings_icon_url', null ),
 								'position'        => apply_filters( 'prince_settings_position', null ),
 								'updated_message' => apply_filters( 'prince_settings_updated_message', __( 'Settings updated.', 'notification-plus' ) ),
@@ -100,18 +100,18 @@ if ( ! function_exists( 'prince_register_settings_page' ) ) {
 				'page_title'  => __( 'Prince', 'notification-plus' ),
 				'menu_title'  => __( 'Prince', 'notification-plus' ),
 				'capability'  => 'edit_settings',
-				'menu_slug'   => 'prince-options',
+				'menu_slug'   => 'prince-settings',
 				'icon_url'    => null,
 				'position'    => 61,
 				'hidden_page' => true
 			),
 			array(
 				'id'              => 'settings',
-				'parent_slug'     => 'prince-options',
+				'parent_slug'     => 'prince-settings',
 				'page_title'      => __( 'Settings', 'notification-plus' ),
 				'menu_title'      => __( 'Settings', 'notification-plus' ),
 				'capability'      => 'edit_settings',
-				'menu_slug'       => 'prince-options',
+				'menu_slug'       => 'prince-settings',
 				'icon_url'        => null,
 				'position'        => null,
 				'updated_message' => __( 'Settings updated.', 'notification-plus' ),
@@ -201,7 +201,7 @@ if ( ! function_exists( 'prince_register_settings_page' ) ) {
 			),
 			array(
 				'id'              => 'documentation',
-				'parent_slug'     => 'prince-options',
+				'parent_slug'     => 'prince-settings',
 				'page_title'      => __( 'Documentation', 'notification-plus' ),
 				'menu_title'      => __( 'Documentation', 'notification-plus' ),
 				'capability'      => 'edit_settings',
@@ -330,7 +330,7 @@ if ( ! function_exists( 'prince_after_settings_save' ) ) {
 		$updated = isset( $_REQUEST['settings-updated'] ) && esc_html( $_REQUEST['settings-updated'] ) == 'true' ? true : false;
 
 		/* only execute after the Settings are saved */
-		if ( apply_filters( 'prince_settings_menu_slug', 'prince-options' ) == $page && $updated ) {
+		if ( apply_filters( 'prince_settings_menu_slug', 'prince-settings' ) == $page && $updated ) {
 
 			/* grab a copy of the Settings */
 			$options = get_option( prince_options_id() );
@@ -350,7 +350,7 @@ if ( ! function_exists( 'prince_after_settings_save' ) ) {
  * This function will run on only some of the option types
  * as all of them don't need to be validated, just the
  * ones users are going to input data into; because they
- * can't be notificationed.
+ * can't be trusted.
  *
  * @param mixed     Setting value
  * @param string    Setting type
@@ -657,10 +657,10 @@ if ( ! function_exists( 'prince_admin_styles' ) ) {
 		wp_enqueue_style( 'wp-color-picker' );
 
 		/* load admin styles */
-		wp_enqueue_style( 'prince-admin', PRINCE_ASSETS_URL . '/css/admin.css', false, false );
+		wp_enqueue_style( 'prince-admin-css', PRINCE_ASSETS_URL . '/css/admin.css', false, false );
 
 		/* load the RTL stylesheet */
-		$wp_styles->add_data( 'prince-admin', 'rtl', true );
+		$wp_styles->add_data( 'prince-admin-css', 'rtl', true );
 
 		/* Remove styles added by the Easy Digital Downloads plugin */
 		if ( isset( $post->post_type ) && $post->post_type == 'post' ) {
@@ -676,9 +676,9 @@ if ( ! function_exists( 'prince_admin_styles' ) ) {
 		 *
 		 */
 		$screen_ids = apply_filters( 'prince_dequeue_jquery_ui_css_screen_ids', array(
-			'toplevel_page_prince-options',
+			'toplevel_page_prince-settings',
 			'prince_page_prince-documentation',
-			'appearance_page_prince-options'
+			'appearance_page_prince-settings'
 		) );
 
 		/* Remove styles added by the WP Review plugin and any custom pages added through filtering */
@@ -735,9 +735,8 @@ if ( ! function_exists( 'prince_admin_scripts' ) ) {
 		//wp_enqueue_script( 'ace-editor', PRINCE_ASSETS_URL.'/ace.min.js', null, '1.1.3' );
 
 		/* load all the required scripts */
-		wp_enqueue_script( 'prince-admin', PRINCE_ASSETS_URL . '/js/admin.js', array(
+		wp_enqueue_script( 'prince', PRINCE_ASSETS_URL . '/js/admin.js', array(
 			'jquery',
-
 			'jquery-ui-tabs',
 			'jquery-ui-slider',
 			'jquery-ui-datepicker',
@@ -771,7 +770,7 @@ if ( ! function_exists( 'prince_admin_scripts' ) ) {
 		);
 
 		/* localized script attached to 'prince' */
-		wp_localize_script( 'prince-admin', 'prince', $localized_array );
+		wp_localize_script( 'prince', 'prince', $localized_array );
 
 		/* execute scripts after actions */
 		do_action( 'prince_admin_scripts_after' );
@@ -4635,7 +4634,7 @@ if ( ! function_exists( 'prince_register_meta_box' ) ) {
 			return;
 		}
 
-		new Prince_Options_MetaBox( $args );
+		$prince_meta_box = new Prince\Settings\MetaBox( $args );
 	}
 
 }
