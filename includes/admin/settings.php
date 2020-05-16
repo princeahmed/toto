@@ -4,13 +4,14 @@ defined( 'ABSPATH' ) || exit();
 
 class Notification_Plus_Settings {
 	public function __construct() {
-		add_action( 'admin_init', [ $this, 'render_settings' ] );
+		//add_action( 'admin_init', [ $this, 'render_settings' ] );
 		add_filter( 'prince_on_off_switch_on_label', [ $this, 'switch_on_label' ], 10, 2 );
 		add_filter( 'prince_on_off_switch_off_label', [ $this, 'switch_off_label' ], 10, 2 );
 
 		add_filter( 'prince_header_version_text', [ $this, 'settings_version_text' ] );
 		add_filter( 'prince_header_logo_link', [ $this, 'settings_page_logo' ] );
-		add_filter( 'prince_settings_parent_slug', [ $this, 'settings_menu' ] );
+		//add_filter( 'prince_settings_parent_slug', [ $this, 'settings_menu' ] );
+		add_filter( 'prince_settings_parent_slug', '__return_false' );
 
 		add_filter( 'prince_settings_id', [ $this, 'prince_settings_id' ] );
 		add_filter( 'prince_options_id', [ $this, 'prince_options_id' ] );

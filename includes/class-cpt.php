@@ -23,7 +23,7 @@ class Notification_Plus_CPT {
 			'supports'      => [ 'title' ],
 			'show_ui'      => true,
 			'menu_position' => 5,
-			'menu_icon'     => NOTIFICATION_PLUS_ASSETS.'/images/notification-plus-32x32.png',
+			'menu_icon'     => NOTIFICATION_PLUS_ASSETS.'/images/menu-icon.svg',
 		) );
 	}
 

@@ -117,7 +117,7 @@ final class Notification_Plus {
 	}
 
 	public function plugin_action_links( $links ) {
-		$links[] = '<a href="' . admin_url( 'edit.php?post_type=post_type&page=settings' ) . '">' . __( 'Settings', 'notification-plus' ) . '</a>';
+		//$links[] = '<a href="' . admin_url( 'edit.php?post_type=post_type&page=settings' ) . '">' . __( 'Settings', 'notification-plus' ) . '</a>';
 
 		return $links;
 	}

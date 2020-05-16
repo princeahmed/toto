@@ -67,16 +67,17 @@ class Notification_Plus_Enqueue {
 
 		/* Create localized JS array */
 		$localized_array = [
-			'_wpnonce'       => wp_create_nonce(),
-			'site_url'       => site_url(),
+			'_wpnonce'              => wp_create_nonce(),
+			'site_url'              => site_url(),
 			'notification_plus_url' => plugins_url( '', NOTIFICATION_PLUS_FILE ),
-			'i18n'           => [
+			'i18n'                  => [
 				'disabled'         => __( 'Disabled', 'notification-plus' ),
 				'enabled'          => __( 'Enabled', 'notification-plus' ),
 				'notification'     => __( 'Notification', 'notification-plus' ),
 				'copied'           => __( 'Copied to Clipboard.', 'notification-plus' ),
 				'select_locations' => __( 'Select Locations', 'notification-plus' ),
 				'choose_image'     => __( 'Choose Image', 'notification-plus' ),
+				'pro_msg'          => __( 'This type is only available on the PRO version', 'notification-plus' ),
 			]
 		];
 

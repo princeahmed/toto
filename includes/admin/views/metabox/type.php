@@ -4,7 +4,7 @@
 	<?php
 
 	foreach ( Notification_Plus_Notifications::get_config() as $type => $config ) { ?>
-        <div class="notification-plus-notification-type <?php echo $current_type == $type ? 'active' : ''; ?>">
+        <div class="notification-plus-notification-type <?php echo $current_type == $type ? 'active' : ''; ?> <?php echo isset( $config['is_pro'] ) ? 'item-is-pro' : ''; ?>">
 
             <h3 class="notification-plus-notification-type-title"><?php echo $config['name']; ?></h3>
 

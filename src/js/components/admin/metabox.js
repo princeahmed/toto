@@ -290,10 +290,45 @@
 
             $('#notification_type').addClass('loading');
 
+            //set preview html
+            $('.notification-preview-content').html($('.preview', $(this)).html());
+
+            //set preview title
+            const title = $('.notification-plus-notification-type-title', $(this)).text();
+            $('.notification-preview-title-type').text(title);
+
+            //check if accessing pro item from free
+            if ($(this).hasClass('item-is-pro')) {
+                Swal.fire({
+                    title: notificationPlus.i18n.pro_msg,
+                    //text: notificationPlus.i18n.proMsg,
+                    icon: 'info',
+                    timer: 5000,
+                    showConfirmButton: false,
+                    showCancelButton: true,
+                    cancelButtonColor: '#dc3545',
+                    customClass: {
+                        container: 'notification-plus-swal',
+                    },
+                    onClose: () => {
+                        $('.notification-plus-tab-item:not(:first-child)').addClass('container-disabled');
+
+                        $('#notification_type').removeClass('loading');
+
+                        $([document.documentElement, document.body]).animate({
+                            scrollTop: $('#notification_plus_type').offset().top
+                        }, 400);
+                    },
+                });
+
+                return;
+            }
+
+            $('.notification-plus-tab-item:not(:first-child)').removeClass('container-disabled');
+
+            // checked the clicked type
             $('.notification-plus-notification-type').removeClass('active').find('input').prop('checked', false);
             $(this).addClass('active').find('input').prop('checked', true);
-
-            $('.notification-preview-content').html($('.preview', $(this)).html());
 
             const type = $('input', $(this)).val();
             const post_id = $('#post_ID').val();

@@ -112,8 +112,9 @@ class Notification_Plus_Notifications {
 			], $default ),
 
 			'LATEST_CONVERSION' => array_merge( [
-				"name" => __( 'Latest Conversion', 'notification-plus' ),
-				"icon" => "fa fa-funnel-dollar",
+				"name"   => __( 'Latest Conversion', 'notification-plus' ),
+				"icon"   => "fa fa-funnel-dollar",
+				'is_pro' => true,
 
 				'title'             => ! empty( $settings->title ) ? $settings->title : __( 'A cool person', 'notification-plus' ),
 				'description'       => ! empty( $settings->description ) ? $settings->description : __( 'Signed up for the newsletter.', 'notification-plus' ),
@@ -123,8 +124,9 @@ class Notification_Plus_Notifications {
 			], $default ),
 
 			'CONVERSIONS_COUNTER' => array_merge( [
-				"name" => __( 'Conversions Counter', 'notification-plus' ),
-				"icon" => "fa fa-comment-dollar",
+				"name"   => __( 'Conversions Counter', 'notification-plus' ),
+				"icon"   => "fa fa-comment-dollar",
+				'is_pro' => true,
 
 				'title'         => ! empty( $settings->title ) ? $settings->title : __( 'People bought the product', 'notification-plus' ),
 				'image'         => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/officel/2x/return-purchase.png",
@@ -155,8 +157,9 @@ class Notification_Plus_Notifications {
 			], $default ),
 
 			'RANDOM_REVIEW' => array_merge( [
-				"name" => __( 'Random Review', 'notification-plus' ),
-				"icon" => "fa fa-random",
+				"name"   => __( 'Random Review', 'notification-plus' ),
+				"icon"   => "fa fa-random",
+				'is_pro' => true,
 
 				'title'       => ! empty( $settings->title ) ? $settings->title : __( 'John Doe', 'notification-plus' ),
 				'description' => ! empty( $settings->description ) ? $settings->description : __( 'SocialProof is a 5 star product! 🔥', 'notification-plus' ),
@@ -515,7 +518,7 @@ class Notification_Plus_Notifications {
 				],
 			],
 
-			'EMOJI_FEEDBACK' => [
+			'EMOJI_FEEDBACK'    => [
 				'content' => [ 'title', 'emoji' ],
 
 				'customize' => [
@@ -524,94 +527,94 @@ class Notification_Plus_Notifications {
 					'border_radius',
 					//'max_width',
 				],
+			],
 
-				'LATEST_CONVERSION' => [
-					'content' => [ 'title', 'description', 'image', 'url', 'conversions_count', ],
+			'LATEST_CONVERSION' => [
+				'content' => [ 'title', 'description', 'image', 'url', 'conversions_count', ],
 
-					'customize' => [
-						'title_color',
-						'description_color',
-						'background_color',
-						'border_radius',
-						//'max_width',
-					],
+				'customize' => [
+					'title_color',
+					'description_color',
+					'background_color',
+					'border_radius',
+					//'max_width',
+				],
+			],
+
+			'RANDOM_REVIEW' => [
+				'content' => [ 'url' ],
+
+				'customize' => [
+					'title_color',
+					'description_color',
+					'background_color',
+					'border_radius',
+					//'max_width',
+				],
+			],
+
+			'REQUEST_COLLECTOR' => [
+				'content' => [
+					'title',
+					'description',
+					'image',
+					'content_title',
+					'content_description',
+					'input_placeholder',
+					'button_text',
+					'agreement',
+					//'max_width',
 				],
 
-				'RANDOM_REVIEW' => [
-					'content' => [ 'url' ],
-
-					'customize' => [
-						'title_color',
-						'description_color',
-						'background_color',
-						'border_radius',
-						//'max_width',
-					],
+				'customize' => [
+					'title_color',
+					'description_color',
+					'content_title_color',
+					'content_description_color',
+					'background_color',
+					'button_background_color',
+					'button_color',
+					'border_radius',
+					//'max_width',
 				],
+			],
 
-				'REQUEST_COLLECTOR' => [
-					'content' => [
-						'title',
-						'description',
-						'image',
-						'content_title',
-						'content_description',
-						'input_placeholder',
-						'button_text',
-						'agreement',
-						//'max_width',
-					],
+			'SCORE_FEEDBACK' => [
+				'content' => [ 'title', 'description', ],
 
-					'customize' => [
-						'title_color',
-						'description_color',
-						'content_title_color',
-						'content_description_color',
-						'background_color',
-						'button_background_color',
-						'button_color',
-						'border_radius',
-						//'max_width',
-					],
+				'customize' => [
+					'title_color',
+					'description_color',
+					'background_color',
+					'button_background_color',
+					'button_color',
+					//'max_width',
 				],
+			],
 
-				'SCORE_FEEDBACK' => [
-					'content' => [ 'title', 'description', ],
+			'SOCIAL_SHARE' => [
+				'content' => [ 'title', 'description', 'share_url', ],
 
-					'customize' => [
-						'title_color',
-						'description_color',
-						'background_color',
-						'button_background_color',
-						'button_color',
-						//'max_width',
-					],
+				'customize' => [
+					'title_color',
+					'description_color',
+					'background_color',
+					'border_radius',
+					//'max_width',
 				],
+			],
 
-				'SOCIAL_SHARE' => [
-					'content' => [ 'title', 'description', 'share_url', ],
+			'VIDEO' => [
+				'content' => [ 'title', 'video', 'button_url', 'button_text', ],
 
-					'customize' => [
-						'title_color',
-						'description_color',
-						'background_color',
-						'border_radius',
-						//'max_width',
-					],
-				],
-
-				'VIDEO' => [
-					'content' => [ 'title', 'video', 'button_url', 'button_text', ],
-
-					'customize' => [
-						'title_color',
-						'background_color',
-						'button_background_color',
-						'button_color',
-						'border_radius',
-						//'max_width',
-					]
-				],
+				'customize' => [
+					'title_color',
+					'background_color',
+					'button_background_color',
+					'button_color',
+					'border_radius',
+					//'max_width',
+				]
 			],
 
 		];

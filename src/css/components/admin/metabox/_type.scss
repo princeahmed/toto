@@ -15,6 +15,7 @@
     padding: 20px;
     box-sizing: border-box;
     cursor: pointer;
+    position: relative;
 
     .notification-plus-notification-type-title {
       margin-top: 0;
@@ -30,7 +31,7 @@
     }
 
     &.active {
-      background: #96c03d;
+      background: $primary;
       color: #fff;
 
       .notification-plus-notification-type-title {
@@ -39,6 +40,28 @@
 
     }
 
+    &.item-is-pro {
+      border-color: $primary;
+
+      &:after {
+        content: 'PRO';
+        background: $primary;
+        color: #fff;
+        padding: 11px 8px;
+        border-radius: 50%;
+        position: absolute;
+        left: -15px;
+        top: -5px;
+        font-size: 10px;
+      }
+    }
+
   }
 
+}
+
+.notification-plus-swal {
+  .swal2-title {
+    line-height: 1.2;
+  }
 }
