@@ -168,7 +168,7 @@ export const watch = () => {
 export const compress = () => {
     return gulp.src(paths.build.src)
         .pipe(replace('__prefix', pkg.name.toLowerCase().replace(/-/g, '_')))
-        .pipe(zip(`${pkg.name}.zip`))
+        .pipe(zip(`${pkg.name}-${pkg.version}.zip`))
         .pipe(gulp.dest(paths.build.dest));
 };
 

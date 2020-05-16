@@ -3,7 +3,7 @@ Contributors: princeahmed
 Tags: social proof, notification, fomo, woocommerce recent sells, notificationx,woocommerce upsell, notification bar, wp fomo, wpfomify, email subscription notification, review feedback notification, email subscription, countdown popup, popup
 
 Requires at least: 4.4
-Tested up to: 5.3
+Tested up to: 5.4.1
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
@@ -16,60 +16,84 @@ Social Shares, Coupon, Video Popup and Many More Notification & Popup.
 
 == Description ==
 
-Let your visitors to know about your special offers, deals, announcement, etc. with a call to action.
-Notification Plus brings the best notification popup solution for WordPress.
-You could turn on the end, start time, you will get detail statistics how your notification popups are working as well.
+Notification Plus is a fully loaded toolkit with marketing tools and pop-ups to create FOMO, Social Proof notifications to Engage and keep your website visitors.
+By displaying different type of notification such as: Score & Emoji Feedback, Random Review, Cookie Notification, WooCommerce Recent Sales & Upsells, Email & Request Collector, Countdown Timer,Social Shares, Coupon, Video Popup and Many More Notification & Popup.
+
+Let your visitors know about your special offers, deals, announcement, etc. with a call to action. Notification Plus brings the best notification popup solution for WordPress.You could turn on the end, start time, you will get detail statistics how your notification popups are working as well.
+
 Engage and Convert Your Users By Displaying 14+ Types Of Notifications of This Plugin.
 Social-Proofs help to increase your sales & FOMOs are help to increase conversion rate.
 
 == NOTIFICATION PLUS PLUGIN FEATURES: ==
 
-* Live Editing Preview - (You can see the preview of the notification how looks like during editing the notification. It saves a lots of time and very user friendly.)
+== Live Editing Preview ==
+You can see the preview of the notification how looks like during editing the notification. It saves a lots of time and very user friendly.
 
-* Sound Supports - (Play sound when the notification is displayed.)
+== Sound Supports ==
+Play sound when the notification is displayed.
 
-* Show Popup on Exit-Intent, Time Delay and Scroll Percentage -
-(Different options for displaying notification before user leave the page, after a specific time delay and after a scroll the window )
+== Show Popup on Exit-Intent, Time Delay and Scroll Percentage ==
+Different options for displaying notification before user leave the page, after a specific time delay and after a scroll the window
 
-* Statistics & Conversations Tracker - (Get great statistics & setup automated conversations tracker)
+== Statistics & Conversations Tracker ==
+Get great statistics & setup automated conversations tracker
 
-* Shortcode Supports - (Notification Plus allows its users to display their notifications anywhere they want by using Shortcode. You can now display your popup notification in your WordPress posts, pages, or wherever you wish. There is no binding anymore!)
+== Shortcode Supports ==
+Notification Plus allows its users to display their notifications anywhere they want by using Shortcode. You can now display your popup notification in your WordPress posts, pages, or wherever you wish. There is no binding anymore!
 
-* Informational Social Proof Notification Popup - (Customize everything and create your own informational)
+== Informational Social Proof Notification Popup ==
+Customize everything and create your own informational
 
-* Live Counter Social Proof Notification Popup - (Easiest live counter you will ever setup. It just works)
+== Live Counter Social Proof Notification Popup ==
+Easiest live counter you will ever setup. It just works
 
-* Email Collector Notification Popup - (Collecting emails easily and generating leads)
+== Email Collector Notification Popup ==
+Collecting emails easily and generating leads
 
-* Cookie Notification Popup - (We all need this one even if we don't want it)
+== Cookie Notification Popup ==
+We all need this one even if we don't want it.
 
-* Score Feedback Notification Popup - (Learn more about your visitors thoughts)
+== Score Feedback Notification Popup ==
+Learn more about your visitors thoughts
 
-* Youtube Video - (Show your users a demo, presentation or anything else)
+== Youtube Video ==
+Show your users a demo, presentation or anything else.
 
-* Random Review Social Proof Notification Popup - (Add actual reviews and display them for a social boost)
+== Random Review Social Proof Notification Popup ==
+Add actual reviews and display them for a social boost.
 
-* Social Share Notification Popup - (Social sharing with just a simple click)
+== Social Share Notification Popup ==
+Social sharing with just a simple click.
 
-* Emoji Feedback Notification Popup - Track and see how your users feel
+== Emoji Feedback Notification Popup ==
+Track and see how your users feel.
 
-* Custom Campaign Branding – Users are able to set their own branding of the notifications that they create.
+== Custom Campaign Branding ==
+Users are able to set their own branding of the notifications that they create.
 
-* Highly Customizable Notfications – Users can set their own settings of the notifications they create and control everything through the settings.
+== Highly Customizable Notifications ==
+Users can set their own settings of the notifications they create and control everything through the settings.
 
-* Notifications Statistics – Users will have a dedicated page for statistics for each of their notifications to see how they are doing.
+== Notifications Statistics ==
+Users will have a dedicated page for statistics for each of their notifications to see how they are doing.
 
-* Notifications Conversions – Users can see and track the conversions generated by specific notifications.
+== Notifications Conversions ==
+Users can see and track the conversions generated by specific notifications.
 
-* Activity Social Proof Popup - (Show live visitor count, order count and product views with attractive popup notifications)
+== Activity Social Proof Popup ==
+Show live visitor count, order count and product views with attractive popup notifications.
 
-* Countdown Popup - (Create a strong sense of urgency and hurry visitors to make purchases quickly by showing a countdown timer)
+== Countdown Popup ==
+Create a strong sense of urgency and hurry visitors to make purchases quickly by showing a countdown timer.
 
-* Promo Sticky Popup Notification Bar (PRO)- (Let visitors know how many days, hours and minutes are left until the end of promotions)
+== Promo Sticky Popup Notification Bar (PRO) ==
+Let visitors know how many days, hours and minutes are left until the end of promotions
 
-* WooCommerce Recent Sales Popup Notification (PRO) - (Let visitors know what others did on the website by showing recent sales notifications)
+== WooCommerce Recent Sales Popup Notification (PRO) ==
+Let visitors know what others did on the website by showing recent sales notifications
 
-* WooCommerce Latest Conversations Popup Notification (PRO) - (Let visitors know how many people bought a specific product)
+== WooCommerce Latest Conversations Popup Notification (PRO) ==
+Let visitors know how many people bought a specific product
 
 
 == HOW DOES IT WORK / FUNCTIONALITY EXPLAINED: ==
