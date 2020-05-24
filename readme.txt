@@ -1,15 +1,15 @@
 === Notification Plus - Social Proof, Fomo Notifications & Popups for WordPress ===
 Contributors: princeahmed
-Tags: social proof, notification, fomo, woocommerce recent sells, notificationx,woocommerce upsell, notification bar, wp fomo, wpfomify, email subscription notification, review feedback notification, email subscription, countdown popup, popup
-
 Requires at least: 4.4
 Tested up to: 5.4.1
 Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags: social proof, notification, fomo, woocommerce recent sells, notificationx,woocommerce upsell, notification bar, wp fomo, wpfomify, email subscription notification, review feedback notification, email subscription, countdown popup, popup
 
 Notification Plus is a fully loaded toolkit with marketing tools and pop-ups to create FOMO, Social Proof notifications to Engage and keep your website visitors.
+
 By displaying different type of notification such as: Score & Emoji Feedback, Random Review,
 Cookie Notification, WooCommerce Recent Sales & Upsells, Email & Request Collector, Countdown Timer,
 Social Shares, Coupon, Video Popup and Many More Notification & Popup.
@@ -17,6 +17,7 @@ Social Shares, Coupon, Video Popup and Many More Notification & Popup.
 == Description ==
 
 Notification Plus is a fully loaded toolkit with marketing tools and pop-ups to create FOMO, Social Proof notifications to Engage and keep your website visitors.
+
 By displaying different type of notification such as: Score & Emoji Feedback, Random Review, Cookie Notification, WooCommerce Recent Sales & Upsells, Email & Request Collector, Countdown Timer,Social Shares, Coupon, Video Popup and Many More Notification & Popup.
 
 Let your visitors know about your special offers, deals, announcement, etc. with a call to action. Notification Plus brings the best notification popup solution for WordPress.You could turn on the end, start time, you will get detail statistics how your notification popups are working as well.
@@ -26,73 +27,73 @@ Social-Proofs help to increase your sales & FOMOs are help to increase conversio
 
 == NOTIFICATION PLUS PLUGIN FEATURES: ==
 
-== Live Editing Preview ==
+= Live Editing Preview =
 You can see the preview of the notification how looks like during editing the notification. It saves a lots of time and very user friendly.
 
-== Sound Supports ==
+= Sound Supports =
 Play sound when the notification is displayed.
 
-== Show Popup on Exit-Intent, Time Delay and Scroll Percentage ==
+= Show Popup on Exit-Intent, Time Delay and Scroll Percentage =
 Different options for displaying notification before user leave the page, after a specific time delay and after a scroll the window
 
-== Statistics & Conversations Tracker ==
+= Statistics & Conversations Tracker =
 Get great statistics & setup automated conversations tracker
 
-== Shortcode Supports ==
+= Shortcode Supports =
 Notification Plus allows its users to display their notifications anywhere they want by using Shortcode. You can now display your popup notification in your WordPress posts, pages, or wherever you wish. There is no binding anymore!
 
-== Informational Social Proof Notification Popup ==
+= Informational Social Proof Notification Popup =
 Customize everything and create your own informational
 
-== Live Counter Social Proof Notification Popup ==
+= Live Counter Social Proof Notification Popup =
 Easiest live counter you will ever setup. It just works
 
-== Email Collector Notification Popup ==
+= Email Collector Notification Popup =
 Collecting emails easily and generating leads
 
-== Cookie Notification Popup ==
+= Cookie Notification Popup =
 We all need this one even if we don't want it.
 
-== Score Feedback Notification Popup ==
+= Score Feedback Notification Popup =
 Learn more about your visitors thoughts
 
-== Youtube Video ==
+= Youtube Video =
 Show your users a demo, presentation or anything else.
 
-== Random Review Social Proof Notification Popup ==
+= Random Review Social Proof Notification Popup =
 Add actual reviews and display them for a social boost.
 
-== Social Share Notification Popup ==
+= Social Share Notification Popup =
 Social sharing with just a simple click.
 
-== Emoji Feedback Notification Popup ==
+= Emoji Feedback Notification Popup =
 Track and see how your users feel.
 
-== Custom Campaign Branding ==
+= Custom Campaign Branding =
 Users are able to set their own branding of the notifications that they create.
 
-== Highly Customizable Notifications ==
+= Highly Customizable Notifications =
 Users can set their own settings of the notifications they create and control everything through the settings.
 
-== Notifications Statistics ==
+= Notifications Statistics =
 Users will have a dedicated page for statistics for each of their notifications to see how they are doing.
 
-== Notifications Conversions ==
+= Notifications Conversions =
 Users can see and track the conversions generated by specific notifications.
 
-== Activity Social Proof Popup ==
+= Activity Social Proof Popup =
 Show live visitor count, order count and product views with attractive popup notifications.
 
-== Countdown Popup ==
+= Countdown Popup =
 Create a strong sense of urgency and hurry visitors to make purchases quickly by showing a countdown timer.
 
-== Promo Sticky Popup Notification Bar (PRO) ==
+= Promo Sticky Popup Notification Bar (PRO) =
 Let visitors know how many days, hours and minutes are left until the end of promotions
 
-== WooCommerce Recent Sales Popup Notification (PRO) ==
+= WooCommerce Recent Sales Popup Notification (PRO) =
 Let visitors know what others did on the website by showing recent sales notifications
 
-== WooCommerce Latest Conversations Popup Notification (PRO) ==
+= WooCommerce Latest Conversations Popup Notification (PRO) =
 Let visitors know how many people bought a specific product
 
 
@@ -125,7 +126,17 @@ Yes, Notification+ can be used to display promotional announcements, email subsc
 Yes. Your data is legally safe and we guarantee to not make use of your data under any circumstances. And your data stays at your site, so zero risk, its not like other SaaS based solution.
 
 == Screenshots ==
-
+1. Informational Notification
+2. Email Collector Popup
+3. Conversions Counter Notification
+4. Cookie Notification
+5. Emoji Feedback Notification
+6. Latest Conversions
+7. Live Counter Notification
+8. Random Review
+9. Score Feedback
+10. Youtube Video
+11. Social Share
 
 
 == Changelog ==

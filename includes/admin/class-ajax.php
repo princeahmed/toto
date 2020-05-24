@@ -28,10 +28,16 @@ class Notification_Plus_Admin_Ajax {
 		}
 
 		$post_id = ! empty( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : '';
+		$tabs    = Notification_Plus_Notifications::setting_tabs( $current_type );
 
+		//render menus
 		ob_start();
-		$tabs = Notification_Plus_Notifications::setting_tabs( $current_type );
+		$menus = array_keys( $tabs );
+		include_once NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/menu.php';
+		$menu = ob_get_clean();
 
+		//render tab content
+		ob_start();
 		foreach ( $tabs as $key => $fields ) { ?>
             <div class="notification-plus-tab-content-item flex-column" id="<?php echo $key; ?>">
 				<?php
@@ -43,10 +49,11 @@ class Notification_Plus_Admin_Ajax {
 				?>
             </div>
 		<?php }
-		$html = ob_get_clean();
+		$content = ob_get_clean();
 
 		wp_send_json_success( [
-			'html' => $html,
+			'menu'    => $menu,
+			'content' => $content,
 		] );
 
 	}
@@ -56,9 +63,9 @@ class Notification_Plus_Admin_Ajax {
 	 */
 	public function handle_status_change() {
 
-	    if(!current_user_can('manage_options')){
-	    	return;
-	    }
+		if ( ! current_user_can( 'manage_options' ) ) {
+			return;
+		}
 
 		$post_id = ! empty( $_REQUEST['post_id'] ) ? intval( $_REQUEST['post_id'] ) : '';
 		$status  = ! empty( $_REQUEST['status'] ) ? wp_unslash( $_REQUEST['status'] ) : 'draft';

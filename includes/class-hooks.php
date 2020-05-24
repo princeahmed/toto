@@ -8,7 +8,7 @@ class Notification_Plus_Hooks {
 	 * Notification_Plus_Hooks constructor.
 	 */
 	public function __construct() {
-		add_action( 'wp_print_footer_scripts', [ $this, 'render_notifications' ] );
+		add_action( 'wp_footer', [ $this, 'render_notifications' ] );
 
 		add_filter( 'display_post_states', [ $this, 'notification_state' ] );
 		add_filter( 'views_edit-notification_plus', [ $this, 'edit_quick_links' ] );

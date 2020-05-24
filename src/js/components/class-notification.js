@@ -75,7 +75,6 @@ export default class Notification {
             document.querySelector(`[data-shortcode="notification_plus_${this.options.notification_id}"]`)
             : document.getElementById(`notification_plus_${this.options.notification_id}`);
 
-
         /* Add the close button icon if needed */
         if (this.options.close) {
 

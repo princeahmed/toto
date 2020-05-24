@@ -10,11 +10,11 @@ class Notification_Plus_Settings {
 
 		add_filter( 'prince_header_version_text', [ $this, 'settings_version_text' ] );
 		add_filter( 'prince_header_logo_link', [ $this, 'settings_page_logo' ] );
-		//add_filter( 'prince_settings_parent_slug', [ $this, 'settings_menu' ] );
-		add_filter( 'prince_settings_parent_slug', '__return_false' );
+		//add_filter( '__prefix_settings_parent_slug', [ $this, 'settings_menu' ] );
+		add_filter( '__prefix_settings_parent_slug', '__return_false' );
 
-		add_filter( 'prince_settings_id', [ $this, 'prince_settings_id' ] );
-		add_filter( 'prince_options_id', [ $this, 'prince_options_id' ] );
+		add_filter( '__prefix_settings_id', [ $this, 'prince_settings_id' ] );
+		add_filter( '__prefix_options_id', [ $this, 'prince_options_id' ] );
 
 		add_action( 'prince_after_settings_save', [ $this, 'update_modules' ] );
 	}

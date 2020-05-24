@@ -22,7 +22,7 @@
 }
 
 .notification-plus * {
-  margin: 0
+  margin: 0;
 }
 
 .notification-plus.on {
@@ -118,7 +118,8 @@
   max-width: 90% !important;
   position: relative !important;
   font-family: 'Open Sans', -apple-system, 'Segoe UI', BlinkMacSystemFont, Roboto, 'Helvetica Neue', Arial, sans-serif !important;
-  a{
+
+  a {
     text-decoration: none;
   }
 
@@ -185,4 +186,8 @@
 
 #notification-plus-agreement {
   margin-top: 8px;
+}
+
+.notification-plus-wrapper p {
+  margin-top: 0 !important;
 }

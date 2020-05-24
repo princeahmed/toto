@@ -17,53 +17,43 @@ class Notification_Plus_Notifications {
 		$settings = (object) get_post_meta( $post_id, '_settings', true );
 
 		$default = [
-			'url'                      => ! empty( $settings->url ) ? $settings->url : '',
-			'trigger_on'               => ! empty( $settings->trigger_on ) ? $settings->trigger_on : 'all',
-			'trigger_locations'        => ! empty( $settings->trigger_locations ) ? $settings->trigger_locations : [],
-			'display_for'              => ! empty( $settings->display_for ) ? $settings->display_for : 'all',
-			'triggers'                 => ! empty( $settings->triggers ) ? $settings->triggers : [],
-			'display_trigger'          => ! empty( $settings->display_trigger ) ? $settings->display_trigger : 'delay',
-			'display_trigger_value'    => ! empty( $settings->display_trigger_value ) ? $settings->display_trigger_value : 2,
-			'display_once_per_session' => ! empty( $settings->display_once_per_session ) ? $settings->display_once_per_session : false,
-			'display_mobile'           => isset( $settings->display_mobile ) ? $settings->display_mobile : true,
-			'display_duration'         => ! empty( $settings->display_duration ) ? $settings->display_duration : 5,
-			'display_position'         => ! empty( $settings->display_position ) ? $settings->display_position : 'bottom_left',
-			'display_close_button'     => isset( $settings->display_close_button ) ? $settings->display_close_button : true,
-			'display_branding'         => isset( $settings->display_branding ) ? $settings->display_branding : true,
-			'branding_name'            => ! empty( $settings->branding_name ) ? $settings->branding_name : '🔥 by Notification Plus',
-			'branding_url'             => ! empty( $settings->branding_url ) ? $settings->branding_url : '#',
-
-			'title_color'          => ! empty( $settings->title_color ) ? $settings->title_color : '#000',
-			'description_color'    => ! empty( $settings->description_color ) ? $settings->description_color : '#000',
-			'background_color'     => ! empty( $settings->background_color ) ? $settings->background_color : '#fff',
-			'border_radius'        => ! empty( $settings->border_radius ) ? $settings->border_radius : 'rounded',
-			'custom_post_page_ids' => ! empty( $settings->custom_post_page_ids ) ? $settings->custom_post_page_ids : '',
-
-			'button_url'               => ! empty( $settings->button_url ) ? $settings->button_url : '',
-			'display_minimum_activity' => ! empty( $settings->display_minimum_activity ) ? $settings->display_minimum_activity : 0,
-			'pulse_background_color'   => ! empty( $settings->pulse_background_color ) ? $settings->pulse_background_color : '#17bf21',
-
-			'enable_sound'       => isset( $settings->enable_sound ) ? $settings->enable_sound : false,
-			'notification_sound' => ! empty( $settings->notification_sound ) ? $settings->notification_sound : '',
-			'sound_volume'       => ! empty( $settings->sound_volume ) ? $settings->sound_volume : 50,
-
-			'show_agreement' => isset( $settings->show_agreement ) ? $settings->show_agreement : false,
-			'agreement_text' => ! empty( $settings->agreement_text ) ? $settings->agreement_text : "I read & agree the Privacy Policy",
-			'agreement_url'  => ! empty( $settings->agreement_url ) ? $settings->agreement_url : '',
-
-			'number_color'            => ! empty( $settings->number_color ) ? $settings->number_color : '#fff',
-			'number_background_color' => ! empty( $settings->number_background_color ) ? $settings->number_background_color : '#000',
-
+			'url'                       => ! empty( $settings->url ) ? $settings->url : '',
+			'trigger_on'                => ! empty( $settings->trigger_on ) ? $settings->trigger_on : 'all',
+			'trigger_locations'         => ! empty( $settings->trigger_locations ) ? $settings->trigger_locations : [],
+			'display_for'               => ! empty( $settings->display_for ) ? $settings->display_for : 'all',
+			'triggers'                  => ! empty( $settings->triggers ) ? $settings->triggers : [],
+			'display_trigger'           => ! empty( $settings->display_trigger ) ? $settings->display_trigger : 'delay',
+			'display_trigger_value'     => ! empty( $settings->display_trigger_value ) ? $settings->display_trigger_value : 2,
+			'display_once_per_session'  => ! empty( $settings->display_once_per_session ) ? $settings->display_once_per_session : false,
+			'display_mobile'            => isset( $settings->display_mobile ) ? $settings->display_mobile : true,
+			'display_duration'          => ! empty( $settings->display_duration ) ? $settings->display_duration : 5,
+			'display_position'          => ! empty( $settings->display_position ) ? $settings->display_position : 'bottom_left',
+			'display_close_button'      => isset( $settings->display_close_button ) ? $settings->display_close_button : true,
+			'display_branding'          => isset( $settings->display_branding ) ? $settings->display_branding : true,
+			'branding_name'             => ! empty( $settings->branding_name ) ? $settings->branding_name : '🔥 by Notification Plus',
+			'branding_url'              => ! empty( $settings->branding_url ) ? $settings->branding_url : '#',
+			'title_color'               => ! empty( $settings->title_color ) ? $settings->title_color : '#000',
+			'description_color'         => ! empty( $settings->description_color ) ? $settings->description_color : '#000',
+			'background_color'          => ! empty( $settings->background_color ) ? $settings->background_color : '#fff',
+			'border_radius'             => ! empty( $settings->border_radius ) ? $settings->border_radius : 'rounded',
+			'custom_post_page_ids'      => ! empty( $settings->custom_post_page_ids ) ? $settings->custom_post_page_ids : '',
+			'button_url'                => ! empty( $settings->button_url ) ? $settings->button_url : '',
+			'display_minimum_activity'  => ! empty( $settings->display_minimum_activity ) ? $settings->display_minimum_activity : 0,
+			'pulse_background_color'    => ! empty( $settings->pulse_background_color ) ? $settings->pulse_background_color : '#17bf21',
+			'enable_sound'              => isset( $settings->enable_sound ) ? $settings->enable_sound : false,
+			'notification_sound'        => ! empty( $settings->notification_sound ) ? $settings->notification_sound : '',
+			'sound_volume'              => ! empty( $settings->sound_volume ) ? $settings->sound_volume : 50,
+			'show_agreement'            => isset( $settings->show_agreement ) ? $settings->show_agreement : false,
+			'agreement_text'            => ! empty( $settings->agreement_text ) ? $settings->agreement_text : "I read & agree the Privacy Policy",
+			'agreement_url'             => ! empty( $settings->agreement_url ) ? $settings->agreement_url : '',
+			'number_color'              => ! empty( $settings->number_color ) ? $settings->number_color : '#fff',
+			'number_background_color'   => ! empty( $settings->number_background_color ) ? $settings->number_background_color : '#000',
 			'content_title_color'       => '#000',
 			'content_description_color' => '#000',
-
-			'button_background_color' => ! empty( $settings->button_background_color ) ? $settings->button_background_color : '#272727',
-			'button_color'            => ! empty( $settings->button_color ) ? $settings->button_color : '#fff',
-
-			'time_color'            => ! empty( $settings->time_color ) ? $settings->time_color : '#fff',
-			'time_background_color' => ! empty( $settings->time_background_color ) ? $settings->time_background_color : '#000',
-
-			'max_width' => ! empty( $settings->max_width ) ? $settings->max_width . 'px' : 'auto',
+			'button_background_color'   => ! empty( $settings->button_background_color ) ? $settings->button_background_color : '#272727',
+			'button_color'              => ! empty( $settings->button_color ) ? $settings->button_color : '#fff',
+			'time_color'                => ! empty( $settings->time_color ) ? $settings->time_color : '#fff',
+			'time_background_color'     => ! empty( $settings->time_background_color ) ? $settings->time_background_color : '#000',
 		];
 
 		$all = [
@@ -111,16 +101,41 @@ class Notification_Plus_Notifications {
 				'button_text'       => ! empty( $settings->button_text ) ? $settings->button_text : __( 'Sign me up ✅', 'notification-plus' ),
 			], $default ),
 
-			'LATEST_CONVERSION' => array_merge( [
-				"name"   => __( 'Latest Conversion', 'notification-plus' ),
-				"icon"   => "fa fa-funnel-dollar",
-				'is_pro' => true,
+			'RECENT_SALES' => array_merge( [
+				"name" => __( 'Recent Sales', 'notification-plus' ),
+				"icon" => "fa fa-funnel-dollar",
+				//'is_pro' => true,
 
-				'title'             => ! empty( $settings->title ) ? $settings->title : __( 'A cool person', 'notification-plus' ),
-				'description'       => ! empty( $settings->description ) ? $settings->description : __( 'Signed up for the newsletter.', 'notification-plus' ),
-				'image'             => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/color/2x/webhook.png",
+				'source' => ! empty( $settings->source ) ? $settings->source : 'custom',
+
+				'who'      => ! empty( $settings->who ) ? $settings->who : __( 'A cool person just Purchased', 'notification-plus' ),
+				'text'     => ! empty( $settings->text ) ? $settings->text : __( 'Notification Plus PRO', 'notification-plus' ),
+				'woo_who'  => ! empty( $settings->woo_who ) ? $settings->woo_who : __( '{full_name} just Purchased', 'notification-plus' ),
+				'woo_text' => ! empty( $settings->woo_text ) ? $settings->woo_text : __( '{product_name}', 'notification-plus' ),
+
+				'image_type'   => ! empty( $settings->image_type ) ? $settings->image_type : 'featured',
+				'image'        => ! empty( $settings->image ) ? $settings->image : 'https://img.icons8.com/color/2x/webhook.png',
+				'product_type' => ! empty( $settings->product_type_type ) ? $settings->product_type : 'all',
+				'product'      => ! empty( $settings->product ) ? $settings->product : '',
+				'category'     => ! empty( $settings->category_type ) ? $settings->category : '',
+				'url_type'     => ! empty( $settings->url_type ) ? $settings->url_type : 'product_page',
+				'url'          => ! empty( $settings->url ) ? $settings->url : '',
+
 				'time_ago'          => ! empty( $settings->time_ago ) ? $settings->time_ago : __( '10 mins ago', 'notification-plus' ),
 				'conversions_count' => ! empty( $settings->conversions_count ) ? $settings->conversions_count : 1,
+			], $default ),
+
+			'LATEST_CONVERSION' => array_merge( [
+				"name" => __( 'Latest Conversion', 'notification-plus' ),
+				"icon" => "fa fa-funnel-dollar",
+				//'is_pro' => true,
+
+				'title'                    => ! empty( $settings->title ) ? $settings->title : __( 'A cool person', 'notification-plus' ),
+				'description'              => ! empty( $settings->description ) ? $settings->description : __( 'Signed up for the newsletter.', 'notification-plus' ),
+				'image'                    => ! empty( $settings->image ) ? $settings->image : "https://img.icons8.com/color/2x/webhook.png",
+				'time_ago'                 => ! empty( $settings->time_ago ) ? $settings->time_ago : __( '10 mins ago', 'notification-plus' ),
+				'conversions_count'        => ! empty( $settings->conversions_count ) ? $settings->conversions_count : 1,
+				'latest_conversion_source' => 'custom'
 			], $default ),
 
 			'CONVERSIONS_COUNTER' => array_merge( [
@@ -295,23 +310,43 @@ class Notification_Plus_Notifications {
 			$attr['data-position'] = $notification->display_position;
 		}
 
-		$attr['data-config'] = json_encode( $config );
+		$classes = implode( ' ', $classes );
 
 		ob_start();
-		?>
 
-        <div class="<?php echo implode( ' ', $classes ); ?>"
-			<?php
+		if ( 'LATEST_CONVERSION' == $type ) {
+			$delay = 8;
+			for ( $i = 1; $i <= $notification->conversions_count; $i ++ ) {
 
+				$config['display_trigger_value'] += $delay;
+				$config['notification_id']       = "{$post_id}_{$i}";
+				$attr['data-notification-id']    = "{$post_id}_{$i}";
+				$attr['id']                      = "notification_plus_{$post_id}_{$i}";
+
+				$attr['data-config'] = json_encode( $config );
+
+				$data_string = '';
+				foreach ( $attr as $key => $value ) {
+					$data_string .= sprintf( " %s='%s'", $key, $value );
+				}
+
+				printf( '<div class="%1$s" %2$s>', $classes, $data_string );
+				include NOTIFICATION_PLUS_INCLUDES . '/notifications/' . strtolower( $type ) . '.php';
+				printf( '</div>' );
+			}
+		} else {
+			$attr['data-config'] = json_encode( $config );
+
+			$data_string = '';
 			foreach ( $attr as $key => $value ) {
-				printf( " %s='%s'", $key, $value );
+				$data_string .= sprintf( " %s='%s'", $key, $value );
 			}
 
-			?>
-        >
-			<?php include NOTIFICATION_PLUS_INCLUDES . '/notifications/views/' . strtolower( $type ) . '.php'; ?>
-        </div>
-		<?php
+			printf( '<div class="%1$s" %2$s>', $classes, $data_string );
+			include NOTIFICATION_PLUS_INCLUDES . '/notifications/' . strtolower( $type ) . '.php';
+			printf( '</div>' );
+		}
+
 		echo ob_get_clean();
 
 	}
@@ -326,7 +361,7 @@ class Notification_Plus_Notifications {
 		$notification = (object) self::get_config( $type, $post_id );
 
 		ob_start();
-		include NOTIFICATION_PLUS_INCLUDES . '/notifications/views/' . strtolower( $type ) . '.php';
+		include NOTIFICATION_PLUS_INCLUDES . '/notifications/' . strtolower( $type ) . '.php';
 
 		echo preg_replace( [ '/<form/', '/<\/form>/', '/required=\"required\"/' ], [
 			'<div',
@@ -373,7 +408,7 @@ class Notification_Plus_Notifications {
 	public static function settings_fields( $type, $field = false, $post_id = false ) {
 		$notification = self::get_config( $type, $post_id );
 
-		$fields = require NOTIFICATION_PLUS_INCLUDES . '/notifications/fields.php';
+		$fields = require NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/fields/fields.php';
 
 		return $field ? $fields->$field : $fields;
 	}
@@ -518,7 +553,7 @@ class Notification_Plus_Notifications {
 				],
 			],
 
-			'EMOJI_FEEDBACK'    => [
+			'EMOJI_FEEDBACK' => [
 				'content' => [ 'title', 'emoji' ],
 
 				'customize' => [
@@ -530,14 +565,29 @@ class Notification_Plus_Notifications {
 			],
 
 			'LATEST_CONVERSION' => [
-				'content' => [ 'title', 'description', 'image', 'url', 'conversions_count', ],
 
+				'source'    => [ 'latest_conversion_source' ],
+				'content'   => [ 'title', 'description', 'image', 'url', 'conversions_count', ],
 				'customize' => [
 					'title_color',
 					'description_color',
 					'background_color',
 					'border_radius',
-					//'max_width',
+				],
+			],
+
+			'RECENT_SALES' => [
+				'source'    => [ 'source' ],
+				'content'   => [
+					'recent_sales_custom',
+					//'recent_sales_woocommerce',
+					'conversions_count',
+				],
+				'customize' => [
+					'title_color',
+					'description_color',
+					'background_color',
+					'border_radius',
 				],
 			],
 

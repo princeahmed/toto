@@ -45,8 +45,9 @@ class Notification_Plus_Enqueue {
 		if ( ! in_array( get_current_screen()->id, $this->notification_plus_admin_screens ) ) {
 			return;
 		}
+		wp_enqueue_style( 'fontawesome', NOTIFICATION_PLUS_ASSETS . '/vendor/fontawesome/css/all.min.css', false, '5.13.0' );
+
 		wp_enqueue_style( 'select2-css', NOTIFICATION_PLUS_ASSETS . '/vendor/select2/select2.min.css', [], '4.0.6' );
-		wp_enqueue_script( 'fontawesome', NOTIFICATION_PLUS_ASSETS . '/vendor/fontawesome.min.js', false, '5.10.0', true );
 		wp_enqueue_script( 'sweetalert', NOTIFICATION_PLUS_ASSETS . '/vendor/sweetalert.min.js', false, '', true );
 		wp_enqueue_script( 'select2', NOTIFICATION_PLUS_ASSETS . '/vendor/select2/select2.min.js', false, '4.0.6', true );
 		wp_enqueue_script( 'notification-plus-admin-js', NOTIFICATION_PLUS_ASSETS . '/js/admin.js', [

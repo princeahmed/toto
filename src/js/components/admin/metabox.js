@@ -7,23 +7,95 @@
             app.handlePrevNext();
             app.previewHandler();
             app.initDateTimePicker();
+            app.handleConversion();
 
             $(document).on('click', '.notification-plus-meta-tabs .notification-plus-tab-link', app.toggleNotificationTab);
             $(document).on('click', '.notification-plus-notification-type', app.selectType);
-            $(document).on('change', '#settings_trigger_all_pages', app.toggleTriggerContent);
-            $(document).on('change', '#settings_data_send_is_enabled', app.toggleDataSendContent);
-            $(document).on('change', '[name="settings[trigger_on]"]', app.toggleLocationsField);
-            $(document).on('change', '#settings_display_trigger', app.displayTriggerSelect);
-            $(document).on('change', '#settings_trigger_locations', app.toggleCustomIds);
+            $(document).on('click', '.notification-plus-notification-source', app.selectSource);
             $(document).on('click', '#trigger_add', app.addTrigger);
             $(document).on('click', '.notification-plus-btn-delete', app.deleteTrigger);
             $(document).on('click', '.notification-plus-choose-image', app.handleMedia);
             $(document).on('click', '.notification-plus-remove-image', app.removeImage);
             $(document).on('click', '.notification-plus-next, .notification-plus-prev', app.handlePrevNext);
+
+            $(document).on('change', '#settings_trigger_all_pages', app.toggleTriggerContent);
+            $(document).on('change', '#settings_data_send_is_enabled', app.toggleDataSendContent);
+            $(document).on('change', '[name="settings[trigger_on]"]', app.toggleLocationsField);
+            $(document).on('change', '#settings_display_trigger', app.displayTriggerSelect);
             $(document).on('change', '#settings_notification_sound', app.playSound);
-
+            $(document).on('change', '#settings_trigger_locations', app.toggleCustomIds);
             $(document).on('change', '.handle-toggle', app.handleToggle);
+            $(document).on('change', '#settings_recent_sales_image_type', app.toggleRecentSalesImage);
+            $(document).on('change', '#settings_recent_sales_url_type', app.toggleRecentSalesUrl);
+            $(document).on('change', '#settings_recent_sales_product_type', app.toggleRecentSalesProduct);
 
+        },
+
+        handleConversion: () => {
+            //new conversion
+            $(document).on('click', '.conversion_new', function (e) {
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+
+                $('.conversion-group-body').addClass('hidden');
+
+                const conversion = wp.template('load-conversion');
+                $(this).parents('.conversion-group').after(conversion);
+            });
+
+            //new conversion
+            $(document).on('click', '.conversion_copy', function (e) {
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+
+                const p = $(this).parents('.conversion-group');
+                const conversion = p.clone();
+
+                $('.conversion-group-body').addClass('hidden');
+                p.after(conversion);
+            });
+
+            //toggle
+            $(document).on('click', '.conversion-group-header, .conversion_edit', function (e) {
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+                    
+                $('.conversion-group-body', $(this).parents('.conversion-group')).toggleClass('hidden');
+            });
+
+            //remove
+            $(document).on('click', '.conversion_delete', function (e) {
+                e.stopPropagation();
+                e.stopImmediatePropagation();
+
+                $(this).parents('.conversion-group').remove();
+            });
+        },
+
+        toggleRecentSalesImage: function () {
+            if ('custom' === $(this).val()) {
+                $(this).parent().next().removeClass('hidden');
+            } else {
+                $(this).parent().next().addClass('hidden');
+            }
+        },
+
+        toggleRecentSalesUrl: function () {
+            if ('custom' === $(this).val()) {
+                $(this).parent().next().removeClass('hidden');
+            } else {
+                $(this).parent().next().addClass('hidden');
+            }
+        },
+
+        toggleRecentSalesProduct: function () {
+            $('#settings_recent_sales_product, #settings_recent_sales_category').parent().addClass('hidden');
+
+            if ('product' === $(this).val()) {
+                $('#settings_recent_sales_product').parent().removeClass('hidden');
+            } else if ('category' === $(this).val()) {
+                $('#settings_recent_sales_category').parent().removeClass('hidden');
+            }
         },
 
         initDateTimePicker: () => {
@@ -110,6 +182,8 @@
                 content_description: `notification-plus-${type}-content-description`,
                 link_url_text: `notification-plus-${type}-url>a`,
                 branding_name: `notification-plus-site`,
+                recent_sales_who: `notification-plus-${type}-title`,
+                recent_sales_text: `notification-plus-${type}-description`,
             };
 
             for (let [key, target] of Object.entries(textHandlers)) {
@@ -121,11 +195,12 @@
             // srcHandler
             const srcHandler = {
                 image: `notification-plus-${type}-image`,
+                recent_sales_image: `notification-plus-${type}-image`,
                 video: `notification-plus-${type}-video-iframe`,
             };
             for (let [key, target] of Object.entries(srcHandler)) {
                 $(`#settings_${key}`).on('change paste keyup', function () {
-                    $(`#notification_preview .${target}`).attr('src', $(this).val());
+                    $(`#notification_preview .${target}`).removeClass('hidden').attr('src', $(this).val());
                 });
             }
 
@@ -288,7 +363,13 @@
 
         selectType: function () {
 
-            $('#notification_type').addClass('loading');
+            //add loading class
+            $('#notification_plus_type').addClass('loading');
+
+            //scroll to top
+            $([document.documentElement, document.body]).animate({
+                scrollTop: $('#notification_plus_type').offset().top - 50
+            }, 400);
 
             //set preview html
             $('.notification-preview-content').html($('.preview', $(this)).html());
@@ -341,8 +422,10 @@
                 },
 
                 success: res => {
+                    $('.notification-plus-meta-tabs').replaceWith(res.menu);
+
                     $('.notification-plus-tab-content>div:not(#notification_type)').remove();
-                    $('#notification_type').after(res.html);
+                    $('#notification_type').after(res.content);
 
                 },
 
@@ -350,18 +433,41 @@
                     app.initSelect2();
                     app.previewHandler();
                     app.initDateTimePicker();
-                    $('#notification_type').removeClass('loading');
-                    $('.notification-plus-tab-link[data-target="content"]').trigger('click');
+                    app.initVolumeSlider();
 
-                    $([document.documentElement, document.body]).animate({
-                        scrollTop: $('#notification_plus_type').offset().top
-                    }, 400);
+                    $('.notification-plus-tab-item:nth-child(2) .notification-plus-tab-link').trigger('click');
+                    $('#notification_plus_type').removeClass('loading');
 
                 },
 
                 error: error => console.log(error)
             });
 
+        },
+
+        selectSource: function () {
+            const message = $(this).data('message');
+
+            //check if source is setup or not
+            if ($(this).hasClass('need_setup')) {
+                Swal.fire({
+                    //title: message,
+                    text: message,
+                    icon: 'info',
+                    showConfirmButton: false,
+                    showCancelButton: true,
+                    cancelButtonColor: '#dc3545',
+                    customClass: {
+                        container: 'notification-plus-swal',
+                    },
+                });
+
+                return;
+            }
+
+            // checked the clicked type
+            $('.notification-plus-notification-source').removeClass('active').find('input').prop('checked', false);
+            $(this).addClass('active').find('input').prop('checked', true);
         },
 
         toggleTriggerContent: function () {
@@ -403,8 +509,8 @@
                 .on('select', function () {
                     const uploaded_image = image.state().get('selection').first();
                     const image_url = uploaded_image.toJSON().url;
-                    $('.notification-plus-image-preview',).attr('src', image_url).removeClass('hidden');
-                    $('#settings_image',).val(image_url).trigger('change');
+                    $('.notification-plus-image-preview').attr('src', image_url).removeClass('hidden');
+                    $('.notification-plus-image').val(image_url).trigger('change');
                     $('.notification-plus-remove-image').removeClass('hidden');
                 });
         },

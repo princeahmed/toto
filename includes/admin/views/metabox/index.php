@@ -11,7 +11,9 @@ if ( ! $current_type ) {
 }
 
 include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/preview.php';
+
 include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/menu.php';
+
 include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/tabs.php';
 
 ?>
@@ -19,4 +21,8 @@ include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/tabs.php';
     <a href="#" class="notification-plus-prev"><i class="fa fa-angle-left"></i> <?php _e( 'Previous', 'notification-plus' ); ?>
     </a> <a href="#" class="notification-plus-next"><?php _e( 'Next', 'notification-plus' ); ?>
         <i class="fa fa-angle-right"></i></a>
+</div>
+
+<div class="notification-plus-ajax-loader">
+    <img src="<?php echo site_url( 'wp-includes/images/wpspin-2x.gif' ); ?>">
 </div>

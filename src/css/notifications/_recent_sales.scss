@@ -1,0 +1,43 @@
+/* Latest Conversion */
+.notification-plus-recent-sales-wrapper {
+}
+
+@media (min-width: 576px) {
+  .notification-plus-recent-sales-wrapper {
+    max-width: 350px !important;
+  }
+}
+
+.notification-plus-recent-sales-content {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center !important;
+}
+
+.notification-plus-recent-sales-title {
+  font-size: 13px !important;
+  margin-bottom: 0 !important;
+}
+
+.notification-plus-recent-sales-description {
+  font-weight: bold !important;
+  margin-bottom: 5px !important;
+  font-size: 14px !important;
+}
+
+.notification-plus-recent-sales-image {
+  width: 35px !important;
+  height: 35px !important;
+  margin-right: 16px !important;
+}
+
+.notification-plus-recent-sales-footer {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+}
+
+.notification-plus-recent-sales-time {
+  font-size: 11px !important;
+  color: grey;
+}

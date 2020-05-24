@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Notification Plus
  * Plugin URI:  https://princeboss.com
- * Description: Engage users by displaying notification of Social Proof, Fomo, WooCommerce Recent Sales & Upsells, Review Feedback, Email Subscription and many more.
+ * Description: Notification Plus is a fully loaded toolkit with marketing tools and pop-ups to create FOMO, Social Proof notifications to Engage and keep your website visitors.
  * Version:     1.0.0
  * Author:      Prince
  * Author URI:  http://github.com/princeahmed
@@ -90,7 +90,7 @@ final class Notification_Plus {
 		include_once NOTIFICATION_PLUS_INCLUDES . '/class-ajax.php';
 		include_once NOTIFICATION_PLUS_INCLUDES . '/class-notifications.php';
 		include_once NOTIFICATION_PLUS_INCLUDES . '/functions.php';
-		include_once NOTIFICATION_PLUS_INCLUDES . '/prince-options/prince-loader.php';
+		include_once NOTIFICATION_PLUS_INCLUDES . '/prince-settings/prince-loader.php';
 
 		/* admin includes */
 		if ( is_admin() ) {
