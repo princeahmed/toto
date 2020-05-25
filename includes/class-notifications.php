@@ -115,9 +115,9 @@ class Notification_Plus_Notifications {
 
 				'image_type'   => ! empty( $settings->image_type ) ? $settings->image_type : 'featured',
 				'image'        => ! empty( $settings->image ) ? $settings->image : 'https://img.icons8.com/color/2x/webhook.png',
-				'product_type' => ! empty( $settings->product_type_type ) ? $settings->product_type : 'all',
+				'product_type' => ! empty( $settings->product_type ) ? $settings->product_type : 'all',
 				'product'      => ! empty( $settings->product ) ? $settings->product : '',
-				'category'     => ! empty( $settings->category_type ) ? $settings->category : '',
+				'category'     => ! empty( $settings->category ) ? $settings->category : '',
 				'url_type'     => ! empty( $settings->url_type ) ? $settings->url_type : 'product_page',
 				'url'          => ! empty( $settings->url ) ? $settings->url : '',
 
@@ -435,6 +435,7 @@ class Notification_Plus_Notifications {
 		$fields = [
 			'INFORMATIONAL' => [
 				'content'   => [ 'title', 'description', 'image', 'url', ],
+				'display'   => $default_display,
 				'customize' => [
 					'title_color',
 					'description_color',
@@ -454,6 +455,7 @@ class Notification_Plus_Notifications {
 					'button_text',
 					'footer_text',
 				],
+				'display'   => $default_display,
 				'customize' => [
 					'title_color',
 					'description_color',
@@ -467,6 +469,7 @@ class Notification_Plus_Notifications {
 
 			'LIVE_COUNTER' => [
 				'content'   => [ 'description', 'last_activity', 'url', ],
+				'display'   => $default_display,
 				'customize' => [
 					'number_color',
 					'number_background_color',
@@ -486,6 +489,7 @@ class Notification_Plus_Notifications {
 					'button_text',
 					'agreement',
 				],
+				'display'   => $default_display,
 				'customize' => [
 					'title_color',
 					'description_color',
@@ -498,12 +502,12 @@ class Notification_Plus_Notifications {
 			],
 
 			'CONVERSIONS_COUNTER' => [
-				'content' => [
+				'content'   => [
 					'title',
 					'last_activity',
 					'url'
 				],
-
+				'display'   => $default_display,
 				'customize' => [
 					'number_color',
 					'number_background_color',
@@ -515,8 +519,8 @@ class Notification_Plus_Notifications {
 			],
 
 			'COOKIE_NOTIFICATION' => [
-				'content' => [ 'description', 'image', 'link_url', 'link_url_text', 'button_text' ],
-
+				'content'   => [ 'description', 'image', 'link_url', 'link_url_text', 'button_text' ],
+				'display'   => $default_display,
 				'customize' => [
 					'description_color',
 					'background_color',
@@ -528,7 +532,7 @@ class Notification_Plus_Notifications {
 			],
 
 			'COUNTDOWN_COLLECTOR' => [
-				'content' => [
+				'content'   => [
 					'title',
 					'description',
 					'content_title',
@@ -536,9 +540,8 @@ class Notification_Plus_Notifications {
 					'button_text',
 					'end_date',
 					'agreement',
-					//'max_width',
 				],
-
+				'display'   => $default_display,
 				'customize' => [
 					'title_color',
 					'description_color',
@@ -554,13 +557,12 @@ class Notification_Plus_Notifications {
 			],
 
 			'EMOJI_FEEDBACK' => [
-				'content' => [ 'title', 'emoji' ],
-
+				'content'   => [ 'title', 'emoji' ],
+				'display'   => $default_display,
 				'customize' => [
 					'title_color',
 					'background_color',
 					'border_radius',
-					//'max_width',
 				],
 			],
 
@@ -568,6 +570,7 @@ class Notification_Plus_Notifications {
 
 				'source'    => [ 'latest_conversion_source' ],
 				'content'   => [ 'title', 'description', 'image', 'url', 'conversions_count', ],
+				'display'   => $default_display,
 				'customize' => [
 					'title_color',
 					'description_color',
@@ -579,10 +582,10 @@ class Notification_Plus_Notifications {
 			'RECENT_SALES' => [
 				'source'    => [ 'source' ],
 				'content'   => [
-					'recent_sales_custom',
-					//'recent_sales_woocommerce',
+					'recent_sales_content',
 					'conversions_count',
 				],
+				'display'   => $default_display,
 				'customize' => [
 					'title_color',
 					'description_color',
@@ -592,8 +595,8 @@ class Notification_Plus_Notifications {
 			],
 
 			'RANDOM_REVIEW' => [
-				'content' => [ 'url' ],
-
+				'content'   => [ 'url' ],
+				'display'   => $default_display,
 				'customize' => [
 					'title_color',
 					'description_color',
@@ -604,7 +607,7 @@ class Notification_Plus_Notifications {
 			],
 
 			'REQUEST_COLLECTOR' => [
-				'content' => [
+				'content'   => [
 					'title',
 					'description',
 					'image',
@@ -613,9 +616,8 @@ class Notification_Plus_Notifications {
 					'input_placeholder',
 					'button_text',
 					'agreement',
-					//'max_width',
 				],
-
+				'display'   => $default_display,
 				'customize' => [
 					'title_color',
 					'description_color',
@@ -630,48 +632,44 @@ class Notification_Plus_Notifications {
 			],
 
 			'SCORE_FEEDBACK' => [
-				'content' => [ 'title', 'description', ],
-
+				'content'   => [ 'title', 'description', ],
+				'display'   => $default_display,
 				'customize' => [
 					'title_color',
 					'description_color',
 					'background_color',
 					'button_background_color',
 					'button_color',
-					//'max_width',
 				],
 			],
 
 			'SOCIAL_SHARE' => [
-				'content' => [ 'title', 'description', 'share_url', ],
-
+				'content'   => [ 'title', 'description', 'share_url', ],
+				'display'   => $default_display,
 				'customize' => [
 					'title_color',
 					'description_color',
 					'background_color',
 					'border_radius',
-					//'max_width',
 				],
 			],
 
 			'VIDEO' => [
-				'content' => [ 'title', 'video', 'button_url', 'button_text', ],
-
+				'content'   => [ 'title', 'video', 'button_url', 'button_text', ],
+				'display'   => $default_display,
 				'customize' => [
 					'title_color',
 					'background_color',
 					'button_background_color',
 					'button_color',
 					'border_radius',
-					//'max_width',
 				]
 			],
 
 		];
 
-		$return            = $fields[ $type ];
-		$return['display'] = $default_display;
-		$return['sound']   = [ 'enable_sound' ];
+		$return          = $fields[ $type ];
+		$return['sound'] = [ 'enable_sound' ];
 
 		return $return;
 

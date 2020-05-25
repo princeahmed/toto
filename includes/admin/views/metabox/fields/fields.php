@@ -825,15 +825,15 @@ printf( '</div>' );
 $fields->source = ob_get_clean();
 
 
-/*recent sales custom*/
+/*recent sales content*/
 ob_start();
+printf( '<div class="content_custom %s">', 'custom' == $source ? '' : 'hidden' );
 include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/fields/recent-sales-custom.php';
-$fields->recent_sales_custom = ob_get_clean();
-
-
-/*recent sales woocommerce*/
-ob_start();
+printf( '</div><div class="content_woocommerce %s">', 'woocommerce' == $source ? '' : 'hidden' );
 include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/fields/recent-sales-woocommerce.php';
-$fields->recent_sales_woocommerce = ob_get_clean();
+printf( '</div><div class="content_edd %s">', 'edd' == $source ? '' : 'hidden' );
+include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/fields/recent-sales-edd.php';
+printf( '</div>' );
+$fields->recent_sales_content = ob_get_clean();
 
 return $fields;
