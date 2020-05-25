@@ -32,6 +32,7 @@
         },
 
         handleConversion: () => {
+
             //new conversion
             $(document).on('click', '.conversion_new', function (e) {
                 e.stopPropagation();
@@ -39,11 +40,23 @@
 
                 $('.conversion-group-body').addClass('hidden');
 
+                const p = $(this).parents('.conversion-group');
+                const elem = p.nextAll('.conversion-group');
+                increaseIndex(elem);
+
+                const count = parseInt($('.conversion-count', p).text());
+
+                const data = {
+                    index: count,
+                    count: (count + 1),
+                };
                 const conversion = wp.template('load-conversion');
-                $(this).parents('.conversion-group').after(conversion);
+                $(this).parents('.conversion-group').after(conversion(data));
+
+                hideDelete();
             });
 
-            //new conversion
+            //duplicate conversion
             $(document).on('click', '.conversion_copy', function (e) {
                 e.stopPropagation();
                 e.stopImmediatePropagation();
@@ -52,14 +65,31 @@
                 const conversion = p.clone();
 
                 $('.conversion-group-body').addClass('hidden');
+
+                const count = parseInt($('.conversion-count', p).text());
+
+                $('input', $(conversion)).each(function () {
+                    const prev_name = $(this).attr('name');
+                    const new_name = prev_name.replace(/\[(\d+)\]/, `[${count}]`);
+
+                    $(this).attr('name', new_name);
+                });
+
+                $('.conversion-count', $(conversion)).html(count + 1);
+
+                const elem = p.nextAll('.conversion-group');
+                increaseIndex(elem);
+
                 p.after(conversion);
+                hideDelete();
+
             });
 
             //toggle
             $(document).on('click', '.conversion-group-header, .conversion_edit', function (e) {
                 e.stopPropagation();
                 e.stopImmediatePropagation();
-                    
+
                 $('.conversion-group-body', $(this).parents('.conversion-group')).toggleClass('hidden');
             });
 
@@ -68,8 +98,54 @@
                 e.stopPropagation();
                 e.stopImmediatePropagation();
 
+                const p = $(this).parents('.conversion-group');
+                const elem = p.nextAll('.conversion-group');
+                decreaseIndex(elem);
+
+
                 $(this).parents('.conversion-group').remove();
+                hideDelete();
+
             });
+
+
+            function increaseIndex(elem) {
+
+                elem.each(function () {
+                    const count = parseInt($('.conversion-count', $(this)).text());
+
+                    $('input', $(this)).each(function () {
+                        const prev_name = $(this).attr('name');
+                        const new_name = prev_name.replace(/\[(\d+)\]/, `[${count}]`);
+
+                        $(this).attr('name', new_name);
+                    });
+
+                    $('.conversion-count', $(this)).html(count + 1);
+                });
+            }
+
+            function decreaseIndex(elem) {
+
+                elem.each(function () {
+                    const count = parseInt($('.conversion-count', $(this)).text());
+
+                    $('input', $(this)).each(function () {
+                        const prev_name = $(this).attr('name');
+                        const new_name = prev_name.replace(/\[(\d+)\]/, `[${(count - 1)}]`);
+
+                        $(this).attr('name', new_name);
+                    });
+
+                    $('.conversion-count', $(this)).html(count - 1);
+                });
+            }
+
+            function hideDelete() {
+                $('.conversion-group:first-child .conversion_delete').addClass('hidden');
+                $('.conversion-group:not(:first-child) .conversion_delete').removeClass('hidden');
+            }
+
         },
 
         toggleRecentSalesImage: function () {
