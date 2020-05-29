@@ -76,7 +76,7 @@
 		<?php
 		$categories = get_terms( [ 'taxonomy' => "download_category" ] );
 
-		if ( ! empty( $categories ) ) {
+		if ( ! is_wp_error( $categories ) && ! empty( $categories ) ) {
 			$categories = wp_list_pluck( $categories, 'name', 'term_id' );
 			foreach ( $categories as $key => $cat ) {
 				printf( '<option value="%1$s" %3$s>%2$s</option>', $key, $cat, selected( $category, $key, false ) );

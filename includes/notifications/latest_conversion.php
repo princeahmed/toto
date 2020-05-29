@@ -6,8 +6,8 @@
             <img src="<?php echo $notification->image ?>" class="notification-plus-latest-conversion-image <?php echo ! empty( $notification->image ) ? '': 'hidden'; ?>"/>
 
         <div>
-            <p class="notification-plus-latest-conversion-title" style="color: <?php echo $notification->title_color ?>"><?php echo isset( $notification->who ) && $notification->who ? $notification->who : $notification->title ?></p>
-            <p class="notification-plus-latest-conversion-description" style="color: <?php echo $notification->description_color ?>"><?php echo $notification->description ?></p>
+            <p class="notification-plus-latest-conversion-title" style="color: <?php echo $notification->title_color ?>"><?php echo $notification->who; ?></p>
+            <p class="notification-plus-latest-conversion-description" style="color: <?php echo $notification->description_color ?>"><?php echo $notification->text ?></p>
 
             <div class="notification-plus-latest-conversion-footer">
                 <div class="notification-plus-latest-conversion-time">
@@ -16,7 +16,8 @@
 						echo notification_plus_get_timeago( $notification->last_action_date );
                     } else {
 						echo __('10 mins ago', 'notification-plus');
-					} ?>
+					}
+					?>
                 </div>
 
 				<?php notification_plus_branding($notification); ?>

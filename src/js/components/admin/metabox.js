@@ -541,7 +541,6 @@
         },
 
         selectSource: function () {
-            $('#notification_plus_type').addClass('loading');
 
             const message = $(this).data('message');
 
@@ -562,6 +561,8 @@
                 return;
             }
 
+            $('#notification_plus_type').addClass('loading');
+
             // checked the clicked type
             $('.notification-plus-notification-source').removeClass('active').find('input').prop('checked', false);
             $(this).addClass('active').find('input').prop('checked', true);
@@ -569,7 +570,7 @@
             setTimeout(function () {
                 $('.notification-plus-tab-item:nth-child(3) .notification-plus-tab-link').trigger('click');
                 $('#notification_plus_type').removeClass('loading');
-            }, 200);
+            }, 500);
         },
 
         toggleTriggerContent: function () {

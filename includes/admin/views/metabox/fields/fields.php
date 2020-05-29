@@ -65,19 +65,27 @@ $time_background_color     = ! empty( $notification['time_background_color'] ) ?
 $end_date                  = ! empty( $notification['end_date'] ) ? $notification['end_date'] : '';
 $link_url                  = ! empty( $notification['link_url'] ) ? $notification['link_url'] : '';
 $link_url_text             = ! empty( $notification['link_url_text'] ) ? $notification['link_url_text'] : '';
+$delay_first               = ! empty( $notification['delay_first'] ) ? $notification['delay_first'] : '';
+$delay_between             = ! empty( $notification['delay_between'] ) ? $notification['delay_between'] : '';
 
-$source       = ! empty( $notification['source'] ) ? $notification['source'] : '';
-$who          = ! empty( $notification['who'] ) ? $notification['who'] : '';
-$text         = ! empty( $notification['text'] ) ? $notification['text'] : '';
-$woo_who      = ! empty( $notification['woo_who'] ) ? $notification['woo_who'] : '';
-$woo_text     = ! empty( $notification['woo_text'] ) ? $notification['woo_text'] : '';
-$image_type   = ! empty( $notification['image_type'] ) ? $notification['image_type'] : '';
-$image        = ! empty( $notification['image'] ) ? $notification['image'] : '';
-$url_type     = ! empty( $notification['url_type'] ) ? $notification['url_type'] : '';
-$url          = ! empty( $notification['url'] ) ? $notification['url'] : '';
-$product_type = ! empty( $notification['product_type'] ) ? $notification['product_type'] : '';
-$product      = ! empty( $notification['product'] ) ? $notification['product'] : '';
-$category     = ! empty( $notification['category'] ) ? $notification['category'] : '';
+$source           = ! empty( $notification['source'] ) ? $notification['source'] : '';
+$who              = ! empty( $notification['who'] ) ? $notification['who'] : '';
+$text             = ! empty( $notification['text'] ) ? $notification['text'] : '';
+$woo_who          = ! empty( $notification['woo_who'] ) ? $notification['woo_who'] : '';
+$woo_text         = ! empty( $notification['woo_text'] ) ? $notification['woo_text'] : '';
+$image_type       = ! empty( $notification['image_type'] ) ? $notification['image_type'] : '';
+$woo_image_type   = ! empty( $notification['woo_image_type'] ) ? $notification['woo_image_type'] : '';
+$image            = ! empty( $notification['image'] ) ? $notification['image'] : '';
+$woo_image        = ! empty( $notification['woo_image'] ) ? $notification['woo_image'] : '';
+$url_type         = ! empty( $notification['url_type'] ) ? $notification['url_type'] : '';
+$woo_url_type     = ! empty( $notification['woo_url_type'] ) ? $notification['woo_url_type'] : '';
+$woo_url          = ! empty( $notification['woo_url'] ) ? $notification['woo_url'] : '';
+$url              = ! empty( $notification['url'] ) ? $notification['url'] : '';
+$product_type     = ! empty( $notification['product_type'] ) ? $notification['product_type'] : '';
+$woo_product_type = ! empty( $notification['woo_product_type'] ) ? $notification['woo_product_type'] : '';
+$product          = ! empty( $notification['product'] ) ? $notification['product'] : '';
+$woo_product      = ! empty( $notification['woo_product'] ) ? $notification['woo_product'] : '';
+$category         = ! empty( $notification['category'] ) ? $notification['category'] : '';
 
 
 $fields = new stdClass();
@@ -280,9 +288,6 @@ ob_start(); ?>
     <div class="notification-plus-form-group">
         <label for="settings_branding_name"><?php _e( 'Branding Name:', 'notification-plus' ) ?></label>
         <input type="text" id="settings_branding_name" name="settings[branding_name]" value="<?php echo $branding_name; ?>">
-    </div>
-
-    <div class="notification-plus-form-group">
         <label for="settings_branding_url"><?php _e( 'Branding URL:', 'notification-plus' ) ?></label>
         <input type="text" id="settings_branding_url" name="settings[branding_url]" value="<?php echo $branding_url; ?>">
     </div>
@@ -671,10 +676,28 @@ $fields->emoji = ob_get_clean();
 ob_start(); ?>
     <div class="notification-plus-form-group flex-row align-center">
         <label for="settings_conversions_count" class="notification-plus-mr-10"><?php _e( 'How many notification to show?', 'notification-plus' ) ?></label>
-        <input type="text" id="settings_conversions_count" name="settings[conversions_count]" value="<?php echo $conversions_count ?>"/>
+        <input type="number" id="settings_conversions_count" name="settings[conversions_count]" value="<?php echo $conversions_count ?>"/>
     </div>
 <?php
 $fields->conversions_count = ob_get_clean();
+
+ob_start(); ?>
+    <div class="notification-plus-form-group">
+        <label for="settings_display_trigger_value"><?php _e( 'First notification delay:', 'notification-plus' ) ?></label>
+        <input type="number" id="settings_display_trigger_value" name="settings[display_trigger_value]" value="<?php echo $display_trigger_value ?>"/>
+        <p class="description">Initial delay before first notification in seconds</p>
+    </div>
+<?php
+$fields->delay_first = ob_get_clean();
+
+ob_start(); ?>
+    <div class="notification-plus-form-group">
+        <label for="settings_delay_between"><?php _e( 'Delay Between:', 'notification-plus' ) ?></label>
+        <input type="number" id="settings_delay_between" name="settings[delay_between]" value="<?php echo $delay_between ?>"/>
+        <p class="description">Delay between each notification in seconds</p>
+    </div>
+<?php
+$fields->delay_between = ob_get_clean();
 
 ob_start(); ?>
     <div class="notification-plus-form-group">
@@ -825,15 +848,15 @@ printf( '</div>' );
 $fields->source = ob_get_clean();
 
 
-/*recent sales content*/
+/*latest conversion content*/
 ob_start();
 printf( '<div class="content_custom %s">', 'custom' == $source ? '' : 'hidden' );
-include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/fields/recent-sales-custom.php';
+include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/fields/latest-conversion-custom.php';
 printf( '</div><div class="content_woocommerce %s">', 'woocommerce' == $source ? '' : 'hidden' );
-include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/fields/recent-sales-woocommerce.php';
+include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/fields/latest-conversion-woocommerce.php';
 printf( '</div><div class="content_edd %s">', 'edd' == $source ? '' : 'hidden' );
-include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/fields/recent-sales-edd.php';
+include NOTIFICATION_PLUS_INCLUDES . '/admin/views/metabox/fields/latest-conversion-edd.php';
 printf( '</div>' );
-$fields->recent_sales_content = ob_get_clean();
+$fields->latest_conversion_content = ob_get_clean();
 
 return $fields;

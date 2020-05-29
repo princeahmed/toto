@@ -1,7 +1,10 @@
 <?php
+
 global $post;
 
-$settings = get_post_meta( $post->ID, '_settings', true );
+if ( $post ) {
+	$settings = get_post_meta( $post->ID, '_settings', true );
+}
 
 if ( ! empty( $settings['custom'] ) ) {
 	$i = 0;
@@ -57,10 +60,7 @@ if ( ! empty( $settings['custom'] ) ) {
 		<?php
 		$i ++;
 	}
-} else {
-
-	?>
-
+} else { ?>
     <div class="conversion-group">
         <div class="conversion-group-header">
             <div class="conversion-group-header-title">Conversion - <span class="conversion-count">1</span></div>
@@ -108,7 +108,6 @@ if ( ! empty( $settings['custom'] ) ) {
             </div>
         </div>
     </div>
-
 <?php } ?>
 
 <script type="text/html" id="tmpl-load-conversion">

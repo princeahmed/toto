@@ -58,7 +58,7 @@ function notification_plus_get_timeago( $date ) {
 }
 
 function notification_plus_branding( $notification ) {
-		printf( '<a href="%1$s" class="notification-plus-site %2$s">%3$s</a>', $notification->branding_url, $notification->display_branding ? '' : 'hidden', $notification->branding_name );
+	printf( '<a href="%1$s" class="notification-plus-site %2$s">%3$s</a>', $notification->branding_url, $notification->display_branding ? '' : 'hidden', $notification->branding_name );
 }
 
 function notification_plus_agreement( $notification ) { ?>
@@ -74,5 +74,54 @@ function notification_plus_agreement( $notification ) { ?>
 
 function notification_plus_close( $notification ) {
 	printf( '    <span class="notification-plus-close">%s</span>', $notification->display_close_button ? '&#10006;' : '' );
+}
+
+/**
+ * Get woocommerce orders
+ *
+ * @param $notification
+ *
+ * @return array|bool
+ */
+function notification_plus_get_woo_orders( $notification ) {
+	global $wpdb;
+
+	$limit = $notification->conversions_count;
+
+	$table_posts    = $wpdb->prefix . "posts";
+	$table_items    = $wpdb->prefix . "woocommerce_order_items";
+	$table_itemmeta = $wpdb->prefix . "woocommerce_order_itemmeta";
+
+	$statuses = array_keys( wc_get_order_statuses() );
+	$statuses = implode( "','", $statuses );
+
+
+	if ( 'all' == $notification->woo_product_type ) {
+		return $wpdb->get_col( "
+        SELECT ID FROM {$wpdb->prefix}posts
+        WHERE post_type LIKE 'shop_order'
+        AND post_status IN ('$statuses')
+        LIMIT 0, $limit
+    " );
+	} elseif ( 'product' == $notification->woo_product_type ) {
+		if ( ! empty( $notification->woo_product ) ) {
+			$sql = "
+                    SELECT $table_items.order_id
+                    FROM $table_itemmeta, $table_items, $table_posts
+                    WHERE $table_items.order_item_id = $table_itemmeta.order_item_id
+                    AND $table_items.order_id = $table_posts.ID
+                    AND $table_posts.post_status IN ( '$statuses' )
+                    AND $table_itemmeta.meta_key LIKE '_product_id'
+                    AND $table_itemmeta.meta_value LIKE '$notification->woo_product'
+                    ORDER BY $table_items.order_item_id DESC
+                    LIMIT 0, $limit
+                    ";
+
+			return $wpdb->get_col( $sql );
+
+		}
+	}
+
+	return false;
 }
 
