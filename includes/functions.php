@@ -125,3 +125,31 @@ function notification_plus_get_woo_orders( $notification ) {
 	return false;
 }
 
+function notification_plus_get_edd_sales( $notification ) {
+
+	if ( ! class_exists( 'EDD_Payments_Query' ) ) {
+		return false;
+	}
+
+	$limit = $notification->conversions_count;
+
+
+	$args = array(
+		'output'  => 'payments',
+		'number'  => $limit,
+		'orderby' => 'ID',
+		'order'   => 'DESC',
+		'status'  => 'any',
+		//'start_date' => isset( $_GET['start-date'] ) ? sanitize_text_field( $_GET['start-date'] ) : null,
+	);
+
+	if ( 'product' == $notification->edd_product_type ) {
+		$args['download'] = $notification->edd_product;
+	}
+
+	$p_query = new EDD_Payments_Query( $args );
+
+	return $p_query->get_payments();
+
+}
+

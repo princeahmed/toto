@@ -75,18 +75,22 @@ $woo_who          = ! empty( $notification['woo_who'] ) ? $notification['woo_who
 $woo_text         = ! empty( $notification['woo_text'] ) ? $notification['woo_text'] : '';
 $image_type       = ! empty( $notification['image_type'] ) ? $notification['image_type'] : '';
 $woo_image_type   = ! empty( $notification['woo_image_type'] ) ? $notification['woo_image_type'] : '';
+$edd_image_type   = ! empty( $notification['edd_image_type'] ) ? $notification['edd_image_type'] : '';
 $image            = ! empty( $notification['image'] ) ? $notification['image'] : '';
 $woo_image        = ! empty( $notification['woo_image'] ) ? $notification['woo_image'] : '';
+$edd_image        = ! empty( $notification['edd_image'] ) ? $notification['edd_image'] : '';
 $url_type         = ! empty( $notification['url_type'] ) ? $notification['url_type'] : '';
 $woo_url_type     = ! empty( $notification['woo_url_type'] ) ? $notification['woo_url_type'] : '';
+$edd_url_type     = ! empty( $notification['edd_url_type'] ) ? $notification['edd_url_type'] : '';
 $woo_url          = ! empty( $notification['woo_url'] ) ? $notification['woo_url'] : '';
+$edd_url          = ! empty( $notification['edd_url'] ) ? $notification['edd_url'] : '';
 $url              = ! empty( $notification['url'] ) ? $notification['url'] : '';
 $product_type     = ! empty( $notification['product_type'] ) ? $notification['product_type'] : '';
 $woo_product_type = ! empty( $notification['woo_product_type'] ) ? $notification['woo_product_type'] : '';
+$edd_product_type = ! empty( $notification['edd_product_type'] ) ? $notification['edd_product_type'] : '';
 $product          = ! empty( $notification['product'] ) ? $notification['product'] : '';
 $woo_product      = ! empty( $notification['woo_product'] ) ? $notification['woo_product'] : '';
-$category         = ! empty( $notification['category'] ) ? $notification['category'] : '';
-
+$edd_product      = ! empty( $notification['edd_product'] ) ? $notification['edd_product'] : '';
 
 $fields = new stdClass();
 

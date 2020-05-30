@@ -117,20 +117,26 @@ class Notification_Plus_Notifications {
 				'woo_who'  => ! empty( $settings->woo_who ) ? $settings->woo_who : __( '{full_name} just Purchased', 'notification-plus' ),
 				'woo_text' => ! empty( $settings->woo_text ) ? $settings->woo_text : __( '{product_name}', 'notification-plus' ),
 
-				'woo_image_type' => ! empty( $settings->woo_image_type ) ? $settings->woo_image_type : 'featured',
 				'image_type'     => ! empty( $settings->image_type ) ? $settings->image_type : 'featured',
+				'woo_image_type' => ! empty( $settings->woo_image_type ) ? $settings->woo_image_type : 'featured',
+				'edd_image_type' => ! empty( $settings->edd_image_type ) ? $settings->edd_image_type : 'featured',
 				'image'          => ! empty( $settings->image ) ? $settings->image : 'https://img.icons8.com/color/2x/webhook.png',
 				'woo_image'      => ! empty( $settings->woo_image ) ? $settings->woo_image : 'https://img.icons8.com/color/2x/webhook.png',
+				'edd_image'      => ! empty( $settings->edd_image ) ? $settings->edd_image : 'https://img.icons8.com/color/2x/webhook.png',
 
-				'woo_product_type' => ! empty( $settings->woo_product_type ) ? $settings->woo_product_type : 'all',
 				'product_type'     => ! empty( $settings->product_type ) ? $settings->product_type : 'all',
+				'woo_product_type' => ! empty( $settings->woo_product_type ) ? $settings->woo_product_type : 'all',
+				'edd_product_type' => ! empty( $settings->edd_product_type ) ? $settings->edd_product_type : 'all',
 				'woo_product'      => ! empty( $settings->woo_product ) ? $settings->woo_product : '',
+				'edd_product'      => ! empty( $settings->edd_product ) ? $settings->edd_product : '',
 
 				'category' => ! empty( $settings->category ) ? $settings->category : '',
 
 				'url_type'     => ! empty( $settings->url_type ) ? $settings->url_type : 'product_page',
 				'woo_url_type' => ! empty( $settings->woo_url_type ) ? $settings->woo_url_type : 'product_page',
+				'edd_url_type' => ! empty( $settings->edd_url_type ) ? $settings->edd_url_type : 'product_page',
 				'woo_url'      => ! empty( $settings->woo_url ) ? $settings->woo_url : '',
+				'edd_url'      => ! empty( $settings->edd_url ) ? $settings->edd_url : '',
 				'url'          => ! empty( $settings->url ) ? $settings->url : '',
 
 				'time_ago'          => ! empty( $settings->time_ago ) ? $settings->time_ago : __( '10 mins ago', 'notification-plus' ),
@@ -363,7 +369,7 @@ class Notification_Plus_Notifications {
 					if ( empty( $items ) ) {
 						continue;
 					}
-					$item       = array_pop($items);
+					$item       = array_pop( $items );
 					$product_id = $item->get_product_id();
 
 					$full_name    = $order->get_formatted_billing_full_name();
@@ -394,6 +400,60 @@ class Notification_Plus_Notifications {
 					$attr['data-config']          = json_encode( $config );
 
 					$image = 'custom' != $notification->woo_image_type ? get_the_post_thumbnail_url( $product_id ) : $notification->woo_image;
+
+					$data_string = '';
+					foreach ( $attr as $key => $value ) {
+						$data_string .= sprintf( " %s='%s'", $key, $value );
+					}
+
+					$notification->who   = str_replace( $rep_search, $replacement, $notification->woo_who );
+					$notification->text  = str_replace( $rep_search, $replacement, $notification->woo_text );
+					$notification->image = $image;
+
+					printf( '<div class="%1$s" %2$s>', $classes, $data_string );
+					include NOTIFICATION_PLUS_INCLUDES . '/notifications/' . strtolower( $type ) . '.php';
+					printf( '</div>' );
+				}
+
+			} elseif ( 'edd' == $notification->source ) {
+
+				$sales = notification_plus_get_edd_sales( $notification );
+
+				if ( empty( $sales ) ) {
+					return;
+				}
+
+				foreach ( $sales as $i => $sale ) {
+
+					$first_name   = $sale->first_name;
+					$last_name    = $sale->last_name;
+					$full_name    = $first_name . ' ' . $last_name;
+					$item         = $sale->downloads[0]['id'];
+					$product_name = get_the_title( $item );
+
+					$rep_search = [
+						'{full_name}',
+						'{first_name}',
+						'{last_name}',
+						'{product_name}',
+					];
+
+					$replacement = [
+						$full_name,
+						$first_name,
+						$last_name,
+						$product_name,
+					];
+
+					$config['display_trigger_value'] += 0 == $i ? $delay : $delay + $between;
+
+					$config['url']                = 'custom' != $notification->edd_url_type ? get_permalink( $item ) : $notification->edd_url;
+					$config['notification_id']    = "{$post_id}_{$i}";
+					$attr['data-notification-id'] = "{$post_id}_{$i}";
+					$attr['id']                   = "notification_plus_{$post_id}_{$i}";
+					$attr['data-config']          = json_encode( $config );
+
+					$image = 'custom' != $notification->edd_image_type ? get_the_post_thumbnail_url( $item ) : $notification->edd_image;
 
 					$data_string = '';
 					foreach ( $attr as $key => $value ) {

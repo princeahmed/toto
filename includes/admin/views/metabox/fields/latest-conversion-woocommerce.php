@@ -21,34 +21,15 @@
     <label for="settings_woo_product_type" class="notification-plus-mr-10"><?php _e( 'Show Notification of:', 'notification-plus' ) ?></label>
     <select name="settings[woo_product_type]" class="settings_product_type" id="settings_woo_product_type">
         <option value="all" <?php selected( 'all', $woo_product_type ) ?>>All Products</option>
-        <option value="product" <?php selected( 'product', $woo_product_type ) ?>>Specific Product(s)
+        <option value="product" <?php selected( 'product', $woo_product_type ) ?>>Specific Product
         </option>
     </select>
 </div>
 
-<div class="notification-plus-form-group <?php echo 'category' != $woo_product_type ? 'hidden' : ''; ?>">
-    <label for="settings_woo_category"><?php _e( 'Select Category(s):', 'notification-plus' ) ?></label>
-    <select name="settings[woo_category]" class="settings_category" id="settings_woo_category">
-        <option value="">Select Category(s)</option>
-		<?php
-		$categories = get_terms( [ 'taxonomy' => "product_cat" ] );
-
-		if ( !is_wp_error($categories) && ! empty( $categories ) ) {
-			$categories = wp_list_pluck( $categories, 'name', 'term_id' );
-			foreach ( $categories as $key => $cat ) {
-				printf( '<option value="%1$s" %3$s>%2$s</option>', $key, $cat, selected( $category, $key, false ) );
-			}
-		}
-
-		?>
-    </select>
-    <p class="description"><?php _e( 'Select the specific product category.', 'notification-plus' ) ?></p>
-</div>
-
 <div class="notification-plus-form-group <?php echo 'product' != $woo_product_type ? 'hidden' : ''; ?>">
-    <label for="settings_woo_product"><?php _e( 'Select Product(s):', 'notification-plus' ) ?></label>
+    <label for="settings_woo_product"><?php _e( 'Select Product:', 'notification-plus' ) ?></label>
     <select name="settings[woo_product]" class="settings_product" id="settings_woo_product">
-        <option value="">Select Product(s)</option>
+        <option value="">Select Product</option>
 		<?php
 
 		$products = get_posts( array(
