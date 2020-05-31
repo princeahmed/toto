@@ -57,6 +57,16 @@ function notification_plus_get_timeago( $date ) {
 	}
 }
 
+function notification_plus_get_time($time){
+	$from = strtotime($time);
+
+	if((time() - $from) < 1){
+	    return 'now';
+    }
+
+	return human_time_diff($from, current_time('timestamp')).' ago';
+}
+
 function notification_plus_branding( $notification ) {
 	printf( '<a href="%1$s" class="notification-plus-site %2$s">%3$s</a>', $notification->branding_url, $notification->display_branding ? '' : 'hidden', $notification->branding_name );
 }

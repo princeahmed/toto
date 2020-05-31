@@ -4,7 +4,7 @@
  * Plugin Name: Notification Plus
  * Plugin URI:  https://princeboss.com
  * Description: Notification Plus is a fully loaded toolkit with marketing tools and pop-ups to create FOMO, Social Proof notifications to Engage and keep your website visitors.
- * Version:     1.0.0
+ * Version:     1.0.1
  * Author:      Prince
  * Author URI:  http://github.com/princeahmed
  * Text Domain: notification-plus
@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit();
  */
 final class Notification_Plus {
 
-	public $version = '1.0.0';
+	public $version = '1.0.1';
 
 	public $min_php = '5.6.0';
 
@@ -80,6 +80,9 @@ final class Notification_Plus {
 	}
 
 	public function includes() {
+
+		/* core includes */
+		include_once NOTIFICATION_PLUS_INCLUDES . '/freemius.php';
 
 		/* core includes */
 		include_once NOTIFICATION_PLUS_INCLUDES . '/class-install.php';

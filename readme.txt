@@ -1,4 +1,4 @@
-=== Notification Plus - Social Proof, Fomo Notifications & Popups for WordPress ===
+=== Notification Plus - Social Proof, Fomo, WooCommerce Recent Sales Notifications & Popups for WordPress ===
 Contributors: princeahmed
 Requires at least: 4.4
 Tested up to: 5.4.1
@@ -6,95 +6,74 @@ Requires PHP: 5.6
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Tags: social proof, notification, fomo, woocommerce recent sells, notificationx,woocommerce upsell, notification bar, wp fomo, wpfomify, email subscription notification, review feedback notification, email subscription, countdown popup, popup
+Tags: social proof, notification, fomo, woocommerce recent sales, notificationx, woocommerce upsales, custom notifications, notification bar, wp fomo, wpfomify, email subscription notification, review feedback notification, email subscription, countdown popup, popup
 
-Notification Plus is a fully loaded toolkit with marketing tools and pop-ups to create FOMO, Social Proof notifications to Engage and keep your website visitors.
+Notification Plus is a fully loaded toolkit with marketing tools and pop-ups to create FOMO, Social Proof, WooCommerce Recent Sales notifications to Engage and keep your website visitors.
 
-By displaying different type of notification such as: Score & Emoji Feedback, Random Review,
+By displaying different type of notification such as: WooCommerce & Easy Digital Downloads Recent Sales, Score & Emoji Feedback, Random Review,
 Cookie Notification, WooCommerce Recent Sales & Upsells, Email & Request Collector, Countdown Timer,
 Social Shares, Coupon, Video Popup and Many More Notification & Popup.
 
 == Description ==
 
-Notification Plus is a fully loaded toolkit with marketing tools and pop-ups to create FOMO, Social Proof notifications to Engage and keep your website visitors.
+Notification Plus is a fully loaded toolkit with marketing tools and pop-ups to create FOMO, Social Proof, WooCommerce & Easy Digital Downloads Recent Sales notifications to Engage and keep your website visitors.
 
-By displaying different type of notification such as: Score & Emoji Feedback, Random Review, Cookie Notification, WooCommerce Recent Sales & Upsells, Email & Request Collector, Countdown Timer,Social Shares, Coupon, Video Popup and Many More Notification & Popup.
+By displaying different type of notification such as: Score & Emoji Feedback, Random Review, Cookie Notification, WooCommerce Recent Sales & Upsells, Email & Request Collector, Latest Conversions, Countdown Timer,Social Shares, Coupon, Video Popup and Many More Notification & Popup.
 
-Let your visitors know about your special offers, deals, announcement, etc. with a call to action. Notification Plus brings the best notification popup solution for WordPress.You could turn on the end, start time, you will get detail statistics how your notification popups are working as well.
+Let your visitors know about your product recent sales, special offers, deals, announcement, etc. with a call to action. Notification Plus brings the best notification popup solution for WordPress.You could turn on the end, start time, you will get detail statistics how your notification popups are working as well.
 
 Engage and Convert Your Users By Displaying 14+ Types Of Notifications of This Plugin.
 Social-Proofs help to increase your sales & FOMOs are help to increase conversion rate.
 
 == NOTIFICATION PLUS PLUGIN FEATURES: ==
 
-= Live Editing Preview =
-You can see the preview of the notification how looks like during editing the notification. It saves a lots of time and very user friendly.
+* ✔️**Custom Notification** - ( You can create & display custom notifications )
 
-= Sound Supports =
-Play sound when the notification is displayed.
+* ✔️**WooCommerce Recent Sales Notification** - ( Display The Latest WooCommerce Sales. )
 
-= Show Popup on Exit-Intent, Time Delay and Scroll Percentage =
-Different options for displaying notification before user leave the page, after a specific time delay and after a scroll the window
+* ✔️**Easy Digital Downloads Recent Sales Notification** - ( Display The Latest Easy Digital Downloads Sales. )
 
-= Statistics & Conversations Tracker =
-Get great statistics & setup automated conversations tracker
+* ✔️**Live Editing Preview** - ( You can see the preview of the notification how looks like during editing the notification. It saves a lots of time and very user friendly. )
 
-= Shortcode Supports =
-Notification Plus allows its users to display their notifications anywhere they want by using Shortcode. You can now display your popup notification in your WordPress posts, pages, or wherever you wish. There is no binding anymore!
+* ✔️**Sound Supports** - ( Play sound when the notification is displayed. )
 
-= Informational Social Proof Notification Popup =
-Customize everything and create your own informational
+* ✔️**Show Popup on Exit-Intent, Time Delay and Scroll Percentage** - ( Different options for displaying notification before user leave the page, after a specific time delay and after a scroll the window )
 
-= Live Counter Social Proof Notification Popup =
-Easiest live counter you will ever setup. It just works
+* ✔️**Statistics & Conversations Tracker** - ( Get great statistics & setup automated conversations tracker )
 
-= Email Collector Notification Popup =
-Collecting emails easily and generating leads
+* ✔️**Shortcode Supports** - ( Notification Plus allows its users to display their notifications anywhere they want by using Shortcode. You can now display your popup notification in your WordPress posts, pages, or wherever you wish. There is no binding anymore! )
 
-= Cookie Notification Popup =
-We all need this one even if we don't want it.
+* ✔️**Informational Social Proof Notification Popup** - ( Customize everything and create your own informational )
 
-= Score Feedback Notification Popup =
-Learn more about your visitors thoughts
+* ✔️**Live Counter Social Proof Notification Popup** - ( Easiest live counter you will ever setup. It just works )
 
-= Youtube Video =
-Show your users a demo, presentation or anything else.
+* ✔️**Email Collector Notification Popup** - ( Collecting emails easily and generating leads )
 
-= Random Review Social Proof Notification Popup =
-Add actual reviews and display them for a social boost.
+* ✔️**Cookie Notification Popup** - ( We all need this one even if we don't want it. )
 
-= Social Share Notification Popup =
-Social sharing with just a simple click.
+* ✔️**Score Feedback Notification Popup** - ( Learn more about your visitors thoughts )
 
-= Emoji Feedback Notification Popup =
-Track and see how your users feel.
+* ✔️**Youtube Video** - ( Show your users a demo, presentation or anything else. )
 
-= Custom Campaign Branding =
-Users are able to set their own branding of the notifications that they create.
+* ✔️**Random Review Social Proof Notification Popup** - ( Add actual reviews and display them for a social boost. )
 
-= Highly Customizable Notifications =
-Users can set their own settings of the notifications they create and control everything through the settings.
+* ✔️**Social Share Notification Popup** - ( Social sharing with just a simple click. )
 
-= Notifications Statistics =
-Users will have a dedicated page for statistics for each of their notifications to see how they are doing.
+* ✔️**Emoji Feedback Notification Popup** - ( Track and see how your users feel. )
 
-= Notifications Conversions =
-Users can see and track the conversions generated by specific notifications.
+* ✔️**Custom Campaign Branding** - ( Users are able to set their own branding of the notifications that they create. )
 
-= Activity Social Proof Popup =
-Show live visitor count, order count and product views with attractive popup notifications.
+* ✔️**Highly Customizable Notifications** - ( Users can set their own settings of the notifications they create and control everything through the settings. )
 
-= Countdown Popup =
-Create a strong sense of urgency and hurry visitors to make purchases quickly by showing a countdown timer.
+* ✔️**Notifications Statistics** - ( Users will have a dedicated page for statistics for each of their notifications to see how they are doing. )
 
-= Promo Sticky Popup Notification Bar (PRO) =
-Let visitors know how many days, hours and minutes are left until the end of promotions
+* ✔️**Notifications Conversions** - ( Users can see and track the conversions generated by specific notifications. )
 
-= WooCommerce Recent Sales Popup Notification (PRO) =
-Let visitors know what others did on the website by showing recent sales notifications
+* ✔️**Activity Social Proof Popup** - ( Show live visitor count, order count and product views with attractive popup notifications. )
 
-= WooCommerce Latest Conversations Popup Notification (PRO) =
-Let visitors know how many people bought a specific product
+* ✔️**Countdown Popup** - ( Create a strong sense of urgency and hurry visitors to make purchases quickly by showing a countdown timer. )
+
+* ✔️**Promo Sticky Popup Notification Bar (PRO)** - ( Let visitors know how many days, hours and minutes are left until the end of promotions )
 
 
 == HOW DOES IT WORK / FUNCTIONALITY EXPLAINED: ==
@@ -116,10 +95,13 @@ This may have bugs and lack of features. If you want to contribute to this proje
 
 == Frequently Asked Questions ==
 
+= How Can I Display WooCommerce Recent Sales Notifications? =
+First, Create a new notification and select Latest Conversion from the Type Tab, Then WooCommerce from the source tab and then fill out the next steps. You will see that Notification Plus in action.
+
 = Is coding skill needed to use Notification+? =
 Not at all! Notification Plus has simple and super user-friendly setup wizard to help you configure the notification without any need of code intervention.
 
-= Can I use Notification+ on non eCommerce websites? =
+= Can I use Notification Plus on non eCommerce websites? =
 Yes, Notification+ can be used to display promotional announcements, email subscription form, countdown timer, review feedback and more which can be use on any website.
 
 = Is our website’s data legally safe with Notification+? =
@@ -140,6 +122,13 @@ Yes. Your data is legally safe and we guarantee to not make use of your data und
 
 
 == Changelog ==
+
+= 1 (June), 2020 =
+* Freemius Integrated
+* Add Latest Conversion Notification Type
+* Custom Notification Added
+* WooCommerce Recent Sales Integrated
+* Easy Digital Downloads Recent Sales Integrated
 
 = 16 May, 2020 =
 * Initial Release

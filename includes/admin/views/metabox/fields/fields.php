@@ -91,6 +91,7 @@ $edd_product_type = ! empty( $notification['edd_product_type'] ) ? $notification
 $product          = ! empty( $notification['product'] ) ? $notification['product'] : '';
 $woo_product      = ! empty( $notification['woo_product'] ) ? $notification['woo_product'] : '';
 $edd_product      = ! empty( $notification['edd_product'] ) ? $notification['edd_product'] : '';
+$time             = ! empty( $notification['time'] ) ? $notification['time'] : '';
 
 $fields = new stdClass();
 
@@ -771,7 +772,6 @@ ob_start(); ?>
     <div class="notification-plus-form-group">
         <label for="settings_end_date"><?php _e( 'End Date', 'notification-plus' ) ?></label>
         <input type="text" id="settings_end_date" class="notification-plus-date-time-picker" name="settings[end_date]" value="<?php echo $end_date ?>"/>
-        <p class="description"><?php _e( 'Ex: https://www.youtube.com/embed/3WxQgvuT6ZI', 'notification-plus' ) ?></p>
     </div>
 <?php
 $fields->end_date = ob_get_clean();
@@ -798,24 +798,24 @@ ob_start();
 
 $sources = [
 	'custom' => [
-		'name'     => __( 'Custom Notification', 'toto' ),
+		'name'     => __( 'Custom Notification', 'notification-plus' ),
 		'icon'     => '<i class="fa fa-cog"></i>',
 		'is_setup' => true,
 		'message'  => '',
 	],
 
 	'woocommerce' => [
-		'name'     => __( 'WooCommerce', 'toto' ),
+		'name'     => __( 'WooCommerce', 'notification-plus' ),
 		'icon'     => sprintf( '<img src="%s">', NOTIFICATION_PLUS_ASSETS . '/images/woocommerce.png' ),
 		'is_setup' => is_plugin_active( 'woocommerce/woocommerce.php' ),
-		'message'  => __( 'You have to install WooCommerce plugin first.', 'toto' )
+		'message'  => __( 'You have to install WooCommerce plugin first.', 'notification-plus' )
 	],
 
 	'edd' => [
-		'name'     => __( 'Easy Digital Downloads', 'toto' ),
+		'name'     => __( 'Easy Digital Downloads', 'notification-plus' ),
 		'icon'     => sprintf( '<img src="%s">', NOTIFICATION_PLUS_ASSETS . '/images/edd.png' ),
 		'is_setup' => is_plugin_active( 'easy-digital-downloads/easy-digital-downloads.php' ),
-		'message'  => __( 'You have to install Easy Digital Downloads plugin first.', 'toto' )
+		'message'  => __( 'You have to install Easy Digital Downloads plugin first.', 'notification-plus' )
 	],
 
 ];

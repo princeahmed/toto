@@ -16,7 +16,7 @@ class Notification_Plus_Enqueue {
 	 */
 	function __construct() {
 		add_action( 'wp_enqueue_scripts', [ $this, 'frontend_scripts' ] );
-		add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts' ] );
+		add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts' ], 101 );
 		add_action( 'admin_enqueue_scripts', [ $this, 'load_prince_scripts' ] );
 	}
 
@@ -45,6 +45,10 @@ class Notification_Plus_Enqueue {
 		if ( ! in_array( get_current_screen()->id, $this->notification_plus_admin_screens ) ) {
 			return;
 		}
+
+		wp_dequeue_style( 'jquery-ui-css' );
+		wp_deregister_style( 'jquery-ui-css' );
+
 		wp_enqueue_style( 'fontawesome', NOTIFICATION_PLUS_ASSETS . '/vendor/fontawesome/css/all.min.css', false, '5.13.0' );
 
 		wp_enqueue_style( 'select2-css', NOTIFICATION_PLUS_ASSETS . '/vendor/select2/select2.min.css', [], '4.0.6' );

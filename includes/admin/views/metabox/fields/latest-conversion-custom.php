@@ -55,6 +55,12 @@ if ( ! empty( $settings['custom'] ) ) {
                     <p class="description"><?php _e( 'The URL you want to user to go to after clicking the notification. Leave empty for no
             link.', 'notification-plus' ) ?></p>
                 </div>
+
+                <div class="notification-plus-form-group">
+                    <label><?php _e( 'Time:', 'notification-plus' ) ?></label>
+                    <input type="text" class="notification-plus-date-time-picker" name="settings[custom][<?php echo $i; ?>][time]" value="<?php echo $conversion['time']; ?>"/>
+                </div>
+
             </div>
         </div>
 		<?php
@@ -106,6 +112,11 @@ if ( ! empty( $settings['custom'] ) ) {
                 <p class="description"><?php _e( 'The URL you want to user to go to after clicking the notification. Leave empty for no
             link.', 'notification-plus' ) ?></p>
             </div>
+
+            <div class="notification-plus-form-group">
+                <label><?php _e( 'Time:', 'notification-plus' ) ?></label>
+                <input type="text" class="notification-plus-date-time-picker" name="settings[custom][0][time]" value=""/>
+            </div>
         </div>
     </div>
 <?php } ?>
@@ -156,6 +167,12 @@ if ( ! empty( $settings['custom'] ) ) {
                 <p class="description"><?php _e( 'The URL you want to user to go to after clicking the notification. Leave empty for no
             link.', 'notification-plus' ) ?></p>
             </div>
+
+            <div class="notification-plus-form-group">
+                <label><?php _e( 'Time:', 'notification-plus' ) ?></label>
+                <input type="text" class="notification-plus-date-time-picker" name="settings[custom][{{data.index}}][time]" value=""/>
+            </div>
+
         </div>
     </div>
 </script>

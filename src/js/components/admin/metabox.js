@@ -72,6 +72,7 @@
                 const conversion = wp.template('load-conversion');
                 $(this).parents('.conversion-group').after(conversion(data));
 
+                app.initDateTimePicker();
                 hideDelete();
             });
 
@@ -99,8 +100,11 @@
                 const elem = p.nextAll('.conversion-group');
                 increaseIndex(elem);
 
+                $('.notification-plus-date-time-picker', $(conversion)).removeClass('hasDatepicker').removeAttr('id');
+
                 p.after(conversion);
                 hideDelete();
+                app.initDateTimePicker();
 
             });
 

@@ -104,7 +104,6 @@ class Notification_Plus_Notifications {
 			'LATEST_CONVERSION' => array_merge( [
 				"name" => __( 'Latest Conversion', 'notification-plus' ),
 				"icon" => "fa fa-funnel-dollar",
-				//'is_pro' => true,
 
 				'display_trigger'       => ! empty( $settings->display_trigger ) ? $settings->display_trigger : 'delay',
 				'display_trigger_value' => ! empty( $settings->display_trigger_value ) ? $settings->display_trigger_value : 2,
@@ -139,7 +138,7 @@ class Notification_Plus_Notifications {
 				'edd_url'      => ! empty( $settings->edd_url ) ? $settings->edd_url : '',
 				'url'          => ! empty( $settings->url ) ? $settings->url : '',
 
-				'time_ago'          => ! empty( $settings->time_ago ) ? $settings->time_ago : __( '10 mins ago', 'notification-plus' ),
+				'time'              => ! empty( $settings->time ) ? $settings->time : '',
 				'conversions_count' => ! empty( $settings->conversions_count ) ? $settings->conversions_count : 1,
 			], $default ),
 
@@ -320,9 +319,10 @@ class Notification_Plus_Notifications {
 		ob_start();
 
 		if ( 'LATEST_CONVERSION' == $type ) {
-			$delay   = $notification->delay;
-			$between = $notification->delay_between;
-			$limit   = $notification->conversions_count;
+			$delay    = $notification->delay;
+			$duration = $notification->display_duration;
+			$between  = $notification->delay_between;
+			$limit    = $notification->conversions_count;
 
 			//custom source notifications
 			if ( 'custom' == $notification->source ) {
@@ -332,7 +332,11 @@ class Notification_Plus_Notifications {
 					$conversions = array_slice( $settings['custom'], 0, $limit );
 
 					foreach ( $conversions as $i => $conversion ) {
-						$config['display_trigger_value'] += 0 == $i ? $delay : $delay + $between;
+						if ( 0 == $i ) {
+							$config['display_trigger_value'] = $delay;
+						} else {
+							$config['display_trigger_value'] += ( $delay + $duration + $between );
+						}
 
 						$config['url']                = $conversion['url'];
 						$config['notification_id']    = "{$post_id}_{$i}";
@@ -348,6 +352,7 @@ class Notification_Plus_Notifications {
 						$notification->who   = $conversion['who'];
 						$notification->text  = $conversion['text'];
 						$notification->image = $conversion['image'];
+						$notification->time  = notification_plus_get_time( $conversion['time'] );
 
 						printf( '<div class="%1$s" %2$s>', $classes, $data_string );
 						include NOTIFICATION_PLUS_INCLUDES . '/notifications/' . strtolower( $type ) . '.php';
@@ -355,6 +360,10 @@ class Notification_Plus_Notifications {
 					}
 				}
 			} elseif ( 'woocommerce' == $notification->source ) {
+
+				if ( ! function_exists( 'wc_get_order' ) ) {
+					return;
+				}
 
 				$orders = notification_plus_get_woo_orders( $notification );
 
@@ -409,6 +418,7 @@ class Notification_Plus_Notifications {
 					$notification->who   = str_replace( $rep_search, $replacement, $notification->woo_who );
 					$notification->text  = str_replace( $rep_search, $replacement, $notification->woo_text );
 					$notification->image = $image;
+					$notification->time  = notification_plus_get_time( $order->order_date );
 
 					printf( '<div class="%1$s" %2$s>', $classes, $data_string );
 					include NOTIFICATION_PLUS_INCLUDES . '/notifications/' . strtolower( $type ) . '.php';
@@ -463,6 +473,8 @@ class Notification_Plus_Notifications {
 					$notification->who   = str_replace( $rep_search, $replacement, $notification->woo_who );
 					$notification->text  = str_replace( $rep_search, $replacement, $notification->woo_text );
 					$notification->image = $image;
+					$notification->time  = notification_plus_get_time( $sale->date );
+
 
 					printf( '<div class="%1$s" %2$s>', $classes, $data_string );
 					include NOTIFICATION_PLUS_INCLUDES . '/notifications/' . strtolower( $type ) . '.php';

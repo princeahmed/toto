@@ -10,15 +10,7 @@
             <p class="notification-plus-latest-conversion-description" style="color: <?php echo $notification->description_color ?>"><?php echo $notification->text ?></p>
 
             <div class="notification-plus-latest-conversion-footer">
-                <div class="notification-plus-latest-conversion-time">
-					<?php
-					if ( isset( $notification->last_action_date ) && $notification->last_action_date ) {
-						echo notification_plus_get_timeago( $notification->last_action_date );
-                    } else {
-						echo __('10 mins ago', 'notification-plus');
-					}
-					?>
-                </div>
+                <div class="notification-plus-latest-conversion-time"><?php echo  $notification->time; ?></div>
 
 				<?php notification_plus_branding($notification); ?>
 
